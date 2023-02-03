@@ -1,0 +1,65 @@
+.themeTogglerBtnContainer {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.themeTogglerBtn {
+  background: none;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+}
+
+.sunIcon {
+  background-image: url('sun-icon.svg');
+}
+
+.moonIcon {
+  background-image: url('moon-icon.svg');
+}
+
+.formContainer {
+  position: absolute;
+  top: 165px;
+  right: 115px;
+  padding: 20px 40px 20px 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.formContainerLightTheme {
+  color: black;
+  background-color: rgba(222, 221, 221, 0.8);
+}
+
+.formContainerLightTheme input {
+  color: black;
+}
+
+.formContainerLightTheme a {
+  color: black;
+}
+
+.formContainerLightTheme button {
+  color: #ffffff;
+  background-color: #474646;
+}
+
+.formContainerDarkTheme {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.formContainerDarkTheme input {
+  color: white;
+}
+
+.formContainerDarkTheme a {
+  color: white;
+}
+
+.formContainerDarkTheme button {
+  color: black;
+  background-color: #bfbfbf;
+}

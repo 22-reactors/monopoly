@@ -1,0 +1,5 @@
+.loginBackground {
+  height: 100%;
+  background-image: url('login-background.png');
+  background-size: cover;
+}

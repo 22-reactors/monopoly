@@ -1,0 +1,38 @@
+@font-face {
+  font-family: times-new-roman;
+  src: url('times.ttf');
+}
+
+#root {
+    height: 100vh;
+}
+
+html * {
+  font-family: times-new-roman, Times, serif;
+}
+
+h1 {
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+button {
+  border: none;
+  padding: 0;
+}
+
+input {
+  border: none;
+  padding: 0;
+  outline: none;
+}
+
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}

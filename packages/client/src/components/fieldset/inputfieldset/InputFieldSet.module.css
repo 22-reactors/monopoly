@@ -1,0 +1,32 @@
+.fieldset {
+  margin-bottom: 50px;
+  width: 310px;
+  position: relative;
+  border: none;
+}
+
+.fieldsetInput {
+  position: absolute;
+  width: 100%;
+  padding: 2px;
+  z-index: 1;
+  border-bottom: 1px solid #838382;
+  background-color: transparent;
+  text-align: center;
+}
+
+.fieldsetLabel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: auto;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.fieldsetInput:focus-within ~ .fieldsetLabel,
+.fieldsetInput:not(:placeholder-shown) ~ .fieldsetLabel {
+  top: -20px;
+  font-size: 9px;
+}
