@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import './App.css'
+import './app.scss'
 
 function App() {
   useEffect(() => {
