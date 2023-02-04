@@ -4,20 +4,15 @@
 }
 
 #root {
-    height: 100vh;
+  height: 100vh;
 }
 
 html * {
   font-family: times-new-roman, Times, serif;
 }
 
-h1 {
+body, h2 {
   margin: 0;
-}
-
-body {
-  margin: 0;
-  overflow: hidden;
 }
 
 button {

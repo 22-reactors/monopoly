@@ -2,6 +2,7 @@ import LoginBackGroundTheme from '../../components/backgroundtheme/loginbackgrou
 import InputFieldSet from '../../components/fieldset/inputfieldset'
 import { LoginForm, LoginFormHeader } from '../../components/form'
 import ThemeToggler from '../../components/themetoggler'
+import './register.module.scss'
 
 const Register = () => {
     return (
@@ -11,10 +12,10 @@ const Register = () => {
                     headerName="Вход в игру"
                     hrefName="создать аккаунт" />
                 <LoginForm submitBtnName="Войти">
-                <InputFieldSet
+                    <InputFieldSet
                         fieldId="email"
                         fieldName="Почта"
-                        inputType="text" 
+                        inputType="text"
                         key="1" />
                     <InputFieldSet
                         fieldId="login"
@@ -30,22 +31,22 @@ const Register = () => {
                         fieldId="surname"
                         fieldName="Фамилия"
                         inputType="text"
-                        key="3" />
+                        key="4" />
                     <InputFieldSet
                         fieldId="phone"
                         fieldName="Телефон"
                         inputType="text"
-                        key="4" />
+                        key="5" />
                     <InputFieldSet
                         fieldId="password"
                         fieldName="Пароль"
                         inputType="password"
-                        key="5" />
+                        key="6" />
                     <InputFieldSet
                         fieldId="checkPwd"
                         fieldName="Пароль ещё раз"
                         inputType="password"
-                        key="5" />
+                        key="7" />
                 </LoginForm>
             </ThemeToggler>
         </LoginBackGroundTheme>

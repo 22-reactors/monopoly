@@ -1,4 +1,4 @@
-import LoginForm from './loginform/LoginForm'
-import LoginFormHeader from './loginformheader/LoginFormHeader'
+import LoginForm from './loginform/loginForm'
+import LoginFormHeader from './loginformheader/loginFormHeader'
 
 export {LoginForm, LoginFormHeader}; 

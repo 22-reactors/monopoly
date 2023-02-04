@@ -2,6 +2,7 @@ import LoginBackGroundTheme from '../../components/backgroundtheme/loginbackgrou
 import InputFieldSet from '../../components/fieldset/inputfieldset'
 import { LoginForm, LoginFormHeader } from '../../components/form'
 import ThemeToggler from '../../components/themetoggler'
+import './login.module.scss'
 
 const Login = () => {
     return (

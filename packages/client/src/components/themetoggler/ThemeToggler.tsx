@@ -1,12 +1,11 @@
 import { useState } from 'react'
-import styles from './ThemeToggler.module.css'
+import styles from './themeToggler.module.scss'
 
 interface IThemeToggler {
     children: JSX.Element | JSX.Element[]
 }
 
 const ThemeToggler = (props: IThemeToggler) => {
-
     const [isLightTheme, setIsLightTheme] = useState(true)
 
     const toggleTheme = () => {

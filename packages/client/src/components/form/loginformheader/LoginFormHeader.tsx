@@ -1,4 +1,4 @@
-import styles from './LoginFormHeader.module.css'
+import styles from './loginFormHeader.module.scss'
 
 interface ILoginFormHeader {
     headerName: string
@@ -8,7 +8,7 @@ interface ILoginFormHeader {
 const LoginFormHeader = (props: ILoginFormHeader) => {
     return (
         <div className={styles.headerFormContainer}>
-            <h3>{props.headerName}</h3>
+            <h2>{props.headerName}</h2>
             <a href="#">{props.hrefName}</a>
         </div>
     )

@@ -1,4 +1,4 @@
-import styles from './LoginForm.module.css'
+import styles from './LoginForm.module.scss'
 
 interface ILoginForm {
     submitBtnName: string

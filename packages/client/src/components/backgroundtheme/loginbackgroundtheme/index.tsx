@@ -1,2 +1,2 @@
-import LoginBackGroundTheme from './loginbackgroundtheme'
+import LoginBackGroundTheme from './loginBackGroundTheme'
 export default LoginBackGroundTheme

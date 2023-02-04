@@ -1,4 +1,4 @@
-import styles from './loginbackgroundtheme.module.css'
+import styles from './loginBackGroundTheme.module.scss'
 
 interface ILoginBackGroundTheme {
     children: JSX.Element | JSX.Element[]

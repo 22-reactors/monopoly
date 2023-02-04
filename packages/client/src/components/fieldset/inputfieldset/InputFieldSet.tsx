@@ -1,4 +1,4 @@
-import styles from './InputFieldSet.module.css'
+import styles from './InputFieldSet.module.scss'
 
 export type InputTypeEnum = 'text' | 'password'
 

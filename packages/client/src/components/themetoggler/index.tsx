@@ -1,2 +1,2 @@
-import ThemeToggler from './ThemeToggler'
+import ThemeToggler from './themeToggler'
 export default ThemeToggler

@@ -1,6 +1,6 @@
 .fieldset {
-  margin-bottom: 50px;
-  width: 310px;
+  margin-bottom: 60px;
+  width: 350px;
   position: relative;
   border: none;
 }
@@ -13,6 +13,11 @@
   border-bottom: 1px solid #838382;
   background-color: transparent;
   text-align: center;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
 }
 
 .fieldsetLabel {
@@ -28,5 +33,5 @@
 .fieldsetInput:focus-within ~ .fieldsetLabel,
 .fieldsetInput:not(:placeholder-shown) ~ .fieldsetLabel {
   top: -20px;
-  font-size: 9px;
+  font-size: 14px;
 }
