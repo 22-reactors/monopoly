@@ -1,5 +1,11 @@
 import { useState } from 'react'
-import styles from './themeToggler.module.scss'
+import style from './themeToggler.module.scss'
+import classNames from 'classnames'
+import React from 'react'
+
+export type themePropsType = {
+    isLightTheme?: boolean
+}
 
 interface IThemeToggler {
     children: JSX.Element | JSX.Element[]
@@ -12,18 +18,29 @@ const ThemeToggler = (props: IThemeToggler) => {
         setIsLightTheme(lightTheme => !lightTheme)
     }
 
-    const themeIcon = isLightTheme ? styles.sunIcon : styles.moonIcon;
-    const themeStyle = isLightTheme ? styles.formContainerLightTheme : styles.formContainerDarkTheme;
+    const themeContainerClass = classNames(style.formContainer,
+        [isLightTheme ? style.formContainerLightTheme : style.formContainerDarkTheme])
+
+    const iconBtnClass = classNames(style.themeTogglerBtn,
+        [isLightTheme ? style.sunIcon : style.moonIcon])
+
+    const childrenWithProps = React.Children.map(props.children, child => {
+        if (React.isValidElement(child)) {
+            return React.cloneElement(child as React.ReactElement<themePropsType>, 
+                {isLightTheme: isLightTheme})
+        }
+        return child;
+    });
 
     return (
-        <div>
-            <div className={`${styles.formContainer} ${themeStyle}`}>
-                {props.children}
+        <>
+            <div className={themeContainerClass}>
+                {childrenWithProps}
             </div>
-            <div className={styles.themeTogglerBtnContainer}>
-                <button onClick={toggleTheme} className={`${styles.themeTogglerBtn} ${themeIcon}`}></button>
+            <div className={style.themeTogglerBtnContainer}>
+                <button onClick={toggleTheme} className={iconBtnClass}></button>
             </div>
-        </div>
+        </>
     )
 }
 

@@ -24,3 +24,40 @@
   cursor: pointer;
   margin-top: 20px;
 }
+
+.headerFormContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.headerFormContainer h2 {
+  font-weight: lighter;
+  margin: auto;
+  margin-bottom: 40px;
+}
+
+.headerFormContainer a {
+  right: 20px;
+  position: absolute;
+}
+
+a:visited,
+a:link {
+  color: #000;
+  text-decoration: none;
+}
+
+a:hover,
+a:active {
+  text-decoration: underline;
+}
+
+.btnLightTheme {
+  color: #ffffff;
+  background-color: #474646;
+}
+
+.btnDarkTheme {
+  color: black;
+  background-color: #bfbfbf;
+}

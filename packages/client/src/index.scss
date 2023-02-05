@@ -1,17 +1,12 @@
-@font-face {
-  font-family: times-new-roman;
-  src: url('times.ttf');
-}
-
 #root {
   height: 100vh;
 }
 
 html * {
-  font-family: times-new-roman, Times, serif;
+  font-family: 'Times New Roman', Times, serif
 }
 
-body, h2 {
+body {
   margin: 0;
 }
 

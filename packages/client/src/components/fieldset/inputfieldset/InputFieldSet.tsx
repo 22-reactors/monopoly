@@ -1,22 +1,31 @@
-import styles from './InputFieldSet.module.scss'
+import style from './InputFieldSet.module.scss'
+import classNames from 'classnames'
 
 export type InputTypeEnum = 'text' | 'password'
 
-export interface IInputFieldSet {
+interface IInputFieldSet {
     fieldId: string
     fieldName: string
     inputType: InputTypeEnum
+    isLightTheme?: boolean
 }
 
 const InputFieldSet = (props: IInputFieldSet) => {
-    return (
-        <fieldset className={styles.fieldset}>
+
+    const labelClass = classNames(style.fieldsetLabel,
+        [props.isLightTheme ? style.labelLightTheme : style.labelDarkTheme])
+
+    const inputClass = classNames(style.fieldsetInput,
+        [props.isLightTheme ? style.inputLightTheme : style.inputDarkTheme])
+
+    return (        
+        <fieldset className={style.fieldset}>
             <input
                 id={props.fieldId}
                 type={props.inputType}
-                className={styles.fieldsetInput}
+                className={inputClass}
                 placeholder=" " />
-            <label className={styles.fieldsetLabel}>{props.fieldName}</label>
+            <label className={labelClass}>{props.fieldName}</label>
         </fieldset>
     )
 }

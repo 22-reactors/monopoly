@@ -1,13 +1,13 @@
-html,
-input,
-button {
-  font-size: 20px;
-}
-
-a {
-  font-size: 16px;
-}
-
 body {
-    overflow: hidden;
+  overflow: hidden;
+}
+
+h2 {
+  margin: 0;
+}
+
+.loginBackground {
+  height: 100%;
+  background-image: url('monopoly-board-theme.png');
+  background-size: cover;
 }

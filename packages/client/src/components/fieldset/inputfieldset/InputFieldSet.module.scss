@@ -33,5 +33,21 @@ input:-webkit-autofill:focus {
 .fieldsetInput:focus-within ~ .fieldsetLabel,
 .fieldsetInput:not(:placeholder-shown) ~ .fieldsetLabel {
   top: -20px;
-  font-size: 14px;
+  font-size: 12px;
+}
+
+.labelLightTheme {
+  color: black !important;
+}
+
+.labelDarkTheme {
+  color: white !important;
+}
+
+.inputLightTheme {
+  color: black !important;
+}
+
+.inputDarkTheme {
+  color: white !important;
 }
