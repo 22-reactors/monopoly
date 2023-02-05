@@ -1,0 +1,13 @@
+@import './variables';
+
+// Light theme
+$theme-map-light: (
+  $--theme-text-base: #2E2E2E,
+  $--theme-text-additional: #959595,
+);
+
+// Dark theme
+$theme-map-dark: (
+  $--theme-text-base: #fff,
+  $--theme-text-additional: #959595,
+);

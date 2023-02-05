@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import style from './app.module.scss'
+import { textStyle, utilityStyle } from '../../assets/scss/modules'
 
 function App() {
   useEffect(() => {
@@ -12,7 +13,17 @@ function App() {
 
     fetchServerData()
   }, [])
-  return <div className={style.app}>Вот тут будет жить ваше приложение :)</div>
+  return (
+    <div
+      className={[
+        style.app,
+        textStyle.h1,
+        textStyle.baseColor,
+        utilityStyle.displayFlex,
+      ].join(' ')}>
+      Вот тут будет жить ваше приложение :)
+    </div>
+  )
 }
 
 export default App
