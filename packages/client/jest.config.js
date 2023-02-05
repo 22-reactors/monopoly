@@ -9,6 +9,6 @@ export default {
     __SERVER_PORT__: process.env.SERVER_PORT,
   },
   transform: {
-    ".+\\.(css|scss)$": "jest-css-modules-transform"
-  }
+    '.+\\.(css|scss)$': 'jest-css-modules-transform',
+  },
 }
