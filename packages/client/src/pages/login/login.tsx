@@ -1,5 +1,5 @@
 import InputFieldSet from '../../components/fieldset/inputfieldset'
-import { InputTypeEnum } from '../../components/fieldset/inputfieldset/InputFieldSet'
+import { InputType } from '../../components/fieldset/inputfieldset/InputFieldSet'
 import LoginAndRegistrForm from '../../components/form/loginandregistrform'
 import ThemeToggler from '../../components/themetoggler'
 import style from './login.module.scss'
@@ -7,7 +7,7 @@ import style from './login.module.scss'
 interface ILoginInput {
     fieldId: string
     fieldName: string
-    inputType: InputTypeEnum
+    inputType: InputType
 }
 
 export interface ILoginForm {
@@ -16,34 +16,23 @@ export interface ILoginForm {
     headerName: string
     linkTitle: string
     linkAction: React.MouseEventHandler<HTMLAnchorElement>
+    formAction: React.FormEventHandler<HTMLFormElement>
     inputsProps: ILoginInput[]
 }
 
-interface ILogin {
-    loginProps: ILoginForm
-}
+const Login = (props: ILoginForm) => {
 
-const Login = (props: ILogin) => {
+    const { inputsProps } = props;
 
-    const loginFormProps = props.loginProps;
-    const loginInputsProps = loginFormProps.inputsProps;
-
-    const inputItems = loginInputsProps.map((inputProp, i) => {
-        return <InputFieldSet key={i}
-            fieldId={inputProp.fieldId}
-            fieldName={inputProp.fieldName}
-            inputType={inputProp.inputType} />
+    const inputItems = inputsProps.map((inputProp, i) => {
+        return <InputFieldSet key={i} {...inputProp}/>
     })
 
     return (
-        <div className={style.loginBackground}>
+        <div className={style.bg}>
             <ThemeToggler>
                 <LoginAndRegistrForm
-                    headerLevel={loginFormProps.headerLevel}
-                    headerName={loginFormProps.headerName}
-                    linkTitle={loginFormProps.linkTitle}
-                    linkAction={loginFormProps.linkAction}
-                    submitBtnName={loginFormProps.submitBtnName}>
+                    {...props}>
                     {inputItems}
                 </LoginAndRegistrForm>
             </ThemeToggler>

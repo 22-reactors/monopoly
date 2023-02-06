@@ -5,6 +5,7 @@ const RegistrProps: IRegistrForm = {
     headerName: 'Регистрация игрока',
     linkTitle: 'войти',
     linkAction: () => { console.log('router to login page') },
+    formAction: () => { console.log('router to submit form') },
     submitBtnName: 'Зарегистрироваться',
     inputsProps: [
         {

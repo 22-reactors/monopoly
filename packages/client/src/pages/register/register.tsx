@@ -1,13 +1,14 @@
 import InputFieldSet from '../../components/fieldset/inputfieldset'
-import { InputTypeEnum } from '../../components/fieldset/inputfieldset/InputFieldSet';
+import { InputType } from '../../components/fieldset/inputfieldset/InputFieldSet';
 import LoginAndRegistrForm from '../../components/form/loginandregistrform';
 import ThemeToggler from '../../components/themetoggler'
-import style from './register.module.scss'
+import './register.module.scss'
+import loginStyle from '../login/login.module.scss'
 
 interface IRegistrInput {
     fieldId: string
     fieldName: string
-    inputType: InputTypeEnum
+    inputType: InputType
 }
 
 export interface IRegistrForm {
@@ -16,34 +17,22 @@ export interface IRegistrForm {
     headerName: string
     linkTitle: string
     linkAction: React.MouseEventHandler<HTMLAnchorElement>
+    formAction: React.FormEventHandler<HTMLFormElement>
     inputsProps: IRegistrInput[]
 }
 
-interface IRegistr {
-    registrProps: IRegistrForm
-}
+const Register = (props: IRegistrForm) => {
 
-const Register = (props: IRegistr) => {
+    const { inputsProps } = props;
 
-    const registrFormProps = props.registrProps;
-    const registrInputsProps = registrFormProps.inputsProps;
-
-    const inputItems = registrInputsProps.map((inputProp, i) => {
-        return <InputFieldSet key={i}
-            fieldId={inputProp.fieldId}
-            fieldName={inputProp.fieldName}
-            inputType={inputProp.inputType} />
+    const inputItems = inputsProps.map((inputProp, i) => {
+        return <InputFieldSet key={i} {...inputProp} />
     })
 
     return (
-        <div className={style.registrBackground}>
+        <div className={loginStyle.bg}>
             <ThemeToggler>
-                <LoginAndRegistrForm
-                    headerLevel={registrFormProps.headerLevel}
-                    headerName={registrFormProps.headerName}
-                    linkTitle={registrFormProps.linkTitle}
-                    linkAction={registrFormProps.linkAction}
-                    submitBtnName={registrFormProps.submitBtnName}>
+                <LoginAndRegistrForm {...props}>
                     {inputItems}
                 </LoginAndRegistrForm>
             </ThemeToggler>

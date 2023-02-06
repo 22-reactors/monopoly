@@ -11,8 +11,8 @@ interface IHeader {
 const Header = (props: IHeader) => {
 
     const headerClass = classNames(
-        [props.className ? props.className : ''],
-        [props.isLightTheme ? style.headerLightTheme : style.headerDarkTheme])
+        props.className,
+        props.isLightTheme ? style.headerLightTheme : style.headerDarkTheme)
 
 
     const Header = props.headingLevel;

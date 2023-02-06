@@ -43,7 +43,6 @@
 
 a:visited,
 a:link {
-  color: #000;
   text-decoration: none;
 }
 
@@ -60,4 +59,12 @@ a:active {
 .btnDarkTheme {
   color: black;
   background-color: #bfbfbf;
+}
+
+.linkDarkTheme {
+  color: white;
+}
+
+.linkLightTheme {
+  color: black;
 }
