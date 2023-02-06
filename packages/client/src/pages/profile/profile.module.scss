@@ -1,0 +1,17 @@
+@import "./src/styles/mixin";
+
+.wrapper {
+  @include absolute(0);
+  background-image: url("profile-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.container {
+  height: 100%;
+  padding-bottom: 70px;
+  display: grid;
+  grid-template-columns: 40% 60%;
+  box-sizing: border-box;
+}
