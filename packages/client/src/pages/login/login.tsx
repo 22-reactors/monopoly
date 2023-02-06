@@ -11,7 +11,6 @@ interface ILoginInput {
 }
 
 export interface ILoginForm {
-    headerLevel: React.ElementType
     submitBtnName: string
     headerName: string
     linkTitle: string

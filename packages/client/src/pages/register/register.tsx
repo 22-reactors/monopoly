@@ -12,7 +12,6 @@ interface IRegistrInput {
 }
 
 export interface IRegistrForm {
-    headerLevel: React.ElementType
     submitBtnName: string
     headerName: string
     linkTitle: string

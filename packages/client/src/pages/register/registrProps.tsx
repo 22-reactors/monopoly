@@ -1,7 +1,6 @@
 import { IRegistrForm } from "./register";
 
 const RegistrProps: IRegistrForm = {
-    headerLevel: 'h2',
     headerName: 'Регистрация игрока',
     linkTitle: 'войти',
     linkAction: () => { console.log('router to login page') },

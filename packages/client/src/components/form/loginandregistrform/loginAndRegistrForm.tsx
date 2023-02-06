@@ -1,11 +1,9 @@
 import React from 'react'
-import Header from '../../header'
 import style from './loginAndRegistrForm.module.scss'
 import classNames from 'classnames'
 import { themePropsType } from '../../themetoggler/themeToggler'
 
 export interface ILoginAndRegistrForm {
-    headerLevel: React.ElementType
     submitBtnName: string
     children: JSX.Element | JSX.Element[]
     headerName: string
@@ -16,6 +14,9 @@ export interface ILoginAndRegistrForm {
 }
 
 const LoginAndRegistrForm = (props: ILoginAndRegistrForm) => {
+
+    const headerClass = classNames(
+        props.isLightTheme ? style.headerLightTheme : style.headerDarkTheme)
 
     const btnClass = classNames(style.submitFormBtn,
         props.isLightTheme ? style.btnLightTheme : style.btnDarkTheme)
@@ -34,11 +35,7 @@ const LoginAndRegistrForm = (props: ILoginAndRegistrForm) => {
     return (
         <>
             <div className={style.headerFormContainer}>
-                <Header
-                    isLightTheme={props.isLightTheme}
-                    headingLevel={props.headerLevel}>
-                    {props.headerName}
-                </Header>
+                <h2 className={headerClass}>{props.headerName}</h2>
                 <a href="#" onClick={props.linkAction}
                     className={linkClass}>{props.linkTitle}</a>
             </div>
