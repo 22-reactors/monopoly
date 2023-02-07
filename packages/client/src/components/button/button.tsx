@@ -25,8 +25,8 @@ export function Button(props: IButton) {
         style[`btn_${props.variation}`],
         props.isHide && style.hide
       )}
-      type={props.type || 'button'}
-      {...props.onClick && {onClick: props.onClick}}
+      type={props.type ?? 'button'}
+      onClick={props.onClick}
     >
       {props.text}
     </button>

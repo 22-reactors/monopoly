@@ -51,7 +51,7 @@ export function Info(props: IInfo) {
             key={idx}
             {...field}
             disabled={!isEdit}
-            value={fieldInput[field.id] || field.value}
+            value={fieldInput[field.id] ?? field.value}
             onChange={onChangeFieldInput}
           />
         )}
@@ -60,7 +60,7 @@ export function Info(props: IInfo) {
             className={classNames(style.btnEdit, isEdit && style.btnEditActive)}
             variation={ButtonVariation.THRAKRAL}
             text={'Изменить'}
-            onClick={() => setIsEdit(!isEdit)}
+            onClick={() => setIsEdit(prevState => !prevState)}
           />
           <Button
             type={'submit'}

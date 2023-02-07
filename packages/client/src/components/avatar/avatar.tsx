@@ -29,6 +29,7 @@ export function Avatar(props: IAvatar): JSX.Element {
     evt.preventDefault();
     props.onSubmit?.();
 
+    setIsEdit(false);
     console.log('Save avatar');
   };
 
@@ -39,7 +40,7 @@ export function Avatar(props: IAvatar): JSX.Element {
         className={style.form}
         onSubmit={onSubmitForm}
       >
-        <img className={style.preview} src={props.src || avatar || noAva} alt=''/>
+        <img className={style.preview} src={props.src || avatar || noAva} alt='Аватар игрока'/>
         <fieldset className={style.field}>
           <input
             id={'avatar'}

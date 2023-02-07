@@ -5,14 +5,19 @@
   padding: 15px 30px;
   cursor: pointer;
   border: none;
-  transition: background-color 0.4s;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: background-color 0.4s;
+  }
 
   &_Thrakral {
     background-color: #69655c;
     color: #d7d2bf;
 
-    &:hover {
-      background-color: darken(#69655c, 10);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: darken(#69655c, 10);
+      }
     }
   }
 
@@ -20,8 +25,10 @@
     background-color: #b23d3d;
     color: #d7d2bf;
 
-    &:hover {
-      background-color: darken(#b23d3d, 10);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: darken(#b23d3d, 10);
+      }
     }
   }
 }
