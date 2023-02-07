@@ -1,5 +1,9 @@
 @import "./src/styles/mixin";
 
+.wrapper {
+  height: 100%;
+}
+
 .form {
   height: 100%;
   display: flex;
@@ -36,9 +40,15 @@
   background-color: #69655c;
   color: #d7d2bf;
   cursor: pointer;
-  transition: background-color 0.4s;
 
-  &:hover {
-    background-color: darken(#69655c, 10);
+  @media (prefers-reduced-motion: no-preference) {
+    transition: background-color 0.4s;
+  }
+
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: darken(#69655c, 10);
+    }
   }
 }
