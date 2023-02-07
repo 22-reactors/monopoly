@@ -1,7 +1,7 @@
-import style from './info.module.scss'
-import classNames from 'classnames'
-import { ChangeEvent, FormEvent, useState } from 'react'
-import { Button, ButtonVariation } from '../button/button'
+import style from './info.module.scss';
+import classNames from 'classnames';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { Button, ButtonVariation } from '../button/button';
 
 export type FieldInfo = {
   id: string;
@@ -11,7 +11,7 @@ export type FieldInfo = {
   value?: string;
   disabled?: boolean;
   onChange?(evt: ChangeEvent): void;
-}
+};
 
 interface IInfo {
   className?: string;
@@ -27,7 +27,7 @@ export function Info(props: IInfo) {
     const target = evt.target as HTMLInputElement;
     setFieldInput({
       ...fieldInput,
-      [target.name]: target.value
+      [target.name]: target.value,
     });
   };
 
@@ -41,12 +41,8 @@ export function Info(props: IInfo) {
 
   return (
     <section className={classNames(props.className, style.wrapper)}>
-      <form
-        action='#'
-        className={style.form}
-        onSubmit={onSubmitForm}
-      >
-        {props.fields.map((field, idx) =>
+      <form action="#" className={style.form} onSubmit={onSubmitForm}>
+        {props.fields.map((field, idx) => (
           <Field
             key={idx}
             {...field}
@@ -54,7 +50,7 @@ export function Info(props: IInfo) {
             value={fieldInput[field.id] ?? field.value}
             onChange={onChangeFieldInput}
           />
-        )}
+        ))}
         <div className={style.btnWrapper}>
           <Button
             className={classNames(style.btnEdit, isEdit && style.btnEditActive)}
@@ -74,16 +70,15 @@ export function Info(props: IInfo) {
   );
 }
 
-function Field(props:FieldInfo) {
-  const {label, id, ...otherProps} = props;
+function Field(props: FieldInfo) {
+  const { label, id, ...otherProps } = props;
 
   return (
     <fieldset className={style.field}>
-      <label htmlFor={id} className={style.label}>{label}</label>
-      <input
-        className={style.input}
-        {...otherProps}
-      />
+      <label htmlFor={id} className={style.label}>
+        {label}
+      </label>
+      <input className={style.input} {...otherProps} />
     </fieldset>
   );
 }

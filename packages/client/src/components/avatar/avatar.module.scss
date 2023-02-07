@@ -1,4 +1,4 @@
-@import "./src/styles/mixin";
+@import './src/styles/mixin';
 
 .wrapper {
   height: 100%;
@@ -44,7 +44,6 @@
   @media (prefers-reduced-motion: no-preference) {
     transition: background-color 0.4s;
   }
-
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
