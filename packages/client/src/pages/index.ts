@@ -4,7 +4,7 @@ import Game, { gameLoader } from './game/game'
 import Home from './home/home'
 import Leaderboard from './leaderboard/leaderboard'
 import Login, { loginLoader } from './login/login'
-import Profile, { profileLoader } from './profile/profile'
+import { ProfilePage, profileLoader } from './profile/profile'
 import SignUp, { signUpLoader } from './signup/signup'
 
 export {
@@ -16,7 +16,7 @@ export {
   Leaderboard,
   Login,
   loginLoader,
-  Profile,
+  ProfilePage,
   profileLoader,
   SignUp,
   signUpLoader,
