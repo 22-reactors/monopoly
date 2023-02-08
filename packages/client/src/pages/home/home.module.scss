@@ -1,0 +1,15 @@
+@import '../../styles/mixin.scss';
+
+.wrapper {
+  @include absolute(0);
+  background-image: url('home-bg.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
