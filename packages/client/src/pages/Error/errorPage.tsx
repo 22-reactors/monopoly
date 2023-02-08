@@ -42,10 +42,10 @@ function ErrorPage({ code, message, discription }: Props) {
         <div className={style.code}>{code}</div>
         <div className={style.divider}></div>
         <div>
-          <div className={style.message}>{codeText?.message || message}</div>
-          <div className={style.discription}>
+          <p className={style.message}>{codeText?.message || message}</p>
+          <p className={style.discription}>
             {codeText?.discription || discription}
-          </div>
+          </p>
         </div>
       </div>
       <button className={style.button}>Вернуться</button>
