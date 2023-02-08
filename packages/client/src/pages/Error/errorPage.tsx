@@ -49,7 +49,7 @@ function ErrorPage({ code, message, discription }: Props) {
           </div>
         </div>
       </div>
-      ;
+      <button className={style.button}>Вернуться</button>
     </main>
   )
 }

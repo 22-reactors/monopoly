@@ -1,6 +1,7 @@
 .pageContainer {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background: linear-gradient(180deg, #3b5e53 0%, #091e20 100%);
@@ -32,4 +33,9 @@
 .discription {
   font-size: 16px;
   color: #acacac;
+}
+
+.button {
+  margin-top: 1rem;
+  padding: 6px 10px;
 }
