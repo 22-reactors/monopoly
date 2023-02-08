@@ -1,0 +1,64 @@
+.wrapper {
+  height: 100%;
+}
+
+.form {
+  height: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  box-sizing: border-box;
+}
+
+.btnWrapper {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  justify-content: center;
+}
+
+.field {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.label {
+  width: 30%;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #69655c;
+}
+
+.input {
+  width: 100%;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.2;
+  border: none;
+  border-bottom: 1px solid #69655c;
+  background-color: transparent;
+  transform: translateY(-5px);
+  text-align: center;
+  box-sizing: border-box;
+
+  &:disabled {
+    background-color: darken(#d7d2bf, 10);
+    cursor: not-allowed;
+  }
+}
+
+.btnEdit {
+  width: 100%;
+
+  &Active {
+    width: 45%;
+  }
+}
