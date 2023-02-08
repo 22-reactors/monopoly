@@ -9,7 +9,7 @@ import {
   Leaderboard,
   Login,
   loginLoader,
-  Profile,
+  ProfilePage,
   profileLoader,
   SignUp,
   signUpLoader,
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'profile',
-        element: <Profile />,
+        element: <ProfilePage />,
         loader: profileLoader,
       },
       {
