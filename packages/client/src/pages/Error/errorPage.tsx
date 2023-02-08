@@ -1,4 +1,3 @@
-import PageError from '../../components/PageError/pageError'
 import style from './errorPage.module.scss'
 
 interface Props {
