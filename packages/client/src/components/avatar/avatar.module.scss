@@ -1,0 +1,54 @@
+@import "./src/styles/mixin";
+
+.wrapper {
+  height: 100%;
+}
+
+.form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.field {
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.input {
+  @include hide();
+}
+
+.preview {
+  max-width: 400px;
+  height: auto;
+  object-fit: contain;
+  transform: translateY(-50px);
+  filter: grayscale(1);
+  box-shadow: 0 0 25px;
+}
+
+.label {
+  width: 55%;
+  padding: 15px 30px;
+  background-color: #69655c;
+  color: #d7d2bf;
+  cursor: pointer;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: background-color 0.4s;
+  }
+
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: darken(#69655c, 10);
+    }
+  }
+}
