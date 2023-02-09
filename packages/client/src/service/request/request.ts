@@ -30,7 +30,7 @@ function queryStringify(data: Record<string, string>): string {
   return `?${stringify}`;
 }
 
-export default class Request {
+export default class RequestTransport {
   protected get: HTTPMethod = async (url, options) => {
     const correctUrl = options.data ? `${url}${queryStringify(options.data as Record<string, string>)}` : url;
 
@@ -74,9 +74,13 @@ export default class Request {
         'Content-type': 'application/json',
         ...headers
       },
+      credentials: "include",
       body: JSON.stringify(data),
     });
 
-    return response.json();
+    const contentType = response.headers.get('content-type');
+    const isResponseJson = contentType && contentType.indexOf("application/json") >= 0;
+
+    return isResponseJson ? response.json() : response.text();
   };
 }
