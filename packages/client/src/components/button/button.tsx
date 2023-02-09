@@ -1,10 +1,10 @@
-import style from '../button/button.module.scss'
-import classNames from 'classnames'
+import style from '../button/button.module.scss';
+import classNames from 'classnames';
 
 // https://www.fantasynamegenerators.com/alien-names.php
 export const enum ButtonVariation {
   THRAKRAL = 'Thrakral',
-  VRUTUKS = 'Vrutuks'
+  VRUTUKS = 'Vrutuks',
 }
 
 export interface IButton {
@@ -12,7 +12,7 @@ export interface IButton {
   variation: ButtonVariation;
   text: string;
   type?: 'button' | 'submit';
-  isHide?: boolean
+  isHide?: boolean;
   onClick?(): void;
 }
 
@@ -26,8 +26,7 @@ export function Button(props: IButton) {
         props.isHide && style.hide
       )}
       type={props.type ?? 'button'}
-      onClick={props.onClick}
-    >
+      onClick={props.onClick}>
       {props.text}
     </button>
   );
