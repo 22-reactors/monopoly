@@ -1,19 +1,32 @@
-import { Button, ButtonVariation } from '../../components/button/button';
+import {
+  Button,
+  ButtonSizes,
+  ButtonVariation,
+} from '../../components/button/button';
 import style from './layout.module.scss';
 
 const Layout = () => {
   return (
-    <>
+    <div className={style.wrapper}>
       <header className={style.header}>
         <img src="logo.svg" />
         <div className={style.headerButtons}>
-          <Button variation={ButtonVariation.KORGUKS} text="Войти" />
-          <Button variation={ButtonVariation.KORGUKS} text="Регистрация" />
+          <Button
+            variation={ButtonVariation.PRIMARY}
+            text="Войти"
+            size={ButtonSizes.MEDIUM}
+            rounded
+          />
+          <Button
+            variation={ButtonVariation.OUTLINED}
+            text="Регистрация"
+            size={ButtonSizes.MEDIUM}
+            rounded
+          />
         </div>
       </header>
       <main className={style.main}></main>
       <footer className={style.footer}>
-        
         <nav className={style.menu}>
           <p className={style.menuTitle}>Меню</p>
           <ul>
@@ -25,7 +38,7 @@ const Layout = () => {
         </nav>
         <div className={style.info}></div>
       </footer>
-    </>
+    </div>
   );
 };
 
