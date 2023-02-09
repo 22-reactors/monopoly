@@ -2,8 +2,6 @@ import { unAuthorizedRedirect } from '../../utils/helpers'
 
 export const gameLoader = unAuthorizedRedirect
 
-const Game = () => {
+export const Game = () => {
   return <div>Игра</div>
 }
-
-export default Game

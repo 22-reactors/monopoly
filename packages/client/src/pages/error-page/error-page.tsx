@@ -1,7 +1,7 @@
-import { isRouteErrorResponse, useRouteError } from "react-router-dom"
+import { isRouteErrorResponse, useRouteError } from 'react-router-dom'
 
 /* Компонент для обработки ошибок */
-const RootBoundary = () => {
+export const RootBoundary = () => {
   const error = useRouteError()
 
   if (isRouteErrorResponse(error)) {
@@ -17,7 +17,7 @@ const RootBoundary = () => {
   return <div>Что-то пошло не так</div>
 }
 
-const ErrorPage = ({
+export const ErrorPage = ({
   status,
   message,
 }: {
@@ -25,11 +25,9 @@ const ErrorPage = ({
   message: string
 }) => {
   return (
-    <div>
+    <>
       <div>{status}</div>
       <div>{message}</div>
-    </div>
+    </>
   )
 }
-
-export default RootBoundary;
