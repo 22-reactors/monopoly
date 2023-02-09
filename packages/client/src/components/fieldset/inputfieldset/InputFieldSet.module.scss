@@ -1,3 +1,16 @@
+$dark-color: black;
+$light-color: white;
+
+@media (prefers-reduced-motion: no-preference) {
+  input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+  }
+  .fieldsetLabel {
+    transition: 0.3s;
+  }
+}
+
 button {
   border: none;
   padding: 0;
@@ -19,7 +32,6 @@ fieldset {
   margin-bottom: 60px;
   width: 350px;
   position: relative;
-  border: none;
 }
 
 .fieldsetInput {
@@ -32,11 +44,6 @@ fieldset {
   text-align: center;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:focus {
-  transition: background-color 600000s 0s, color 600000s 0s;
-}
-
 .fieldsetLabel {
   position: absolute;
   left: 0;
@@ -44,7 +51,6 @@ input:-webkit-autofill:focus {
   top: 0;
   z-index: auto;
   text-align: center;
-  transition: 0.3s;
 }
 
 .fieldsetInput:focus-within ~ .fieldsetLabel,
@@ -54,17 +60,17 @@ input:-webkit-autofill:focus {
 }
 
 .labelLightTheme {
-  color: black;
+  color: $dark-color;
 }
 
 .labelDarkTheme {
-  color: white;
+  color: $light-color;
 }
 
 .inputLightTheme {
-  color: black;
+  color: $dark-color;
 }
 
 .inputDarkTheme {
-  color: white;
+  color: $light-color;
 }

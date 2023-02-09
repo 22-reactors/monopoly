@@ -1,4 +1,4 @@
-import { ILoginForm } from "./login";
+import { ILoginForm } from "../pages/login/login";
 
 const LoginProps: ILoginForm = {
     headerName: 'Вход в игру',

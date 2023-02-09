@@ -1,14 +1,8 @@
 import InputFieldSet from '../../components/fieldset/inputfieldset'
-import { InputType } from '../../components/fieldset/inputfieldset/InputFieldSet'
+import { IInputFieldSet } from '../../components/fieldset/inputfieldset/InputFieldSet'
 import LoginAndRegistrForm from '../../components/form/loginandregistrform'
 import ThemeToggler from '../../components/themetoggler'
 import style from './login.module.scss'
-
-interface ILoginInput {
-    fieldId: string
-    fieldName: string
-    inputType: InputType
-}
 
 export interface ILoginForm {
     submitBtnName: string
@@ -16,7 +10,7 @@ export interface ILoginForm {
     linkTitle: string
     linkAction: React.MouseEventHandler<HTMLAnchorElement>
     formAction: React.FormEventHandler<HTMLFormElement>
-    inputsProps: ILoginInput[]
+    inputsProps: IInputFieldSet[]
 }
 
 const Login = (props: ILoginForm) => {

@@ -1,15 +1,9 @@
 import InputFieldSet from '../../components/fieldset/inputfieldset'
-import { InputType } from '../../components/fieldset/inputfieldset/InputFieldSet';
+import { IInputFieldSet } from '../../components/fieldset/inputfieldset/InputFieldSet';
 import LoginAndRegistrForm from '../../components/form/loginandregistrform';
 import ThemeToggler from '../../components/themetoggler'
 import './register.module.scss'
 import loginStyle from '../login/login.module.scss'
-
-interface IRegistrInput {
-    fieldId: string
-    fieldName: string
-    inputType: InputType
-}
 
 export interface IRegistrForm {
     submitBtnName: string
@@ -17,7 +11,7 @@ export interface IRegistrForm {
     linkTitle: string
     linkAction: React.MouseEventHandler<HTMLAnchorElement>
     formAction: React.FormEventHandler<HTMLFormElement>
-    inputsProps: IRegistrInput[]
+    inputsProps: IInputFieldSet[]
 }
 
 const Register = (props: IRegistrForm) => {

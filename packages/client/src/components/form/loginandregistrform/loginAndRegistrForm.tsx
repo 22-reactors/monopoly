@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './loginAndRegistrForm.module.scss'
 import classNames from 'classnames'
-import { themePropsType } from '../../themetoggler/themeToggler'
+import { themePropsType } from '../../themetoggler/ThemeToggler'
 
 export interface ILoginAndRegistrForm {
     submitBtnName: string

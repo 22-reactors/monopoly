@@ -1,4 +1,4 @@
-import { IRegistrForm } from "./register";
+import { IRegistrForm } from "../pages/register/register";
 
 const RegistrProps: IRegistrForm = {
     headerName: 'Регистрация игрока',

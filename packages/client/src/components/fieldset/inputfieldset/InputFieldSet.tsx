@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 export type InputType = 'text' | 'password'
 
-interface IInputFieldSet {
+export interface IInputFieldSet {
     fieldId: string
     fieldName: string
     inputType: InputType

@@ -21,7 +21,7 @@ const ThemeToggler = (props: IThemeToggler) => {
     const themeContainerClass = classNames(style.formContainer,
         isLightTheme ? style.formContainerLightTheme : style.formContainerDarkTheme)
 
-    const toggleBtn = classNames(style.themeTogglerBtn,
+    const toggleBtnClass = classNames(style.themeTogglerBtn,
         isLightTheme ? style.sunIcon : style.moonIcon)
 
     const childrenWithProps = React.Children.map(props.children, child => {
@@ -38,7 +38,7 @@ const ThemeToggler = (props: IThemeToggler) => {
                 {childrenWithProps}
             </div>
             <div className={style.themeTogglerBtnContainer}>
-                <button onClick={toggleTheme} className={toggleBtn}></button>
+                <button onClick={toggleTheme} className={toggleBtnClass}></button>
             </div>
         </>
     )

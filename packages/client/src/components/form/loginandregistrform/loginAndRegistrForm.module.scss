@@ -1,3 +1,6 @@
+$dark-color: black;
+$light-color: white;
+
 .form {
   display: flex;
   flex-direction: column;
@@ -57,22 +60,22 @@ a:active {
 }
 
 .btnDarkTheme {
-  color: black;
+  color: $dark-color;
   background-color: #bfbfbf;
 }
 
 .linkDarkTheme {
-  color: white;
+  color: $light-color;
 }
 
 .linkLightTheme {
-  color: black;
+  color: $dark-color;
 }
 
 .headerLightTheme {
-  color: black;
+  color: $dark-color;
 }
 
 .headerDarkTheme {
-  color: white;
+  color: $light-color;
 }
