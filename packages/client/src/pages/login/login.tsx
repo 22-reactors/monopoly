@@ -3,6 +3,9 @@ import { IInputFieldSet } from '../../components/fieldset/inputfieldset/InputFie
 import LoginAndRegistrForm from '../../components/form/loginandregistrform'
 import ThemeToggler from '../../components/themetoggler'
 import style from './login.module.scss'
+import { authorizedRedirect } from "../../utils/helpers"
+
+export const loginLoader = authorizedRedirect;
 
 export interface ILoginForm {
     submitBtnName: string
