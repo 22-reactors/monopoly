@@ -68,15 +68,22 @@ export default class RequestTransport {
   private readonly request: HTTPMethod = async (url, options, timeout = TIMEOUT_DELAY) => {
     const { headers = {}, method, data } = options;
 
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+
+    if (!(data instanceof FormData)) {
+      headers['content-type'] = 'application/json';
+    }
+
     const response = await fetch(url, {
       method,
-      headers: {
-        'Content-type': 'application/json',
-        ...headers
-      },
+      headers,
       credentials: "include",
       body: JSON.stringify(data),
+      signal:controller.signal
     });
+
+    clearTimeout(id);
 
     const contentType = response.headers.get('content-type');
     const isResponseJson = contentType && contentType.indexOf("application/json") >= 0;
