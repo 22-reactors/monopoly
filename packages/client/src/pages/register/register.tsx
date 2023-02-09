@@ -1,13 +1,11 @@
 import InputFieldSet from '../../components/fieldset/inputfieldset'
-import { IInputFieldSet } from '../../components/fieldset/inputfieldset/InputFieldSet'
-import LoginAndRegistrForm from '../../components/form/loginandregistrform'
+import { IInputFieldSet } from '../../components/fieldset/inputfieldset/InputFieldSet';
+import LoginAndRegistrForm from '../../components/form/loginandregistrform';
 import ThemeToggler from '../../components/themetoggler'
-import style from './login.module.scss'
-import { authorizedRedirect } from "../../utils/helpers"
+import './register.module.scss'
+import loginStyle from '../login/login.module.scss'
 
-export const loginLoader = authorizedRedirect;
-
-export interface ILoginForm {
+export interface IRegistrForm {
     submitBtnName: string
     headerName: string
     linkTitle: string
@@ -16,24 +14,23 @@ export interface ILoginForm {
     inputsProps: IInputFieldSet[]
 }
 
-const Login = (props: ILoginForm) => {
+const Register = (props: IRegistrForm) => {
 
     const { inputsProps } = props;
 
     const inputItems = inputsProps.map((inputProp, i) => {
-        return <InputFieldSet key={i} {...inputProp}/>
+        return <InputFieldSet key={i} {...inputProp} />
     })
 
     return (
-        <div className={style.bg}>
+        <div className={loginStyle.bg}>
             <ThemeToggler>
-                <LoginAndRegistrForm
-                    {...props}>
+                <LoginAndRegistrForm {...props}>
                     {inputItems}
                 </LoginAndRegistrForm>
             </ThemeToggler>
         </div>
     )
-}
+};
 
-export default Login
+export default Register

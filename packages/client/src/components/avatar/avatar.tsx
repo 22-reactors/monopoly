@@ -1,8 +1,8 @@
-import style from './avatar.module.scss'
-import classNames from 'classnames'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import style from './avatar.module.scss';
+import classNames from 'classnames';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import noAva from '../../assets/no-ava.png';
-import { Button, ButtonVariation } from '../button/button'
+import { Button, ButtonVariation } from '../button/button';
 
 export interface IAvatar {
   className?: string;
@@ -35,21 +35,28 @@ export function Avatar(props: IAvatar): JSX.Element {
 
   return (
     <section className={classNames(props.className, style.wrapper)}>
-      <form
-        action='#'
-        className={style.form}
-        onSubmit={onSubmitForm}
-      >
-        <img className={style.preview} src={props.src || avatar || noAva} alt='Аватар игрока'/>
+      <form action="#" className={style.form} onSubmit={onSubmitForm}>
+        <img
+          className={style.preview}
+          src={props.src || avatar || noAva}
+          alt="Аватар игрока"
+        />
         <fieldset className={style.field}>
           <input
             id={'avatar'}
-            type='file'
+            type="file"
             className={style.input}
             onChange={onChangeAvatar}
           />
-          <label htmlFor='avatar' className={style.label}>Изменить</label>
-          <Button type={'submit'} isHide={!isEdit} variation={ButtonVariation.VRUTUKS} text={'Сохранить'}/>
+          <label htmlFor="avatar" className={style.label}>
+            Изменить
+          </label>
+          <Button
+            type={'submit'}
+            isHide={!isEdit}
+            variation={ButtonVariation.VRUTUKS}
+            text={'Сохранить'}
+          />
         </fieldset>
       </form>
     </section>

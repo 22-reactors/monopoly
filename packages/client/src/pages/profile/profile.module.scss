@@ -1,8 +1,8 @@
-@import "./src/styles/mixin";
+@import './src/styles/mixin';
 
 .wrapper {
   @include absolute(0);
-  background-image: url("profile-bg.jpg");
+  background-image: url('profile-bg.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
