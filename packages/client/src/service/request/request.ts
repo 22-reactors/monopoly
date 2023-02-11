@@ -80,7 +80,7 @@ export default class RequestTransport {
       headers,
       credentials: "include",
       body: JSON.stringify(data),
-      signal:controller.signal
+      signal: controller.signal
     });
 
     clearTimeout(id);
