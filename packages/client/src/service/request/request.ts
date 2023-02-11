@@ -18,6 +18,10 @@ const TIMEOUT_DELAY = 5000;
 const HOST = 'https://ya-praktikum.tech/api/v2';
 
 function queryStringify(data: Record<string, string>): string {
+  if (!data) {
+    return '';
+  }
+
   if (typeof data !== 'object') {
     throw new Error('Data должна быть объектом');
   }
@@ -32,7 +36,7 @@ function queryStringify(data: Record<string, string>): string {
 
 export default class RequestTransport {
   protected get: HTTPMethod = async (url, options) => {
-    const correctUrl = options.data ? `${url}${queryStringify(options.data as Record<string, string>)}` : url;
+    const correctUrl = `${url}${queryStringify(options.data as Record<string, string>)}`;
 
     return await this.request(
       `${HOST}${correctUrl}`,
