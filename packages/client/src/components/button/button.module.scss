@@ -1,4 +1,5 @@
-@import './src/styles/mixin';
+@import '../../styles/mixin';
+@import '../../styles/variables';
 
 .btn {
   width: 55%;
@@ -10,27 +11,48 @@
     transition: background-color 0.4s;
   }
 
-  &_Thrakral {
-    background-color: #69655c;
-    color: #d7d2bf;
+  &_primary {
+    width: auto;
+    background-color: $primary-color;
+    color: $outlined-color;
+    border: 1px solid $primary-color;
+    border-radius: 4px;
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
-        background-color: darken(#69655c, 10);
+        background-color: $primary-hover-color;
       }
     }
   }
 
-  &_Vrutuks {
-    background-color: #b23d3d;
-    color: #d7d2bf;
+  &_outlined {
+    width: auto;
+    background-color: $outlined-color;
+    color: $primary-color;
+    border: 1px solid $primary-color;
+    border-radius: 40px;
+    border-radius: 4px;
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
-        background-color: darken(#b23d3d, 10);
+        background-color: $outlined-hover-color;
       }
     }
   }
+
+  &_sm {
+    padding: 6px 14px;
+  }
+  &_md {
+    padding: 12px 18px;
+  }
+  &_lg {
+    padding: 14px 22px;
+  }
+}
+
+.rounded {
+  border-radius: 40px;
 }
 
 .hide {
