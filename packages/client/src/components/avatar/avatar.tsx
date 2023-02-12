@@ -54,6 +54,7 @@ function Avatar(props: Props) {
       <button onClick={openBrowserAvatarFile} className={style.button}>
         Обновить аватар
       </button>
+
     </section>
   );
 }
