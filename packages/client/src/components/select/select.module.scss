@@ -1,0 +1,19 @@
+@import '../../styles/globals.scss';
+
+.container {
+  position: relative;
+  cursor: pointer;
+}
+
+.select {
+  border: none;
+  cursor: inherit;
+  border: 1px solid;
+  border-color: $text-additional;
+  &:focus {
+    outline: none;
+  }
+}
+
+.label {
+}
