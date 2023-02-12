@@ -2,40 +2,36 @@
 @import '../../styles/variables';
 
 .btn {
-  width: 55%;
-  padding: 15px 30px;
   cursor: pointer;
-  border: none;
+  border: 1px solid $primary-color;
+  border-radius: 4px;
+  padding: 12px 18px;
+  font: $text-base-font;
 
   @media (prefers-reduced-motion: no-preference) {
     transition: background-color 0.4s;
   }
 
   &_primary {
-    width: auto;
     background-color: $primary-color;
     color: $outlined-color;
-    border: 1px solid $primary-color;
-    border-radius: 4px;
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
         background-color: $primary-hover-color;
+        border-color: $primary-hover-color;
       }
     }
   }
 
   &_outlined {
-    width: auto;
     background-color: $outlined-color;
     color: $primary-color;
-    border: 1px solid $primary-color;
-    border-radius: 40px;
-    border-radius: 4px;
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
         background-color: $outlined-hover-color;
+
       }
     }
   }

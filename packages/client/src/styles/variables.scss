@@ -5,6 +5,9 @@ $outlined-color: white;
 $outlined-hover-color: rgba(71, 70, 70, 0.09);
 
 // Text colors
-$text-base: #2e2e2e;
-$text-additional: #959595;
-$text-error: #f30000;
+$text-base-color: #2e2e2e;
+$text-additional-color: #959595;
+$text-error-color: #f30000;
+
+// Fonts
+$text-base-font: 16px/24px 'Manrope', sans-serif;
