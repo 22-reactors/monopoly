@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, HTMLProps, useRef, useState } from 'react';
 import style from './textarea.module.scss';
 
 interface Props {
@@ -7,12 +7,13 @@ interface Props {
   placeholder?: string;
   label?: string;
   solo?: boolean;
+  resize?: 'none' | 'both' | 'horizontal' | 'vertical' | 'inherit';
   onChange?: (event?: ChangeEvent<HTMLTextAreaElement>) => void;
   onBlur?: (event?: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 function Textarea(props: Props) {
-  const { value, onChange, solo, label, onBlur } = props;
+  const { value, onChange, solo, label, onBlur, resize } = props;
 
   const [labelFocus, setLabelFocus] = useState(false);
 
@@ -34,14 +35,20 @@ function Textarea(props: Props) {
     }
   };
 
+  const textateaStyle = {
+    resize: resize || 'vertical',
+  };
+
   return (
     <div
       tabIndex={0}
-      className={style.container}
+      className={classNames(style.container, solo && style.containerSolo)}
       onFocus={focusTextareaContainer}>
       <textarea
+        style={textateaStyle}
         ref={textareaRef}
-        className={classNames(style.textarea)}
+        placeholder={(solo && label) || ''}
+        className={style.textarea}
         value={value}
         onBlur={onBlurTextarea}
         onChange={onChange}

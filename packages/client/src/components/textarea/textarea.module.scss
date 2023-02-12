@@ -1,4 +1,6 @@
 @import '../../styles/globals.scss';
+@import '../../styles/mixin.scss';
+
 $animation-time: 0.25s;
 
 .textarea {
@@ -9,21 +11,32 @@ $animation-time: 0.25s;
   min-width: 0;
   border: none;
   border-bottom: 1px solid $text-additional;
+  &::placeholder {
+    color: $text-additional;
+  }
   &:focus {
     outline: none;
     border-color: $primary;
     color: $primary;
   }
-  &--solo {
-    background: #fff;
-    padding: 20px;
-    border-radius: 20px;
-  }
-  resize: vertical;
 }
+
 .container {
   position: relative;
   cursor: text;
+}
+
+.containerSolo {
+  @include shadowDefault;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  & .textarea {
+    border-color: transparent;
+  }
+  & .label {
+    display: none;
+  }
 }
 
 .label {
