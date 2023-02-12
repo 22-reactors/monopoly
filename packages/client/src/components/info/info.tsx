@@ -55,15 +55,16 @@ export function Info(props: IInfo) {
           <Button
             className={classNames(style.btnEdit, isEdit && style.btnEditActive)}
             variation={ButtonVariation.PRIMARY}
-            text={'Изменить'}
-            onClick={() => setIsEdit(prevState => !prevState)}
-          />
+            onClick={() => setIsEdit(prevState => !prevState)}>
+            Изменить
+          </Button>
           <Button
             type={'submit'}
             variation={ButtonVariation.PRIMARY}
-            text={'Сохранить'}
             isHide={!isEdit}
-          />
+            disabled>
+            Сохранить
+          </Button>
         </div>
       </form>
     </section>

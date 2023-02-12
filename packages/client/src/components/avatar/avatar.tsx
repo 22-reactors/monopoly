@@ -55,8 +55,7 @@ export function Avatar(props: IAvatar): JSX.Element {
             type={'submit'}
             isHide={!isEdit}
             variation={ButtonVariation.PRIMARY}
-            text={'Сохранить'}
-          />
+          >Сохранить</Button>
         </fieldset>
       </form>
     </section>

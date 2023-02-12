@@ -31,7 +31,6 @@
     @media (hover: hover) and (pointer: fine) {
       &:hover {
         background-color: $outlined-hover-color;
-
       }
     }
   }
@@ -44,6 +43,19 @@
   }
   &_lg {
     padding: 14px 22px;
+  }
+}
+
+.disabled {
+  background-color: $disabled-color;
+  border-color: $disabled-color;
+  cursor: auto;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: $disabled-color;
+      border-color: $disabled-color;
+    }
   }
 }
 
