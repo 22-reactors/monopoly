@@ -1,0 +1,44 @@
+@import '../../styles/globals.scss';
+@import '../../styles/mixin.scss';
+
+$animation-time: 0.25s;
+
+.container {
+  &:focus {
+    outline: none;
+  }
+  position: relative;
+  cursor: text;
+}
+
+.input {
+  padding-bottom: 4px;
+  width: 100%;
+  @include text-base;
+  appearance: none;
+  border: none;
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
+  border-bottom: 1px solid;
+  border-color: $text-additional;
+  &:focus {
+    border-color: $primary;
+  }
+}
+
+.label {
+  top: 0;
+  left: 0;
+  transition: all $animation-time;
+  color: $text-additional;
+  position: absolute;
+  cursor: inherit;
+}
+
+.labelFocus {
+  font-size: 12px;
+  color: $primary;
+  transform: translateY(-100%);
+}
