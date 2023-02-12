@@ -6,6 +6,7 @@ $animation-time: 0.25s;
 .textarea {
   transition: border-color, color $animation-time;
   color: $text-base;
+  @include text-base;
   min-height: 52px;
   width: 100%;
   min-width: 0;
