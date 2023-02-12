@@ -17,7 +17,7 @@ type HTTPMethod = (url: string, options: Options, timeout?: number) => Promise<u
 const TIMEOUT_DELAY = 5000;
 const HOST = 'https://ya-praktikum.tech/api/v2';
 
-function queryStringify(data: Record<string, string>): string {
+function queryStringify(data?: Record<string, string>): string {
   if (!data) {
     return '';
   }
