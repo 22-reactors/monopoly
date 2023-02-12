@@ -1,8 +1,9 @@
 import classNames from 'classnames';
-import { ChangeEvent, HTMLProps, useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
+import { IValidationInputProps } from '../../types/validation';
 import style from './textarea.module.scss';
 
-interface Props {
+interface Props extends IValidationInputProps {
   value?: string;
   placeholder?: string;
   label?: string;
@@ -13,7 +14,7 @@ interface Props {
 }
 
 function Textarea(props: Props) {
-  const { value, onChange, solo, label, onBlur, resize } = props;
+  const { value, onChange, solo, label, onBlur, resize, errorText } = props;
 
   const [labelFocus, setLabelFocus] = useState(false);
 
