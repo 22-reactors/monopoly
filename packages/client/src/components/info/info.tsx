@@ -54,13 +54,13 @@ export function Info(props: IInfo) {
         <div className={style.btnWrapper}>
           <Button
             className={classNames(style.btnEdit, isEdit && style.btnEditActive)}
-            variation={ButtonVariation.THRAKRAL}
+            variation={ButtonVariation.PRIMARY}
             text={'Изменить'}
             onClick={() => setIsEdit(prevState => !prevState)}
           />
           <Button
             type={'submit'}
-            variation={ButtonVariation.VRUTUKS}
+            variation={ButtonVariation.PRIMARY}
             text={'Сохранить'}
             isHide={!isEdit}
           />
