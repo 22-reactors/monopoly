@@ -4,7 +4,7 @@ import { IValidationInputProps } from '../../types/validation';
 import style from './textarea.module.scss';
 
 interface Props extends IValidationInputProps {
-  value?: string;
+  value: string;
   placeholder?: string;
   label?: string;
   solo?: boolean;
