@@ -1,5 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
-import { links } from '../app';
+import { links } from '../../app';
 
 export const Home = () => {
   return (
