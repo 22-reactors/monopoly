@@ -39,6 +39,30 @@ $animation-time: 0.25s;
   }
 }
 
+.containerError {
+  &:not(.containerSolo) {
+    & .textarea {
+      border-color: $text-error;
+    }
+    & .label {
+      color: $text-error !important;
+    }
+  }
+
+  &.containerSolo {
+    border: 1px solid;
+    border-color: $text-error;
+    & .error {
+      left: 0;
+      transform: translateY(2px);
+      top: 100%;
+    }
+    & .label {
+      color: $text-error !important;
+    }
+  }
+}
+
 .label {
   transition: all $animation-time;
   position: absolute;
@@ -46,6 +70,13 @@ $animation-time: 0.25s;
   left: 0;
   top: 0;
   color: $text-additional;
+}
+
+.error {
+  position: absolute;
+  font-size: 12px;
+  white-space: nowrap;
+  color: $text-error;
 }
 
 .textarea:focus + .label {
