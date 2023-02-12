@@ -1,7 +1,7 @@
-import { useEffect } from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import LoginProps from './mocs/loginProps'
-import RegistrProps from './mocs/registrProps'
+import { useEffect } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import LoginProps from './mocs/loginProps';
+import RegistrProps from './mocs/registrProps';
 import {
   RootBoundary,
   Forum,
@@ -15,7 +15,7 @@ import {
   profileLoader,
   Register,
   registerLoader,
-} from './pages/index'
+} from './pages/index';
 
 export const links = {
   root: {
@@ -46,7 +46,7 @@ export const links = {
     path: '/game',
     title: 'Игра',
   },
-}
+};
 
 const router = createBrowserRouter([
   {
@@ -56,12 +56,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: links.login.path,
-        element: <Login {...LoginProps}/>,
+        element: <Login {...LoginProps} />,
         loader: loginLoader,
       },
       {
         path: links.signup.path,
-        element: <Register {...RegistrProps}/>,
+        element: <Register {...RegistrProps} />,
         loader: registerLoader,
       },
       {
@@ -84,18 +84,18 @@ const router = createBrowserRouter([
       },
     ],
   },
-])
+]);
 
 export function App() {
   useEffect(() => {
     const fetchServerData = async () => {
-      const url = `http://localhost:${__SERVER_PORT__}`
-      const response = await fetch(url)
-      const data = await response.json()
-      console.log(data)
-    }
+      const url = `http://localhost:${__SERVER_PORT__}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data);
+    };
 
-    fetchServerData()
-  }, [])
-  return <RouterProvider router={router} />
+    fetchServerData();
+  }, []);
+  return <RouterProvider router={router} />;
 }
