@@ -2,10 +2,11 @@ import classNames from 'classnames';
 import { memo, useRef, useState } from 'react';
 import style from './select.module.scss';
 import SelectOption, { IOption } from './selectOption';
+import { IValidationInputProps } from '../../types/validation';
 
-interface Props {
+interface Props extends IValidationInputProps {
   label?: string;
-  value: IOption | undefined;
+  value?: IOption | undefined;
   options?: IOption[];
   onChange?: (option: IOption) => void;
 }
@@ -16,7 +17,7 @@ const defaultOption: IOption = {
 };
 
 function Select(props: Props) {
-  const { label, value, onChange, options } = props;
+  const { label, value, onChange, options, errorText } = props;
 
   const [labelFocus, setLabelFocus] = useState(!!value);
   const [isOpen, setIsOpen] = useState(false);
@@ -49,13 +50,15 @@ function Select(props: Props) {
   const onOptionSelectClick = (option: IOption) => {
     if (onChange) {
       onChange(option);
-      setSelectedOption(option);
     }
+    setSelectedOption(option);
   };
+
+  const isValid = !!errorText;
 
   return (
     <button
-      className={style.container}
+      className={classNames(style.container, isValid && style.errorContainer)}
       tabIndex={0}
       onFocus={onSelectContainerFocus}
       onBlur={onSelectContainerBlur}
@@ -65,7 +68,6 @@ function Select(props: Props) {
         ref={selectRef}
         disabled
         className={style.select}></input>
-      <div className={style.options}></div>
       <label
         className={classNames(style.label, labelFocus && style.labelFocus)}>
         {label}
@@ -97,6 +99,7 @@ function Select(props: Props) {
           />
         ))}
       </div>
+      {isValid && <div className={style.error}>{errorText}</div>}
     </button>
   );
 }

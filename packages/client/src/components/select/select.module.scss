@@ -2,6 +2,7 @@
 @import '../../styles/mixin.scss';
 
 $animation-time: 0.25s;
+$option-y-offset: 2px;
 
 .container {
   width: 100%;
@@ -16,6 +17,16 @@ $animation-time: 0.25s;
   }
   border-bottom: 1px solid;
   border-color: $text-additional;
+}
+
+.errorContainer {
+  border-color: $text-error !important;
+  & .icon {
+    stroke: $text-error !important;
+  }
+  & .label {
+    color: $text-error !important;
+  }
 }
 
 .select {
@@ -70,6 +81,7 @@ $animation-time: 0.25s;
 }
 
 .options {
+  overflow: hidden;
   max-height: 0;
   transition: all $animation-time;
   opacity: 0;
@@ -79,13 +91,21 @@ $animation-time: 0.25s;
   border-radius: 4px;
   width: 100%;
   left: 0;
-  transform: translateY(6px);
+  transform: translateY($option-y-offset);
   @include shadowDefault;
 }
 
 .optionsOpen {
   max-height: 320px;
   padding: 6px 0;
-
   opacity: 1;
+}
+
+.error {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  transform: translateY($option-y-offset);
+  z-index: -10;
+  color: $text-error;
 }
