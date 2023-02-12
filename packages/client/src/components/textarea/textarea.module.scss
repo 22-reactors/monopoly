@@ -1,0 +1,44 @@
+@import '../../styles/globals.scss';
+$animation-time: 0.25s;
+
+.textarea {
+  transition: border-color, color $animation-time;
+  color: $text-base;
+  min-height: 52px;
+  width: 100%;
+  min-width: 0;
+  border: none;
+  border-bottom: 1px solid $text-additional;
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    color: $primary;
+  }
+  &--solo {
+    background: #fff;
+    padding: 20px;
+    border-radius: 20px;
+  }
+  resize: vertical;
+}
+.container {
+  position: relative;
+  cursor: text;
+}
+
+.label {
+  transition: all $animation-time;
+  position: absolute;
+  cursor: inherit;
+  left: 0;
+  top: 0;
+  color: $text-additional;
+}
+
+.textarea:focus + .label {
+  color: $primary;
+}
+
+.labelFocus {
+  transform: translateY(-100%);
+}
