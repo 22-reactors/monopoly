@@ -1,64 +1,61 @@
-import style from './avatar.module.scss';
 import classNames from 'classnames';
-import { ChangeEvent, FormEvent, useState } from 'react';
-import noAva from '../../assets/no-ava.png';
-import { Button, ButtonVariation } from '../button/button';
-
-export interface IAvatar {
-  className?: string;
-  src?: string;
-  onSubmit?(): void;
+import { ChangeEvent, FormEvent, useRef } from 'react';
+import style from './avatar.module.scss';
+interface Props {
+  sizePx?: number;
 }
 
-export function Avatar(props: IAvatar): JSX.Element {
-  const [isEdit, setIsEdit] = useState(false);
-  const [avatar, setAvatar] = useState('');
+function Avatar(props: Props) {
+  const { sizePx } = props;
 
-  const onChangeAvatar = (evt: ChangeEvent) => {
-    const files = (evt.target as HTMLInputElement).files;
+  const avatarSize = {
+    width: '0px',
+    height: '0px',
+  };
 
-    if (files?.length && files[0]) {
-      const image = URL.createObjectURL(files[0]);
+  if (sizePx) {
+    avatarSize.width = sizePx + 'px';
+    avatarSize.height = sizePx + 'px';
+  }
 
-      setAvatar(image);
-      setIsEdit(true);
+  const avatarContainerStyle = {
+    ...avatarSize,
+  };
+
+  const onChangeAvatarFileHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) {
+      return;
+    }
+    const avatarFile = event.target.files[0];
+    if (avatarFile) {
+      // Запрос к API
     }
   };
 
-  const onSubmitForm = (evt: FormEvent) => {
-    evt.preventDefault();
-    props.onSubmit?.();
+  const fileInput = useRef<HTMLInputElement>(null);
 
-    setIsEdit(false);
-    console.log('Save avatar');
+  const openBrowserAvatarFile = () => {
+    if (fileInput.current) {
+      fileInput.current.click();
+    }
   };
 
   return (
-    <section className={classNames(props.className, style.wrapper)}>
-      <form action="#" className={style.form} onSubmit={onSubmitForm}>
-        <img
-          className={style.preview}
-          src={props.src || avatar || noAva}
-          alt="Аватар игрока"
-        />
-        <fieldset className={style.field}>
-          <input
-            id={'avatar'}
-            type="file"
-            className={style.input}
-            onChange={onChangeAvatar}
-          />
-          <label htmlFor="avatar" className={style.label}>
-            Изменить
-          </label>
-          <Button
-            type={'submit'}
-            isHide={!isEdit}
-            variation={ButtonVariation.VRUTUKS}
-            text={'Сохранить'}
-          />
-        </fieldset>
-      </form>
+    <section className={style.container}>
+      <div
+        style={avatarContainerStyle}
+        className={classNames(style.avatar)}></div>
+      <input
+        className={style.avatarInput}
+        onChange={onChangeAvatarFileHandler}
+        type="file"
+        ref={fileInput}
+      />
+      <button onClick={openBrowserAvatarFile} className={style.button}>
+        Обновить аватар
+      </button>
     </section>
   );
 }
+
+export default Avatar;
