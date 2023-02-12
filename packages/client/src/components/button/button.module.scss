@@ -1,36 +1,66 @@
-@import './src/styles/mixin';
+@import '../../styles/mixin';
+@import '../../styles/variables';
 
 .btn {
-  width: 55%;
-  padding: 15px 30px;
   cursor: pointer;
-  border: none;
+  border: 1px solid $primary-color;
+  border-radius: 4px;
+  padding: 12px 18px;
+  font: $text-base-font;
 
   @media (prefers-reduced-motion: no-preference) {
     transition: background-color 0.4s;
   }
 
-  &_Thrakral {
-    background-color: #69655c;
-    color: #d7d2bf;
+  &_primary {
+    background-color: $primary-color;
+    color: $outlined-color;
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
-        background-color: darken(#69655c, 10);
+        background-color: $primary-hover-color;
+        border-color: $primary-hover-color;
       }
     }
   }
 
-  &_Vrutuks {
-    background-color: #b23d3d;
-    color: #d7d2bf;
+  &_outlined {
+    background-color: $outlined-color;
+    color: $primary-color;
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
-        background-color: darken(#b23d3d, 10);
+        background-color: $outlined-hover-color;
       }
     }
   }
+
+  &_sm {
+    padding: 6px 14px;
+  }
+  &_md {
+    padding: 12px 18px;
+  }
+  &_lg {
+    padding: 14px 22px;
+  }
+}
+
+.disabled {
+  background-color: $disabled-color;
+  border-color: $disabled-color;
+  cursor: auto;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: $disabled-color;
+      border-color: $disabled-color;
+    }
+  }
+}
+
+.rounded {
+  border-radius: 40px;
 }
 
 .hide {
