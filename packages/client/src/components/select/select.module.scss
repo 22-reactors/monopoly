@@ -1,19 +1,91 @@
 @import '../../styles/globals.scss';
+@import '../../styles/mixin.scss';
+
+$animation-time: 0.25s;
 
 .container {
+  width: 100%;
+  padding: 0;
   position: relative;
   cursor: pointer;
+  border: none;
+  background: transparent;
+  &:focus {
+    outline: none;
+    border-color: $primary;
+  }
+  border-bottom: 1px solid;
+  border-color: $text-additional;
 }
 
 .select {
+  width: 100%;
+  color: $text-base;
+  @include text-base;
+  padding-bottom: 4px;
   border: none;
+  pointer-events: none;
   cursor: inherit;
-  border: 1px solid;
-  border-color: $text-additional;
   &:focus {
     outline: none;
   }
+  &:disabled {
+    background: transparent;
+  }
+}
+
+.icon {
+  transition: all $animation-time;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  stroke: $text-additional;
+  transform: translateY(-50%);
+}
+
+.container:focus .iconFocus {
+  stroke: $primary;
+}
+
+.iconOpen {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.container:focus .label {
+  color: $primary;
 }
 
 .label {
+  transition: all $animation-time;
+  user-select: none;
+  cursor: inherit;
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: $text-additional;
+}
+
+.labelFocus {
+  transform: translateY(-100%);
+}
+
+.options {
+  max-height: 0;
+  transition: all $animation-time;
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  background-color: #fff;
+  border-radius: 4px;
+  width: 100%;
+  left: 0;
+  transform: translateY(6px);
+  @include shadowDefault;
+}
+
+.optionsOpen {
+  max-height: 320px;
+  padding: 6px 0;
+
+  opacity: 1;
 }
