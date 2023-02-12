@@ -59,7 +59,6 @@ function Select(props: Props) {
   return (
     <button
       className={classNames(style.container, isValid && style.errorContainer)}
-      tabIndex={0}
       onFocus={onSelectContainerFocus}
       onBlur={onSelectContainerBlur}
       onClick={onSelectContainerClick}>
