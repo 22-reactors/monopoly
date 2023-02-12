@@ -1,31 +1,13 @@
-import {
-  Button,
-  ButtonSizes,
-  ButtonVariation,
-} from '../../components/button/button';
+import { Outlet } from 'react-router-dom';
+import { Header } from '../../components/header/header';
+import { headerProps } from '../../mocs/headerProps';
 import style from './layout.module.scss';
 
 const Layout = () => {
   return (
     <div className={style.wrapper}>
-      <header className={style.header}>
-        <img src="logo.svg" />
-        <div className={style.headerButtons}>
-          <Button
-            variation={ButtonVariation.PRIMARY}
-            text="Войти"
-            size={ButtonSizes.MEDIUM}
-            rounded
-          />
-          <Button
-            variation={ButtonVariation.OUTLINED}
-            text="Регистрация"
-            size={ButtonSizes.MEDIUM}
-            rounded
-          />
-        </div>
-      </header>
-      <main className={style.main}></main>
+      <Header {...headerProps} />
+      <Outlet />
       <footer className={style.footer}>
         <nav className={style.menu}>
           <p className={style.menuTitle}>Меню</p>

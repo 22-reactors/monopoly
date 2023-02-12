@@ -4,21 +4,6 @@
   flex-direction: column;
 }
 
-.header,
-.footer {
-  width: 100vw;
-  box-sizing: border-box;
-  padding: 10px 20%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.headerButtons {
-  display: grid;
-  grid-auto-flow: column;
-  gap: 10px;
-}
-
 .main {
   flex-grow: 1;
   background: linear-gradient(to right, #ffeeee, #e7dfff);
