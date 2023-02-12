@@ -15,6 +15,7 @@ import {
   ProfilePage,
   profileLoader,
   Register,
+  registerLoader,
 } from './pages/index';
 
 export const links = {
