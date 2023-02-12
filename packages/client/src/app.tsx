@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import LoginProps from './mocs/loginProps';
 import {
   RootBoundary,
   Forum,
@@ -52,11 +53,11 @@ const router = createBrowserRouter([
     element: <Home />,
     errorElement: <RootBoundary />,
     children: [
-      // {
-      //   path: links.login.path,
-      //   element: <Login />,
-      //   loader: loginLoader,
-      // },
+      {
+        path: links.login.path,
+        element: <Login {...LoginProps} />,
+        loader: loginLoader,
+      },
       {
         path: links.signup.path,
         element: <SignUp />,
