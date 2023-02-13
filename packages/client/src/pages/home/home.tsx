@@ -11,27 +11,37 @@ export interface IHomeProps {
   title: string;
   description: string;
   linkText: string;
+  isAuthorized: boolean;
 }
 
 export const Home = (props: IHomeProps) => {
-  const { title, description, linkText } = props;
+  const { title, description, linkText, isAuthorized } = props;
 
   return (
     <main className={style.main}>
-      <div className={style.mainContent}>
-        <h1 className={style.title}>{title}</h1>
-        <h2 className={style.description}>{description}</h2>
-        <Link className={style.link} to={links.game.path}>
-          <Button
-            className={style.button}
-            variation={ButtonVariation.PRIMARY}
-            size={ButtonSizes.LARGE}
-            rounded>
-            {linkText}
-          </Button>
-        </Link>
-      </div>
-      <img className={style.cardsImage} src="cards.svg" alt="monopoly cards" />
+      {!isAuthorized && (
+        <>
+          <div className={style.mainContent}>
+            <h1 className={style.title}>{title}</h1>
+            <h2 className={style.description}>{description}</h2>
+            <Link className={style.link} to={links.game.path}>
+              <Button
+                className={style.button}
+                variation={ButtonVariation.PRIMARY}
+                size={ButtonSizes.LARGE}
+                rounded>
+                {linkText}
+              </Button>
+            </Link>
+          </div>
+          <img
+            className={style.cardsImage}
+            src="cards.svg"
+            alt="monopoly cards"
+          />
+        </>
+      )}
+      {isAuthorized && <></>}
     </main>
   );
 };

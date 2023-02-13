@@ -4,5 +4,6 @@ export const homeProps: IHomeProps = {
   title: 'МОНОПОЛИЯ',
   description:
     'Это отличное место, чтобы поиграть с друзьями в легендарную настольную игру.',
-  linkText: "Начать играть"
+  linkText: 'Начать играть',
+  isAuthorized: false,
 };
