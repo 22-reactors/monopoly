@@ -1,27 +1,16 @@
 import { Outlet } from 'react-router-dom';
+import { Footer } from '../../components/footer/footer';
 import { Header } from '../../components/header/header';
+import { footerProps } from '../../mocs/footerProps';
 import { headerProps } from '../../mocs/headerProps';
 import style from './layout.module.scss';
 
-const Layout = () => {
+export const Layout = () => {
   return (
     <div className={style.wrapper}>
       <Header {...headerProps} />
       <Outlet />
-      <footer className={style.footer}>
-        <nav className={style.menu}>
-          <p className={style.menuTitle}>Меню</p>
-          <ul>
-            <li className={style.link}>Главная</li>
-            <li className={style.link}>Профиль</li>
-            <li className={style.link}>Таблица лидеров</li>
-            <li className={style.link}>Форум</li>
-          </ul>
-        </nav>
-        <div className={style.info}></div>
-      </footer>
+      <Footer {...footerProps} />
     </div>
   );
 };
-
-export default Layout;

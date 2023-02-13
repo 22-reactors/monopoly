@@ -16,16 +16,17 @@ import {
   profileLoader,
   Register,
   registerLoader,
-
+  Layout
 } from './pages/index';
 import { links } from './utils/const';
 
 const router = createBrowserRouter([
   {
     path: links.root.path,
-    element: <Home />,
+    element: <Layout />,
     errorElement: <RootBoundary />,
     children: [
+      { index: true, element: <Home /> },
       {
         path: links.login.path,
         element: <Login {...LoginProps} />,
