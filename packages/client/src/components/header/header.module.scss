@@ -52,10 +52,6 @@
   border-bottom: 1px solid rgba(149, 149, 149, 0.2);
 }
 
-.darkLink {
-  color: $dark-theme-white;
-}
-
 .user {
   display: flex;
   gap: 10px;
@@ -82,6 +78,13 @@
 
 .logoutText {
   font: $text-base-font;
-  color: $primary-color;
   cursor: pointer;
+}
+
+.lightText {
+  color: $primary-color;
+}
+
+.darkText {
+  color: $dark-theme-white;
 }
