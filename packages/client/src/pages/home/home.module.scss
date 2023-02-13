@@ -29,3 +29,9 @@
 .cardsImage {
   align-self: flex-start;
 }
+
+.dark {
+  background: none;
+  background-color: $dark-ux-background;
+  color: $dark-theme-white;
+}

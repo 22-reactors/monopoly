@@ -6,4 +6,5 @@ export const homeProps: IHomeProps = {
     'Это отличное место, чтобы поиграть с друзьями в легендарную настольную игру.',
   linkText: 'Начать играть',
   isAuthorized: false,
+  isDarkTheme: false,
 };

@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import {
   Button,
@@ -12,13 +13,14 @@ export interface IHomeProps {
   description: string;
   linkText: string;
   isAuthorized: boolean;
+  isDarkTheme: boolean;
 }
 
 export const Home = (props: IHomeProps) => {
-  const { title, description, linkText, isAuthorized } = props;
+  const { title, description, linkText, isAuthorized, isDarkTheme } = props;
 
   return (
-    <main className={style.main}>
+    <main className={classNames(style.main, isDarkTheme && style.dark)}>
       {!isAuthorized && (
         <>
           <div className={style.mainContent}>

@@ -9,6 +9,9 @@ import {
 
 export interface IHeaderProps extends ILoginButtonsProps {
   navLinks: { path: string; title: string }[];
+  isDarkTheme: boolean;
+  user?: IUser;
+  logoutText: string;
 }
 
 export const Header = (props: IHeaderProps) => {
