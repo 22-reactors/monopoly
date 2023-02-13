@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { homeProps } from './mocs/homeProps';
 import LoginProps from './mocs/loginProps';
 import RegistrProps from './mocs/registrProps';
 
@@ -16,7 +17,7 @@ import {
   profileLoader,
   Register,
   registerLoader,
-  Layout
+  Layout,
 } from './pages/index';
 import { links } from './utils/const';
 
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <RootBoundary />,
     children: [
-      { index: true, element: <Home /> },
+      { index: true, element: <Home {...homeProps} /> },
       {
         path: links.login.path,
         element: <Login {...LoginProps} />,

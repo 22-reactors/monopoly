@@ -1,5 +1,31 @@
+@import "../../styles/mixin.scss";
+@import "../../styles/variables.scss";
+
 .main {
   flex-grow: 1;
   background: linear-gradient(to right, #ffeeee, #e7dfff);
-  background: grad;
+  font: $text-base-font;
+  display: flex;
+  min-height: $main-window-height;
+  justify-content: space-between;
+  align-items: center;
+}
+.mainContent {
+  margin-left: $main-margin-left;
+}
+
+.title {
+  font-size: 64px;
+}
+
+.description {
+  font: $h2;
+}
+
+.button {
+  margin-top: 22px;
+}
+
+.cardsImage {
+  align-self: flex-start;
 }
