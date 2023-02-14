@@ -10,8 +10,16 @@ export interface IThemeCard {
   lastMessage?: string;
 }
 
+export const enum WordMap {
+  SINGLE = 'single',
+  SOME = 'some',
+  MORE = 'more'
+}
+
+const WORD_MAP = { single: 'ответ', some: 'ответа', more: 'ответов' };
+
 export function ThemeCard(props: IThemeCard) {
-  const amountAnswer = `${props.amountAnswer} ${getDeclensionWord(props.amountAnswer, ['ответ', 'ответа', 'ответов'])}`;
+  const amountAnswer = `${props.amountAnswer} ${getDeclensionWord(props.amountAnswer, WORD_MAP)}`;
 
   return (
     <div className={style.wrapper}>

@@ -1,5 +1,6 @@
 import { redirect } from "react-router-dom"
 import { links } from "../app"
+import { WordMap } from '../components/themeCard/themeCard'
 
 export const unAuthorizedRedirect = async () => {
   /*
@@ -24,22 +25,22 @@ export const authorizedRedirect = async () => {
 }
 
 //Получаем склоненную форму слова из переданного массива
-export function getDeclensionWord(value: number, words: string[]): string {
+export function getDeclensionWord(value: number, words: {[value in WordMap]: string}): string {
   const correct_value = Math.abs(value) % 100;
 
   if (correct_value > 10 && correct_value < 20) {
-    return words[2];
+    return words[WordMap['MORE']];
   }
 
   const num = correct_value % 10;
 
   if (num > 1 && num < 5) {
-    return words[1];
+    return words[WordMap['SOME']];
   }
 
   if (num == 1) {
-    return words[0];
+    return words[WordMap['SINGLE']];
   }
 
-  return words[2];
+  return words[WordMap['MORE']];
 }
