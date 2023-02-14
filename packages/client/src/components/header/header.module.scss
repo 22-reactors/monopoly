@@ -1,0 +1,81 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
+
+.header {
+  width: 100vw;
+  box-sizing: border-box;
+  padding: 10px $main-margin-left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.navList {
+  display: flex;
+  @include clear-list;
+}
+
+.logoLink {
+  margin-right: 120px;
+}
+
+.link {
+  margin-right: 30px;
+  font: $text-base-font;
+  color: $primary-color;
+  @include clear-link;
+}
+
+.headerButtons {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 10px;
+}
+
+.dark {
+  background: none;
+  background-color: $dark-ux-background;
+  border-bottom: 1px solid rgba(149, 149, 149, 0.2);
+}
+
+.user {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.name {
+  font: $h4;
+  margin: 0;
+}
+
+.divider {
+  height: 35px;
+  width: 1px;
+  background-color: $text-additional-color;
+}
+
+.logoutText {
+  font: $text-base-font;
+  cursor: pointer;
+}
+
+.lightText {
+  color: $primary-color;
+}
+
+.darkText {
+  color: $dark-theme-white;
+}
