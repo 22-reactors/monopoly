@@ -1,22 +1,14 @@
 import classNames from 'classnames';
 import { ChangeEvent, FormEvent, useRef } from 'react';
 import style from './avatar.module.scss';
-interface Props {
-  sizePx?: number;
-}
 
-function Avatar(props: Props) {
+function Avatar() {
   const { sizePx } = props;
 
   const avatarSize = {
-    width: '0px',
-    height: '0px',
+    width: '100px',
+    height: '100px',
   };
-
-  if (sizePx) {
-    avatarSize.width = sizePx + 'px';
-    avatarSize.height = sizePx + 'px';
-  }
 
   const avatarContainerStyle = {
     ...avatarSize,
