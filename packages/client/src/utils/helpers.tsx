@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom"
-import { links } from "../app"
+import { links } from "./const"
 
 export const unAuthorizedRedirect = async () => {
   /*
