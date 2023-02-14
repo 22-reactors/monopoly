@@ -11,7 +11,7 @@ export const headerProps: IHeaderProps = {
     login: "skaamoogs",
     email: "mail@mail.com",
     phone: "+71234567899",
-    avatar: "avatar.jpg",
+    avatar: "avatar-empty.png",
   },
   isDarkTheme: false,
   logoutText: 'Выйти',
