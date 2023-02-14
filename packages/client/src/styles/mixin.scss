@@ -122,3 +122,17 @@
   clip: rect(0 0 0 0);
   clip-path: inset(100%);
 }
+
+// Обнуляем ссылки
+
+@mixin clear-link {
+  text-decoration: none;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+}
