@@ -1,0 +1,25 @@
+@import "./src/styles/variables";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 51px;
+  height: 51px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.name {
+  font: $text-base-font;
+  color: $primary-color;
+}
+
+.isDark {
+  .name {
+    color: $outlined-color
+  }
+}
