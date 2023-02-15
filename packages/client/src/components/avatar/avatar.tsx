@@ -1,10 +1,9 @@
 import classNames from 'classnames';
 import { ChangeEvent, FormEvent, useRef } from 'react';
+import { Button, ButtonSizes, ButtonVariation } from '../button/button';
 import style from './avatar.module.scss';
 
 function Avatar() {
-  const { sizePx } = props;
-
   const avatarSize = {
     width: '100px',
     height: '100px',
@@ -34,19 +33,21 @@ function Avatar() {
 
   return (
     <section className={style.container}>
-      <div
-        style={avatarContainerStyle}
-        className={classNames(style.avatar)}></div>
+      <div style={avatarContainerStyle} className={style.avatar}></div>
       <input
         className={style.avatarInput}
         onChange={onChangeAvatarFileHandler}
         type="file"
         ref={fileInput}
       />
-      <button onClick={openBrowserAvatarFile} className={style.button}>
+      <Button
+        variation={ButtonVariation.PRIMARY}
+        size={ButtonSizes.SMALL}
+        rounded
+        onClick={openBrowserAvatarFile}
+        className={style.button}>
         Обновить аватар
-      </button>
-
+      </Button>
     </section>
   );
 }
