@@ -5,7 +5,7 @@ export const unAuthorizedRedirect = async () => {
   /*
   Когда подключим API авторизации здесь должен быть запрос пользователя.
   Если  не авторизован, то переход на страницу авторизации */
-  const user = {}
+  const user = null
   if (!user) {
     return redirect(links.login.path)
   }
@@ -16,7 +16,7 @@ export const authorizedRedirect = async () => {
   /*
   Когда подключим API авторизации здесь должен быть запрос пользователя.
   Если авторизован, то переход на страницу игры */
-  const user = {}
+  const user = null
   if (user) {
     return redirect(links.game.path)
   }

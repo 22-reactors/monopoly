@@ -14,7 +14,7 @@ interface Options {
 
 type HTTPMethod = (
   url: string,
-  options: Options,
+  options?: Options,
   timeout?: number
 ) => Promise<unknown>;
 
@@ -44,15 +44,15 @@ export default class RequestTransport {
     this.endpoint = `${HOST}${endpoint}`;
   }
 
-  protected get: HTTPMethod = async (url, options = {}) => {
+  protected get: HTTPMethod = async (url, options) => {
     const correctUrl = `${url}${queryStringify(
-      options.data as Record<string, string>
+      options?.data as Record<string, string>
     )}`;
 
     return await this.request(
       `${this.endpoint}${correctUrl}`,
       { ...options, method: METHODS.GET },
-      options.timeout
+      options?.timeout
     );
   };
 
@@ -60,7 +60,7 @@ export default class RequestTransport {
     return await this.request(
       `${this.endpoint}${url}`,
       { ...options, method: METHODS.POST },
-      options.timeout
+      options?.timeout
     );
   };
 
@@ -68,7 +68,7 @@ export default class RequestTransport {
     return await this.request(
       `${this.endpoint}${url}`,
       { ...options, method: METHODS.PUT },
-      options.timeout
+      options?.timeout
     );
   };
 
@@ -76,13 +76,13 @@ export default class RequestTransport {
     return await this.request(
       `${this.endpoint}${url}`,
       { ...options, method: METHODS.DELETE },
-      options.timeout
+      options?.timeout
     );
   };
 
   private readonly request: HTTPMethod = async (
     url,
-    options,
+    options = {},
     timeout = TIMEOUT_DELAY
   ) => {
     const { headers = {}, method, data } = options;
