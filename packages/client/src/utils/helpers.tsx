@@ -1,6 +1,5 @@
 import { redirect } from "react-router-dom"
 import { links } from "../app"
-import { WordMap } from '../components/themeCard/themeCard'
 
 export const unAuthorizedRedirect = async () => {
   /*
@@ -22,6 +21,13 @@ export const authorizedRedirect = async () => {
     return redirect(links.game.path)
   }
   return true
+}
+
+
+export const enum WordMap {
+  SINGLE = 'single',
+  SOME = 'some',
+  MORE = 'more'
 }
 
 //Получаем склоненную форму слова из переданного массива

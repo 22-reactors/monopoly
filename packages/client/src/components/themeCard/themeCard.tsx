@@ -10,12 +10,6 @@ export interface IThemeCard {
   lastMessage?: string;
 }
 
-export const enum WordMap {
-  SINGLE = 'single',
-  SOME = 'some',
-  MORE = 'more'
-}
-
 const WORD_MAP = { single: 'ответ', some: 'ответа', more: 'ответов' };
 
 export function ThemeCard(props: IThemeCard) {
