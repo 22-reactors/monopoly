@@ -22,7 +22,7 @@ export function ThemeMessage(props: IThemeMessage) {
       <span className={style.status}>{props.status} назад</span>
       <p className={style.message}>{props.message}</p>
       <div className={style.actionWrapper}>
-        <span className={style.icon} onClick={iconHandler}>Иконка реакции сердца</span>
+        <span className={style.icon} onClick={iconHandler} role={'button'}>Иконка реакции сердца</span>
         <span className={classNames(style.text, amountLikes > 0 && style.textShow)}>{amountLikes} Likes</span>
       </div>
     </div>
