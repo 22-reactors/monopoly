@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LoginProps from './mocs/loginProps';
 import RegistrProps from './mocs/registrProps';
+
 import {
   RootBoundary,
   Forum,
