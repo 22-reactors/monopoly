@@ -34,14 +34,12 @@
 
 .icon {
   @include clear-font();
+  @include bg-image-styles(contain);
 
   flex-shrink: 0;
   width: 24px;
   height: 24px;
   background-image: url('heart-icon.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
   cursor: pointer;
   @media (prefers-reduced-motion: no-preference) {
     transition: transform 0.4s linear;
