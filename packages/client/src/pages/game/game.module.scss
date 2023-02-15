@@ -1,0 +1,18 @@
+//добавил т.к. свойство height: 100vh; для html из main.scss не дает скролить canvas элемент по оси y
+body {
+  overflow-y: scroll !important;
+}
+
+.gamePageWrapClass {
+  display: table-caption;
+}
+
+.reloadPageBtnClass {
+  margin-left: 50px;
+  margin-top: 50px;
+}
+
+.canvasClass {
+  margin-left: 50px;
+  margin-top: 15px;
+}
