@@ -9,6 +9,12 @@
   border-radius: 50%;
   border: 7px solid;
   border-color: $primary;
+  position: relative;
+  overflow: hidden;
+  & > img {
+    max-width: 100%;
+    min-height: 100%;
+  }
 }
 
 .button {
