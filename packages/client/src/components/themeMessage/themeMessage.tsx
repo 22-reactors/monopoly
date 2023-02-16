@@ -11,10 +11,16 @@ export interface IThemeMessage {
 }
 
 export function ThemeMessage(props: IThemeMessage) {
-  const [countLike, setCountLike] = useState(0);
+  const [hasLike, setHasLike] = useState(false);
 
-  const iconHandler = () => setCountLike((prevState) => prevState > 0 ? --prevState : ++prevState);
-  const amountLikes = props.countLikes ? props.countLikes + countLike : countLike;
+  let countLikes = props.countLikes || 0;
+  const iconHandler = () => setHasLike((prevState) => !prevState);
+
+  if (hasLike) {
+    ++countLikes;
+  } else {
+    countLikes = props.countLikes || 0;
+  }
 
   return (
     <div className={style.wrapper}>
@@ -23,7 +29,7 @@ export function ThemeMessage(props: IThemeMessage) {
       <p className={style.message}>{props.message}</p>
       <div className={style.actionWrapper}>
         <span className={style.icon} onClick={iconHandler} role='button'>Иконка реакции сердца</span>
-        <span className={classNames(style.text, amountLikes > 0 && style.textShow)}>{amountLikes}</span>
+        <span className={classNames(style.text, countLikes > 0 && style.textShow)}>{countLikes}</span>
       </div>
     </div>
   );
