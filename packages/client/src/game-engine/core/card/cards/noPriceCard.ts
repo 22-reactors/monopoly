@@ -9,6 +9,7 @@ export class NoPriceCard extends CardRect {
   private background: Background | undefined
   private readonly title: TemplateText
   private static readonly CONST_NO_PRICE = {
+    // Размеры относительно карточки
     SHIFT_TITLE: 0.85,
   }
 

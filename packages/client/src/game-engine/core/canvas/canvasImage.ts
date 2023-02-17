@@ -11,6 +11,7 @@ type TCanvasImage = IRect & {
   rotate?: number
 }
 
+//Загрузка и отрисовка изображения
 export class CanvasImage extends CanvasElement {
   private readonly rotate: number
   private readonly image: HTMLImageElement

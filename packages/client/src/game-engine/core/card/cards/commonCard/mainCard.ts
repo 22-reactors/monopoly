@@ -8,6 +8,7 @@ export type TMainCard = ICardRect & ICardMainSetting
 
 export class MainCard extends CardRect {
   private static readonly CONST_MAIN_CARD = {
+    // Размеры относительно карточки
     SHIFT_TITLE: 0.8,
     SHIFT_PRISE: 0.1,
   }

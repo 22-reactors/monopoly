@@ -14,6 +14,7 @@ export class Dice extends CanvasElement {
   private static CONST = {
     RANDOM_VALUE_MAX: 6,
     RANDOM_ROTATE_MAX: 360,
+    //Размер и координаты точек относительно размера кубика
     SIZE_DOT: 0.1,
     START_DOT: 0.2,
     CENTER_DOT: 0.5,

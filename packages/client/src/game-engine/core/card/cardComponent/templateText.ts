@@ -38,8 +38,10 @@ export type TTemplateTitle = IRect & {
  */
 export class TemplateText extends CanvasElement {
   private static readonly CONST = {
+    // Размеры относительно карточки
     CENTER: 0.5,
     WIDTH: 0.8,
+    // Вращение
     ROTATE: {
       RIGHT: 90,
       LEFT: -90,

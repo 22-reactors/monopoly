@@ -14,6 +14,7 @@ type TLabel = IRect & {
 export class CardLabel extends CanvasElement {
   private readonly color: ColorMainCardEnum
   private static readonly CONST = {
+    // Размеры относительно карточки
     SHIFT: 0.85,
     HEIGHT: 0.15,
   }

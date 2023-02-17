@@ -12,8 +12,10 @@ type TBackgroundSize = Omit<IRect, 'ctx'> & {
   position: PositionEnum
 }
 
+//Фоновое изображение карточки без цены
 export class Background extends CanvasImage {
   private static readonly CONST = {
+    //Размеры относительно карточки
     BASE_SIZE: 0.8,
     HORIZONTAL: {
       X_RIGHT: 0.3,
@@ -26,6 +28,7 @@ export class Background extends CanvasImage {
       Y_TOP: 0.25,
       Y_BOTTOM: 0.3,
     },
+    //Вращение
     ROTATE: {
       LEFT: -90,
       RIGHT: 90,

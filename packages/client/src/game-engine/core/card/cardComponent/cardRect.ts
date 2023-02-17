@@ -14,21 +14,31 @@ export interface ICardRect {
 
 export abstract class CardRect extends CanvasElement {
   static readonly CONST = {
+    //индексы карт
     INDEX_CORNER: 10,
     INDEX_TOP_LEFT: 0,
     INDEX_TOP_RIGHT: 10,
     INDEX_BOTTOM_RIGHT: 20,
     INDEX_BOTTOM_LEFT: 30,
+    //Размеры относительно размера canvas (подогнано под 1000x1000)
+    //размер карточки по оси y
     BASE_SIZE: 0.14,
+    //размер карточки по оси x
     MAIN_CARD_SIZE: 0.08,
+    //Координаты расположения фишки на карточке относительно карточки (0 - начало, 1 - конец)
+    //размер карточки по оси y
     CHIP_SHIFT: 0.25,
+    //размер карточки по оси x
     CHIP_CENTER: 0.5,
   }
 
+  //Базовый размер (для вертикальных карточек - высота, для горизонтальных - ширина)
   readonly baseSize: number
+  //Позиционирование карточки
   readonly orientation: OrientationEnum
   readonly position: PositionEnum
   readonly type: CardTypeEmum
+  //позиция для размещения фишек
   chipPosition = {
     x: 0,
     y: 0,
@@ -60,6 +70,7 @@ export abstract class CardRect extends CanvasElement {
 
   private static getOrientation(index: number): OrientationEnum {
     if (index % CardRect.CONST.INDEX_CORNER === 0) {
+      //при индексе кратном десяти - угловая карточка
       return OrientationEnum.Corner
     }
 

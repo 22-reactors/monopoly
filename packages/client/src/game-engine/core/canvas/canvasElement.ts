@@ -4,6 +4,7 @@ type TCanvasElement = Partial<IRect> & {
   ctx: CanvasRenderingContext2D
 }
 
+//Абстрактный класс элемента Canvas
 export abstract class CanvasElement {
   readonly ctx: CanvasRenderingContext2D
   x: number
