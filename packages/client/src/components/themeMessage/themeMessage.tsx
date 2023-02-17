@@ -1,6 +1,6 @@
 import style from './themeMessage.module.scss';
 import { IUserAvatar, UserAvatar } from '../userAvatar/userAvatar'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import classNames from 'classnames'
 
 export interface IThemeMessage {
@@ -13,14 +13,10 @@ export interface IThemeMessage {
 export function ThemeMessage(props: IThemeMessage) {
   const [hasLike, setHasLike] = useState(false);
 
-  let countLikes = props.countLikes || 0;
   const iconHandler = () => setHasLike((prevState) => !prevState);
-
-  if (hasLike) {
-    ++countLikes;
-  } else {
-    countLikes = props.countLikes || 0;
-  }
+  const countLikes = useMemo(() => {
+    return (props.countLikes ?? 0) + Number(hasLike);
+  }, [hasLike, props.countLikes])
 
   return (
     <div className={style.wrapper}>
