@@ -20,7 +20,10 @@ export abstract class CardRect extends CanvasElement {
     INDEX_TOP_RIGHT: 10,
     INDEX_BOTTOM_RIGHT: 20,
     INDEX_BOTTOM_LEFT: 30,
-    //Размеры относительно размера canvas (подогнано под 1000x1000)
+    // Пропорции ряда следующие: в 1 ряду 2 угловые карты и 9 обычных
+    // ширина угловой карты = BASE_SIZE: 0.14, ширина обычной = MAIN_CARD_SIZE: 0.08
+    // итого 0.14 * 2 + 9 * 0.08 = 1 (где 1 это полная длина по x или y)
+    // то есть можно увеличить размер доски canvas и ничего не поедет т.к. размеры относительные
     //размер карточки по оси y
     BASE_SIZE: 0.14,
     //размер карточки по оси x
@@ -31,7 +34,6 @@ export abstract class CardRect extends CanvasElement {
     //размер карточки по оси x
     CHIP_CENTER: 0.5,
   }
-
   //Базовый размер (для вертикальных карточек - высота, для горизонтальных - ширина)
   readonly baseSize: number
   //Позиционирование карточки
