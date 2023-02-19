@@ -1,32 +1,32 @@
-import { IUserConfig } from '../core/chip/chips'
+import { IUserConfig } from '../core/chip/chips';
 import {
   TCardSetting,
   CardTypeEmum,
   ColorMainCardEnum,
-} from '../core/types/card'
+} from '../core/types/card';
 
 /*
-* currency - Валюта
-* moneyPerRound - Стартовое кол-во очков у игроков
-* cards - настройка карточек (кол-во, название карточки, стоимость, тип карточки, цвет) 
-* userConfig - настройка игроков (кол-во, цвет фишки, имя)
-*/
+ * currency - Валюта
+ * moneyPerRound - Стартовое кол-во очков у игроков
+ * cards - настройка карточек (кол-во, название карточки, стоимость, тип карточки, цвет)
+ * userConfig - настройка игроков (кол-во, цвет фишки, имя)
+ */
 interface IMonopolyConfig {
   //Валюта
-  currency: string
-  moneyPerRound: number
-  cards: TCardSetting[]
-  userConfig: IUserConfig[]
+  currency: string;
+  moneyPerRound: number;
+  cards: TCardSetting[];
+  userConfig: IUserConfig[];
 }
 
 /*
-* startMoney - Кол-во денег, с которым старуют игроки
-* startScore - Стартовое кол-во очков у игроков
-*/
+ * startMoney - Кол-во денег, с которым старуют игроки
+ * startScore - Стартовое кол-во очков у игроков
+ */
 const userStartProps = {
   startMoney: 1000,
   startScore: 0,
-}
+};
 
 export const MonopolyConfig: IMonopolyConfig = {
   currency: 'P',
@@ -271,7 +271,7 @@ export const MonopolyConfig: IMonopolyConfig = {
       score: userStartProps.startScore,
     },
   ],
-}
+};
 
 export const ThemeConfig = {
   card: {
@@ -285,4 +285,4 @@ export const ThemeConfig = {
   baseColor: '#c4eda4',
   strokeColor: '#0d1c00',
   textColor: '#000000',
-}
+};

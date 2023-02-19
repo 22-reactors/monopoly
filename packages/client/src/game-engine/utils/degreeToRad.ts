@@ -1,1 +1,1 @@
-export const degreeToRad = (degree: number): number => (degree * Math.PI) / 180
+export const degreeToRad = (degree: number): number => (degree * Math.PI) / 180;

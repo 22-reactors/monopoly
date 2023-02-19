@@ -8,7 +8,7 @@ interface IDice {
   start: ICoordinates;
   end: ICoordinates;
   size: number;
-};
+}
 
 export class Dice extends CanvasElement {
   private static CONST = {

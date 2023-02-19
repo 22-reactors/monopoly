@@ -1,9 +1,9 @@
-import { IRect } from '../core/types/card'
+import { IRect } from '../core/types/card';
 
 type TStrokeRect = IRect & {
-  color?: string
-  rotate?: number
-}
+  color?: string;
+  rotate?: number;
+};
 
 export function strokeRect({
   ctx,
@@ -15,15 +15,15 @@ export function strokeRect({
   rotate,
 }: TStrokeRect) {
   if (color) {
-    ctx.strokeStyle = color
+    ctx.strokeStyle = color;
   }
   if (rotate) {
-    ctx.save()
-    ctx.translate(x, y)
-    ctx.rotate(rotate)
-    ctx.strokeRect(0, 0, width, height)
-    ctx.restore()
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(rotate);
+    ctx.strokeRect(0, 0, width, height);
+    ctx.restore();
   } else {
-    ctx.strokeRect(x, y, width, height)
+    ctx.strokeRect(x, y, width, height);
   }
 }

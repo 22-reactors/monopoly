@@ -1,9 +1,9 @@
-import { IRect } from '../core/types/card'
+import { IRect } from '../core/types/card';
 
 type TFillRect = IRect & {
-  color?: string
-  rotate?: number
-}
+  color?: string;
+  rotate?: number;
+};
 
 export function fillRect({
   ctx,
@@ -15,16 +15,16 @@ export function fillRect({
   rotate,
 }: TFillRect) {
   if (color) {
-    ctx.globalAlpha = 0.75
-    ctx.fillStyle = color
+    ctx.globalAlpha = 0.75;
+    ctx.fillStyle = color;
   }
   if (rotate) {
-    ctx.save()
-    ctx.translate(x, y)
-    ctx.rotate((rotate * Math.PI) / 180)
-    ctx.fillRect(0, 0, width, height)
-    ctx.restore()
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate((rotate * Math.PI) / 180);
+    ctx.fillRect(0, 0, width, height);
+    ctx.restore();
   } else {
-    ctx.fillRect(x, y, width, height)
+    ctx.fillRect(x, y, width, height);
   }
 }
