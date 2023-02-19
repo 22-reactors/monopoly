@@ -40,7 +40,7 @@ export const Footer = (props: IFooterProps) => {
         </nav>
       </div>
       <div className={style.infoContainer}>
-        <img src="logo.svg" alt="logo" />
+        <img src="logo.svg" alt="logo" className={style.logo}/>
         {infoText.map((text, index )=> (
           <p key={index}className={style.info}>{text}</p>
         ))}
