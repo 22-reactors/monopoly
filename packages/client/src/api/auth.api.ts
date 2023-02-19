@@ -25,6 +25,18 @@ export interface ILoginData {
   password: string;
 }
 
+export interface IBadResponse {
+  reason: string;
+}
+
+export interface ISignUpGoodResponse {
+  id: number;
+}
+
+export type SignUpResponse = ISignUpGoodResponse | IBadResponse;
+
+export type UserResponse = IUserData | IBadResponse;
+
 export class AuthAPI extends RequestTransport {
   constructor() {
     super('/auth');
@@ -33,21 +45,21 @@ export class AuthAPI extends RequestTransport {
   login(data: ILoginData) {
     return this.post('/signin', {
       data,
-    });
+    }) as Promise<'OK' | IBadResponse>;
   }
 
   signUp(data: ISignUpData) {
     return this.post('/signup', {
       data,
-    }) as Promise<{ id: number }>;
+    }) as Promise<SignUpResponse>;
   }
 
   getUser() {
-    return this.get('/user') as Promise<IUserData>;
+    return this.get('/user') as Promise<UserResponse>;
   }
 
   logout() {
-    return this.post('/logout');
+    return this.post('/logout') as Promise<"OK" | IBadResponse>;
   }
 }
 

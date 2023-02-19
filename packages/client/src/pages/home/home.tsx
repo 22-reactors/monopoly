@@ -13,5 +13,5 @@ export const Home = () => {
       </ul>
       <Outlet />
     </main>
-  );
-};
+  )
+}

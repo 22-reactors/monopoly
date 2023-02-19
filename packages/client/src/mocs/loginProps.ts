@@ -3,8 +3,9 @@ import { ILoginForm } from '../pages/login/login';
 const LoginProps: ILoginForm = {
   headerName: 'Вход в игру',
   linkTitle: 'создать аккаунт',
-  linkAction: () => { console.log('router to login page') },
-  formAction: () => { console.log('router to submit form') },
+  linkAction: () => {
+    console.log('router to registr page');
+  },
   submitBtnName: 'Войти',
   inputsProps: [
     {

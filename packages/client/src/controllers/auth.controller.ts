@@ -1,6 +1,20 @@
-import { redirect } from 'react-router-dom';
-import API, { AuthAPI, ILoginData, ISignUpData } from '../api/auth.api';
-import { links } from '../utils/const';
+import { redirect, useNavigate } from 'react-router-dom';
+import API, {
+  AuthAPI,
+  ILoginData,
+  ISignUpData,
+  ISignUpGoodResponse,
+  IUserData,
+  SignUpResponse,
+  UserResponse,
+} from '../api/auth.api';
+
+const isSignUpGoodResponse = (
+  object: SignUpResponse
+): object is ISignUpGoodResponse => 'id' in object;
+
+const isUserGoodResponse = (object: UserResponse): object is IUserData =>
+  'avatar' in object;
 
 class AuthController {
   private _api: AuthAPI;
@@ -11,31 +25,39 @@ class AuthController {
 
   async login(data: ILoginData) {
     const response = await this._api.login(data);
-    console.log(response);
-    redirect(links.game.path);
+    if (response == 'OK') {
+      return response;
+    } else {
+      console.log(response.reason);
+    }
   }
 
   async signup(data: ISignUpData) {
-    try {
-      await this._api.signUp(data);
-      const user = await this.getUser();
-      console.log(user);
-      redirect(links.game.path);
-    } catch (error: any) {
-      if (error && error.reason) {
-        console.log(error.reason);
-      }
+    const response = await this._api.signUp(data);
+
+    if (isSignUpGoodResponse(response)) {
+      return response;
+    } else {
+      console.log(response.reason);
     }
   }
 
   async getUser() {
-    const user = await this._api.getUser();
-    return user;
+    const response = await this._api.getUser();
+    if (isUserGoodResponse(response)) {
+      return response;
+    } else {
+      console.log(response.reason);
+    }
   }
 
   async logout() {
-    await this._api.logout();
-    const user = await this.getUser();
+    const response = await this._api.logout();
+    if (response === 'OK') {
+      console.log('logged out');
+    } else {
+      console.log(response.reason);
+    }
   }
 }
 

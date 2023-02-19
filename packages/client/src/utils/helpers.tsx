@@ -1,37 +1,35 @@
-import { redirect } from "react-router-dom"
-import { links } from "./const"
+import { redirect } from 'react-router-dom';
+import { ISignUpGoodResponse, IUserData } from '../api/auth.api';
+import AuthController from '../controllers/auth.controller';
+import { links } from './const';
 
 export const unAuthorizedRedirect = async () => {
-  /*
-  Когда подключим API авторизации здесь должен быть запрос пользователя.
-  Если  не авторизован, то переход на страницу авторизации */
-  const user = null
+  const user = await AuthController.getUser();
   if (!user) {
-    return redirect(links.login.path)
+    return redirect(links.login.path);
   }
-  return true
-}
+  return true;
+};
 
 export const authorizedRedirect = async () => {
-  /*
-  Когда подключим API авторизации здесь должен быть запрос пользователя.
-  Если авторизован, то переход на страницу игры */
-  const user = null
+  const user = await AuthController.getUser();
   if (user) {
-    return redirect(links.game.path)
+    return redirect(links.game.path);
   }
-  return true
-}
-
+  return true;
+};
 
 export const enum WordMap {
   SINGLE = 'single',
   SOME = 'some',
-  MORE = 'more'
+  MORE = 'more',
 }
 
 //Получаем склоненную форму слова из переданного массива
-export function getDeclensionWord(value: number, words: {[value in WordMap]: string}): string {
+export function getDeclensionWord(
+  value: number,
+  words: { [value in WordMap]: string }
+): string {
   const correct_value = Math.abs(value) % 100;
 
   if (correct_value > 10 && correct_value < 20) {
