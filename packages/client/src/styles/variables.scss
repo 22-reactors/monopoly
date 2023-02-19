@@ -9,6 +9,17 @@ $disabled-color: #DDDDDD;
 $text-base-color: #2e2e2e;
 $text-additional-color: #959595;
 $text-error-color: #f30000;
+$dark-theme-white: white;
+$dark-ux-background: black;
 
 // Fonts
-$text-base-font: 16px/24px 'Manrope', sans-serif;
+$text-base-font: 400 16px/24px 'Manrope', sans-serif;
+$text-small-font: 400 12px/22px 'Manrope', sans-serif;
+$h2: 500 24px/32px 'Manrope', sans-serif;
+$h4: 500 16px/22px 'Manrope', sans-serif;
+
+// Heights
+$main-window-height: 960px;
+
+// Padding & Margins
+$main-margin: 200px;
