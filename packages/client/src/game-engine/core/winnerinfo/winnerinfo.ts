@@ -27,23 +27,17 @@ export class WinnerInfo extends CanvasElement {
     ctx.textAlign = 'center'
 
     const winner: IUserConfig = this.getWinner()
-    const userInfoText = [
-      winner.userName,
-      'победил (',
-      winner.score,
-      'оч.)',
-    ].join(' ')
-
-    console.log('filltext')
+    const userInfoText = `${winner.userName} победил (${winner.score} оч.)`
     ctx.fillText(userInfoText, 500, 500)
   }
 
   private getWinner() {
-    let winner: IUserConfig = MonopolyConfig.userConfig[0]
-    MonopolyConfig.userConfig.map(user => {
-      if (!winner || user.score > winner.score) {
-        winner = user
+
+    const winner: IUserConfig = MonopolyConfig.userConfig.reduce((res, user) => {
+      if (!res || user.score > res.score) {
+        return user
       }
+      return res
     })
 
     return winner

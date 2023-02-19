@@ -35,7 +35,7 @@ export class PlayersInfo extends CanvasElement {
 
       ctx.fillStyle = 'black'
       ctx.textAlign = 'left'
-      const userInfoText = [user.userName, user.userMoney, MonopolyConfig.currency].join(' ')
+      const userInfoText = `${user.userName} ${user.userMoney} ${MonopolyConfig.currency}`
       ctx.fillText(userInfoText, 200, y)
     })
   }

@@ -99,10 +99,7 @@ export class Chips {
     while (centerCards.length <= count) {
       const { center } = Cards.getInstance().getCardByIndex(i)
       centerCards.push(center)
-      
-      i++
-
-      if (i === Chips.CONST.COUNT_CARDS) {
+      if (++i === Chips.CONST.COUNT_CARDS) {
         i = 0
         endRound = true
       }

@@ -5,13 +5,24 @@ import {
   ColorMainCardEnum,
 } from '../core/types/card'
 
+/*
+* currency - Валюта
+* moneyPerRound - Стартовое кол-во очков у игроков
+* cards - настройка карточек (кол-во, название карточки, стоимость, тип карточки, цвет) 
+* userConfig - настройка игроков (кол-во, цвет фишки, имя)
+*/
 interface IMonopolyConfig {
+  //Валюта
   currency: string
   moneyPerRound: number
   cards: TCardSetting[]
   userConfig: IUserConfig[]
 }
 
+/*
+* startMoney - Кол-во денег, с которым старуют игроки
+* startScore - Стартовое кол-во очков у игроков
+*/
 const userStartProps = {
   startMoney: 1000,
   startScore: 0,

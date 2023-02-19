@@ -79,6 +79,5 @@ export class Cards {
         return card
       }
     }
-    return undefined
   }
 }

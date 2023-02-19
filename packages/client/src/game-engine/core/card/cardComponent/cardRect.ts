@@ -20,22 +20,16 @@ export abstract class CardRect extends CanvasElement {
     INDEX_TOP_RIGHT: 10,
     INDEX_BOTTOM_RIGHT: 20,
     INDEX_BOTTOM_LEFT: 30,
-    //Пропорции ряда следующие: в 1 ряду 2 угловые карты и 9 обычных
-    //ширина и длина угловой карты 0.14 (14% от полного размера), ширина обычной 0.08 (8% от полного размера)
-    //итого 14% * 2 + 8% * 9 = 100% (где 100% это полная длина по x или y)
-    //размер обычной карточки по оси y, в случае поворота по x, относительно полного размера
-    BASE_SIZE: 0.14,
-    //размер обычной карточки по оси x, в случае поворота по y, относительно полного размера
-    MAIN_CARD_SIZE: 0.08,
     //Координаты расположения фишки на карточке относительно карточки (0 - начало, 1 - конец)
     //Координаты. 0,0 левый верхний угол карты
     //смещение фишки относительно размера карточки по оси y, в случае поворота по x
     CHIP_SHIFT: 0.25,
     //смещение фишки относительно размера карточки по оси x, в случае поворота по y
     CHIP_CENTER: 0.5,
-  }
+  };
   //Базовый размер (для вертикальных карточек - высота, для горизонтальных - ширина)
   readonly baseSize: number
+  readonly mainSize: number
   //Позиционирование карточки
   readonly orientation: OrientationEnum
   readonly position: PositionEnum
@@ -53,7 +47,16 @@ export abstract class CardRect extends CanvasElement {
     this.type = type
     this.orientation = CardRect.getOrientation(index)
     this.position = CardRect.getPosition(index)
-    this.baseSize = Math.floor(canvasSize * CardRect.CONST.BASE_SIZE)
+    //Пропорции ряда следующие: в 1 ряду 2 угловые карты и 9 обычных
+    //Пусть ширина и длина угловой карты будет 1.75 ширины обычной карты
+    //(можно подобрать и другие пропорции, завивисит от удовлетворенности отрисованным результатом)
+    //Тогда 1,75 * x * 2 + x * 9 = 100% (где 100% это полная длина по x или y)
+    //итого 12,5 * x = 100% => x = 8%
+
+    //размер обычной карточки по оси y, в случае поворота по x, относительно полного размера
+    this.baseSize = Math.floor(canvasSize * (1.75 * 8 / 100))
+    //размер обычной карточки по оси x, в случае поворота по y, относительно полного размера
+    this.mainSize = canvasSize * (8 / 100)
   }
 
   protected get propsForElements() {
@@ -76,15 +79,10 @@ export abstract class CardRect extends CanvasElement {
       return OrientationEnum.Corner
     }
 
-    const isTop = index < CardRect.CONST.INDEX_TOP_RIGHT
-    const isBottom =
-      index > CardRect.CONST.INDEX_BOTTOM_RIGHT &&
-      index < CardRect.CONST.INDEX_BOTTOM_LEFT
-    if (isTop || isBottom) {
-      return OrientationEnum.Vertical
-    }
-
-    return OrientationEnum.Horizontal
+    const position = CardRect.getPosition(index)
+    return position === PositionEnum.Top || position === PositionEnum.Bottom
+        ? OrientationEnum.Vertical 
+        : OrientationEnum.Horizontal
   }
 
   private static getPosition(index: number): PositionEnum {
@@ -101,38 +99,39 @@ export abstract class CardRect extends CanvasElement {
   }
 
   private getSizesCard(index: number, canvasSize: number) {
-    if (this.orientation === OrientationEnum.Vertical) {
-      return this.getSizesVertical(index, canvasSize)
-    }
-    return this.getSizesHorizontal(index, canvasSize)
+    return this.orientation === OrientationEnum.Vertical 
+        ? this.getSizesVertical(index, canvasSize)
+        : this.getSizesHorizontal(index, canvasSize)
   }
 
-  private getSizesVertical(position: number, canvasSize: number) {
-    const width = canvasSize * CardRect.CONST.MAIN_CARD_SIZE
+  private getSizesVertical(cardIndex: number, canvasSize: number) {
+    const width = this.mainSize
     const height = this.baseSize
     const baseX =
-      this.baseSize + width * ((position % CardRect.CONST.INDEX_CORNER) - 1)
+      this.baseSize + width * ((cardIndex % CardRect.CONST.INDEX_CORNER) - 1)
     const x =
-      position < CardRect.CONST.INDEX_TOP_RIGHT
+      cardIndex < CardRect.CONST.INDEX_TOP_RIGHT
         ? baseX
         : canvasSize - baseX - width
     const y =
-      position < CardRect.CONST.INDEX_TOP_RIGHT ? 0 : canvasSize - this.baseSize
+      cardIndex < CardRect.CONST.INDEX_TOP_RIGHT
+        ? 0
+        : canvasSize - this.baseSize
 
     return { width, height, x, y }
   }
 
-  private getSizesHorizontal(position: number, canvasSize: number) {
+  private getSizesHorizontal(cardIndex: number, canvasSize: number) {
     const width = this.baseSize
-    const height = canvasSize * CardRect.CONST.MAIN_CARD_SIZE
+    const height = this.mainSize
+    const baseY =
+      this.baseSize + height * ((cardIndex % CardRect.CONST.INDEX_CORNER) - 1)
     const x =
-      position < CardRect.CONST.INDEX_BOTTOM_LEFT
+      cardIndex < CardRect.CONST.INDEX_BOTTOM_LEFT
         ? canvasSize - this.baseSize
         : 0
-    const baseY =
-      this.baseSize + height * ((position % CardRect.CONST.INDEX_CORNER) - 1)
     const y =
-      position < CardRect.CONST.INDEX_BOTTOM_LEFT
+      cardIndex < CardRect.CONST.INDEX_BOTTOM_LEFT
         ? baseY
         : canvasSize - baseY - height
 
@@ -147,12 +146,11 @@ export abstract class CardRect extends CanvasElement {
   }
 
   protected fillRect(backgroundColor?: string) {
-
-    const color = backgroundColor ? backgroundColor : this.backgroundColor
+    const color = backgroundColor ?? this.backgroundColor
 
     fillRect({
       ...this.sizeAndCtx,
-      color: color,
+      color,
     })
   }
 

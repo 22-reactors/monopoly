@@ -47,7 +47,7 @@ export class GameEngine {
 
     this.addEndRoundMoney(endRound, indexChip)
 
-    //костыль, нужен что бы купить карту 39 карту
+    //костыль, нужен что бы купить 39-ую карту
     const cardIndexWithOffset = cardIndex === -1 ? 39 : cardIndex
     this.buyCard(
       Cards.getInstance().getCardByIndex(cardIndexWithOffset),
