@@ -12,7 +12,7 @@ export interface IHeaderProps extends ILoginButtonsProps {
 }
 
 export const Header = (props: IHeaderProps) => {
-  const { navLinks, isDarkTheme, user, logoutText } = props;
+  const { navLinks, isDarkTheme, logoutText } = props;
 
   return (
     <header className={classNames(style.header, isDarkTheme && style.dark)}>
@@ -35,7 +35,7 @@ export const Header = (props: IHeaderProps) => {
           ))}
         </ul>
       </nav>
-      <LoginButtons {...{ logoutText, user, isDarkTheme }} />
+      <LoginButtons {...{ logoutText, isDarkTheme }} />
     </header>
   );
 };

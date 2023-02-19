@@ -19,12 +19,12 @@ const RegistrProps: IRegistrForm = {
       inputType: 'text',
     },
     {
-      fieldId: 'name',
+      fieldId: 'first_name',
       fieldName: 'Имя',
       inputType: 'text',
     },
     {
-      fieldId: 'surname',
+      fieldId: 'second_name',
       fieldName: 'Фамилия',
       inputType: 'text',
     },
@@ -39,7 +39,7 @@ const RegistrProps: IRegistrForm = {
       inputType: 'password',
     },
     {
-      fieldId: 'checkPwd',
+      fieldId: 'confirmPassword',
       fieldName: 'Пароль ещё раз',
       inputType: 'password',
     },

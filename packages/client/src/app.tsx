@@ -49,12 +49,12 @@ const router = createBrowserRouter([
         path: links.forum.path,
         element: <Forum />,
       },
-      {
-        path: links.game.path,
-        element: <Game />,
-        loader: gameLoader,
-      },
     ],
+  },
+  {
+    path: links.game.path,
+    element: <Game />,
+    loader: gameLoader,
   },
 ]);
 

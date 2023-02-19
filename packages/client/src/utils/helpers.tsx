@@ -1,5 +1,4 @@
 import { redirect } from 'react-router-dom';
-import { ISignUpGoodResponse, IUserData } from '../api/auth.api';
 import AuthController from '../controllers/auth.controller';
 import { links } from './const';
 

@@ -4,7 +4,7 @@ import LoginAndRegistrForm from '../../components/form/loginandregistrform';
 import ThemeToggler from '../../components/themetoggler';
 import style from './login.module.scss';
 import { authorizedRedirect } from '../../utils/helpers';
-import { ILoginData } from '../../api/auth.api';
+import { ILoginData } from '../../api/auth/interfaces';
 import AuthController from '../../controllers/auth.controller';
 import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
@@ -16,7 +16,6 @@ export interface ILoginForm {
   headerName: string;
   linkTitle: string;
   linkAction: React.MouseEventHandler<HTMLAnchorElement>;
-  //formAction: React.FormEventHandler<HTMLFormElement>
   inputsProps: IInputFieldSet[];
 }
 
@@ -30,6 +29,7 @@ const Login = (props: ILoginForm) => {
   const navigate = useNavigate();
 
   const formAction = async (event: React.FormEvent<HTMLFormElement>) => {
+
     event.preventDefault();
     const target = event.target as typeof event.target & {
       login: { value: string };
@@ -40,6 +40,7 @@ const Login = (props: ILoginForm) => {
       password: target.password.value,
     };
     const response = await AuthController.login(data);
+
     if (response) {
       navigate(links.game.path);
     }

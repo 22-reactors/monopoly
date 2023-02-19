@@ -1,13 +1,12 @@
-import { redirect, useNavigate } from 'react-router-dom';
-import API, {
-  AuthAPI,
+import API, { AuthAPI } from '../api/auth/auth.api';
+import {
   ILoginData,
   ISignUpData,
   ISignUpGoodResponse,
   IUserData,
   SignUpResponse,
   UserResponse,
-} from '../api/auth.api';
+} from '../api/auth/interfaces';
 
 const isSignUpGoodResponse = (
   object: SignUpResponse
@@ -24,39 +23,55 @@ class AuthController {
   }
 
   async login(data: ILoginData) {
-    const response = await this._api.login(data);
-    if (response == 'OK') {
-      return response;
-    } else {
-      console.log(response.reason);
+    try {
+      const response = await this._api.login(data);
+      if (response == 'OK') {
+        return response;
+      } else {
+        console.log(response.reason);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
   async signup(data: ISignUpData) {
-    const response = await this._api.signUp(data);
+    try {
+      const response = await this._api.signUp(data);
 
-    if (isSignUpGoodResponse(response)) {
-      return response;
-    } else {
-      console.log(response.reason);
+      if (isSignUpGoodResponse(response)) {
+        return response;
+      } else {
+        console.log(response.reason);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
   async getUser() {
-    const response = await this._api.getUser();
-    if (isUserGoodResponse(response)) {
-      return response;
-    } else {
-      console.log(response.reason);
+    try {
+      const response = await this._api.getUser();
+      if (isUserGoodResponse(response)) {
+        return response;
+      } else {
+        console.log(response.reason);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
   async logout() {
-    const response = await this._api.logout();
-    if (response === 'OK') {
-      console.log('logged out');
-    } else {
-      console.log(response.reason);
+    try {
+      const response = await this._api.logout();
+      if (response === 'OK') {
+        console.log('logged out');
+      } else {
+        console.log(response.reason);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 }

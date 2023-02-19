@@ -5,7 +5,7 @@ import ThemeToggler from '../../components/themetoggler';
 import './register.module.scss';
 import loginStyle from '../login/login.module.scss';
 import { authorizedRedirect } from '../../utils/helpers';
-import { ILoginData, ISignUpData } from '../../api/auth.api';
+import { ISignUpData } from '../../api/auth/interfaces';
 import AuthController from '../../controllers/auth.controller';
 import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
@@ -17,7 +17,6 @@ export interface IRegistrForm {
   headerName: string;
   linkTitle: string;
   linkAction: React.MouseEventHandler<HTMLAnchorElement>;
-  // formAction: React.FormEventHandler<HTMLFormElement>;
   inputsProps: IInputFieldSet[];
 }
 

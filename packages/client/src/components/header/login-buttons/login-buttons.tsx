@@ -1,18 +1,37 @@
 import classNames from 'classnames';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { IUserData } from '../../../api/auth/interfaces';
+import AuthController from '../../../controllers/auth.controller';
 import { links } from '../../../utils/const';
-import { IUser } from '../../../utils/interfaces';
 import { Button, ButtonSizes, ButtonVariation } from '../../button/button';
 import style from './login-buttons.module.scss';
 
 export interface ILoginButtonsProps {
   logoutText: string;
-  user?: IUser;
   isDarkTheme?: boolean;
 }
 
 export const LoginButtons = (props: ILoginButtonsProps) => {
-  const { user, isDarkTheme, logoutText } = props;
+  const { isDarkTheme, logoutText } = props;
+
+  const [user, setUser] = useState<IUserData | null>(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const user = await AuthController.getUser();
+      if (user) {
+        setUser(user);
+      }
+    };
+
+    getUser();
+  }, []);
+
+  const logout = () => {
+    AuthController.logout();
+    setUser(null);
+  };
 
   if (user) {
     return (
@@ -26,7 +45,8 @@ export const LoginButtons = (props: ILoginButtonsProps) => {
           className={classNames(
             style.logoutText,
             isDarkTheme ? style.darkText : style.lightText
-          )}>
+          )}
+          onClick={logout}>
           {logoutText}
         </span>
       </div>
