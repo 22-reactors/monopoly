@@ -190,3 +190,17 @@
   font-size: 12px;
   line-height: 22px;
 }
+
+// Обнуляем ссылки
+
+@mixin clear-link {
+  text-decoration: none;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+}
