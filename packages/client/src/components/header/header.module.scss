@@ -1,0 +1,47 @@
+@import '../../styles/mixin';
+@import '../../styles/globals';
+@import "../../styles/variables";
+
+.header {
+  width: 100vw;
+  box-sizing: border-box;
+  padding: 10px $main-margin;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.navList {
+  display: flex;
+  @include clear-list;
+}
+
+.logoLink {
+  margin-right: 120px;
+  line-height: 0;
+}
+
+.link {
+  @include text-base;
+  @include clear-link;
+  color: $primary;
+}
+
+.li + .li {
+  margin-left: 30px;
+}
+
+.dark {
+  background: none;
+  background-color: $dark-ux-background;
+  border-bottom: 1px solid rgba(149, 149, 149, 0.2);
+}
+
+.darkText {
+  color: $dark-white;
+}
