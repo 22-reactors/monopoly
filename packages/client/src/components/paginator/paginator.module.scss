@@ -34,6 +34,11 @@
   width: 5px;
   height: 11px;
   margin: 10px;
+
+  &.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
 }
 
 .arrowBack {
