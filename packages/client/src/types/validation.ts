@@ -1,4 +1,4 @@
 export interface IValidationInputProps {
-  errorText?: string | boolean;
+  errorText?: string;
   touched?: boolean;
 }

@@ -5,7 +5,6 @@ import style from './textarea.module.scss';
 
 interface Props extends IValidationInputProps {
   value: string;
-  placeholder?: string;
   label?: string;
   solo?: boolean;
   resize?: 'none' | 'both' | 'horizontal' | 'vertical' | 'inherit';
@@ -36,8 +35,8 @@ function Textarea(props: Props) {
     }
   };
 
-  const textateaStyle = {
-    resize: resize || 'vertical',
+  const textareaStyle = {
+    resize: resize ?? 'vertical',
   };
 
   const isValid = !!errorText;
@@ -52,7 +51,7 @@ function Textarea(props: Props) {
       )}
       onFocus={focusTextareaContainer}>
       <textarea
-        style={textateaStyle}
+        style={textareaStyle}
         ref={textareaRef}
         placeholder={(solo && label) || ''}
         className={style.textarea}
