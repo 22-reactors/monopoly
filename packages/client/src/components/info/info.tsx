@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Button, ButtonVariation } from '../button/button';
 import { IUser } from '../../utils/interfaces';
-import UserController from '../../controllers/user.controller';
+import UserController from '../../controllers/user';
 import { IProfileData } from '../../api/user/interfaces';
 
 export type FieldInfo = {
