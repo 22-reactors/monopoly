@@ -1,5 +1,3 @@
-import { ILoginData } from '../api/auth.api';
-import AuthController from '../controllers/auth.controller';
 import { ILoginForm } from '../pages/login/login';
 
 const LoginProps: ILoginForm = {
@@ -8,24 +6,8 @@ const LoginProps: ILoginForm = {
   linkAction: () => {
     console.log('router to registr page');
   },
-  formAction: async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data: ILoginData = { login: 'jBrown', password: 'abcdefghi1' };
-/*     try {
-      const response = await fetch(
-        'https://ya-praktikum.tech/api/v2/auth/signin',
-        {
-          method: 'post',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify(data),
-          credentials: 'include',
-        }
-      );
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    } */
-    AuthController.login(data);
+  formAction: () => {
+    console.log('router to registr page');
   },
   submitBtnName: 'Войти',
   inputsProps: [
