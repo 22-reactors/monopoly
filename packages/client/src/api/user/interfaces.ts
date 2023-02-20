@@ -1,4 +1,4 @@
-import { IUser } from "../../utils/interfaces";
+import { IUser } from '../../utils/interfaces';
 
 export interface IProfileData {
   first_name: string;

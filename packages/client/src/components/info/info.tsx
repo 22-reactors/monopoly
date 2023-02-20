@@ -53,7 +53,6 @@ export function Info(props: IInfo) {
     const data = inputs.reduce((result, input) => {
       return { ...result, [input.name]: input.value };
     }, {} as IProfileData);
-    console.log(data);
     const response = await UserController.changeProfile(data);
     if (response) {
       setProfile(response);
@@ -73,7 +72,7 @@ export function Info(props: IInfo) {
             value={
               fieldInput[field.id] ??
               (profile && profile[field.id as keyof IProfileForm]) ??
-              field.value
+              ''
             }
             onChange={onChangeFieldInput}
           />
