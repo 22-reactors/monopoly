@@ -6,7 +6,7 @@ import './register.module.scss';
 import loginStyle from '../login/login.module.scss';
 import { authorizedRedirect } from '../../utils/helpers';
 import { ISignUpData } from '../../api/auth/interfaces';
-import AuthController from '../../controllers/auth.controller';
+import AuthController from '../../controllers/auth';
 import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
 

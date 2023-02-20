@@ -5,7 +5,7 @@ import ThemeToggler from '../../components/themetoggler';
 import style from './login.module.scss';
 import { authorizedRedirect } from '../../utils/helpers';
 import { ILoginData } from '../../api/auth/interfaces';
-import AuthController from '../../controllers/auth.controller';
+import AuthController from '../../controllers/auth';
 import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
 

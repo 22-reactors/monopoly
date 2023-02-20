@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IUserData } from '../../../api/auth/interfaces';
-import AuthController from '../../../controllers/auth.controller';
+import AuthController from '../../../controllers/auth';
 import { links } from '../../../utils/const';
 import { Button, ButtonSizes, ButtonVariation } from '../../button/button';
 import style from './login-buttons.module.scss';

@@ -1,5 +1,5 @@
 import { redirect } from 'react-router-dom';
-import AuthController from '../controllers/auth.controller';
+import AuthController from '../controllers/auth';
 import { links } from './const';
 
 export const unAuthorizedRedirect = async () => {

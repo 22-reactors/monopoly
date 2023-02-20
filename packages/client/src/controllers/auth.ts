@@ -1,4 +1,4 @@
-import API, { AuthAPI } from '../api/auth/auth.api';
+import API, { AuthAPI } from '../api/auth/auth';
 import {
   ILoginData,
   ISignUpData,
@@ -25,7 +25,7 @@ class AuthController {
   async login(data: ILoginData) {
     try {
       const response = await this._api.login(data);
-      if (response == 'OK') {
+      if (response === 'OK') {
         return response;
       } else {
         console.log(response.reason);
