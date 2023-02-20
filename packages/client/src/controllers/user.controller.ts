@@ -1,7 +1,14 @@
-import API, { UserAPI } from "../api/user/user.api";
-import { IPasswordData, IProfileData } from "../api/user/interfaces";
+import API, { UserAPI } from '../api/user/user.api';
+import {
+  IPasswordData,
+  IProfileData,
+  ProfileResponse,
+} from '../api/user/interfaces';
+import { IUser } from '../utils/interfaces';
 
-
+const isChangeProfileGoodResponse = (
+  object: ProfileResponse
+): object is IUser => 'id' in object;
 
 class UserController {
   private _api: UserAPI;
@@ -13,7 +20,11 @@ class UserController {
   async changeProfile(data: IProfileData) {
     try {
       const response = await this._api.changeProfile(data);
-      // if (response)
+      if (isChangeProfileGoodResponse(response)) {
+        return response;
+      } else {
+        console.log(response.reason);
+      }
     } catch (error: any) {
       if (error && error.reason) {
         console.log(error.reason);
@@ -23,7 +34,10 @@ class UserController {
 
   async changePassword(data: IPasswordData) {
     try {
-      await this._api.changePassword(data);
+      const response = await this._api.changePassword(data);
+      if (response !== 'OK') {
+        return response.reason;
+      }
     } catch (error: any) {
       if (error && error.reason) {
         console.log(error.reason);
@@ -33,7 +47,12 @@ class UserController {
 
   async changeAvatar(data: FormData) {
     try {
-      await this._api.changeAvatar(data);
+      const response = await this._api.changeAvatar(data);
+      if (isChangeProfileGoodResponse(response)) {
+        return response;
+      } else {
+        console.log(response.reason);
+      }
     } catch (error: any) {
       if (error && error.reason) {
         console.log(error.reason);

@@ -2,6 +2,7 @@ import style from './info.module.scss';
 import classNames from 'classnames';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Button, ButtonVariation } from '../button/button';
+import { IUser } from '../../utils/interfaces';
 
 export type FieldInfo = {
   id: string;
@@ -19,9 +20,19 @@ interface IInfo {
   onSubmit?(): void;
 }
 
+interface IProfileForm {
+  email: { value: string };
+  login: { value: string };
+  first_name: { value: string };
+  second_name: { value: string };
+  display_name: { value: string };
+  phone: { value: string };
+}
+
 export function Info(props: IInfo) {
   const [isEdit, setIsEdit] = useState(false);
   const [fieldInput, setFieldInput] = useState<Record<string, string>>({});
+  const [profile, setProfile] = useState<IUser | null>(null);
 
   const onChangeFieldInput = (evt: ChangeEvent) => {
     const target = evt.target as HTMLInputElement;
@@ -33,8 +44,9 @@ export function Info(props: IInfo) {
 
   const onSubmitForm = (evt: FormEvent) => {
     evt.preventDefault();
-    props.onSubmit?.();
-
+    // props.onSubmit?.();
+    const target = evt.target as typeof evt.target & IProfileForm;
+    const data = {};
     setIsEdit(false);
     console.log('Save info');
   };

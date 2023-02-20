@@ -1,6 +1,10 @@
 import RequestTransport from '../../service/request/request';
-import { IBadResponse, IPasswordData, IProfileData, ProfileResponse } from './interfaces';
-
+import {
+  IChangePasswordResponse,
+  IPasswordData,
+  IProfileData,
+  ProfileResponse,
+} from './interfaces';
 
 export class UserAPI extends RequestTransport {
   constructor() {
@@ -14,7 +18,7 @@ export class UserAPI extends RequestTransport {
   changePassword(data: IPasswordData) {
     return this.put('/password', {
       data,
-    }) as Promise<"OK" | IBadResponse>;
+    }) as Promise<IChangePasswordResponse>;
   }
 
   changeAvatar(data: FormData) {
