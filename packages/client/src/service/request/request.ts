@@ -93,12 +93,12 @@ export default class RequestTransport {
     if (!(data instanceof FormData)) {
       headers['content-type'] = 'application/json';
     }
-
+    
     const response = await fetch(url, {
       method,
       headers,
       credentials: 'include',
-      body: JSON.stringify(data),
+      body: data instanceof FormData ? data : JSON.stringify(data),
       signal: controller.signal,
     });
 

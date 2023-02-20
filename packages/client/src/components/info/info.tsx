@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Button, ButtonVariation } from '../button/button';
 import { IUser } from '../../utils/interfaces';
+import UserController from '../../controllers/user.controller';
+import { IProfileData } from '../../api/user/interfaces';
 
 export type FieldInfo = {
   id: string;
@@ -42,11 +44,20 @@ export function Info(props: IInfo) {
     });
   };
 
-  const onSubmitForm = (evt: FormEvent) => {
+  const onSubmitForm = async (evt: FormEvent) => {
     evt.preventDefault();
-    // props.onSubmit?.();
     const target = evt.target as typeof evt.target & IProfileForm;
-    const data = {};
+    const inputs = Object.values(target).filter(
+      element => element instanceof HTMLInputElement
+    ) as HTMLInputElement[];
+    const data = inputs.reduce((result, input) => {
+      return { ...result, [input.name]: input.value };
+    }, {} as IProfileData);
+    console.log(data);
+    const response = await UserController.changeProfile(data);
+    if (response) {
+      setProfile(response);
+    }
     setIsEdit(false);
     console.log('Save info');
   };
@@ -59,7 +70,11 @@ export function Info(props: IInfo) {
             key={idx}
             {...field}
             disabled={!isEdit}
-            value={fieldInput[field.id] ?? field.value}
+            value={
+              fieldInput[field.id] ??
+              (profile && profile[field.id as keyof IProfileForm]) ??
+              field.value
+            }
             onChange={onChangeFieldInput}
           />
         ))}
@@ -73,8 +88,7 @@ export function Info(props: IInfo) {
           <Button
             type={'submit'}
             variation={ButtonVariation.PRIMARY}
-            isHide={!isEdit}
-            disabled>
+            isHide={!isEdit}>
             Сохранить
           </Button>
         </div>

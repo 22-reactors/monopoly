@@ -28,3 +28,5 @@ export const links = {
     title: 'Играть',
   },
 };
+
+export const resourceURL = 'https://ya-praktikum.tech/api/v2/resources/';
