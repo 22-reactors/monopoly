@@ -43,6 +43,7 @@ function Input(props: Props) {
   };
 
   const isValid = !!errorText;
+  const inputType = showPasswordComputed ? 'text' : type ?? 'text';
 
   return (
     <div
@@ -53,7 +54,7 @@ function Input(props: Props) {
         ref={inputRef}
         className={style.input}
         onChange={onChange}
-        type={showPasswordComputed ? 'text' : type || 'text'}
+        type={inputType}
         onBlur={onInputBlur}
         value={value}
       />
