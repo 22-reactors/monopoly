@@ -1,4 +1,4 @@
-import API, { UserAPI } from '../api/user/user.api';
+import API, { UserAPI } from '../api/user/user';
 import {
   IPasswordData,
   IProfileData,
