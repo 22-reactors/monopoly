@@ -123,6 +123,19 @@
   clip-path: inset(100%);
 }
 
+
+// Стили для бэкграунд изображения
+@mixin bg-image-styles($size, $position: null) {
+  background-repeat: no-repeat;
+  background-size: $size;
+
+  @if $position {
+    background-position: $position;
+  } @else {
+    background-position: center;
+  }
+}
+
 // Text style (типографика)
 @mixin h1 {
   font-weight: 600;
@@ -182,3 +195,16 @@
   box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.07);
 }
 
+// Обнуляем ссылки
+
+@mixin clear-link {
+  text-decoration: none;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+}

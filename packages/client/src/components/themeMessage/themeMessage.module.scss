@@ -1,0 +1,64 @@
+@import "./src/styles/variables";
+@import "./src/styles/mixin";
+
+.wrapper {
+  @include relative();
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: $outlined-color;
+  padding: 20px;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.status {
+  @include absolute(20px, 20px, null, null);
+
+  font: $text-base-font;
+  color: $text-base-color
+}
+
+.message {
+  margin: 0;
+  font: $text-base-font;
+  font-weight: 500;
+  color: $text-description-color;
+}
+
+.actionWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  @include clear-font();
+  @include bg-image-styles(contain);
+
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  background-image: url('heart-icon.svg');
+  cursor: pointer;
+  @media (prefers-reduced-motion: no-preference) {
+    transition: transform 0.4s linear;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.text {
+  margin-left: 8px;
+  font: $text-base-font;
+  color: $text-action-color;
+  opacity: 0;
+
+  &Show {
+    opacity: 1;
+  }
+}
