@@ -1,18 +1,6 @@
-import RequestTransport from '../service/request/request';
+import RequestTransport from '../../service/request/request';
+import { IBadResponse, IPasswordData, IProfileData, ProfileResponse } from './interfaces';
 
-export interface IProfileData {
-  first_name: string;
-  second_name: string;
-  display_name: string;
-  login: string;
-  email: string;
-  phone: string;
-}
-
-export interface IPasswordData {
-  oldPassword: string;
-  newPassword: string;
-}
 
 export class UserAPI extends RequestTransport {
   constructor() {
@@ -20,19 +8,19 @@ export class UserAPI extends RequestTransport {
   }
 
   changeProfile(data: IProfileData) {
-    return this.put('/profile', { data });
+    return this.put('/profile', { data }) as Promise<ProfileResponse>;
   }
 
   changePassword(data: IPasswordData) {
     return this.put('/password', {
       data,
-    });
+    }) as Promise<"OK" | IBadResponse>;
   }
 
   changeAvatar(data: FormData) {
     return this.put('/profile/avatar', {
       data,
-    });
+    }) as Promise<ProfileResponse>;
   }
 
   getUserById(id: string) {

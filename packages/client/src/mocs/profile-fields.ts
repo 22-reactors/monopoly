@@ -16,8 +16,8 @@ export const fields: FieldInfo[] = [
     label: 'Логин',
   },
   {
-    id: 'name',
-    name: 'name',
+    id: 'first_name',
+    name: 'first_name',
     type: 'text',
     value: 'Иван',
     label: 'Имя',

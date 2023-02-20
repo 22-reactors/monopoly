@@ -1,4 +1,7 @@
-import API, { IPasswordData, IProfileData, UserAPI } from "../api/user.api";
+import API, { UserAPI } from "../api/user/user.api";
+import { IPasswordData, IProfileData } from "../api/user/interfaces";
+
+
 
 class UserController {
   private _api: UserAPI;
@@ -9,7 +12,8 @@ class UserController {
 
   async changeProfile(data: IProfileData) {
     try {
-      await this._api.changeProfile(data);
+      const response = await this._api.changeProfile(data);
+      // if (response)
     } catch (error: any) {
       if (error && error.reason) {
         console.log(error.reason);
