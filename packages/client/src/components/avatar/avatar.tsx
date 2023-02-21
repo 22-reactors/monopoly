@@ -6,15 +6,6 @@ import style from './avatar.module.scss';
 function Avatar() {
   const [avatarSrc, setAvatarSrc] = useState('');
 
-  const avatarSize = {
-    width: '150px',
-    height: '150px',
-  };
-
-  const avatarContainerStyle = {
-    ...avatarSize,
-  };
-
   const onChangeAvatarFileHandler = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) {
       return;
@@ -35,7 +26,7 @@ function Avatar() {
 
   return (
     <section className={style.container}>
-      <div style={avatarContainerStyle} className={style.avatar}>
+      <div className={style.avatar}>
         <img src={avatarSrc} alt="аватар" />
       </div>
       <input
