@@ -1,8 +1,7 @@
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { IUserData } from '../../../api/auth/interfaces';
 import AuthController from '../../../controllers/auth';
+import { useUser } from '../../../hooks/useUser';
 import { links } from '../../../utils/const';
 import { Button, ButtonSizes, ButtonVariation } from '../../button/button';
 import style from './login-buttons.module.scss';
@@ -14,19 +13,7 @@ export interface ILoginButtonsProps {
 
 export const LoginButtons = (props: ILoginButtonsProps) => {
   const { isDarkTheme, logoutText } = props;
-
-  const [user, setUser] = useState<IUserData | null>(null);
-
-  useEffect(() => {
-    const getUser = async () => {
-      const user = await AuthController.getUser();
-      if (user) {
-        setUser(user);
-      }
-    };
-
-    getUser();
-  }, []);
+  const [user, setUser] = useUser(null);
 
   const logout = () => {
     AuthController.logout();
