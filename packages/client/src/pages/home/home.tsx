@@ -1,5 +1,5 @@
-import { Link, Outlet } from 'react-router-dom'
-import { links } from '../../utils/const'
+import { Link, Outlet } from 'react-router-dom';
+import { links } from '../../utils/const';
 
 export const Home = () => {
   return (
@@ -13,5 +13,5 @@ export const Home = () => {
       </ul>
       <Outlet />
     </main>
-  )
-}
+  );
+};

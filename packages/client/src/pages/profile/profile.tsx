@@ -1,8 +1,8 @@
 import style from './profile.module.scss';
-import { Avatar } from '../../components/avatar/avatar';
 import { Info } from '../../components/info/info';
 import { fields } from '../../mocs/profile-fields';
-import { unAuthorizedRedirect } from "../../utils/helpers";
+import { unAuthorizedRedirect } from '../../utils/helpers';
+import Avatar from '../../components/avatar/avatar';
 
 export const profileLoader = unAuthorizedRedirect;
 

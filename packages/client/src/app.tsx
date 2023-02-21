@@ -16,6 +16,7 @@ import {
   profileLoader,
   Register,
   registerLoader,
+
 } from './pages/index';
 import { links } from './utils/const';
 
