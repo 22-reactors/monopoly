@@ -14,19 +14,21 @@ export interface IFooterProps {
 export const Footer = (props: IFooterProps) => {
   const { navLinks, navTitle, isAuthorized, infoText, isDarkTheme } = props;
 
+  const isLoginLinksAndAuthorized = (title: string) => {
+    return (
+      isAuthorized &&
+      (title === links.login.title || title === links.signup.title)
+    );
+  };
+
   return (
     <footer className={classNames(style.footer, isDarkTheme && style.dark)}>
       <div className={classNames(style.menu, isDarkTheme && style.dark)}>
         <h4 className={style.title}>{navTitle}</h4>
-        <nav className={style.nav}>
+        <nav>
           <ul className={style.navList}>
             {navLinks.map(({ path, title }) => {
-              if (
-                !(
-                  isAuthorized &&
-                  (title === links.login.title || title === links.signup.title)
-                )
-              ) {
+              if (!isLoginLinksAndAuthorized(title)) {
                 return (
                   <li key={path}>
                     <Link to={path} className={style.link}>
@@ -40,9 +42,11 @@ export const Footer = (props: IFooterProps) => {
         </nav>
       </div>
       <div className={style.infoContainer}>
-        <img src="logo.svg" alt="logo" className={style.logo}/>
-        {infoText.map((text, index )=> (
-          <p key={index}className={style.info}>{text}</p>
+        <img src="logo.svg" alt="logo" className={style.logo} />
+        {infoText.map((text, index) => (
+          <p key={index} className={style.info}>
+            {text}
+          </p>
         ))}
       </div>
     </footer>
