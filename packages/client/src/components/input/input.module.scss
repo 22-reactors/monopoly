@@ -1,0 +1,76 @@
+@import '../../styles/globals.scss';
+@import '../../styles/mixin.scss';
+
+$animation-time: 0.25s;
+
+.container {
+  &:focus {
+    outline: none;
+  }
+  position: relative;
+  cursor: text;
+}
+
+.errorContainer {
+  & .input {
+    border-color: $text-error;
+  }
+  & .label {
+    color: $text-error;
+  }
+}
+
+.input {
+  padding-bottom: 4px;
+  width: 100%;
+  @include text-base;
+  appearance: none;
+  border: none;
+  color: $text-base;
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
+  border-bottom: 1px solid;
+  border-color: $text-additional;
+  &:focus {
+    border-color: $primary;
+  }
+}
+
+.label {
+  top: 0;
+  left: 0;
+  transition: all $animation-time;
+  color: $text-additional;
+  position: absolute;
+  cursor: inherit;
+}
+
+.labelFocus {
+  font-size: 12px;
+  color: $primary;
+  transform: translateY(-100%);
+}
+
+.error {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  color: $text-error;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.eyeIcon {
+  position: absolute;
+  cursor: pointer;
+  right: 0;
+  top: 0;
+  display: inline-block;
+  width: 24px;
+  fill: $primary;
+  &:hover {
+    opacity: 0.5;
+  }
+}

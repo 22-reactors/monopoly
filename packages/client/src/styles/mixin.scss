@@ -123,7 +123,6 @@
   clip-path: inset(100%);
 }
 
-
 // Стили для бэкграунд изображения
 @mixin bg-image-styles($size, $position: null) {
   background-repeat: no-repeat;
@@ -204,3 +203,4 @@
     text-decoration: none;
   }
 }
+
