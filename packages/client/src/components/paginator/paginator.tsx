@@ -1,20 +1,25 @@
 import style from './paginator.module.scss';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useMemo, useState } from 'react'
 
 export interface IPaginator {
-  pages: number[];
+  pagesCount: number;
   isDarkMode?: boolean;
   pageHandler?(pageNumber: number): void;
 }
 
+const LIMIT_VISIBLE_PAGES = 3;
+
 export function Paginator(props: IPaginator) {
-  const visiblePages = props.pages.slice(0, 3) as number[];
-  const firstPage = props.pages.at(0) as number;
-  const lastPage = props.pages.at(-1) as number;
+  const defaultVisiblePages = useMemo(() =>
+    Array(props.pagesCount).fill(null).map((_, i) => i + 1),
+    [props.pagesCount]);
+  const visiblePages = defaultVisiblePages.slice(0, LIMIT_VISIBLE_PAGES);
+  const firstPage = defaultVisiblePages.at(0);
+  const lastPage = defaultVisiblePages.at(-1);
 
   const [pages, setPages] = useState<number[]>(visiblePages);
-  const [page, setPage] = useState<number>(firstPage);
+  const [page, setPage] = useState<number>(firstPage ?? 1);
 
   return (
     <div className={classNames(style.container, props.isDarkMode && style.isDarkMode)}>
@@ -30,9 +35,9 @@ export function Paginator(props: IPaginator) {
             return;
           }
 
-          const firstVisiblePage = pages.at(0) as number;
+          const firstVisiblePage = pages[0];
 
-          if (page > firstVisiblePage && page <= (pages.at(-1) as number)) {
+          if (page > firstVisiblePage && page <= pages[pages.length - 1]) {
             setPage((prevState) => prevState - 1);
             props.pageHandler?.(page - 1);
             return;
