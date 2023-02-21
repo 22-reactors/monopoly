@@ -6,7 +6,9 @@
   background: #fff;
   @include text-base;
   padding: 10px;
-  transition: all 0.25s;
+  @media (prefers-reduced-motion: no-preference) {
+    transition: all 0.25s;
+  }
   &:hover {
     @extend .optionSelected;
   }

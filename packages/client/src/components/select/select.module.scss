@@ -11,7 +11,7 @@ $option-y-offset: 2px;
   cursor: pointer;
   border: none;
   background: transparent;
-  &:focus {
+  &:focus:not(.errorContainer) {
     outline: none;
     border-color: $primary;
   }
@@ -20,12 +20,12 @@ $option-y-offset: 2px;
 }
 
 .errorContainer {
-  border-color: $text-error !important;
+  border-color: $text-error;
   & .icon {
-    stroke: $text-error !important;
+    stroke: $text-error;
   }
   & .label {
-    color: $text-error !important;
+    color: $text-error;
   }
 }
 
@@ -54,16 +54,16 @@ $option-y-offset: 2px;
   transform: translateY(-50%);
 }
 
-.container:focus .iconFocus {
+.container:focus:not(.errorContainer) .iconFocus {
   stroke: $primary;
+}
+
+.container:focus:not(.errorContainer) .label {
+  color: $primary;
 }
 
 .iconOpen {
   transform: translateY(-50%) rotate(180deg);
-}
-
-.container:focus .label {
-  color: $primary;
 }
 
 .label {

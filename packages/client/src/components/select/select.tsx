@@ -3,6 +3,7 @@ import { memo, useRef, useState } from 'react';
 import style from './select.module.scss';
 import SelectOption, { IOption } from './selectOption';
 import { IValidationInputProps } from '../../types/validation';
+import DropdownIcon from '../../assets/icons/DropdownIcon';
 
 interface Props extends IValidationInputProps {
   label?: string;
@@ -23,7 +24,7 @@ function Select(props: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [isMouseOver, setIsMouseOver] = useState(false);
   const [selectedOption, setSelectedOption] = useState<IOption>(
-    options?.find(o => o.value === value?.value) || defaultOption
+    options?.find(o => o.value === value?.value) ?? defaultOption
   );
 
   const selectRef = useRef<HTMLInputElement>(null);
@@ -63,27 +64,22 @@ function Select(props: Props) {
       onBlur={onSelectContainerBlur}
       onClick={onSelectContainerClick}>
       <input
-        value={selectedOption?.label}
+        value={selectedOption.label}
         ref={selectRef}
         disabled
-        className={style.select}></input>
+        className={style.select}
+      />
       <label
         className={classNames(style.label, labelFocus && style.labelFocus)}>
         {label}
       </label>
-      <svg
+      <DropdownIcon
         className={classNames(
           style.icon,
           labelFocus && style.iconFocus,
           isOpen && style.iconOpen
         )}
-        width="8"
-        height="5"
-        viewBox="0 0 8 5"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg">
-        <path d="M1 1L4 4L7 1" stroke-linecap="round" stroke-linejoin="round" />
-      </svg>
+      />
       <div
         className={classNames(style.options, isOpen && style.optionsOpen)}
         onMouseEnter={() => setIsMouseOver(true)}
