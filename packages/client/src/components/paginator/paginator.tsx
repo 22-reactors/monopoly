@@ -3,19 +3,18 @@ import classNames from 'classnames';
 import { useState } from 'react';
 
 export interface IPaginator {
-  pages?: number[];
+  pages: number[];
   isDarkMode?: boolean;
   pageHandler?(pageNumber: number): void;
 }
 
-const DEFAULT_PAGES = [1, 2, 3];
-
 export function Paginator(props: IPaginator) {
-  const [pages, setPages] = useState(DEFAULT_PAGES);
-  const [page, setPage] = useState(1);
+  const visiblePages = props.pages.slice(0, 3) as number[];
+  const firstPage = props.pages.at(0) as number;
+  const lastPage = props.pages.at(-1) as number;
 
-  const firstPage = props.pages?.at(0) ?? pages.at(0);
-  const lastPage = props.pages?.at(-1) ?? pages.at(-1);
+  const [pages, setPages] = useState<number[]>(visiblePages);
+  const [page, setPage] = useState<number>(firstPage);
 
   return (
     <div className={classNames(style.container, props.isDarkMode && style.isDarkMode)}>
@@ -31,16 +30,16 @@ export function Paginator(props: IPaginator) {
             return;
           }
 
-          const firstPagesNumber = pages.at(0)!;
+          const firstVisiblePage = pages.at(0) as number;
 
-          if (page > firstPagesNumber && page <= pages.at(-1)!) {
+          if (page > firstVisiblePage && page <= (pages.at(-1) as number)) {
             setPage((prevState) => prevState - 1);
             props.pageHandler?.(page - 1);
             return;
           }
 
-          if (firstPage && page > firstPage && page === firstPagesNumber) {
-            const newFirstPage = firstPagesNumber - 1;
+          if (firstPage && page > firstPage && page === firstVisiblePage) {
+            const newFirstPage = firstVisiblePage - 1;
 
             setPage((prevState) => prevState - 1);
             setPages((prevState) => [newFirstPage, ...prevState.slice(0, -1)]);
@@ -69,16 +68,16 @@ export function Paginator(props: IPaginator) {
             return;
           }
 
-          const lastPagesNumber = pages.at(-1);
+          const lastVisiblePage = pages.at(-1);
 
-          if (page !== lastPagesNumber) {
+          if (page !== lastVisiblePage) {
             setPage((prevState) => prevState + 1);
             props.pageHandler?.(page + 1);
             return;
           }
 
           if (lastPage && page < lastPage) {
-            const newLastPage = lastPagesNumber + 1;
+            const newLastPage = lastVisiblePage + 1;
 
             setPage((prevState) => prevState + 1);
             setPages((prevState) => [...prevState.slice(1), newLastPage]);
