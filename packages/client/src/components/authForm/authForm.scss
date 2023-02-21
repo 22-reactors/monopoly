@@ -1,0 +1,33 @@
+@import '../../../styles/globals.scss';
+@import '../../../styles/mixin.scss';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  @include h2;
+  color: $text-base;
+}
+
+.linkTitle {
+  @include text-base;
+  color: $text-additional;
+}
+
+.link {
+  @include clear-link;
+  @include text-paragraph-medium;
+  color: $primary;
+}
+
+.button {
+  width: 100%;
+}
+
+.dark {
+  background-color: $dark-ux-background;
+  color: $dark-theme-white;
+}
