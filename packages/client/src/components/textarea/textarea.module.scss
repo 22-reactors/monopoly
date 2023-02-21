@@ -45,8 +45,9 @@ $animation-time: 0.25s;
     & .textarea {
       border-color: $text-error;
     }
-    & .label {
-      color: $text-error !important;
+    & .label,
+    & .label:focus {
+      color: $text-error;
     }
   }
 
@@ -59,7 +60,7 @@ $animation-time: 0.25s;
       top: 100%;
     }
     & .label {
-      color: $text-error !important;
+      color: $text-error;
     }
   }
 }
@@ -80,7 +81,7 @@ $animation-time: 0.25s;
   color: $text-error;
 }
 
-.textarea:focus + .label {
+.container:not(.containerError) .textarea:focus + .label {
   color: $primary;
 }
 
