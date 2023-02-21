@@ -3,7 +3,7 @@ import { IInputFieldSet } from '../../components/fieldset/inputfieldset/InputFie
 import LoginAndRegistrForm from '../../components/form/loginandregistrform';
 import ThemeToggler from '../../components/themetoggler';
 import style from './login.module.scss';
-import { authorizedRedirect } from '../../utils/helpers';
+import { authorizedRedirect, getInputData } from '../../utils/helpers';
 import { ILoginData } from '../../api/auth/interfaces';
 import AuthController from '../../controllers/auth';
 import { useNavigate } from 'react-router-dom';
@@ -36,11 +36,7 @@ const Login = (props: ILoginProps) => {
 
   const formAction = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const target = event.target as typeof event.target & ILoginForm;
-    const data: ILoginData = {
-      login: target.login.value,
-      password: target.password.value,
-    };
+    const data = getInputData<ILoginForm, ILoginData>(event);
     const response = await AuthController.login(data);
 
     if (response) {

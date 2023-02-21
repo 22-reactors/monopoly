@@ -1,6 +1,6 @@
-import { IRegistrForm } from '../pages/register/register';
+import { IRegistrProps } from '../pages/register/register';
 
-const RegistrProps: IRegistrForm = {
+const RegistrProps: IRegistrProps = {
   headerName: 'Регистрация игрока',
   linkTitle: 'войти',
   linkAction: () => {
