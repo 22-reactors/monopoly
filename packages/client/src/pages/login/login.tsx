@@ -8,10 +8,11 @@ import { ILoginData } from '../../api/auth/interfaces';
 import AuthController from '../../controllers/auth';
 import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
+import { IValue } from '../../utils/interfaces';
 
 export const loginLoader = authorizedRedirect;
 
-export interface ILoginForm {
+export interface ILoginProps {
   submitBtnName: string;
   headerName: string;
   linkTitle: string;
@@ -19,7 +20,12 @@ export interface ILoginForm {
   inputsProps: IInputFieldSet[];
 }
 
-const Login = (props: ILoginForm) => {
+export interface ILoginForm {
+  login: IValue;
+  password: IValue;
+}
+
+const Login = (props: ILoginProps) => {
   const { inputsProps } = props;
 
   const inputItems = inputsProps.map((inputProp, i) => {
@@ -29,12 +35,8 @@ const Login = (props: ILoginForm) => {
   const navigate = useNavigate();
 
   const formAction = async (event: React.FormEvent<HTMLFormElement>) => {
-
     event.preventDefault();
-    const target = event.target as typeof event.target & {
-      login: { value: string };
-      password: { value: string };
-    };
+    const target = event.target as typeof event.target & ILoginForm;
     const data: ILoginData = {
       login: target.login.value,
       password: target.password.value,
