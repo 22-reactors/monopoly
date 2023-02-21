@@ -2,7 +2,7 @@ import style from './info.module.scss';
 import classNames from 'classnames';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Button, ButtonVariation } from '../button/button';
-import { IUser } from '../../utils/interfaces';
+import { IUser, IValue } from '../../utils/interfaces';
 import UserController from '../../controllers/user';
 import { IProfileData } from '../../api/user/interfaces';
 
@@ -23,12 +23,12 @@ interface IInfo {
 }
 
 interface IProfileForm {
-  email: { value: string };
-  login: { value: string };
-  first_name: { value: string };
-  second_name: { value: string };
-  display_name: { value: string };
-  phone: { value: string };
+  email: IValue;
+  login: IValue;
+  first_name: IValue;
+  second_name: IValue;
+  display_name: IValue;
+  phone: IValue;
 }
 
 export function Info(props: IInfo) {
