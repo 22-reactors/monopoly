@@ -5,6 +5,7 @@ import { Button, ButtonVariation } from '../button/button';
 import { IUser, IValue } from '../../utils/interfaces';
 import UserController from '../../controllers/user';
 import { IProfileData } from '../../api/user/interfaces';
+import { getInputData } from '../../utils/helpers';
 
 export type FieldInfo = {
   id: string;
@@ -44,21 +45,25 @@ export function Info(props: IInfo) {
     });
   };
 
-  const onSubmitForm = async (evt: FormEvent) => {
+  const onSubmitForm = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    const target = evt.target as typeof evt.target & IProfileForm;
-    const inputs = Object.values(target).filter(
-      element => element instanceof HTMLInputElement
-    ) as HTMLInputElement[];
-    const data = inputs.reduce((result, input) => {
-      return { ...result, [input.name]: input.value };
-    }, {} as IProfileData);
+    const data = getInputData<IProfileForm, IProfileData>(evt);
     const response = await UserController.changeProfile(data);
     if (response) {
       setProfile(response);
     }
     setIsEdit(false);
     console.log('Save info');
+  };
+
+  const getFieldValue = (fieldId: string) => {
+    if (fieldId in fieldInput) {
+      return fieldInput[fieldId];
+    }
+    if (profile !== null && fieldId) {
+      return profile[fieldId as keyof IProfileForm];
+    }
+    return '';
   };
 
   return (
@@ -69,11 +74,7 @@ export function Info(props: IInfo) {
             key={idx}
             {...field}
             disabled={!isEdit}
-            value={
-              fieldInput[field.id] ??
-              (profile && profile[field.id as keyof IProfileForm]) ??
-              ''
-            }
+            value={getFieldValue(field.id)}
             onChange={onChangeFieldInput}
           />
         ))}
