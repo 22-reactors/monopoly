@@ -27,12 +27,8 @@ function Textarea(props: Props) {
   };
 
   const onBlurTextarea = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    if (!value) {
-      setLabelFocus(false);
-    }
-    if (onBlur) {
-      onBlur(event);
-    }
+    !value && setLabelFocus(false);
+    onBlur && onBlur(event);
   };
 
   const textareaStyle = {
