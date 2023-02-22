@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { links } from '../../utils/const';
+import { Logo } from '../../icons/logo';
 import style from './header.module.scss';
 import {
   ILoginButtonsProps,
@@ -10,7 +11,6 @@ import {
 export interface IHeaderProps extends ILoginButtonsProps {
   navLinks: { path: string; title: string }[];
   isDarkTheme: boolean;
-  user?: IUser;
   logoutText: string;
 }
 
@@ -21,7 +21,7 @@ export const Header = (props: IHeaderProps) => {
     <header className={classNames(style.header, isDarkTheme && style.dark)}>
       <nav className={style.nav}>
         <Link to={links.root.path} className={style.logoLink}>
-          <img src="logo.svg" alt="logo" />
+          <Logo />
         </Link>
         <ul className={style.navList}>
           {navLinks.map(link => (

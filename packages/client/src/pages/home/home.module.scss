@@ -1,5 +1,7 @@
 @import "../../styles/mixin.scss";
 @import "../../styles/variables.scss";
+@import "../../styles/globals.scss";
+
 
 .main {
   flex-grow: 1;
@@ -11,19 +13,23 @@
   align-items: center;
 }
 .mainContent {
-  margin-left: $main-margin-left;
+  margin-left: $main-margin;
 }
 
 .title {
   font-size: 64px;
+  font-weight: 700;
+  line-height: 88px;
+  margin: 0 0 6px;
 }
 
 .description {
-  font: $h2;
+   @include h2;
+   width: 650px;
 }
 
 .button {
-  margin-top: 22px;
+  margin: 90px 0 0 35px;
 }
 
 .cardsImage {

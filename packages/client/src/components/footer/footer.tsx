@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { links } from '../../utils/const';
+import { Logo } from '../../icons/logo';
 import style from './footer.module.scss';
 
 export interface IFooterProps {
@@ -42,7 +43,7 @@ export const Footer = (props: IFooterProps) => {
         </nav>
       </div>
       <div className={style.infoContainer}>
-        <img src="logo.svg" alt="logo" className={style.logo} />
+      <Logo className={style.logo} />
         {infoText.map((text, index) => (
           <p key={index} className={style.info}>
             {text}

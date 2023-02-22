@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import AuthController from '../../../controllers/auth';
 import { useUser } from '../../../hooks/useUser';
-import { links } from '../../../utils/const';
+import { links, resourceURL } from '../../../utils/const';
 import { Button, ButtonSizes, ButtonVariation } from '../../button/button';
 import style from './login-buttons.module.scss';
 
@@ -21,9 +21,11 @@ export const LoginButtons = (props: ILoginButtonsProps) => {
   };
 
   if (user) {
+    const avatar = `${resourceURL}${user?.avatar}`;
+
     return (
       <div className={style.user}>
-        <img className={style.avatar} src={user.avatar} alt="avatar" />
+        <img className={style.avatar} src={avatar} alt="avatar" />
         <h4 className={classNames(style.name, isDarkTheme && style.darkText)}>
           {user.display_name}
         </h4>
