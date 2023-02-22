@@ -25,7 +25,7 @@ export const Footer = (props: IFooterProps) => {
   return (
     <footer className={classNames(style.footer, isDarkTheme && style.dark)}>
       <div className={classNames(style.menu, isDarkTheme && style.dark)}>
-        <h4 className={style.title}>{navTitle}</h4>
+        <h4 className={classNames(style.title, isDarkTheme && style.dark)}>{navTitle}</h4>
         <nav>
           <ul className={style.navList}>
             {navLinks.map(({ path, title }) => {
