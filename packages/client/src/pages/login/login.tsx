@@ -1,4 +1,3 @@
-import LoginAndRegistrForm from '../../components/form/loginandregistrform';
 import ThemeToggler from '../../components/themetoggler';
 import style from './login.module.scss';
 import { authorizedRedirect, getInputData } from '../../utils/helpers';
@@ -8,10 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
 import { IValue } from '../../utils/interfaces';
 import { Input, InputProps } from '../../components/input/input';
+import { AuthForm, IAuthFormProps } from '../../components/authForm/authForm';
 
 export const loginLoader = authorizedRedirect;
 
-export interface ILoginForm extends Omit<IAuthFormProps, 'children'> {
+export interface ILoginProps extends Omit<IAuthFormProps, 'children'> {
   inputsProps: InputProps[];
 }
 
@@ -42,9 +42,9 @@ const Login = (props: ILoginProps) => {
   return (
     <div className={style.bg}>
       <ThemeToggler>
-        <LoginAndRegistrForm {...props} formAction={formAction}>
+        <AuthForm {...props} formAction={formAction}>
           {inputItems}
-        </LoginAndRegistrForm>
+        </AuthForm>
       </ThemeToggler>
     </div>
   );
