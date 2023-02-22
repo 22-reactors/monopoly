@@ -12,11 +12,7 @@ import { IValue } from '../../utils/interfaces';
 
 export const loginLoader = authorizedRedirect;
 
-export interface ILoginProps {
-  submitBtnName: string;
-  headerName: string;
-  linkTitle: string;
-  linkAction: React.MouseEventHandler<HTMLAnchorElement>;
+export interface ILoginForm extends Omit<IAuthFormProps, 'children'> {
   inputsProps: IInputFieldSet[];
 }
 

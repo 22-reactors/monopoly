@@ -9,6 +9,7 @@ export interface IAuthFormProps {
   children: JSX.Element | JSX.Element[];
   title: string;
   isDarkTheme?: boolean;
+  linkTitle?: string;
   linkName?: string;
   linkPath?: string;
   linkAction: React.MouseEventHandler<HTMLAnchorElement>;
