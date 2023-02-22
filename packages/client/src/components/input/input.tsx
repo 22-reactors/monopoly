@@ -4,8 +4,9 @@ import EyeIcon from '../../icons/EyeIcon';
 import { IValidationInputProps } from '../../types/validation';
 import style from './input.module.scss';
 
-interface Props extends IValidationInputProps {
+export interface InputProps extends IValidationInputProps {
   value: HTMLProps<HTMLInputElement>['value'];
+  name: string;
   label?: string;
   type?: HTMLProps<HTMLInputElement>['type'];
   showPassword?: boolean;
@@ -13,8 +14,8 @@ interface Props extends IValidationInputProps {
   onBlur?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-function Input(props: Props) {
-  const { type, value, label, onChange, showPassword, onBlur, errorText } =
+export function Input(props: InputProps) {
+  const { type, value, label, onChange, showPassword, onBlur, errorText, name } =
     props;
 
   const [labelFocus, setLabelFocus] = useState(!!value);
@@ -55,6 +56,7 @@ function Input(props: Props) {
         className={style.input}
         onChange={onChange}
         type={inputType}
+        name={name}
         onBlur={onInputBlur}
         value={value}
       />
@@ -69,5 +71,3 @@ function Input(props: Props) {
     </div>
   );
 }
-
-export default Input;

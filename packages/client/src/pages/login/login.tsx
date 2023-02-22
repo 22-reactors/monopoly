@@ -1,5 +1,3 @@
-import InputFieldSet from '../../components/fieldset/inputfieldset';
-import { IInputFieldSet } from '../../components/fieldset/inputfieldset/InputFieldSet';
 import LoginAndRegistrForm from '../../components/form/loginandregistrform';
 import ThemeToggler from '../../components/themetoggler';
 import style from './login.module.scss';
@@ -9,11 +7,12 @@ import AuthController from '../../controllers/auth';
 import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
 import { IValue } from '../../utils/interfaces';
+import { Input, InputProps } from '../../components/input/input';
 
 export const loginLoader = authorizedRedirect;
 
 export interface ILoginForm extends Omit<IAuthFormProps, 'children'> {
-  inputsProps: IInputFieldSet[];
+  inputsProps: InputProps[];
 }
 
 export interface ILoginForm {
@@ -25,7 +24,7 @@ const Login = (props: ILoginProps) => {
   const { inputsProps } = props;
 
   const inputItems = inputsProps.map((inputProp, i) => {
-    return <InputFieldSet key={i} {...inputProp} />;
+    return <Input key={i} {...inputProp} />;
   });
 
   const navigate = useNavigate();

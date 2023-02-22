@@ -1,5 +1,5 @@
-import React from 'react';
-import style from './loginAndRegistrForm.module.scss';
+import React, { ChangeEvent } from 'react';
+import style from './authForm.module.scss';
 import classNames from 'classnames';
 import { Button, ButtonVariation } from '../button/button';
 import { Link } from 'react-router-dom';
@@ -27,10 +27,15 @@ export const AuthForm = (props: IAuthFormProps) => {
     linkName,
   } = props;
 
+  const inputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const target = event.target.value;
+  };
+
   const childrenWithProps = React.Children.map(children, child => {
     if (React.isValidElement(child)) {
       return React.cloneElement(child as React.ReactElement, {
         isDarkTheme,
+        onChange: inputChangeHandler,
       });
     }
     return child;
