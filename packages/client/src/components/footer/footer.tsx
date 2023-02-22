@@ -11,15 +11,15 @@ export interface IFooterProps {
   isDarkTheme: boolean;
 }
 
+const isLoginLinksAndAuthorized = (title: string, isAuthorized: boolean) => {
+  return (
+    isAuthorized &&
+    (title === links.login.title || title === links.signup.title)
+  );
+};
+
 export const Footer = (props: IFooterProps) => {
   const { navLinks, navTitle, isAuthorized, infoText, isDarkTheme } = props;
-
-  const isLoginLinksAndAuthorized = (title: string) => {
-    return (
-      isAuthorized &&
-      (title === links.login.title || title === links.signup.title)
-    );
-  };
 
   return (
     <footer className={classNames(style.footer, isDarkTheme && style.dark)}>
@@ -28,7 +28,7 @@ export const Footer = (props: IFooterProps) => {
         <nav>
           <ul className={style.navList}>
             {navLinks.map(({ path, title }) => {
-              if (!isLoginLinksAndAuthorized(title)) {
+              if (!isLoginLinksAndAuthorized(title, isAuthorized)) {
                 return (
                   <li key={path}>
                     <Link to={path} className={style.link}>
