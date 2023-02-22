@@ -1,18 +1,24 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+import AuthController from '../../../controllers/auth';
+import { useUser } from '../../../hooks/useUser';
 import { links } from '../../../utils/const';
-import { IUser } from '../../../utils/interfaces';
 import { Button, ButtonSizes, ButtonVariation } from '../../button/button';
 import style from './login-buttons.module.scss';
 
 export interface ILoginButtonsProps {
   logoutText: string;
-  user?: IUser;
   isDarkTheme?: boolean;
 }
 
 export const LoginButtons = (props: ILoginButtonsProps) => {
-  const { user, isDarkTheme, logoutText } = props;
+  const { isDarkTheme, logoutText } = props;
+  const [user, setUser] = useUser(null);
+
+  const logout = () => {
+    AuthController.logout();
+    setUser(null);
+  };
 
   if (user) {
     return (
@@ -26,7 +32,8 @@ export const LoginButtons = (props: ILoginButtonsProps) => {
           className={classNames(
             style.logoutText,
             isDarkTheme ? style.darkText : style.lightText
-          )}>
+          )}
+          onClick={logout}>
           {logoutText}
         </span>
       </div>

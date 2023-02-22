@@ -22,6 +22,7 @@ const InputFieldSet = (props: IInputFieldSet) => {
         <fieldset className={style.fieldset}>
             <input
                 id={props.fieldId}
+                name={props.fieldId}
                 type={props.inputType}
                 className={inputClass}
                 placeholder=" " />
