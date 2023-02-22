@@ -8,3 +8,7 @@ export interface IUser {
   phone: string;
   avatar: string;
 }
+
+export interface IValue {
+  value: string;
+}

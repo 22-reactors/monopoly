@@ -2,6 +2,10 @@ import style from './info.module.scss';
 import classNames from 'classnames';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Button, ButtonVariation } from '../button/button';
+import { IUser, IValue } from '../../utils/interfaces';
+import UserController from '../../controllers/user';
+import { IProfileData } from '../../api/user/interfaces';
+import { getInputData } from '../../utils/helpers';
 
 export type FieldInfo = {
   id: string;
@@ -19,9 +23,19 @@ interface IInfo {
   onSubmit?(): void;
 }
 
+interface IProfileForm {
+  email: IValue;
+  login: IValue;
+  first_name: IValue;
+  second_name: IValue;
+  display_name: IValue;
+  phone: IValue;
+}
+
 export function Info(props: IInfo) {
   const [isEdit, setIsEdit] = useState(false);
   const [fieldInput, setFieldInput] = useState<Record<string, string>>({});
+  const [profile, setProfile] = useState<IUser | null>(null);
 
   const onChangeFieldInput = (evt: ChangeEvent) => {
     const target = evt.target as HTMLInputElement;
@@ -31,12 +45,25 @@ export function Info(props: IInfo) {
     });
   };
 
-  const onSubmitForm = (evt: FormEvent) => {
+  const onSubmitForm = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    props.onSubmit?.();
-
+    const data = getInputData<IProfileForm, IProfileData>(evt);
+    const response = await UserController.changeProfile(data);
+    if (response) {
+      setProfile(response);
+    }
     setIsEdit(false);
     console.log('Save info');
+  };
+
+  const getFieldValue = (fieldId: string) => {
+    if (fieldId in fieldInput) {
+      return fieldInput[fieldId];
+    }
+    if (profile !== null && fieldId) {
+      return profile[fieldId as keyof IProfileForm];
+    }
+    return '';
   };
 
   return (
@@ -47,7 +74,7 @@ export function Info(props: IInfo) {
             key={idx}
             {...field}
             disabled={!isEdit}
-            value={fieldInput[field.id] ?? field.value}
+            value={getFieldValue(field.id)}
             onChange={onChangeFieldInput}
           />
         ))}
@@ -61,8 +88,7 @@ export function Info(props: IInfo) {
           <Button
             type={'submit'}
             variation={ButtonVariation.PRIMARY}
-            isHide={!isEdit}
-            disabled>
+            isHide={!isEdit}>
             Сохранить
           </Button>
         </div>

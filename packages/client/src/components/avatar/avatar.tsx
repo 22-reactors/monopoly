@@ -1,18 +1,29 @@
 import classNames from 'classnames';
 import { ChangeEvent, useRef, useState } from 'react';
 import { Button, ButtonSizes, ButtonVariation } from '../button/button';
+import UserController from '../../controllers/user';
 import style from './avatar.module.scss';
+import { resourceURL } from '../../utils/const';
 
 function Avatar() {
   const [avatarSrc, setAvatarSrc] = useState('');
 
-  const onChangeAvatarFileHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeAvatarFileHandler = async (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     if (!event.target.files) {
       return;
     }
+    const formData = new FormData();
+
     const avatarFile = event.target.files[0];
     if (avatarFile) {
-      // Запрос к API
+      formData.append('avatar', avatarFile, avatarFile.name);
+      const response = await UserController.changeAvatar(formData);
+      if (response) {
+        const url = `${resourceURL}${response.avatar}`;
+        setAvatarSrc(url);
+      }
     }
   };
 

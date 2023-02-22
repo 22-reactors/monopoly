@@ -50,3 +50,14 @@ export function getDeclensionWord(value: number, words: {[value in WordMap]: str
 
   return words[WordMap['MORE']];
 }
+
+export const getInputData = <T, D>(evt: React.FormEvent<HTMLFormElement>) => {
+  const target = evt.target as typeof evt.target & T;
+  const inputs = Object.values(target).filter(
+    element => element instanceof HTMLInputElement
+  ) as HTMLInputElement[];
+  const data = inputs.reduce((result, input) => {
+    return { ...result, [input.name]: input.value };
+  }, {} as D);
+  return data;
+};
