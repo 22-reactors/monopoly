@@ -3,24 +3,27 @@ import { Link } from 'react-router-dom';
 import { links } from '../../utils/const';
 import { Logo } from '../../icons/logo';
 import style from './footer.module.scss';
+import { useUser } from '../../hooks/useUser';
+import { IUser } from '../../utils/interfaces';
 
 export interface IFooterProps {
   navTitle: string;
   navLinks: { path: string; title: string }[];
   infoText: string[];
-  isAuthorized: boolean;
   isDarkTheme: boolean;
 }
 
-const isLoginLinksAndAuthorized = (title: string, isAuthorized: boolean) => {
+const isLoginLinksAndAuthorized = (title: string, user: IUser | null) => {
   return (
-    isAuthorized &&
+    user &&
     (title === links.login.title || title === links.signup.title)
   );
 };
 
 export const Footer = (props: IFooterProps) => {
-  const { navLinks, navTitle, isAuthorized, infoText, isDarkTheme } = props;
+  const { navLinks, navTitle, infoText, isDarkTheme } = props;
+  const [user, setUser] = useUser(null);
+
 
   return (
     <footer className={classNames(style.footer, isDarkTheme && style.dark)}>
@@ -29,7 +32,7 @@ export const Footer = (props: IFooterProps) => {
         <nav>
           <ul className={style.navList}>
             {navLinks.map(({ path, title }) => {
-              if (!isLoginLinksAndAuthorized(title, isAuthorized)) {
+              if (!isLoginLinksAndAuthorized(title, user)) {
                 return (
                   <li key={path}>
                     <Link to={path} className={style.link}>

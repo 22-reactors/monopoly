@@ -4,9 +4,8 @@
 
 
 .main {
-  flex-grow: 1;
-  background: linear-gradient(to right, #ffeeee, #e7dfff);
-  font: $text-base-font;
+  @include text-base;
+  background: $light-background;
   display: flex;
   min-height: $main-window-height;
   justify-content: space-between;

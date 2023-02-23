@@ -5,6 +5,7 @@ import {
   ButtonSizes,
   ButtonVariation,
 } from '../../components/button/button';
+import { useUser } from '../../hooks/useUser';
 import { links } from '../../utils/const';
 import style from './home.module.scss';
 
@@ -12,16 +13,16 @@ export interface IHomeProps {
   title: string;
   description: string;
   linkText: string;
-  isAuthorized: boolean;
   isDarkTheme: boolean;
 }
 
 export const Home = (props: IHomeProps) => {
-  const { title, description, linkText, isAuthorized, isDarkTheme } = props;
+  const { title, description, linkText, isDarkTheme } = props;
+  const [user, setUser] = useUser(null);
 
   return (
     <main className={classNames(style.main, isDarkTheme && style.dark)}>
-      {!isAuthorized && (
+      {!user && (
         <>
           <div className={style.mainContent}>
             <h1 className={style.title}>{title}</h1>
@@ -43,7 +44,7 @@ export const Home = (props: IHomeProps) => {
           />
         </>
       )}
-      {isAuthorized && <></>}
+      {user && <></>}
     </main>
   );
 };
