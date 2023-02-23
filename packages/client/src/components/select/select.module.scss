@@ -1,0 +1,111 @@
+@import '../../styles/globals.scss';
+@import '../../styles/mixin.scss';
+
+$animation-time: 0.25s;
+$option-y-offset: 2px;
+
+.container {
+  width: 100%;
+  padding: 0;
+  position: relative;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  &:focus:not(.errorContainer) {
+    outline: none;
+    border-color: $primary;
+  }
+  border-bottom: 1px solid;
+  border-color: $text-additional;
+}
+
+.errorContainer {
+  border-color: $text-error;
+  & .icon {
+    stroke: $text-error;
+  }
+  & .label {
+    color: $text-error;
+  }
+}
+
+.select {
+  width: 100%;
+  color: $text-base;
+  @include text-base;
+  padding-bottom: 4px;
+  border: none;
+  pointer-events: none;
+  cursor: inherit;
+  &:focus {
+    outline: none;
+  }
+  &:disabled {
+    background: transparent;
+  }
+}
+
+.icon {
+  transition: all $animation-time;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  stroke: $text-additional;
+  transform: translateY(-50%);
+}
+
+.container:focus:not(.errorContainer) .iconFocus {
+  stroke: $primary;
+}
+
+.container:focus:not(.errorContainer) .label {
+  color: $primary;
+}
+
+.iconOpen {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.label {
+  transition: all $animation-time;
+  user-select: none;
+  cursor: inherit;
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: $text-additional;
+}
+
+.labelFocus {
+  transform: translateY(-100%);
+}
+
+.options {
+  overflow: hidden;
+  max-height: 0;
+  transition: all $animation-time;
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  background-color: #fff;
+  border-radius: 4px;
+  width: 100%;
+  left: 0;
+  transform: translateY($option-y-offset);
+  @include shadowDefault;
+}
+
+.optionsOpen {
+  max-height: 320px;
+  padding: 6px 0;
+  opacity: 1;
+}
+
+.error {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  transform: translateY($option-y-offset);
+  z-index: -10;
+  color: $text-error;
+}
