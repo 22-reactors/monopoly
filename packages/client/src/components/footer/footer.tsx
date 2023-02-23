@@ -14,21 +14,19 @@ export interface IFooterProps {
 }
 
 const isLoginLinksAndAuthorized = (title: string, user: IUser | null) => {
-  return (
-    user &&
-    (title === links.login.title || title === links.signup.title)
-  );
+  return user && (title === links.login.title || title === links.signup.title);
 };
 
 export const Footer = (props: IFooterProps) => {
   const { navLinks, navTitle, infoText, isDarkTheme } = props;
-  const [user, setUser] = useUser(null);
-
+  const [user] = useUser(null);
 
   return (
     <footer className={classNames(style.footer, isDarkTheme && style.dark)}>
       <div className={classNames(style.menu, isDarkTheme && style.dark)}>
-        <h4 className={classNames(style.title, isDarkTheme && style.dark)}>{navTitle}</h4>
+        <h4 className={classNames(style.title, isDarkTheme && style.dark)}>
+          {navTitle}
+        </h4>
         <nav>
           <ul className={style.navList}>
             {navLinks.map(({ path, title }) => {
@@ -46,7 +44,7 @@ export const Footer = (props: IFooterProps) => {
         </nav>
       </div>
       <div className={style.infoContainer}>
-      <Logo className={style.logo} />
+        <Logo className={style.logo} />
         {infoText.map((text, index) => (
           <p key={index} className={style.info}>
             {text}

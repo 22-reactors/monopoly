@@ -18,7 +18,7 @@ export interface IHomeProps {
 
 export const Home = (props: IHomeProps) => {
   const { title, description, linkText, isDarkTheme } = props;
-  const [user, setUser] = useUser(null);
+  const [user] = useUser(null);
 
   return (
     <main className={classNames(style.main, isDarkTheme && style.dark)}>
