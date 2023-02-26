@@ -1,7 +1,4 @@
-import InputFieldSet from '../../components/fieldset/inputfieldset';
-import { IInputFieldSet } from '../../components/fieldset/inputfieldset/InputFieldSet';
 import { AuthForm, IAuthFormProps } from '../../components/authForm/authForm';
-import ThemeToggler from '../../components/themetoggler';
 import './register.module.scss';
 import loginStyle from '../login/login.module.scss';
 import { authorizedRedirect, getInputData } from '../../utils/helpers';
@@ -10,15 +7,12 @@ import AuthController from '../../controllers/auth';
 import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
 import { IValue } from '../../utils/interfaces';
+import { IInputProps, Input } from '../../components/input/input';
 
 export const registerLoader = authorizedRedirect;
 
-export interface IRegistrProps {
-  submitBtnName: string;
-  headerName: string;
-  linkTitle: string;
-  linkAction: React.MouseEventHandler<HTMLAnchorElement>;
-  inputsProps: IInputFieldSet[];
+export interface IRegistrProps extends Omit<IAuthFormProps, 'children'> {
+  inputsProps: IInputProps[];
 }
 
 export interface ISignUpForm {
@@ -34,7 +28,7 @@ const Register = (props: IRegistrProps) => {
   const { inputsProps } = props;
 
   const inputItems = inputsProps.map((inputProp, i) => {
-    return <InputFieldSet key={i} {...inputProp} />;
+    return <Input key={i} {...inputProp} />;
   });
 
   const navigate = useNavigate();
@@ -50,11 +44,9 @@ const Register = (props: IRegistrProps) => {
 
   return (
     <div className={loginStyle.bg}>
-      <ThemeToggler>
-        <LoginAndRegistrForm {...props} formAction={formAction}>
+        <AuthForm {...props} formAction={formAction}>
           {inputItems}
-        </LoginAndRegistrForm>
-      </ThemeToggler>
+        </AuthForm>
     </div>
   );
 };

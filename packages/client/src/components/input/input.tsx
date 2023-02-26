@@ -4,7 +4,7 @@ import EyeIcon from '../../icons/EyeIcon';
 import { IValidationInputProps } from '../../types/validation';
 import style from './input.module.scss';
 
-export interface InputProps extends IValidationInputProps {
+export interface IInputProps extends IValidationInputProps {
   value: HTMLProps<HTMLInputElement>['value'];
   name: string;
   label?: string;
@@ -14,7 +14,7 @@ export interface InputProps extends IValidationInputProps {
   onBlur?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export function Input(props: InputProps) {
+export function Input(props: IInputProps) {
   const { type, value, label, onChange, showPassword, onBlur, errorText, name } =
     props;
 

@@ -1,6 +1,6 @@
 import { ILoginProps } from "../pages/login/login";
 
-const LoginProps: ILoginForm = {
+const LoginProps: ILoginProps = {
   title: 'Войти',
   linkTitle: 'У вас нет аккаунта?',
   linkName: 'Регистрация',

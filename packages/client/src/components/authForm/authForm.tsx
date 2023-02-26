@@ -1,8 +1,10 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import style from './authForm.module.scss';
 import classNames from 'classnames';
 import { Button, ButtonVariation } from '../button/button';
 import { Link } from 'react-router-dom';
+import { Input } from '../input/input';
+import { getInputName } from '../../utils/helpers';
 
 export interface IAuthFormProps {
   submitBtnName: string;
@@ -26,23 +28,30 @@ export const AuthForm = (props: IAuthFormProps) => {
     linkPath,
     linkName,
   } = props;
+  const [inputValues, setInputValues] = useState({} as Record<string, string>);
 
   const inputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const target = event.target.value;
+    const { value, name } = event.target;
+    setInputValues(prevState => {
+      return { ...prevState, [name]: value };
+    });
   };
 
   const childrenWithProps = React.Children.map(children, child => {
     if (React.isValidElement(child)) {
+      const name = getInputName(child);
+      const value = name ? inputValues[name] : '';
       return React.cloneElement(child as React.ReactElement, {
         isDarkTheme,
         onChange: inputChangeHandler,
+        value: value ? value : '',
       });
     }
     return child;
   });
 
   return (
-    <div className={classNames(isDarkTheme && style.dark)}>
+    <div className={classNames(style.container, isDarkTheme && style.dark)}>
       <h2 className={style.title}>{title}</h2>
       <form className={style.form} onSubmit={formAction}>
         {childrenWithProps}

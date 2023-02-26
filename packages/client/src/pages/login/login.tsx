@@ -1,4 +1,3 @@
-import ThemeToggler from '../../components/themetoggler';
 import style from './login.module.scss';
 import { authorizedRedirect, getInputData } from '../../utils/helpers';
 import { ILoginData } from '../../api/auth/interfaces';
@@ -6,13 +5,13 @@ import AuthController from '../../controllers/auth';
 import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
 import { IValue } from '../../utils/interfaces';
-import { Input, InputProps } from '../../components/input/input';
+import { Input, IInputProps } from '../../components/input/input';
 import { AuthForm, IAuthFormProps } from '../../components/authForm/authForm';
 
 export const loginLoader = authorizedRedirect;
 
 export interface ILoginProps extends Omit<IAuthFormProps, 'children'> {
-  inputsProps: InputProps[];
+  inputsProps: IInputProps[];
 }
 
 export interface ILoginForm {
@@ -41,11 +40,9 @@ const Login = (props: ILoginProps) => {
 
   return (
     <div className={style.bg}>
-      <ThemeToggler>
         <AuthForm {...props} formAction={formAction}>
           {inputItems}
         </AuthForm>
-      </ThemeToggler>
     </div>
   );
 };
