@@ -58,3 +58,24 @@ export const getInputData = <T, D>(evt: React.FormEvent<HTMLFormElement>) => {
   }, {} as D);
   return data;
 };
+
+// Разбивает массив на двумерный массив с указанным кол-вом возможной длины
+export function getSeparateArray<T>(arr: T[], count: number, limit: number): T[][] {
+  const result = [];
+  let current = 0;
+  let next = limit;
+
+  for (let i = 0; i < count; i++) {
+    const separateResults = arr.slice(current, next);
+
+    if (separateResults.length === 0) {
+      break;
+    }
+
+    result.push(separateResults);
+    current += limit;
+    next += limit;
+  }
+
+  return result;
+}
