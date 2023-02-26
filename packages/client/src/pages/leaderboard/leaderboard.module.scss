@@ -1,0 +1,84 @@
+@import './src/styles/mixin';
+@import './src/styles/globals';
+
+.wrapper {
+  max-width: 1110px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title {
+  @include h2();
+  margin-top: 27px;
+  color: $text-base;
+}
+
+.board {
+  width: 100%;
+  table-layout: fixed;
+  margin-top: 27px;
+  border-spacing: 0;
+  padding: 40px;
+  background-color: $text-white;
+  border-radius: 10px;
+  border: none;
+  box-sizing: border-box;
+  box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.07);
+}
+
+.headerCell {
+  padding: 0;
+  padding-bottom: 9px;
+  border-bottom: 1px solid $row-separate;
+
+  &:first-child {
+    width: 100%;
+    text-align: left;
+  }
+
+  &:last-child {
+    padding-right: 18px;
+
+    .caption {
+      @include relative();
+
+      &::after {
+        content: '';
+        @include absolute(50%, -18px, null, null);
+        @include bg-image-styles(contain);
+        width: 11px;
+        height: 13px;
+        margin-top: 2px;
+        background-image: url('arrow-down-icon.svg');
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  &:not(&:first-child) {
+    width: 70px;
+    text-align: right;
+  }
+}
+
+.caption {
+  @include text-paragraph-medium();
+  color: $text-black;
+}
+
+.contentCell {
+  padding: 0;
+  padding-top: 10px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid $row-separate;
+
+  &:last-child {
+    text-align: right;
+  }
+}
+
+.paginator {
+  margin-top: 43px;
+  margin-left: auto;
+  margin-right: auto;
+}
