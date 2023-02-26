@@ -5,23 +5,35 @@
   width: 360px;
   padding: 40px;
   background-color: white;
+  border-radius: 10px;
+  @include shadowDefault;
+  text-align: center;
+}
+
+.title {
+  @include h2;
+  color: $text-base;
+  margin-bottom: 36px;
 }
 
 .form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
 }
 
-.header {
-  @include h2;
-  color: $text-base;
+.input {
+  background-color: transparent;
+  & + .input {
+    margin-top: 32px;
+  }
 }
 
 .linkTitle {
   @include text-base;
   color: $text-additional;
+  margin: 0;
+  margin-top: 23px;
 }
 
 .link {
@@ -32,6 +44,7 @@
 
 .button {
   width: 100%;
+  margin-top: 36px;
 }
 
 .dark {

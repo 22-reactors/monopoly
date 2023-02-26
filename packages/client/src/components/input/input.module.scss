@@ -37,6 +37,8 @@ $animation-time: 0.25s;
   &:focus {
     border-color: $primary;
   }
+  background-color: transparent;
+
 }
 
 .label {

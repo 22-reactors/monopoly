@@ -1,9 +1,12 @@
 import { ILoginProps } from "../pages/login/login";
+import { links } from "../utils/const";
 
 const LoginProps: ILoginProps = {
-  title: 'Войти',
+  title: 'Вход',
   linkTitle: 'У вас нет аккаунта?',
   linkName: 'Регистрация',
+  linkPath: links.signup.path,
+  isDarkTheme: true,
   linkAction: () => {
     console.log('router to registr page');
   },

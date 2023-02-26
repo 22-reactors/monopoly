@@ -3,7 +3,6 @@ import style from './authForm.module.scss';
 import classNames from 'classnames';
 import { Button, ButtonVariation } from '../button/button';
 import { Link } from 'react-router-dom';
-import { Input } from '../input/input';
 import { getInputName } from '../../utils/helpers';
 
 export interface IAuthFormProps {
@@ -26,6 +25,7 @@ export const AuthForm = (props: IAuthFormProps) => {
     formAction,
     children,
     linkPath,
+    linkTitle,
     linkName,
   } = props;
   const [inputValues, setInputValues] = useState({} as Record<string, string>);
@@ -42,6 +42,7 @@ export const AuthForm = (props: IAuthFormProps) => {
       const name = getInputName(child);
       const value = name ? inputValues[name] : '';
       return React.cloneElement(child as React.ReactElement, {
+        className: style.input,
         isDarkTheme,
         onChange: inputChangeHandler,
         value: value ? value : '',
@@ -52,7 +53,9 @@ export const AuthForm = (props: IAuthFormProps) => {
 
   return (
     <div className={classNames(style.container, isDarkTheme && style.dark)}>
-      <h2 className={style.title}>{title}</h2>
+      <h2 className={classNames(style.title, isDarkTheme && style.dark)}>
+        {title}
+      </h2>
       <form className={style.form} onSubmit={formAction}>
         {childrenWithProps}
         <Button
@@ -64,8 +67,10 @@ export const AuthForm = (props: IAuthFormProps) => {
       </form>
       {linkPath && (
         <>
-          <span className={style.linkTitle}></span>
-          <Link to={linkPath} className={style.link}>
+          <p className={style.linkTitle}>{linkTitle}</p>
+          <Link
+            to={linkPath}
+            className={classNames(style.link, isDarkTheme && style.dark)}>
             {linkName}
           </Link>
         </>

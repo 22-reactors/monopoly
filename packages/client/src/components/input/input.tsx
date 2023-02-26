@@ -7,6 +7,7 @@ import style from './input.module.scss';
 export interface IInputProps extends IValidationInputProps {
   value: HTMLProps<HTMLInputElement>['value'];
   name: string;
+  className?: string;
   label?: string;
   type?: HTMLProps<HTMLInputElement>['type'];
   showPassword?: boolean;
@@ -15,7 +16,7 @@ export interface IInputProps extends IValidationInputProps {
 }
 
 export function Input(props: IInputProps) {
-  const { type, value, label, onChange, showPassword, onBlur, errorText, name } =
+  const { type, value, label, onChange, showPassword, onBlur, errorText, name, className } =
     props;
 
   const [labelFocus, setLabelFocus] = useState(!!value);
@@ -49,7 +50,7 @@ export function Input(props: IInputProps) {
   return (
     <div
       tabIndex={0}
-      className={classNames(style.container, isValid && style.errorContainer)}
+      className={classNames(style.container, isValid && style.errorContainer, className)}
       onFocus={onInputContainerFocus}>
       <input
         ref={inputRef}
