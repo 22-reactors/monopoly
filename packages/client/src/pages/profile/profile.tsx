@@ -1,18 +1,99 @@
 import style from './profile.module.scss';
-import { Info } from '../../components/info/info';
-import { fields } from '../../mocs/profile-fields';
+import { FieldInfo, Info } from '../../components/info/info'
 import { unAuthorizedRedirect } from '../../utils/helpers';
 import Avatar from '../../components/avatar/avatar';
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import AuthController from '../../controllers/auth';
+import { IUserData } from '../../api/auth/interfaces';
+
+const FieldMap: Record<string, FieldInfo> = {
+  email: {
+    id: 'email',
+    name: 'email',
+    type: 'email',
+    label: 'Почта',
+    value: '',
+  },
+  login: {
+    id: 'login',
+    name: 'login',
+    type: 'text',
+    label: 'Логин',
+    value: '',
+  },
+  first_name: {
+    id: 'first_name',
+    name: 'first_name',
+    type: 'text',
+    label: 'Имя',
+    value: '',
+  },
+  second_name: {
+    id: 'second_name',
+    name: 'second_name',
+    type: 'text',
+    label: 'Фамилия',
+    value: '',
+  },
+  display_name: {
+    id: 'display_name',
+    name: 'display_name',
+    type: 'text',
+    label: 'Имя в чате',
+    value: '',
+  },
+  phone: {
+    id: 'phone',
+    name: 'phone',
+    type: 'tel',
+    label: 'Телефон',
+    value: '',
+  },
+};
 
 export const profileLoader = unAuthorizedRedirect;
 
 export function ProfilePage(): JSX.Element {
+  const defaultUserFields = useMemo(() => Object.values(FieldMap), []);
+
+  const [fields, setFields] = useState<FieldInfo[]>(defaultUserFields);
+  const [avatar, setAvatar] = useState<string>('');
+
+  const fetchUser = useCallback(async () => {
+    const user = await AuthController.getUser();
+    const userFields = connectorUserFields(user);
+
+    if (user?.avatar) {
+      setAvatar(user.avatar);
+      setFields(userFields);
+    } else {
+      setFields(userFields);
+    }
+  }, []);
+
+
+  useEffect( () => {
+    fetchUser().catch(console.error);
+  }, [fetchUser]);
+
   return (
     <main className={style.wrapper}>
+      <h2 className={style.title}>Профиль</h2>
       <div className={style.container}>
+        <Avatar src={avatar} />
         <Info fields={fields} />
-        <Avatar />
       </div>
     </main>
   );
+}
+
+
+function connectorUserFields(userInfo?: IUserData): FieldInfo[] {
+  if (!userInfo?.login) {
+    return [];
+  }
+
+  return Object.entries(userInfo)
+    .map(([key, value]) => ({...FieldMap[key], value}))
+    .filter((field) => FieldMap[field.name]);
 }
