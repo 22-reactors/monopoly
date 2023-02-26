@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { ChangeEvent, HTMLProps, useRef, useState } from 'react';
+import { ChangeEvent, HTMLProps, useEffect, useRef, useState } from 'react'
 import EyeIcon from '../../icons/EyeIcon';
 import { IValidationInputProps } from '../../types/validation';
 import style from './input.module.scss';
@@ -22,6 +22,10 @@ export function Input(props: IInputProps) {
 
   const [labelFocus, setLabelFocus] = useState(!!value);
   const [showPasswordComputed, setShowPasswordComputed] = useState(false);
+
+  useEffect(() => {
+    setLabelFocus(!!value);
+  }, [value]);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
