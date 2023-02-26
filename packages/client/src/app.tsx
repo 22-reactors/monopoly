@@ -16,7 +16,7 @@ import {
   profileLoader,
   Register,
   registerLoader,
-} from './pages/index.jsx';
+} from './pages/index';
 import { links } from './utils/const';
 
 const router = createBrowserRouter([

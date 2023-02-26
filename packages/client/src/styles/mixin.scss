@@ -1,0 +1,210 @@
+@mixin position-values($args...) {
+  @if length($args) == 4 {
+    @if nth($args, 1) != null {
+      top: nth($args, 1);
+    }
+
+    @if nth($args, 2) != null {
+      right: nth($args, 2);
+    }
+
+    @if nth($args, 3) != null {
+      bottom: nth($args, 3);
+    }
+
+    @if nth($args, 4) != null {
+      left: nth($args, 4);
+    }
+  }
+
+  @if length($args) == 3 {
+    @if nth($args, 1) != null {
+      top: nth($args, 1);
+    }
+
+    @if nth($args, 2) != null {
+      right: nth($args, 2);
+      left: nth($args, 2);
+    }
+
+    @if nth($args, 3) != null {
+      bottom: nth($args, 3);
+    }
+  }
+
+  @if length($args) == 2 {
+    @if nth($args, 1) != null {
+      top: nth($args, 1);
+      bottom: nth($args, 1);
+    }
+
+    @if nth($args, 2) != null {
+      right: nth($args, 2);
+      left: nth($args, 2);
+    }
+  }
+
+  @if length($args) == 1 {
+    @if nth($args, 1) != null {
+      top: nth($args, 1);
+      bottom: nth($args, 1);
+      right: nth($args, 1);
+      left: nth($args, 1);
+    }
+  }
+}
+
+// Указание относительного позиционирования с перечислением координат
+
+@mixin relative($args...) {
+  position: relative;
+
+  @include position-values($args...);
+}
+
+// Указание абсолютного позиционирования с перечислением координат
+
+@mixin absolute($args...) {
+  position: absolute;
+
+  @include position-values($args...);
+}
+
+@mixin absolute-top-center($top: null) {
+  @if $top {
+    @include absolute($top, null, null, 50%);
+
+    transform: translateX(-50%);
+  } @else {
+    @include absolute(50%, null, null, 50%);
+
+    transform: translate(-50%, -50%);
+  }
+}
+
+// Обнуляем шрифт
+
+@mixin clear-font {
+  font-size: 0;
+  line-height: 1;
+}
+
+// Обнуляем списки
+
+@mixin clear-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// Ограничиваем троеточием длинный текст с указанием кол-ва строк ограничения
+
+@mixin text-overflow($line: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+}
+
+// Скрывает элемент со страницы
+
+@mixin hide() {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  font-size: 0;
+  white-space: nowrap;
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(100%);
+}
+
+// Стили для бэкграунд изображения
+@mixin bg-image-styles($size, $position: null) {
+  background-repeat: no-repeat;
+  background-size: $size;
+
+  @if $position {
+    background-position: $position;
+  } @else {
+    background-position: center;
+  }
+}
+
+// Text style (типографика)
+@mixin h1 {
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 49px;
+}
+
+@mixin h2 {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 34px;
+}
+
+@mixin h3 {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+@mixin h4 {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+@mixin text-paragraph {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@mixin text-base {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+@mixin text-paragraph-medium {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@mixin text-additional {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+@mixin text-small {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 22px;
+}
+
+@mixin shadowDefault {
+  box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.07);
+}
+
+// Обнуляем ссылки
+
+@mixin clear-link {
+  text-decoration: none;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+}
+

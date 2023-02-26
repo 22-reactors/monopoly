@@ -1,0 +1,68 @@
+@import '../../styles/mixin';
+@import '../../styles/variables';
+
+.btn {
+  cursor: pointer;
+  border: 1px solid $primary-color;
+  border-radius: 4px;
+  padding: 12px 18px;
+  font: $text-base-font;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: background-color 0.4s;
+  }
+
+  &_primary {
+    background-color: $primary-color;
+    color: $outlined-color;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: $primary-hover-color;
+        border-color: $primary-hover-color;
+      }
+    }
+  }
+
+  &_outlined {
+    background-color: $outlined-color;
+    color: $primary-color;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: $outlined-hover-color;
+      }
+    }
+  }
+
+  &_sm {
+    padding: 6px 14px;
+  }
+  &_md {
+    padding: 12px 18px;
+  }
+  &_lg {
+    padding: 14px 22px;
+  }
+}
+
+.disabled {
+  background-color: $disabled-color;
+  border-color: $disabled-color;
+  cursor: auto;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: $disabled-color;
+      border-color: $disabled-color;
+    }
+  }
+}
+
+.rounded {
+  border-radius: 40px;
+}
+
+.hide {
+  @include hide();
+}

@@ -1,0 +1,92 @@
+@import '../../styles/globals.scss';
+@import '../../styles/mixin.scss';
+
+$animation-time: 0.25s;
+
+.textarea {
+  transition: border-color, color $animation-time;
+  color: $text-base;
+  @include text-base;
+  min-height: 52px;
+  width: 100%;
+  min-width: 0;
+  border: none;
+  border-bottom: 1px solid $text-additional;
+  &::placeholder {
+    color: $text-additional;
+  }
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    color: $primary;
+  }
+}
+
+.container {
+  position: relative;
+  cursor: text;
+}
+
+.containerSolo {
+  @include shadowDefault;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  & .textarea {
+    border-color: transparent;
+  }
+  & .label {
+    display: none;
+  }
+}
+
+.containerError {
+  &:not(.containerSolo) {
+    & .textarea {
+      border-color: $text-error;
+    }
+    & .label,
+    & .label:focus {
+      color: $text-error;
+    }
+  }
+
+  &.containerSolo {
+    border: 1px solid;
+    border-color: $text-error;
+    & .error {
+      left: 0;
+      transform: translateY(2px);
+      top: 100%;
+    }
+    & .label {
+      color: $text-error;
+    }
+  }
+}
+
+.label {
+  transition: all $animation-time;
+  position: absolute;
+  cursor: inherit;
+  left: 0;
+  top: 0;
+  color: $text-additional;
+}
+
+.error {
+  position: absolute;
+  font-size: 12px;
+  white-space: nowrap;
+  color: $text-error;
+}
+
+.container:not(.containerError) .textarea:focus + .label {
+  color: $primary;
+}
+
+.labelFocus {
+  font-size: 12px;
+  line-height: 18px;
+  transform: translateY(-100%);
+}
