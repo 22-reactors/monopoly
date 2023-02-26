@@ -1,41 +1,43 @@
+@import '../../styles/globals.scss';
+@import '../../styles/mixin.scss';
+
 .pageContainer {
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, #3b5e53 0%, #091e20 100%);
+  background: $light-background;
 }
 
 .container {
   display: flex;
-  align-items: center;
   flex-direction: row;
   color: #fff;
 }
 .code {
-  font-size: 36px;
-  line-height: 48px;
+  @include h1;
+  color: $primary;
 }
 
 .divider {
-  background: #fff;
-  width: 1px;
+  background: $primary;
+  width: 2px;
   margin: 0 25px;
-  height: 50px;
+  border-radius: 5px;
+  height: 71px;
 }
 
 .message {
-  font-size: 24px;
-  line-height: 34px;
+  @include h2;
+  color: $primary;
 }
 
 .discription {
-  font-size: 16px;
-  color: #acacac;
+  color: $text-additional;
+  @include text-paragraph;
 }
 
 .button {
-  margin-top: 1rem;
-  padding: 6px 10px;
+  margin-top: 40px;
 }
