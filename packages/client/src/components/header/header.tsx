@@ -21,7 +21,7 @@ export const Header = (props: IHeaderProps) => {
     <header className={classNames(style.header, isDarkTheme && style.dark)}>
       <nav className={style.nav}>
         <Link to={links.root.path} className={style.logoLink}>
-          <Logo />
+          <Logo className={style.logo}/>
         </Link>
         <ul className={style.navList}>
           {navLinks.map(link => (

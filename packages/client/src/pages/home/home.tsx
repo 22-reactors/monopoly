@@ -26,7 +26,7 @@ export const Home = (props: IHomeProps) => {
         <>
           <div className={style.mainContent}>
             <h1 className={style.title}>{title}</h1>
-            <h2 className={style.description}>{description}</h2>
+            <p className={style.description}>{description}</p>
             <Link className={style.link} to={links.game.path}>
               <Button
                 className={style.button}

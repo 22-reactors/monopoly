@@ -26,6 +26,10 @@
   line-height: 0;
 }
 
+.logo {
+  color: $primary
+}
+
 .link {
   @include text-base;
   @include clear-link;
