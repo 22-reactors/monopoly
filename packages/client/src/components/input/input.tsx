@@ -54,7 +54,7 @@ export function Input(props: IInputProps) {
       onFocus={onInputContainerFocus}>
       <input
         ref={inputRef}
-        className={style.input}
+        className={classNames(style.input, style.dark)}
         onChange={onChange}
         type={inputType}
         name={name}

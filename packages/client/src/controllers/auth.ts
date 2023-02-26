@@ -25,11 +25,7 @@ class AuthController {
   async login(data: ILoginData) {
     try {
       const response = await this._api.login(data);
-      if (response === 'OK') {
-        return response;
-      } else {
-        console.log(response.reason);
-      }
+      return response;
     } catch (error) {
       console.log(error);
     }

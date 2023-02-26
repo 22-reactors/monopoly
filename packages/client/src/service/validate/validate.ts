@@ -1,3 +1,20 @@
+enum ErrorMessages {
+  LOGIN = `Логин должен содержать от 3 до 20 символов,
+  латиницей, может содержать цифры, но не состоять из них, 
+  без пробелов, без спецсимволов (допустимы дефис и нижнее подчёркивание)`,
+  PASSWORD = `Некорректный пароль. Пароль должен содержать от 8 до 40 символов, 
+  обязательно хотя бы одна заглавная буква и цифра.`,
+  EMAIL = 'Некорректный email. Допускаются латиница, спецсимволы и цифры.',
+  FIRST_NAME = `Некорректное имя. Первая буква должна быть заглавной, 
+  без пробелов, цифр и спецсимволов (допустим только дефис).`,
+  SECOND_NAME = `Некорректная фамилия. Первая буква должна быть заглавной, 
+  без пробелов, цифр и спецсимволов (допустим только дефис).`,
+  PHONE = `Некорректный формат номера. Телефон должен содержать от 10 до 15 символов, 
+  состоять из цифр, может начинается с плюса.`,
+  MESSAGE = 'Сообщение не должно быть пустым',
+  DISPLAY_NAME = 'Поле не должно быть пустым',
+}
+
 enum InputId {
   LOGIN = 'login',
   OLD_PASSWORD = 'oldPassword',
@@ -53,9 +70,9 @@ class Validate {
   }
 
   isValidField(target: HTMLInputElement): boolean {
-    const { id, value } = target;
+    const { name, value } = target;
 
-    switch (id) {
+    switch (name) {
       case InputId.LOGIN:
         return this.login(value);
       case InputId.OLD_PASSWORD:
@@ -75,6 +92,25 @@ class Validate {
         return this.message(value);
       default:
         return false;
+    }
+  }
+
+  getErrorMessage(name: string) {
+    switch (name) {
+      case InputId.EMAIL:
+       return ErrorMessages.EMAIL;
+      case InputId.LOGIN:
+        return ErrorMessages.LOGIN;
+      case InputId.FIRST_NAME:
+        return ErrorMessages.FIRST_NAME;
+      case InputId.SECOND_NAME:
+        return ErrorMessages.SECOND_NAME;
+      case InputId.PHONE:
+        return ErrorMessages.PHONE;
+      case InputId.PASSWORD:
+        return ErrorMessages.PASSWORD;
+      default:
+        break;
     }
   }
 

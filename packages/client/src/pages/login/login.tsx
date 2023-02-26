@@ -7,6 +7,7 @@ import { links } from '../../utils/const';
 import { IValue } from '../../utils/interfaces';
 import { Input, IInputProps } from '../../components/input/input';
 import { AuthForm, IAuthFormProps } from '../../components/authForm/authForm';
+import { useState } from 'react';
 
 export const loginLoader = authorizedRedirect;
 
@@ -21,28 +22,39 @@ export interface ILoginForm {
 
 const Login = (props: ILoginProps) => {
   const { inputsProps } = props;
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
 
   const inputItems = inputsProps.map((inputProp, i) => {
     return <Input key={i} {...inputProp} />;
   });
 
-  const navigate = useNavigate();
-
   const formAction = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
     const data = getInputData<ILoginForm, ILoginData>(event);
     const response = await AuthController.login(data);
 
     if (response) {
-      navigate(links.game.path);
+      if (response === 'OK') {
+        navigate(links.game.path);
+      } else {
+        setError(response.reason);
+      }
     }
+  };
+
+  const formFocus = () => {
+    setError('');
   };
 
   return (
     <div className={style.bg}>
-        <AuthForm {...props} formAction={formAction}>
-          {inputItems}
-        </AuthForm>
+      <AuthForm
+        {...props}
+        formAction={formAction}
+        errorTitle={error}
+        formFocus={formFocus}>
+        {inputItems}
+      </AuthForm>
     </div>
   );
 };
