@@ -1,4 +1,4 @@
-interface itemWrap {
+interface ItemWrap {
   object: any;
   objectType: string;
 }
@@ -8,7 +8,7 @@ export const localStorageService = () => {
     get(itemName: string): any {
       const item = localStorage.getItem(itemName);
       if (item) {
-        const itemWrap: itemWrap = JSON.parse(item);
+        const itemWrap: ItemWrap = JSON.parse(item);
 
         return itemWrap.objectType === 'string'
           ? itemWrap.object
@@ -28,10 +28,10 @@ export const localStorageService = () => {
   };
 };
 
-const getItemWrap = (item: any): itemWrap => {
+const getItemWrap = (item: any): ItemWrap => {
   const itemType = typeof item;
   item = itemType === 'object' ? JSON.stringify(item) : item;
-  const itemWrap: itemWrap = {
+  const itemWrap: ItemWrap = {
     object: item,
     objectType: itemType,
   };
