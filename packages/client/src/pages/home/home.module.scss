@@ -1,7 +1,6 @@
-@import "../../styles/mixin.scss";
-@import "../../styles/variables.scss";
-@import "../../styles/globals.scss";
-
+@import '../../styles/mixin.scss';
+@import '../../styles/variables.scss';
+@import '../../styles/globals.scss';
 
 .main {
   @include text-base;
@@ -10,8 +9,11 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .mainContent {
-  margin-left: $main-margin;
+  margin: 20px 0 20px auto;
+  min-width: 500px;
+  max-width: 600px;
 }
 
 .title {
@@ -20,9 +22,8 @@
 }
 
 .description {
-   @include h2;
-   width: 600px;
-   margin: 0;
+  @include h2;
+  margin: 0;
 }
 
 .button {
@@ -30,6 +31,7 @@
 }
 
 .cardsImage {
+  max-width: 40vw;
   align-self: flex-start;
 }
 

@@ -214,3 +214,21 @@
   }
 }
 
+// Main container
+
+@mixin container-width {
+  margin: 0 auto;
+  
+  @media screen and (min-width: 768px) {
+    max-width: 620px;
+  }
+  @media screen and (min-width: 992px) {
+    max-width: 800px;
+  }
+  @media screen and (min-width: 1200px) {
+    max-width: 960px;
+  }
+  @media screen and (min-width: 1400px) {
+    max-width: 1110px;
+  }
+}

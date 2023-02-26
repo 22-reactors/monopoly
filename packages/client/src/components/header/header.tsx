@@ -19,26 +19,28 @@ export const Header = (props: IHeaderProps) => {
 
   return (
     <header className={classNames(style.header, isDarkTheme && style.dark)}>
-      <nav className={style.nav}>
-        <Link to={links.root.path} className={style.logoLink}>
-          <Logo className={style.logo}/>
-        </Link>
-        <ul className={style.navList}>
-          {navLinks.map(link => (
-            <li key={link.path} className={style.li}>
-              <Link
-                className={classNames(
-                  style.link,
-                  isDarkTheme && style.darkText
-                )}
-                to={link.path}>
-                {link.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <LoginButtons {...{ logoutText, isDarkTheme }} />
+      <div className={style.container}>
+        <nav className={style.nav}>
+          <Link to={links.root.path} className={style.logoLink}>
+            <Logo className={style.logo} />
+          </Link>
+          <ul className={style.navList}>
+            {navLinks.map(link => (
+              <li key={link.path} className={style.li}>
+                <Link
+                  className={classNames(
+                    style.link,
+                    isDarkTheme && style.darkText
+                  )}
+                  to={link.path}>
+                  {link.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <LoginButtons {...{ logoutText, isDarkTheme }} />
+      </div>
     </header>
   );
 };

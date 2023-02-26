@@ -8,8 +8,12 @@
   box-sizing: border-box;
 }
 
+.container {
+  @include container-width;
+}
+
 .menu {
-  padding: 26px $main-margin;
+  padding: 26px 0;
   border-top: 1px solid rgba(149, 149, 149, 0.2);
   border-bottom: 1px solid rgba(149, 149, 149, 0.2);
 }

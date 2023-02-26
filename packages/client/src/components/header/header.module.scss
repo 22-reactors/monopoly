@@ -1,14 +1,18 @@
 @import '../../styles/mixin';
 @import '../../styles/globals';
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .header {
   width: 100vw;
+}
+
+.container {
   box-sizing: border-box;
-  padding: 10px $main-margin;
+  padding: 10px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @include container-width;
 }
 
 .nav {
@@ -27,7 +31,7 @@
 }
 
 .logo {
-  color: $primary
+  color: $primary;
 }
 
 .link {
