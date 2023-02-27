@@ -23,6 +23,14 @@ export const links = {
     path: '/forum',
     title: 'Форум',
   },
+  forumsection1: {
+    path: '/forum/section/1',
+    title: 'Форум/Раздел1',
+  },
+  forumtopic1: {
+    path: '/forum/section/1/topic/1',
+    title: 'Форум/Раздел1/Тема1',
+  },
   game: {
     path: '/game',
     title: 'Играть',

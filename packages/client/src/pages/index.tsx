@@ -20,10 +20,14 @@ const RootBoundary = () => {
 
   return <ErrorPage />;
 };
+import { ForumSection1 } from './forum/ForumSection/ForumSection1';
+import { ForumTopic1 } from './forum/ForumTopic/ForumTopic1';
 
 export {
   RootBoundary,
   Forum,
+  ForumSection1,
+  ForumTopic1,
   Game,
   gameLoader,
   Home,

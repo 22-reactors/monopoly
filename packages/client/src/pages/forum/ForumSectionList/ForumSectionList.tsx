@@ -1,6 +1,6 @@
 import { type FC } from 'react';
 import { Link } from 'react-router-dom';
-
+import style from '../forum.module.scss';
 //import { Paths } from '../src/pages/forum/constans';
 import { type ForumSectionListProps } from './typings';
 export enum Paths {
@@ -11,17 +11,11 @@ export enum Paths {
 
 export const ForumSectionList: FC<ForumSectionListProps> = ({ sectionList }) => {
   return (
-    <table border={1} className="forum">
-      <thead className="forum__row-header">
-        <tr>
-          <th className="forum__cell-header">Подфорумы</th>
-          <th className="forum__cell-header">Темы</th>
-          <th className="forum__cell-header">Ответы</th>
-        </tr>
-      </thead>
-      <tbody className="forum__body">
+    <table border={1} className={style.forum}>
+    
+      <tbody className={style.forum__body}>
         {sectionList.map(item => (
-          <tr key={item.id} data-testid={item.id} className="forum__item">
+          <tr key={item.id} className="forum__item">
             <td className="forum__first-column">
               <Link to={`${Paths.Section}/${item.id}`}>{item.name}</Link>
             </td>

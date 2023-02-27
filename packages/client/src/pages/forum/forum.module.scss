@@ -1,7 +1,7 @@
 @import '../../styles/globals.scss';
 @import '../../styles/mixin.scss';
 
-.pageContainer {
+.forum__wrapper {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,34 +10,77 @@
   background: $light-background;
 }
 
-.container {
+.forum {
   display: flex;
-  flex-direction: row;
-  color: #fff;
-}
-.code {
-  @include h1;
-  color: $primary;
-}
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 28px;
+  
+  position: absolute;
+  width: 100vh;
+  justify-content: space-between;
+  max-width: 1110px;
+  height: 278px;
+  left: 405px;
+  top: 159px;
 
-.divider {
-  background: $primary;
-  width: 2px;
-  margin: 0 25px;
-  border-radius: 5px;
-  height: 71px;
-}
+  td {
+    padding: 0 20px;
 
-.message {
-  @include h2;
-  color: $primary;
-}
+    @media (max-width: 420px) {
+      padding: 0 5px;
+    }
+  }
 
-.discription {
-  color: $text-additional;
-  @include text-paragraph;
-}
+  &__title {
+    position: absolute;
+    width: 76px;
+    height: 34px;
+    left: 405px;
+    top: 98px;
+    margin: 0;
+/* H2 */
+font-family: 'Manrope';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 34px;
+/* identical to box height, or 142% */
+/* text-base */
+color: #2E2E2E;
+  }
+ 
+  &__row-header {
+    height: 100px;
+    text-align: center;
+    
+  }
 
-.button {
-  margin-top: 40px;
+  &__cell-header {
+    padding: 0 20px;
+
+    &:nth-child(1) {
+      width: 70%;
+      text-align: left;
+    }
+
+    @media (max-width: 600px) {
+      padding: 0 5px;
+      margin: 0 0 60px;
+    }
+  }
+
+  &__item {
+    height: 70px;
+
+    &:nth-child(odd) {
+      background-color: var(--background-color);
+    }
+  }
+
+  &__first-column {
+    font-weight: bold;
+    text-align: left;
+  }
 }

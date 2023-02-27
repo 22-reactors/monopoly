@@ -7,6 +7,8 @@ import RegistrProps from './mocs/registrProps';
 import {
   RootBoundary,
   Forum,
+  ForumSection1,
+  ForumTopic1,
   Game,
   gameLoader,
   Home,
@@ -51,6 +53,20 @@ const router = createBrowserRouter([
         path: links.forum.path,
         element: <Forum />,
       },
+      {
+        path: links.forumsection1.path,
+        element: <ForumSection1 />,
+      },
+      {
+        path: links.forumtopic1.path,
+        element: <ForumTopic1 />,
+      },
+      {
+        path: links.game.path,
+        element: <Game />,
+        loader: gameLoader,
+      },
+      
     ],
   },
   {
