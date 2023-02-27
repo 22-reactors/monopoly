@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { homeProps } from './mocs/homeProps';
 import LoginProps from './mocs/loginProps';
 import RegistrProps from './mocs/registrProps';
 
@@ -16,16 +17,17 @@ import {
   profileLoader,
   Register,
   registerLoader,
-
+  Layout,
 } from './pages/index';
 import { links } from './utils/const';
 
 const router = createBrowserRouter([
   {
     path: links.root.path,
-    element: <Home />,
+    element: <Layout />,
     errorElement: <RootBoundary />,
     children: [
+      { index: true, element: <Home {...homeProps} /> },
       {
         path: links.login.path,
         element: <Login {...LoginProps} />,
@@ -49,12 +51,12 @@ const router = createBrowserRouter([
         path: links.forum.path,
         element: <Forum />,
       },
-      {
-        path: links.game.path,
-        element: <Game />,
-        loader: gameLoader,
-      },
     ],
+  },
+  {
+    path: links.game.path,
+    element: <Game />,
+    loader: gameLoader,
   },
 ]);
 

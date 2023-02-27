@@ -1,0 +1,42 @@
+@import '../../styles/mixin.scss';
+@import '../../styles/variables.scss';
+@import '../../styles/globals.scss';
+
+.main {
+  @include text-base;
+  background: $light-background;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mainContent {
+  margin: 20px 0 20px auto;
+  min-width: 500px;
+  max-width: 600px;
+}
+
+.title {
+  @include text-title;
+  margin: 0 0 6px;
+}
+
+.description {
+  @include h2;
+  margin: 0;
+}
+
+.button {
+  margin: 90px 0 0 35px;
+}
+
+.cardsImage {
+  max-width: 40vw;
+  align-self: flex-start;
+}
+
+.dark {
+  background: none;
+  background-color: $dark-background;
+  color: $dark-theme-white;
+}
