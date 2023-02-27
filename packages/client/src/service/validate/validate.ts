@@ -110,7 +110,7 @@ class Validate {
       case InputId.PASSWORD:
         return ErrorMessages.PASSWORD;
       default:
-        break;
+        return "";
     }
   }
 

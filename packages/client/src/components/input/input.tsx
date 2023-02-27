@@ -11,12 +11,13 @@ export interface IInputProps extends IValidationInputProps {
   label?: string;
   type?: HTMLProps<HTMLInputElement>['type'];
   showPassword?: boolean;
+  isDarkTheme?: boolean;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export function Input(props: IInputProps) {
-  const { type, value, label, onChange, showPassword, onBlur, errorText, name, className } =
+  const { type, value, label, onChange, showPassword, onBlur, errorText, name, className, isDarkTheme } =
     props;
 
   const [labelFocus, setLabelFocus] = useState(!!value);
@@ -54,7 +55,7 @@ export function Input(props: IInputProps) {
       onFocus={onInputContainerFocus}>
       <input
         ref={inputRef}
-        className={classNames(style.input, style.dark)}
+        className={classNames(style.input, isDarkTheme && style.dark)}
         onChange={onChange}
         type={inputType}
         name={name}

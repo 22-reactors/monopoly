@@ -37,6 +37,7 @@ export const AuthForm = (props: IAuthFormProps) => {
   } = props;
   const [inputValues, setInputValues] = useState({} as InputsState);
   const [error, setError] = useState<boolean>(false);
+  const { password, confirmPassword } = inputValues;
 
   useEffect(() => {
     let isValid = true;
@@ -64,24 +65,31 @@ export const AuthForm = (props: IAuthFormProps) => {
   };
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
-    console.log('form submit');
     event.preventDefault();
     let isValid = true;
     const inputs = Object.values(event.target).filter(
       element => element instanceof HTMLInputElement
     ) as HTMLInputElement[];
     const newInputsState: InputsState = {};
-    console.log(inputs);
     inputs.forEach(input => {
       newInputsState[input.name] = { value: input.value, errorText: undefined };
       let errorText: string | undefined;
       if (!validate.isValidField(input)) {
         errorText = validate.getErrorMessage(input.name);
-        newInputsState[input.name].errorText = errorText;
-        isValid = false;
-        console.log(`field ${input.name} not valid`);
+        if (errorText) {
+          newInputsState[input.name].errorText = errorText;
+          isValid = false;
+        }
       }
     });
+    if (
+      password &&
+      confirmPassword &&
+      password.value !== confirmPassword.value
+    ) {
+      newInputsState.confirmPassword.errorText = 'Пароли не совпадают';
+      isValid = false;
+    }
     setInputValues(newInputsState);
     if (isValid) {
       formAction(event);

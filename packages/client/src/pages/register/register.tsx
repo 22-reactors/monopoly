@@ -3,11 +3,12 @@ import './register.module.scss';
 import loginStyle from '../login/login.module.scss';
 import { authorizedRedirect, getInputData } from '../../utils/helpers';
 import { ISignUpData } from '../../api/auth/interfaces';
-import AuthController from '../../controllers/auth';
+import AuthController, { isSignUpGoodResponse } from '../../controllers/auth';
 import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
 import { IValue } from '../../utils/interfaces';
 import { IInputProps, Input } from '../../components/input/input';
+import { useState } from 'react';
 
 export const registerLoader = authorizedRedirect;
 
@@ -26,6 +27,7 @@ export interface ISignUpForm {
 
 const Register = (props: IRegistrProps) => {
   const { inputsProps } = props;
+  const [error, setError] = useState('');
 
   const inputItems = inputsProps.map((inputProp, i) => {
     return <Input key={i} {...inputProp} />;
@@ -34,19 +36,30 @@ const Register = (props: IRegistrProps) => {
   const navigate = useNavigate();
 
   const formAction = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
     const data = getInputData<ISignUpForm, ISignUpData>(event);
     const response = await AuthController.signup(data);
     if (response) {
-      navigate(links.game.path);
+      if (isSignUpGoodResponse(response)) {
+        navigate(links.game.path);
+      } else {
+        setError(response.reason);
+      }
     }
+  };
+
+  const formFocus = () => {
+    setError('');
   };
 
   return (
     <div className={loginStyle.bg}>
-        <AuthForm {...props} formAction={formAction}>
-          {inputItems}
-        </AuthForm>
+      <AuthForm
+        {...props}
+        formAction={formAction}
+        errorTitle={error}
+        formFocus={formFocus}>
+        {inputItems}
+      </AuthForm>
     </div>
   );
 };
