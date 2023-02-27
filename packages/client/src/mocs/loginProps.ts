@@ -6,7 +6,7 @@ const LoginProps: ILoginProps = {
   linkTitle: 'У вас нет аккаунта?',
   linkName: 'Регистрация',
   linkPath: links.signup.path,
-  isDarkTheme: true,
+  isDarkTheme: false,
   linkAction: () => {
     console.log('router to registr page');
   },

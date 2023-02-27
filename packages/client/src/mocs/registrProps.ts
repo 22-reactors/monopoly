@@ -2,7 +2,7 @@ import { IRegistrProps } from '../pages/register/register';
 
 const RegistrProps: IRegistrProps = {
   title: 'Регистрация игрока',
-  linkTitle: 'войти',
+  validation: true,
   linkAction: () => {
     console.log('router to login page');
   },

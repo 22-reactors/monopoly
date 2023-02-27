@@ -15,6 +15,7 @@ export interface IAuthFormProps {
   linkName?: string;
   linkPath?: string;
   errorTitle?: string;
+  validation?: boolean;
   linkAction: React.MouseEventHandler<HTMLAnchorElement>;
   formAction: React.FormEventHandler<HTMLFormElement>;
   formFocus?: React.FormEventHandler<HTMLFormElement>;
@@ -34,6 +35,7 @@ export const AuthForm = (props: IAuthFormProps) => {
     linkTitle,
     linkName,
     errorTitle,
+    validation
   } = props;
   const [inputValues, setInputValues] = useState({} as InputsState);
   const [error, setError] = useState<boolean>(false);
@@ -56,7 +58,7 @@ export const AuthForm = (props: IAuthFormProps) => {
   const inputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
     let errorText: string | undefined;
-    if (!validate.isValidField(event.target)) {
+    if (validation && !validate.isValidField(event.target)) {
       errorText = validate.getErrorMessage(name);
     }
     setInputValues(prevState => {
@@ -74,7 +76,7 @@ export const AuthForm = (props: IAuthFormProps) => {
     inputs.forEach(input => {
       newInputsState[input.name] = { value: input.value, errorText: undefined };
       let errorText: string | undefined;
-      if (!validate.isValidField(input)) {
+      if (validation && !validate.isValidField(input)) {
         errorText = validate.getErrorMessage(input.name);
         if (errorText) {
           newInputsState[input.name].errorText = errorText;
