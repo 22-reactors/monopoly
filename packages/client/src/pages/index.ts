@@ -8,6 +8,7 @@ import { loginLoader } from './login/login';
 import { ProfilePage, profileLoader } from './profile/profile';
 import Register from './register';
 import { registerLoader } from './register/register';
+import { Layout } from './layout/layout';
 
 export {
   RootBoundary,
@@ -22,4 +23,5 @@ export {
   profileLoader,
   Register,
   registerLoader,
+  Layout,
 };

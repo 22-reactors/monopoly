@@ -16,6 +16,5 @@ export const footerProps: IFooterProps = {
   принадлежат правообладателям и размещены на правах рекламы.`,
     `Собственность 22 когорты, команда “Реакторы”, все права защищены`,
   ],
-  isAuthorized: false,
   isDarkTheme: false,
 };
