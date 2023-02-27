@@ -1,14 +1,18 @@
 @import '../../styles/mixin';
 @import '../../styles/globals';
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .header {
   width: 100vw;
+}
+
+.container {
   box-sizing: border-box;
-  padding: 10px $main-margin;
+  padding: 10px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @include container-width;
 }
 
 .nav {
@@ -26,6 +30,10 @@
   line-height: 0;
 }
 
+.logo {
+  color: $primary;
+}
+
 .link {
   @include text-base;
   @include clear-link;
@@ -38,10 +46,14 @@
 
 .dark {
   background: none;
-  background-color: $dark-ux-background;
+  background-color: $dark-background;
   border-bottom: 1px solid rgba(149, 149, 149, 0.2);
 }
 
 .darkText {
-  color: $dark-white;
+  color: $dark-theme-white;
+}
+
+.lightText {
+  color: $primary-color;
 }
