@@ -22,12 +22,16 @@ const RootBoundary = () => {
 };
 import { ForumSection1 } from './forum/ForumSection/ForumSection1';
 import { ForumTopic1 } from './forum/ForumTopic/ForumTopic1';
+import { ThemeMessage } from '../components/themeMessage/themeMessage';
+import { ThemeCard } from '../components/themeCard/themeCard';
 
 export {
   RootBoundary,
   Forum,
   ForumSection1,
   ForumTopic1,
+  ThemeMessage,
+  ThemeCard,
   Game,
   gameLoader,
   Home,

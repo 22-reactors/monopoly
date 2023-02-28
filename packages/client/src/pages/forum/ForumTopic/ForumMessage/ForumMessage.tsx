@@ -1,4 +1,4 @@
-import './ForumMessage.css';
+//import './ForumMessage.scss';
 
 import { type FC } from 'react';
 
@@ -8,7 +8,7 @@ export const ForumMessage: FC<ForumMessageProps> = ({ message }) => {
   const { id, username, content, } = message;
  
   return (
-    <div id={`forum-message-${id}`} className="forum-message" data-testid="forum-message">
+    <div id={`forum-message-${id}`} className="forum-message" >
       <div className="forum-message__avatar">
         <img alt={`${username} user avatar`} className="forum-message__avatar-image"  />
       </div>

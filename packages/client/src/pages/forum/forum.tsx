@@ -1,3 +1,5 @@
+// Главная страница форума. На ней расположен список разделов из компонента ForumSectionList
+
 import '../../styles/globals.scss';
 import style from './forum.module.scss';
 import { type FC } from 'react';
@@ -5,7 +7,7 @@ import { type FC } from 'react';
 import { ExampleForum as sectionList } from './ExampleData';
 import { ForumSectionList } from './ForumSectionList';
 import { type ForumProps } from './typing';
-import { Paginator } from '../../components/paginator/paginator';
+
 
 
 export const Forum: FC<ForumProps> = () => {
@@ -19,7 +21,7 @@ export const Forum: FC<ForumProps> = () => {
         </h1>
         <ForumSectionList sectionList={sectionList} />
         
-        <Paginator pagesCount={4} />
+
       </section>
       
     </>

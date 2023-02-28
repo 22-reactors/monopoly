@@ -1,12 +1,18 @@
+//Страница темы- сообщения существующие и оставить свое
+
 //import style from './ForumTopic.scss';
 import style from '../forum.module.scss';
 
 import { type FC } from 'react';
 //import { Button, ButtonSizes, ButtonVariation } from '../../../components/button/button';
 
-import { ExampleTopic as topicList } from '../ExampleData';
-import { ForumMessage } from './ForumMessage';
+//import { ExampleTopic as topicList } from '../ExampleData';
+//import { ForumMessage } from './ForumMessage';
 import { type ForumTopicProps } from './typings';
+import { ThemeMessage } from '../../../components/themeMessage/themeMessage';
+import { ThemeMessageProps } from '../../../mocs/ForumProps';
+import { Paginator } from '../../../components/paginator/paginator';
+
 
 
 export const ForumTopic1: FC<ForumTopicProps> = () => {
@@ -14,19 +20,26 @@ export const ForumTopic1: FC<ForumTopicProps> = () => {
 
   return (
     <>
-      
       <section className={style.pageContainer}>
-        <h1 className="forum-topic__title">Топик {topicId}</h1>
+        <h1 className={style.forum__title}>Топик {topicId}</h1>
        
-        <div className="forum-topic__container">
-          <div className="forum-topic__messages">
+        <div className={style.topic__container}>
+
+
+          {/* Это реализация варианта с составными айди
+            <div className={style.forum__body}>
             {topicList.map(row => (
               <ForumMessage key={row.id} message={row} />
             ))}
+          </div> */}
+          <div className={style.forum__body}>
+            
+              <ThemeMessage {...ThemeMessageProps} />
+              <ThemeMessage {...ThemeMessageProps} />
           </div>
-          
-        
-          
+          <div className={style.paginator}> 
+            <Paginator pagesCount={4} />
+            </div>
         </div>
       </section>
     </>

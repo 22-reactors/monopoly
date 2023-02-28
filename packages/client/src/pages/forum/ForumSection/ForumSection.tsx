@@ -1,3 +1,5 @@
+//Раздел форума. включает список тем и кол-во сообщений
+
 import { type FC } from 'react';
 import { useParams } from 'react-router-dom';
 import style from '../forum.module.scss';

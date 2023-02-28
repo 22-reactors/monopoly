@@ -1,14 +1,18 @@
 import { useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { homeProps } from './mocs/homeProps';
+import { ThemeCard } from './components/themeCard/themeCard';
 import LoginProps from './mocs/loginProps';
 import RegistrProps from './mocs/registrProps';
+import {ThemeCardProps, ThemeMessageProps} from './mocs/ForumProps'; 
+
 
 import {
   RootBoundary,
   Forum,
   ForumSection1,
   ForumTopic1,
+  ThemeMessage,
   Game,
   gameLoader,
   Home,
@@ -60,6 +64,14 @@ const router = createBrowserRouter([
       {
         path: links.forumtopic1.path,
         element: <ForumTopic1 />,
+      },
+      {
+        path: links.CreateTopic.path,
+        element: <ThemeCard {...ThemeCardProps}/>,
+      },
+      {
+        path: links.ThemeMessage.path,
+        element: <ThemeMessage {...ThemeMessageProps} />,
       },
       {
         path: links.game.path,

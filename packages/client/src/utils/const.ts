@@ -31,6 +31,14 @@ export const links = {
     path: '/forum/section/1/topic/1',
     title: 'Форум/Раздел1/Тема1',
   },
+  CreateTopic:{
+    path: '/forum/CreateTopic',
+    title: 'Создать тему',
+  },
+  ThemeMessage:{
+    path: '/forum/ThemeMessage',
+    title: 'Отправить',
+  },
   game: {
     path: '/game',
     title: 'Играть',
