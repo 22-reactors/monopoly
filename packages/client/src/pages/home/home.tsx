@@ -5,6 +5,7 @@ import {
   ButtonSizes,
   ButtonVariation,
 } from '../../components/button/button';
+import { GameSetup } from '../../components/gameSetup/gameSetup';
 import { useUser } from '../../hooks/useUser';
 import { links } from '../../utils/const';
 import style from './home.module.scss';
@@ -44,7 +45,7 @@ export const Home = (props: IHomeProps) => {
           />
         </>
       )}
-      {user && <></>}
+      {user && <GameSetup />}
     </main>
   );
 };
