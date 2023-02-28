@@ -1,39 +1,48 @@
-import style from './errorPage.module.scss'
+import { Link } from 'react-router-dom';
+import { Button, ButtonVariation } from '../../components/button/button';
+import style from './errorPage.module.scss';
 
 interface Props {
-  code: number
-  message?: string
-  discription?: string
+  code?: number;
+  message?: string;
+  discription?: string;
 }
 
 interface CodeText {
-  message: string
-  discription?: string
+  message: string;
+  discription?: string;
 }
 
 function resolveCodeText(code: Props['code']): CodeText {
+  if (!code) {
+    return {
+      message: 'Непредвиденная ошибка',
+      discription: 'Попробуйте обновить страницу',
+    };
+  }
   if (code === 404) {
     return {
       message: 'Мы не можем найти страницу',
       discription: 'Проверьте указанный вами адрес',
-    }
+    };
   } else if (code >= 500) {
     return {
       message: 'Произошла непредвиденная ошибка',
       discription: 'Попробуйте обновить страницу',
-    }
+    };
   }
   return {
     message: 'Непредвиденная ошибка',
     discription: 'Попробуйте обновить страницу',
-  }
+  };
 }
 
-function ErrorPage({ code, message, discription }: Props) {
-  let codeText: CodeText | undefined
+function ErrorPage(props: Props) {
+  const { code, message, discription } = props;
+  let codeText: CodeText | undefined;
 
   if (!message) {
-    codeText = resolveCodeText(code)
+    codeText = resolveCodeText(code);
   }
 
   return (
@@ -48,9 +57,16 @@ function ErrorPage({ code, message, discription }: Props) {
           </p>
         </div>
       </div>
-      <button className={style.button}>Вернуться</button>
+      <Link to={'/'}>
+        <Button
+          variation={ButtonVariation.PRIMARY}
+          rounded
+          className={style.button}>
+          На главную
+        </Button>
+      </Link>
     </main>
-  )
+  );
 }
 
-export default ErrorPage
+export default ErrorPage;
