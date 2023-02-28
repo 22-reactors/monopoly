@@ -12,9 +12,8 @@ export function Leaderboard() {
 
   const getResults = useCallback(async () => {
     const leaderboard: LeaderboardResults[] = await LeaderboardController.getAll() ?? [];
-    const totalCountPage = Math.ceil(leaderboard.length / LIMIT_ITEMS_ON_PAGE);
     const sortUsersResults = sortResult(leaderboard);
-    const usersResults = getSeparateArray<LeaderboardResults>(sortUsersResults, totalCountPage, LIMIT_ITEMS_ON_PAGE);
+    const usersResults = getSeparateArray<LeaderboardResults>(sortUsersResults, LIMIT_ITEMS_ON_PAGE);
 
     setResults(usersResults);
   }, []);

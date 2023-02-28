@@ -60,12 +60,23 @@ export const getInputData = <T, D>(evt: React.FormEvent<HTMLFormElement>) => {
 };
 
 // Разбивает массив на двумерный массив с указанным кол-вом возможной длины
-export function getSeparateArray<T>(arr: T[], count: number, limit: number): T[][] {
+/**
+ * @param {array} arr - Массив, который нужно разбить
+ * @param {number} limit - Кол-во айтемов из которых состоят внутренние массивы.
+ * @return {[array]} Двумерный массив
+ *
+ * @example
+ *
+ * getSeparateArray([1, 2, 3, 4, 5, 6], 2);
+ * Вернет [[1, 2], [3, 4], [5, 6]];
+ */
+export function getSeparateArray<T>(arr: T[], limit: number): T[][] {
   const result = [];
+  const countArr = Math.ceil(arr.length / limit);
   let current = 0;
   let next = limit;
 
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < countArr; i++) {
     const separateResults = arr.slice(current, next);
 
     if (separateResults.length === 0) {

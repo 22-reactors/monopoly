@@ -5,7 +5,7 @@ export type Leaderboard = [
   {
     data: {
       results: LeaderboardResults[],
-      reactors: ''
+      reactors: string
     }
   }
 ];
