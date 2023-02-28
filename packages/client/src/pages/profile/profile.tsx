@@ -51,6 +51,23 @@ const FieldMap: Record<string, FieldInfo> = {
   },
 };
 
+const PASSWORD_FIELDS = [
+  {
+    id: 'oldPassword',
+    name: 'oldPassword',
+    type: 'password',
+    label: 'Старый пароль',
+    value: '',
+  },
+  {
+    id: 'newPassword',
+    name: 'newPassword',
+    type: 'password',
+    label: 'Новый пароль',
+    value: '',
+  },
+];
+
 export const profileLoader = unAuthorizedRedirect;
 
 export function ProfilePage(): JSX.Element {
@@ -93,7 +110,9 @@ function connectorUserFields(userInfo?: IUserData): FieldInfo[] {
     return [];
   }
 
-  return Object.entries(userInfo)
+  const filteredFields = Object.entries(userInfo)
     .map(([key, value]) => ({...FieldMap[key], value}))
-    .filter((field) => FieldMap[field.name]);
+    .filter((field) => FieldMap[field.name])
+
+  return [...filteredFields, ...PASSWORD_FIELDS];
 }

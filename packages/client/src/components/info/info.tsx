@@ -3,7 +3,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { Button, ButtonVariation } from '../button/button';
 import { IValue } from '../../utils/interfaces';
 import UserController from '../../controllers/user';
-import { IProfileData } from '../../api/user/interfaces';
+import { IPasswordData, IProfileData } from '../../api/user/interfaces'
 import { getInputData } from '../../utils/helpers';
 import Input from '../input/input';
 import { useNavigate } from 'react-router-dom';
@@ -49,9 +49,10 @@ export function Info(props: IInfo) {
   const onSubmitForm = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    const data = getInputData<IProfileForm, IProfileData>(evt);
+    const {oldPassword, newPassword, ...userInfo} = getInputData<IProfileForm, IProfileData & IPasswordData>(evt);
 
-    void await UserController.changeProfile(data);
+    void await UserController.changeProfile(userInfo);
+    void await UserController.changePassword({oldPassword, newPassword});
     void navigate(-1);
   };
 
