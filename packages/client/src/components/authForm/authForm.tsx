@@ -34,19 +34,15 @@ export const AuthForm = (props: PropsWithChildren<IAuthFormProps>) => {
     linkTitle,
     linkName,
     errorTitle,
-    validation
+    validation,
   } = props;
   const [inputValues, setInputValues] = useState({} as InputsState);
   const [error, setError] = useState<boolean>(false);
   const { password, confirmPassword } = inputValues;
 
   useEffect(() => {
-    let isValid = true;
-    Object.entries(inputValues).forEach(([key]) => {
-      if (inputValues[key].errorText) {
-        isValid = false;
-      }
-    });
+    const isValid = Object.values(inputValues).every(value => !value.errorText);
+
     if (isValid) {
       setError(false);
     } else {
