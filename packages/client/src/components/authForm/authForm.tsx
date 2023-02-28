@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, PropsWithChildren, useEffect, useState } from 'react';
 import style from './authForm.module.scss';
 import classNames from 'classnames';
 import { Button, ButtonVariation } from '../button/button';
@@ -8,7 +8,6 @@ import validate from '../../service/validate/validate';
 
 export interface IAuthFormProps {
   submitBtnName: string;
-  children: JSX.Element | JSX.Element[];
   title: string;
   isDarkTheme?: boolean;
   linkTitle?: string;
@@ -23,7 +22,7 @@ export interface IAuthFormProps {
 
 type InputsState = Record<string, { value: string; errorText?: string }>;
 
-export const AuthForm = (props: IAuthFormProps) => {
+export const AuthForm = (props: PropsWithChildren<IAuthFormProps>) => {
   const {
     isDarkTheme,
     submitBtnName,

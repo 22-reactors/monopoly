@@ -8,7 +8,8 @@
   border-radius: 10px;
   @include shadowDefault;
   text-align: center;
-  box-sizing: border-box
+  box-sizing: border-box;
+  margin: 10px 0;
 }
 
 .title {
