@@ -5,6 +5,7 @@ import {
   ButtonSizes,
   ButtonVariation,
 } from '../../components/button/button';
+import { GameSetup } from '../../components/gameSetup/gameSetup';
 import { useAppSelector } from '../../reduxstore/hooks';
 import { userSelector } from '../../reduxstore/user/user.selector';
 import { links } from '../../utils/const';
@@ -45,7 +46,7 @@ export const Home = (props: IHomeProps) => {
           />
         </>
       )}
-      {user && <></>}
+      {user && <GameSetup />}
     </main>
   );
 };
