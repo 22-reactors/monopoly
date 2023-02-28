@@ -15,12 +15,10 @@ const RootBoundary = () => {
   const error = useRouteError();
 
   if (isRouteErrorResponse(error)) {
-    return (
-      <ErrorPage code={error.status} />
-    );
+    return <ErrorPage code={error.status} />;
   }
 
-  throw error;
+  return <ErrorPage />;
 };
 
 export {

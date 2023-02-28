@@ -3,7 +3,7 @@ import { Button, ButtonVariation } from '../../components/button/button';
 import style from './errorPage.module.scss';
 
 interface Props {
-  code: number;
+  code?: number;
   message?: string;
   discription?: string;
 }
@@ -14,6 +14,12 @@ interface CodeText {
 }
 
 function resolveCodeText(code: Props['code']): CodeText {
+  if (!code) {
+    return {
+      message: 'Непредвиденная ошибка',
+      discription: 'Попробуйте обновить страницу',
+    };
+  }
   if (code === 404) {
     return {
       message: 'Мы не можем найти страницу',
