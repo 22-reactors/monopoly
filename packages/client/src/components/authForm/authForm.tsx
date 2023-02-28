@@ -43,11 +43,7 @@ export const AuthForm = (props: PropsWithChildren<IAuthFormProps>) => {
   useEffect(() => {
     const isValid = Object.values(inputValues).every(value => !value.errorText);
 
-    if (isValid) {
-      setError(false);
-    } else {
-      setError(true);
-    }
+    setError(!isValid);
   }, [inputValues]);
 
   const inputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
