@@ -23,7 +23,7 @@ export interface ILoginForm {
 const Login = (props: ILoginProps) => {
   const { inputsProps } = props;
   const navigate = useNavigate();
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string | undefined>(undefined);
 
   const inputItems = inputsProps.map((inputProp, i) => {
     return <Input key={i} {...inputProp} />;
@@ -43,7 +43,7 @@ const Login = (props: ILoginProps) => {
   };
 
   const formFocus = () => {
-    setError('');
+    setError(undefined);
   };
 
   return (

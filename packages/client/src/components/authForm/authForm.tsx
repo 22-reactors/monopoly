@@ -129,7 +129,7 @@ export const AuthForm = (props: PropsWithChildren<IAuthFormProps>) => {
         <Button
           type="submit"
           variation={ButtonVariation.PRIMARY}
-          disabled={errorText ? true : false}
+          disabled={Boolean(errorText)}
           className={style.button}>
           {submitBtnName}
         </Button>

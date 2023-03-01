@@ -27,7 +27,7 @@ export interface ISignUpForm {
 
 const Register = (props: IRegistrProps) => {
   const { inputsProps } = props;
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string | undefined>();
 
   const inputItems = inputsProps.map((inputProp, i) => {
     return <Input key={i} {...inputProp} />;
@@ -48,7 +48,7 @@ const Register = (props: IRegistrProps) => {
   };
 
   const formFocus = () => {
-    setError('');
+    setError(undefined);
   };
 
   return (
