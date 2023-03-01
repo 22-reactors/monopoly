@@ -1,10 +1,18 @@
-import React, { ChangeEvent, PropsWithChildren, useEffect, useState } from 'react';
+import React, {
+  ChangeEvent,
+  PropsWithChildren,
+  useEffect,
+  useState,
+} from 'react';
 import style from './authForm.module.scss';
 import classNames from 'classnames';
 import { Button, ButtonVariation } from '../button/button';
 import { Link } from 'react-router-dom';
 import { getInputName } from '../../utils/helpers';
-import validate from '../../service/validate/validate';
+import validate, {
+  InputId,
+  mapErrorMessage,
+} from '../../service/validate/validate';
 
 export interface IAuthFormProps {
   submitBtnName: string;
@@ -38,7 +46,8 @@ export const AuthForm = (props: PropsWithChildren<IAuthFormProps>) => {
   } = props;
   const [inputValues, setInputValues] = useState({} as InputsState);
   const [error, setError] = useState<boolean>(false);
-  const { password, confirmPassword } = inputValues;
+  const password = inputValues[InputId.PASSWORD];
+  const confirmPassword = inputValues[InputId.CONFIRM_PASSWORD];
 
   useEffect(() => {
     const isValid = Object.values(inputValues).every(value => !value.errorText);
@@ -50,7 +59,7 @@ export const AuthForm = (props: PropsWithChildren<IAuthFormProps>) => {
     const { value, name } = event.target;
     let errorText: string | undefined;
     if (validation && !validate.isValidField(event.target)) {
-      errorText = validate.getErrorMessage(name);
+      errorText = mapErrorMessage[name as keyof typeof mapErrorMessage];
     }
     setInputValues(prevState => {
       return { ...prevState, [name]: { value, errorText } };
@@ -68,7 +77,7 @@ export const AuthForm = (props: PropsWithChildren<IAuthFormProps>) => {
       newInputsState[input.name] = { value: input.value, errorText: undefined };
       let errorText: string | undefined;
       if (validation && !validate.isValidField(input)) {
-        errorText = validate.getErrorMessage(input.name);
+        errorText = mapErrorMessage[input.name as keyof typeof mapErrorMessage];
         if (errorText) {
           newInputsState[input.name].errorText = errorText;
           isValid = false;
@@ -105,11 +114,9 @@ export const AuthForm = (props: PropsWithChildren<IAuthFormProps>) => {
     return child;
   });
 
-  const errorText = errorTitle
-    ? errorTitle
-    : error
-    ? 'Ошибка. Проверьте правильность заполнения полей.'
-    : undefined;
+  const defaultErrorText =
+    error && 'Ошибка. Проверьте правильность заполнения полей.';
+  const errorText = errorTitle ?? defaultErrorText;
 
   return (
     <div className={classNames(style.container, isDarkTheme && style.dark)}>

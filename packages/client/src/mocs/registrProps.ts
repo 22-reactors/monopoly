@@ -1,4 +1,5 @@
 import { IRegistrProps } from '../pages/register/register';
+import { InputId } from '../service/validate/validate';
 
 const RegistrProps: IRegistrProps = {
   title: 'Регистрация игрока',
@@ -12,43 +13,43 @@ const RegistrProps: IRegistrProps = {
   },
   inputsProps: [
     {
-      name: 'email',
+      name: InputId.EMAIL,
       label: 'Почта',
       type: 'text',
       value: '',
     },
     {
-      name: 'login',
+      name: InputId.LOGIN,
       label: 'Логин',
       type: 'text',
       value: '',
     },
     {
-      name: 'first_name',
+      name: InputId.FIRST_NAME,
       label: 'Имя',
       type: 'text',
       value: '',
     },
     {
-      name: 'second_name',
+      name: InputId.SECOND_NAME,
       label: 'Фамилия',
       type: 'text',
       value: '',
     },
     {
-      name: 'phone',
+      name: InputId.PHONE,
       label: 'Телефон',
       type: 'text',
       value: '',
     },
     {
-      name: 'password',
+      name: InputId.PASSWORD,
       label: 'Пароль',
       type: 'password',
       value: '',
     },
     {
-      name: 'confirmPassword',
+      name: InputId.CONFIRM_PASSWORD,
       label: 'Пароль ещё раз',
       type: 'password',
       value: '',

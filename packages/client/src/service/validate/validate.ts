@@ -15,12 +15,13 @@ enum ErrorMessages {
   DISPLAY_NAME = 'Поле не должно быть пустым',
 }
 
-enum InputId {
+export const enum InputId {
   LOGIN = 'login',
   OLD_PASSWORD = 'oldPassword',
   NEW_PASSWORD = 'newPassword',
   NEW_PASSWORD_AGAIN = 'newPassword_again',
   PASSWORD = 'password',
+  CONFIRM_PASSWORD = 'confirmPassword',
   EMAIL = 'email',
   FIRST_NAME = 'first_name',
   SECOND_NAME = 'second_name',
@@ -29,43 +30,45 @@ enum InputId {
   DISPLAY_NAME = 'display_name',
 }
 
+export type ValidatedInputs = Exclude<
+  InputId,
+  InputId.OLD_PASSWORD | InputId.CONFIRM_PASSWORD | InputId.NEW_PASSWORD_AGAIN
+>;
+
+export const mapErrorMessage: Record<ValidatedInputs, string> = {
+  [InputId.EMAIL]: ErrorMessages.EMAIL,
+  [InputId.LOGIN]: ErrorMessages.LOGIN,
+  [InputId.FIRST_NAME]: ErrorMessages.FIRST_NAME,
+  [InputId.SECOND_NAME]: ErrorMessages.SECOND_NAME,
+  [InputId.PHONE]: ErrorMessages.PHONE,
+  [InputId.PASSWORD]: ErrorMessages.PASSWORD,
+  [InputId.NEW_PASSWORD]: ErrorMessages.PASSWORD,
+  [InputId.MESSAGE]: ErrorMessages.MESSAGE,
+  [InputId.DISPLAY_NAME]: ErrorMessages.DISPLAY_NAME,
+};
+
 class Validate {
-  name (value: string): boolean {
-    return this.isValid(
-      /^([А-ЯA-Z]{1}[-а-яa-z]{1,20})$/,
-      value
-    );
+  name(value: string): boolean {
+    return this.isValid(/^([А-ЯA-Z]{1}[-а-яa-z]{1,20})$/, value);
   }
 
-  login (value: string): boolean {
-    return this.isValid(
-      [/[0-9a-z-_]{3,20}/i, /[a-z-_]/i],
-      value
-    );
+  login(value: string): boolean {
+    return this.isValid([/[0-9a-z-_]{3,20}/i, /[a-z-_]/i], value);
   }
 
-  email (value: string): boolean {
-    return this.isValid(
-      /[0-9a-z-_.]+@[a-z0-9-]+.[a-z]{2,3}/i,
-      value
-    );
+  email(value: string): boolean {
+    return this.isValid(/[0-9a-z-_.]+@[a-z0-9-]+.[a-z]{2,3}/i, value);
   }
 
-  password (value: string): boolean {
-    return this.isValid(
-      [/[0-9a-z-_]{8,40}/i, /[A-Z]+/, /\d+/],
-      value
-    );
+  password(value: string): boolean {
+    return this.isValid([/[0-9a-z-_]{8,40}/i, /[A-Z]+/, /\d+/], value);
   }
 
-  phone (value: string): boolean {
-    return this.isValid(
-      /^\+?(\d{10,15})$/,
-      value
-    );
+  phone(value: string): boolean {
+    return this.isValid(/^\+?(\d{10,15})$/, value);
   }
 
-  message (value: string): boolean {
+  message(value: string): boolean {
     return value !== '';
   }
 
@@ -95,28 +98,9 @@ class Validate {
     }
   }
 
-  getErrorMessage(name: string) {
-    switch (name) {
-      case InputId.EMAIL:
-       return ErrorMessages.EMAIL;
-      case InputId.LOGIN:
-        return ErrorMessages.LOGIN;
-      case InputId.FIRST_NAME:
-        return ErrorMessages.FIRST_NAME;
-      case InputId.SECOND_NAME:
-        return ErrorMessages.SECOND_NAME;
-      case InputId.PHONE:
-        return ErrorMessages.PHONE;
-      case InputId.PASSWORD:
-        return ErrorMessages.PASSWORD;
-      default:
-        return "";
-    }
-  }
-
-  private isValid (regex: RegExp | RegExp[], value: string): boolean {
+  private isValid(regex: RegExp | RegExp[], value: string): boolean {
     if (Array.isArray(regex)) {
-      return regex.every((rule) => rule.test(value));
+      return regex.every(rule => rule.test(value));
     }
 
     return regex.test(value);

@@ -1,4 +1,5 @@
 import { ILoginProps } from "../pages/login/login";
+import { InputId } from "../service/validate/validate";
 import { links } from "../utils/const";
 
 const LoginProps: ILoginProps = {
@@ -16,13 +17,13 @@ const LoginProps: ILoginProps = {
   submitBtnName: 'Войти',
   inputsProps: [
     {
-      name: 'login',
+      name: InputId.LOGIN,
       label: 'Логин',
       type: 'text',
       value: '',
     },
     {
-      name: 'password',
+      name: InputId.PASSWORD,
       label: 'Пароль',
       type: 'password',
       value: '',
