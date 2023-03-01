@@ -4,6 +4,7 @@ import { InputId } from '../service/validate/validate';
 const RegistrProps: IRegistrProps = {
   title: 'Регистрация игрока',
   validation: true,
+  isDarkTheme: false,
   linkAction: () => {
     console.log('router to login page');
   },
