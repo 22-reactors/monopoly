@@ -1,7 +1,3 @@
-import InputFieldSet from '../../components/fieldset/inputfieldset';
-import { IInputFieldSet } from '../../components/fieldset/inputfieldset/InputFieldSet';
-import LoginAndRegistrForm from '../../components/form/loginandregistrform';
-import ThemeToggler from '../../components/themetoggler';
 import style from './login.module.scss';
 import { authorizedRedirect, getInputData } from '../../utils/helpers';
 import { ILoginData } from '../../api/auth/interfaces';
@@ -9,15 +5,14 @@ import AuthController from '../../controllers/auth';
 import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
 import { IValue } from '../../utils/interfaces';
+import { Input, IInputProps } from '../../components/input/input';
+import { AuthForm, IAuthFormProps } from '../../components/authForm/authForm';
+import { useState } from 'react';
 
 export const loginLoader = authorizedRedirect;
 
-export interface ILoginProps {
-  submitBtnName: string;
-  headerName: string;
-  linkTitle: string;
-  linkAction: React.MouseEventHandler<HTMLAnchorElement>;
-  inputsProps: IInputFieldSet[];
+export interface ILoginProps extends Omit<IAuthFormProps, 'children'> {
+  inputsProps: IInputProps[];
 }
 
 export interface ILoginForm {
@@ -27,30 +22,39 @@ export interface ILoginForm {
 
 const Login = (props: ILoginProps) => {
   const { inputsProps } = props;
+  const navigate = useNavigate();
+  const [error, setError] = useState<string | undefined>(undefined);
 
   const inputItems = inputsProps.map((inputProp, i) => {
-    return <InputFieldSet key={i} {...inputProp} />;
+    return <Input key={i} {...inputProp} />;
   });
 
-  const navigate = useNavigate();
-
   const formAction = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
     const data = getInputData<ILoginForm, ILoginData>(event);
     const response = await AuthController.login(data);
 
     if (response) {
-      navigate(links.game.path);
+      if (response === 'OK') {
+        navigate(links.game.path);
+      } else {
+        setError(response.reason);
+      }
     }
+  };
+
+  const formFocus = () => {
+    setError(undefined);
   };
 
   return (
     <div className={style.bg}>
-      <ThemeToggler>
-        <LoginAndRegistrForm {...props} formAction={formAction}>
-          {inputItems}
-        </LoginAndRegistrForm>
-      </ThemeToggler>
+      <AuthForm
+        {...props}
+        formAction={formAction}
+        errorTitle={error}
+        formFocus={formFocus}>
+        {inputItems}
+      </AuthForm>
     </div>
   );
 };

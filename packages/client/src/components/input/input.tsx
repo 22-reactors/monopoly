@@ -4,17 +4,20 @@ import EyeIcon from '../../icons/EyeIcon';
 import { IValidationInputProps } from '../../types/validation';
 import style from './input.module.scss';
 
-interface Props extends IValidationInputProps {
+export interface IInputProps extends IValidationInputProps {
   value: HTMLProps<HTMLInputElement>['value'];
+  name: string;
+  className?: string;
   label?: string;
   type?: HTMLProps<HTMLInputElement>['type'];
   showPassword?: boolean;
+  isDarkTheme?: boolean;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-function Input(props: Props) {
-  const { type, value, label, onChange, showPassword, onBlur, errorText } =
+export function Input(props: IInputProps) {
+  const { type, value, label, onChange, showPassword, onBlur, errorText, name, className, isDarkTheme } =
     props;
 
   const [labelFocus, setLabelFocus] = useState(!!value);
@@ -48,13 +51,14 @@ function Input(props: Props) {
   return (
     <div
       tabIndex={0}
-      className={classNames(style.container, isValid && style.errorContainer)}
+      className={classNames(style.container, isValid && style.errorContainer, className)}
       onFocus={onInputContainerFocus}>
       <input
         ref={inputRef}
-        className={style.input}
+        className={classNames(style.input, isDarkTheme && style.dark)}
         onChange={onChange}
         type={inputType}
+        name={name}
         onBlur={onInputBlur}
         value={value}
       />
@@ -69,5 +73,3 @@ function Input(props: Props) {
     </div>
   );
 }
-
-export default Input;

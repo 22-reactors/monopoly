@@ -8,7 +8,7 @@ import {
   UserResponse,
 } from '../api/auth/interfaces';
 
-const isSignUpGoodResponse = (
+export const isSignUpGoodResponse = (
   object: SignUpResponse
 ): object is ISignUpGoodResponse => 'id' in object;
 
@@ -25,11 +25,7 @@ class AuthController {
   async login(data: ILoginData) {
     try {
       const response = await this._api.login(data);
-      if (response === 'OK') {
-        return response;
-      } else {
-        console.log(response.reason);
-      }
+      return response;
     } catch (error) {
       console.log(error);
     }
@@ -38,12 +34,7 @@ class AuthController {
   async signup(data: ISignUpData) {
     try {
       const response = await this._api.signUp(data);
-
-      if (isSignUpGoodResponse(response)) {
-        return response;
-      } else {
-        console.log(response.reason);
-      }
+      return response;
     } catch (error) {
       console.log(error);
     }

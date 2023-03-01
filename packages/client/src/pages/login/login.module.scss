@@ -1,13 +1,8 @@
-body {
-  overflow: hidden;
-}
-
-h2 {
-  margin: 0;
-}
-
 .bg {
-  height: 100%;
+  min-height: 100vh;
   background-image: url('monopoly-board-theme.png');
   background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

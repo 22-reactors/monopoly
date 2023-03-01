@@ -1,0 +1,62 @@
+@import '../../styles/globals.scss';
+@import '../../styles/mixin.scss';
+
+.container {
+  width: 360px;
+  padding: 40px;
+  background-color: white;
+  border-radius: 10px;
+  @include shadowDefault;
+  text-align: center;
+  box-sizing: border-box;
+  margin: 10px 0;
+}
+
+.title {
+  @include h2;
+  color: $text-base;
+  margin-bottom: 36px;
+}
+
+.error {
+  @include text-base;
+  color: $text-error;
+  text-align: left;
+  margin: 36px 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+
+  & + .input {
+    margin-top: 32px;
+  }
+}
+
+.linkTitle {
+  @include text-base;
+  color: $text-additional;
+  margin: 32px 0 0;
+}
+
+.link {
+  @include clear-link;
+  @include text-paragraph-medium;
+  color: $primary;
+}
+
+.button {
+  width: 100%;
+  margin-top: 36px;
+}
+
+.dark {
+  background-color: $dark-ux-background;
+  color: $dark-theme-white;
+}

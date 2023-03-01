@@ -1,47 +1,58 @@
 import { IRegistrProps } from '../pages/register/register';
+import { InputId } from '../service/validate/validate';
 
 const RegistrProps: IRegistrProps = {
-  headerName: 'Регистрация игрока',
-  linkTitle: 'войти',
+  title: 'Регистрация игрока',
+  validation: true,
   linkAction: () => {
     console.log('router to login page');
   },
   submitBtnName: 'Зарегистрироваться',
+  formAction: () => {
+    console.log('router to submit');
+  },
   inputsProps: [
     {
-      fieldId: 'email',
-      fieldName: 'Почта',
-      inputType: 'text',
+      name: InputId.EMAIL,
+      label: 'Почта',
+      type: 'text',
+      value: '',
     },
     {
-      fieldId: 'login',
-      fieldName: 'Логин',
-      inputType: 'text',
+      name: InputId.LOGIN,
+      label: 'Логин',
+      type: 'text',
+      value: '',
     },
     {
-      fieldId: 'first_name',
-      fieldName: 'Имя',
-      inputType: 'text',
+      name: InputId.FIRST_NAME,
+      label: 'Имя',
+      type: 'text',
+      value: '',
     },
     {
-      fieldId: 'second_name',
-      fieldName: 'Фамилия',
-      inputType: 'text',
+      name: InputId.SECOND_NAME,
+      label: 'Фамилия',
+      type: 'text',
+      value: '',
     },
     {
-      fieldId: 'phone',
-      fieldName: 'Телефон',
-      inputType: 'text',
+      name: InputId.PHONE,
+      label: 'Телефон',
+      type: 'text',
+      value: '',
     },
     {
-      fieldId: 'password',
-      fieldName: 'Пароль',
-      inputType: 'password',
+      name: InputId.PASSWORD,
+      label: 'Пароль',
+      type: 'password',
+      value: '',
     },
     {
-      fieldId: 'confirmPassword',
-      fieldName: 'Пароль ещё раз',
-      inputType: 'password',
+      name: InputId.CONFIRM_PASSWORD,
+      label: 'Пароль ещё раз',
+      type: 'password',
+      value: '',
     },
   ],
 };

@@ -1,4 +1,5 @@
 import { redirect } from 'react-router-dom';
+import { Input } from '../components/input/input';
 import AuthController from '../controllers/auth';
 import { links } from './const';
 
@@ -90,3 +91,9 @@ export function getSeparateArray<T>(arr: T[], limit: number): T[][] {
 
   return result;
 }
+
+export const getInputName = (element: JSX.Element) => {
+  if (element.type === Input) {
+    return element.props.name as string;
+  }
+};

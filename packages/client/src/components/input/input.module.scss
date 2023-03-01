@@ -36,6 +36,7 @@ $animation-time: 0.25s;
   &:focus {
     border-color: $primary;
   }
+  background-color: transparent;
 }
 
 .label {
@@ -54,12 +55,9 @@ $animation-time: 0.25s;
 }
 
 .error {
-  position: absolute;
-  left: 0;
-  top: 100%;
   color: $text-error;
   font-size: 12px;
-  white-space: nowrap;
+  text-align: left;
 }
 
 .eyeIcon {
@@ -73,4 +71,8 @@ $animation-time: 0.25s;
   &:hover {
     opacity: 0.5;
   }
+}
+
+.dark {
+  color: $text-additional;
 }
