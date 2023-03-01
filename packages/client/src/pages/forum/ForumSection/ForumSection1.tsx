@@ -1,9 +1,7 @@
 //Компонент карточка темы форума
 
 import { type FC } from 'react';
-
 import style from '../forum.module.scss';
-
 //import { ExampleSection as topicList } from '../ExampleData';
 //import { ForumTopicList } from './ForumTopicList';
 import { type ForumSectionProps } from './typings';

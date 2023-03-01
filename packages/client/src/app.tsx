@@ -3,8 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { homeProps } from './mocs/homeProps';
 import { ThemeCard } from './components/themeCard/themeCard';
 import LoginProps from './mocs/loginProps';
-import RegistrProps from './mocs/registrProps';
-import {ThemeCardProps, ThemeMessageProps} from './mocs/ForumProps'; 
+import RegistrProps from './mocs/registrProps'; 
 
 
 import {
@@ -12,7 +11,7 @@ import {
   Forum,
   ForumSection1,
   ForumTopic1,
-  ThemeMessage,
+  CreateTopic,
   Game,
   gameLoader,
   Home,
@@ -67,11 +66,7 @@ const router = createBrowserRouter([
       },
       {
         path: links.CreateTopic.path,
-        element: <ThemeCard {...ThemeCardProps}/>,
-      },
-      {
-        path: links.ThemeMessage.path,
-        element: <ThemeMessage {...ThemeMessageProps} />,
+        element: <CreateTopic/>,
       },
       {
         path: links.game.path,

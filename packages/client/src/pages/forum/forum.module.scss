@@ -1,5 +1,6 @@
 @import '../../styles/globals.scss';
 @import '../../styles/mixin.scss';
+@import "./src/styles/variables";
 
 .forum__wrapper {
   height: 100vh;
@@ -38,11 +39,14 @@
   //margin-top: 27px;
   border-spacing: 0;
   //padding: 40px;
+  align-content: stretch;
+  //display: flex;
+  //flex-grow: 1;
   }
 
   &__title {
     position: absolute;
-    width: 176px;
+    width: 476px;
     height: 34px;
     left: 405px;
     top: 98px;
@@ -93,7 +97,7 @@ margin: auto;
 
 .forum__name {
   width: 40%;
-  font-family: 'Manrope';
+font-family: 'Manrope';
 font-style: normal;
 font-weight: 500;
 font-size: 24px;
@@ -136,7 +140,23 @@ color: #2E2E2E;
   color: #fff;
   max-width: 1100px;
   margin-right: 10px;
+  justify-content: space-between;
+  width: 100%;
 }
+
+.topic__name {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 34px;
+  margin: auto;
+  /* identical to box height, or 142% */
+  /* text-base */
+  color: #2E2E2E;
+  }
+
+
 .code {
   @include h1;
   color: $primary;
@@ -222,3 +242,35 @@ color: #2E2E2E;
     width: 100%;
   }
 }
+
+.newmessage {
+  @include relative();
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding-top: 20px;
+  border-radius: 10px;
+  //box-sizing: border-box;
+  margin-bottom: 20px;
+  width: 100%;
+  //flex-grow: 1;
+
+  
+  //flex-direction: row;
+  justify-content: space-between;
+  //max-width: 1110px;
+  //flex-wrap: wrap;
+  &__text {
+    background-color: $outlined-color;
+    display: flex;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    font: 400 16px/24px "Manrope", sans-serif;
+    font-weight: 500;
+    color: #7a757d;
+  }
+}
+
