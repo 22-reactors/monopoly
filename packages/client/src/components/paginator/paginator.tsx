@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 
 export interface IPaginator {
   pagesCount: number;
+  className?: string;
   isDarkMode?: boolean;
   pageHandler?(pageNumber: number): void;
 }
@@ -22,7 +23,10 @@ export function Paginator(props: IPaginator) {
   const [page, setPage] = useState<number>(firstPage ?? 1);
 
   return (
-    <div className={classNames(style.container, props.isDarkMode && style.isDarkMode)}>
+    <div className={classNames(
+      style.container,
+      props.className,
+      props.isDarkMode && style.isDarkMode)}>
       <a
         href='#'
         className={classNames(
