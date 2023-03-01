@@ -1,4 +1,6 @@
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
+import { links } from '../../../utils/const';
 import { Button, ButtonVariation } from '../../button/button';
 import { IConfig } from '../gameSetup';
 import style from './players.module.scss';
@@ -9,21 +11,15 @@ interface IChipProps {
 }
 
 interface IPlayersProps {
-  players: IConfig[]
+  players: IConfig[];
 }
 
-export enum COLORS {
+export const enum Colors {
   RED = 'red',
   GREEN = 'green',
   PINK = 'pink',
   GREY = 'grey',
 }
-
-/* const players = [
-  { name: 'Alex', color: COLORS.GREEN },
-  { name: 'John', color: COLORS.RED },
-  { name: 'Frank', color: COLORS.PINK },
-]; */
 
 export const Players = (props: IPlayersProps) => {
   const { players } = props;
@@ -39,12 +35,14 @@ export const Players = (props: IPlayersProps) => {
               <Chip name={name} color={color} />
             ))}
           </div>
-          <Button
-            className={style.startButton}
-            variation={ButtonVariation.PRIMARY}
-            rounded>
-            Начать игру
-          </Button>
+          <Link to={links.game.path}>
+            <Button
+              className={style.startButton}
+              variation={ButtonVariation.PRIMARY}
+              rounded>
+              Начать игру
+            </Button>
+          </Link>
         </div>
       </div>
     </>

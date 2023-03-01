@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import { useState } from 'react';
 import { Button, ButtonVariation } from '../button/button';
-import Input from '../input/input';
+import { Input } from '../input/input';
 import Select from '../select/select';
 import { IOption } from '../select/selectOption';
 import style from './gameSetup.module.scss';
-import { COLORS, Players } from './players/players';
+import { Colors, Players } from './players/players';
 
 enum Config {
   NAME = 'name',
@@ -13,21 +13,28 @@ enum Config {
   COLOR = 'color',
 }
 
-export interface IConfig {
-  [Config.NAME]: string;
-  [Config.TYPE]: PlayerTypes;
-  [Config.COLOR]: COLORS;
-}
-
 enum PlayerTypes {
   BOT = 'Бот',
   HUMAN = 'Живой human',
 }
 
+const ColorLabels = {
+  [Colors.RED]: 'Красный',
+  [Colors.GREEN]: 'Зеленый',
+  [Colors.PINK]: 'Фиолетовый',
+  [Colors.GREY]: 'Серый',
+};
+
+export interface IConfig {
+  [Config.NAME]: string;
+  [Config.TYPE]: PlayerTypes;
+  [Config.COLOR]: typeof ColorLabels[keyof typeof ColorLabels];
+}
+
 const initialConfig = {
   [Config.NAME]: '',
   [Config.TYPE]: PlayerTypes.BOT,
-  [Config.COLOR]: COLORS.GREY,
+  [Config.COLOR]: ColorLabels.grey,
 };
 
 export interface IGameProps {
@@ -40,7 +47,7 @@ export const GameSetup = (props: IGameProps) => {
   const [players, setPlayers] = useState<IConfig[]>([]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setConfig(prevState => ({ ...prevState, name: event.target.name }));
+    setConfig(prevState => ({ ...prevState, name: event.target.value }));
   };
 
   const addPlayer = () => {
@@ -48,14 +55,14 @@ export const GameSetup = (props: IGameProps) => {
   };
 
   const handleSelectChange = (option: IOption) => {
-    setConfig(prevState => ({ ...prevState, [option.label]: option.value }));
+    setConfig(prevState => ({ ...prevState, [option.value]: option.label }));
   };
 
   const mapOptions = (
     options: Record<string, string>,
-    label: keyof IConfig
+    value: keyof IConfig
   ): IOption[] =>
-    Object.values(options).map(value => {
+    Object.values(options).map(label => {
       return { value, label };
     });
 
@@ -68,13 +75,18 @@ export const GameSetup = (props: IGameProps) => {
           options={mapOptions(PlayerTypes, Config.TYPE)}
           onChange={handleSelectChange}
         />
-        <Input label="Имя игрока" onChange={handleInputChange} value={config.name} />
+        <Input
+          name={Config.NAME}
+          label="Имя игрока"
+          onChange={handleInputChange}
+          value={config.name}
+        />
         <Select
           label="Цвет игрока"
-          options={mapOptions(COLORS, Config.COLOR)}
+          options={mapOptions(ColorLabels, Config.COLOR)}
           onChange={handleSelectChange}
         />
-        {players.length > maxPlayers && (
+        {players.length < maxPlayers &&  (
           <Button variation={ButtonVariation.OUTLINED} onClick={addPlayer}>
             Добавить
           </Button>
