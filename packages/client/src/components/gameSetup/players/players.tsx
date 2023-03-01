@@ -12,7 +12,7 @@ interface IPlayersProps {
   players: IConfig[]
 }
 
-export const enum COLORS {
+export enum COLORS {
   RED = 'red',
   GREEN = 'green',
   PINK = 'pink',

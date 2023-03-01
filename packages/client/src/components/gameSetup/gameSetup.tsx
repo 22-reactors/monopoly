@@ -7,29 +7,39 @@ import { IOption } from '../select/selectOption';
 import style from './gameSetup.module.scss';
 import { COLORS, Players } from './players/players';
 
-export interface IConfig {
-  name: string;
-  type: IPlayerTypes;
-  color: COLORS;
+enum Config {
+  NAME = 'name',
+  TYPE = 'type',
+  COLOR = 'color',
 }
 
-enum IPlayerTypes {
+export interface IConfig {
+  [Config.NAME]: string;
+  [Config.TYPE]: PlayerTypes;
+  [Config.COLOR]: COLORS;
+}
+
+enum PlayerTypes {
   BOT = 'Бот',
   HUMAN = 'Живой human',
 }
 
 const initialConfig = {
-  name: '',
-  type: IPlayerTypes.BOT,
-  color: COLORS.GREY,
+  [Config.NAME]: '',
+  [Config.TYPE]: PlayerTypes.BOT,
+  [Config.COLOR]: COLORS.GREY,
 };
 
-export const GameSetup = () => {
+export interface IGameProps {
+  maxPlayers: number;
+}
+
+export const GameSetup = (props: IGameProps) => {
+  const { maxPlayers } = props;
   const [config, setConfig] = useState<IConfig>(initialConfig);
   const [players, setPlayers] = useState<IConfig[]>([]);
-  const count = players.length;
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setConfig(prevState => ({ ...prevState, name: event.target.name }));
   };
 
@@ -38,21 +48,33 @@ export const GameSetup = () => {
   };
 
   const handleSelectChange = (option: IOption) => {
-/*     let configKey: keyof IConfig;
-    switch (option) {
-      case "":
-    } */
     setConfig(prevState => ({ ...prevState, [option.label]: option.value }));
   };
+
+  const mapOptions = (
+    options: Record<string, string>,
+    label: keyof IConfig
+  ): IOption[] =>
+    Object.values(options).map(value => {
+      return { value, label };
+    });
 
   return (
     <div className={style.container}>
       <Players players={players} />
       <div className={style.selection}>
-        <Select label="Тип игрока" onChange={handleSelectChange}/>
-        <Input label="Имя игрока" onChange={handleChange} value={config.name} />
-        <Select label="Цвет игрока" />
-        {players.length > 4 && (
+        <Select
+          label="Тип игрока"
+          options={mapOptions(PlayerTypes, Config.TYPE)}
+          onChange={handleSelectChange}
+        />
+        <Input label="Имя игрока" onChange={handleInputChange} value={config.name} />
+        <Select
+          label="Цвет игрока"
+          options={mapOptions(COLORS, Config.COLOR)}
+          onChange={handleSelectChange}
+        />
+        {players.length > maxPlayers && (
           <Button variation={ButtonVariation.OUTLINED} onClick={addPlayer}>
             Добавить
           </Button>

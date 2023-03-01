@@ -45,7 +45,7 @@ export const Home = (props: IHomeProps) => {
           />
         </>
       )}
-      {user && <GameSetup />}
+      {user && <GameSetup maxPlayers={4}/>}
     </main>
   );
 };
