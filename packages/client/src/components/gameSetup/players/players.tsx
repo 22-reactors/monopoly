@@ -31,8 +31,8 @@ export const Players = (props: IPlayersProps) => {
         <p className={style.info}>Максимум 4 игрока</p>
         <div className={style.players}>
           <div className={style.chips}>
-            {players.map(({ name, color }) => (
-              <Chip name={name} color={color} />
+            {players.map(({ name, color }, index) => (
+              <Chip name={name} color={color} key={index}/>
             ))}
           </div>
           <Link to={links.game.path}>

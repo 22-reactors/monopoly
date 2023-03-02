@@ -5,11 +5,16 @@ import SelectOption, { IOption } from './selectOption';
 import { IValidationInputProps } from '../../types/validation';
 import DropdownIcon from '../../assets/icons/DropdownIcon';
 
+export interface ISelectChangeData extends IOption {
+  name: string;
+}
+
 interface Props extends IValidationInputProps {
   label?: string;
   value?: IOption | undefined;
+  name: string;
   options?: IOption[];
-  onChange?: (option: IOption) => void;
+  onChange?: (data: ISelectChangeData) => void;
 }
 
 const defaultOption: IOption = {
@@ -18,7 +23,7 @@ const defaultOption: IOption = {
 };
 
 function Select(props: Props) {
-  const { label, value, onChange, options, errorText } = props;
+  const { name, label, value, onChange, options, errorText } = props;
 
   const [labelFocus, setLabelFocus] = useState(!!value);
   const [isOpen, setIsOpen] = useState(false);
@@ -50,7 +55,7 @@ function Select(props: Props) {
 
   const onOptionSelectClick = (option: IOption) => {
     if (onChange) {
-      onChange(option);
+      onChange({ ...option, name });
     }
     setSelectedOption(option);
   };

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { Button, ButtonVariation } from '../button/button';
 import { Input } from '../input/input';
-import Select from '../select/select';
+import Select, { ISelectChangeData } from '../select/select';
 import { IOption } from '../select/selectOption';
 import style from './gameSetup.module.scss';
 import { Colors, Players } from './players/players';
@@ -14,9 +14,26 @@ enum Config {
 }
 
 enum PlayerTypes {
-  BOT = 'Бот',
-  HUMAN = 'Живой human',
+  BOT = 'bot',
+  HUMAN = 'human',
 }
+
+export interface IConfig {
+  [Config.NAME]: string;
+  [Config.TYPE]: PlayerTypes | '';
+  [Config.COLOR]: typeof ColorLabels[keyof typeof ColorLabels] | '';
+}
+
+export interface IInputErrors {
+  [Config.NAME]: string | undefined;
+  [Config.TYPE]: string | undefined;
+  [Config.COLOR]: string | undefined;
+}
+
+const PlayerTypesLabels = {
+  [PlayerTypes.BOT]: 'Бот',
+  [PlayerTypes.HUMAN]: 'Живой Human',
+};
 
 const ColorLabels = {
   [Colors.RED]: 'Красный',
@@ -25,16 +42,22 @@ const ColorLabels = {
   [Colors.GREY]: 'Серый',
 };
 
-export interface IConfig {
-  [Config.NAME]: string;
-  [Config.TYPE]: PlayerTypes;
-  [Config.COLOR]: typeof ColorLabels[keyof typeof ColorLabels];
-}
+const ErrorText = {
+  [Config.NAME]: 'Имя не указано',
+  [Config.TYPE]: 'Тип не указан',
+  [Config.COLOR]: 'Цвет не указан',
+};
 
-const initialConfig = {
+const initialConfig: IConfig = {
   [Config.NAME]: '',
-  [Config.TYPE]: PlayerTypes.BOT,
-  [Config.COLOR]: ColorLabels.grey,
+  [Config.TYPE]: '',
+  [Config.COLOR]: '',
+};
+
+const initialInputErrors: IInputErrors = {
+  [Config.NAME]: undefined,
+  [Config.TYPE]: undefined,
+  [Config.COLOR]: undefined,
 };
 
 export interface IGameProps {
@@ -45,24 +68,32 @@ export const GameSetup = (props: IGameProps) => {
   const { maxPlayers } = props;
   const [config, setConfig] = useState<IConfig>(initialConfig);
   const [players, setPlayers] = useState<IConfig[]>([]);
+  const [inputErrors, setInputErrors] =
+    useState<IInputErrors>(initialInputErrors);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setConfig(prevState => ({ ...prevState, name: event.target.value }));
   };
 
+  const handleSelectChange = (data: ISelectChangeData) => {
+    setConfig(prevState => ({ ...prevState, [data.name]: data.value }));
+  };
+
   const addPlayer = () => {
-    setPlayers(prevState => [...prevState, config]);
+    let isValid = true;
+    Object.entries(config).forEach(([key, value]) => {
+      if (value === '') {
+        isValid = false;
+        setInputErrors(prevState => ({ ...prevState, [key]: '' }));
+      }
+    });
+    if (isValid) {
+      setPlayers(prevState => [...prevState, config]);
+    }
   };
 
-  const handleSelectChange = (option: IOption) => {
-    setConfig(prevState => ({ ...prevState, [option.value]: option.label }));
-  };
-
-  const mapOptions = (
-    options: Record<string, string>,
-    value: keyof IConfig
-  ): IOption[] =>
-    Object.values(options).map(label => {
+  const mapOptions = (options: Record<string, string>): IOption[] =>
+    Object.entries(options).map(([value, label]) => {
       return { value, label };
     });
 
@@ -71,8 +102,9 @@ export const GameSetup = (props: IGameProps) => {
       <Players players={players} />
       <div className={style.selection}>
         <Select
+          name={Config.TYPE}
           label="Тип игрока"
-          options={mapOptions(PlayerTypes, Config.TYPE)}
+          options={mapOptions(PlayerTypesLabels)}
           onChange={handleSelectChange}
         />
         <Input
@@ -82,11 +114,12 @@ export const GameSetup = (props: IGameProps) => {
           value={config.name}
         />
         <Select
+          name={Config.COLOR}
           label="Цвет игрока"
-          options={mapOptions(ColorLabels, Config.COLOR)}
+          options={mapOptions(ColorLabels)}
           onChange={handleSelectChange}
         />
-        {players.length < maxPlayers &&  (
+        {players.length < maxPlayers && (
           <Button variation={ButtonVariation.OUTLINED} onClick={addPlayer}>
             Добавить
           </Button>
