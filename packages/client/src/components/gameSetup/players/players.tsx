@@ -12,27 +12,20 @@ interface IChipProps {
 
 interface IPlayersProps {
   players: IConfig[];
-}
-
-export const enum Colors {
-  RED = 'red',
-  GREEN = 'green',
-  PINK = 'pink',
-  GREY = 'grey',
+  maxPlayers: number;
 }
 
 export const Players = (props: IPlayersProps) => {
-  const { players } = props;
+  const { players, maxPlayers } = props;
 
   return (
     <>
-      <h2 className={style.title}></h2>
       <div className={style.playersContainer}>
-        <p className={style.info}>Максимум 4 игрока</p>
+        <p className={style.info}>{`Максимум ${maxPlayers} игрока`}</p>
         <div className={style.players}>
-          <div className={style.chips}>
+          <div>
             {players.map(({ name, color }, index) => (
-              <Chip name={name} color={color} key={index}/>
+              <Chip name={name} color={color} key={index} />
             ))}
           </div>
           <Link to={links.game.path}>
