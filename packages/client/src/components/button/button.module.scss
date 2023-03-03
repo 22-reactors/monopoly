@@ -7,6 +7,7 @@
   border-radius: 4px;
   padding: 12px 18px;
   font: $text-base-font;
+  white-space: nowrap;
 
   @media (prefers-reduced-motion: no-preference) {
     transition: background-color 0.4s;
