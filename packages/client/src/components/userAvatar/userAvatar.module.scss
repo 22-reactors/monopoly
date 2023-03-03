@@ -1,4 +1,4 @@
-@import "./src/styles/variables";
+@import "./src/styles/globals";
 
 .wrapper {
   display: flex;
@@ -14,12 +14,12 @@
 }
 
 .name {
-  font: $text-base-font;
-  color: $primary-color;
+  font: $text-base;
+  color: $primary;
 }
 
 .isDark {
   .name {
-    color: $outlined-color
+    color: $text-white
   }
 }
