@@ -88,6 +88,7 @@ export const GameSetup = (props: IGameProps) => {
                 onChange={handleSelectChange}
                 errorText={inputErrors[Config.TYPE]}
                 value={selectOptions[Config.TYPE]}
+      
               />
             </div>
             <Input

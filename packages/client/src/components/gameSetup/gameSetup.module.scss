@@ -8,6 +8,7 @@
 .container {
   min-height: 60vh;
   @include container-width;
+  margin-bottom: 185px;
 }
 
 .title {
@@ -21,7 +22,7 @@
   margin-top: 37px;
   padding: 40px;
   display: flex;
-
+  justify-content: space-between;
   background-color: white;
   border-radius: 10px;
   @include shadowDefault;
@@ -31,9 +32,7 @@
 .inputs {
   display: flex;
   gap: 40px;
-
-  & * {
-    align-self: center;
-    max-width: 224px;
-  }
+  align-items: center;
+  margin-right: 40px;
+  min-width: 400px;
 }
