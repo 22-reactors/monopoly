@@ -1,8 +1,12 @@
-.bg {
-  min-height: 100vh;
-  background-image: url('monopoly-board-theme.png');
-  background-size: cover;
+@import "../../styles/globals.scss";
+
+.wrapper {
+  min-height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.dark {
+  background-color: $dark-background;
 }

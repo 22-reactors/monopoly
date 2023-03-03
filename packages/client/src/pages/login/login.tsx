@@ -8,6 +8,7 @@ import { IValue } from '../../utils/interfaces';
 import { Input, IInputProps } from '../../components/input/input';
 import { AuthForm, IAuthFormProps } from '../../components/authForm/authForm';
 import { useState } from 'react';
+import classNames from 'classnames';
 
 export const loginLoader = authorizedRedirect;
 
@@ -20,8 +21,8 @@ export interface ILoginForm {
   password: IValue;
 }
 
-const Login = (props: ILoginProps) => {
-  const { inputsProps } = props;
+export const Login = (props: ILoginProps) => {
+  const { inputsProps, isDarkTheme } = props;
   const navigate = useNavigate();
   const [error, setError] = useState<string | undefined>(undefined);
 
@@ -47,7 +48,7 @@ const Login = (props: ILoginProps) => {
   };
 
   return (
-    <div className={style.bg}>
+    <div className={classNames(style.wrapper, isDarkTheme && style.dark)}>
       <AuthForm
         {...props}
         formAction={formAction}
@@ -58,5 +59,3 @@ const Login = (props: ILoginProps) => {
     </div>
   );
 };
-
-export default Login;

@@ -1,6 +1,5 @@
 import { AuthForm, IAuthFormProps } from '../../components/authForm/authForm';
-import './register.module.scss';
-import loginStyle from '../login/login.module.scss';
+import style from '../login/login.module.scss';
 import { authorizedRedirect, getInputData } from '../../utils/helpers';
 import { ISignUpData } from '../../api/auth/interfaces';
 import AuthController, { isSignUpGoodResponse } from '../../controllers/auth';
@@ -9,6 +8,7 @@ import { links } from '../../utils/const';
 import { IValue } from '../../utils/interfaces';
 import { IInputProps, Input } from '../../components/input/input';
 import { useState } from 'react';
+import classNames from 'classnames';
 
 export const registerLoader = authorizedRedirect;
 
@@ -25,8 +25,8 @@ export interface ISignUpForm {
   phone: IValue;
 }
 
-const Register = (props: IRegistrProps) => {
-  const { inputsProps } = props;
+export const Register = (props: IRegistrProps) => {
+  const { inputsProps, isDarkTheme } = props;
   const [error, setError] = useState<string | undefined>();
 
   const inputItems = inputsProps.map((inputProp, i) => {
@@ -52,7 +52,7 @@ const Register = (props: IRegistrProps) => {
   };
 
   return (
-    <div className={loginStyle.bg}>
+    <div className={classNames(style.wrapper, isDarkTheme && style.dark)}>
       <AuthForm
         {...props}
         formAction={formAction}
@@ -63,5 +63,3 @@ const Register = (props: IRegistrProps) => {
     </div>
   );
 };
-
-export default Register;
