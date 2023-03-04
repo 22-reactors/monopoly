@@ -1,10 +1,18 @@
-import classNames from 'classnames';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../reduxstore/hooks';
+import { playersNumberSelector } from '../../reduxstore/players/players.selector';
+import { addPlayerAction } from '../../reduxstore/players/playersSlice';
 import { Button, ButtonVariation } from '../button/button';
 import { Input } from '../input/input';
 import Select, { ISelectChangeData } from '../select/select';
 import { IOption } from '../select/selectOption';
-import { ColorLabels, Config, PlayerTypes, PlayerTypesLabels } from './const';
+import {
+  ColorLabels,
+  Config,
+  ErrorText,
+  PlayerTypes,
+  PlayerTypesLabels,
+} from './const';
 import style from './gameSetup.module.scss';
 import { Players } from './players/players';
 
@@ -38,10 +46,25 @@ const initialInputErrors: IInputErrors = {
 export const GameSetup = (props: IGameProps) => {
   const { maxPlayers } = props;
   const [config, setConfig] = useState<IConfig>(initialConfig);
-  const [players, setPlayers] = useState<IConfig[]>([]);
   const [inputErrors, setInputErrors] =
     useState<IInputErrors>(initialInputErrors);
-  const [selectOptions, setSelectOptions] = useState<Record<string, IOption>>({});
+  const [selectOptions, setSelectOptions] = useState<Record<string, IOption>>(
+    {}
+  );
+
+  const playersNumber = useAppSelector(playersNumberSelector);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    Object.entries(config).forEach(([key, value]) => {
+      if (value) {
+        setInputErrors(prevState => ({
+          ...prevState,
+          [key]: '',
+        }));
+      }
+    });
+  }, [config]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setConfig(prevState => ({ ...prevState, name: event.target.value }));
@@ -60,11 +83,14 @@ export const GameSetup = (props: IGameProps) => {
     Object.entries(config).forEach(([key, value]) => {
       if (value === '') {
         isValid = false;
-        setInputErrors(prevState => ({ ...prevState, [key]: '' }));
+        setInputErrors(prevState => ({
+          ...prevState,
+          [key]: ErrorText[key as keyof IConfig],
+        }));
       }
     });
     if (isValid) {
-      setPlayers(prevState => [...prevState, config]);
+      dispatch(addPlayerAction(config));
     }
   };
 
@@ -77,26 +103,25 @@ export const GameSetup = (props: IGameProps) => {
     <div className={style.wrapper}>
       <div className={style.container}>
         <h2 className={style.title}>Создание игры</h2>
-        <Players players={players} maxPlayers={maxPlayers} />
+        <Players maxPlayers={maxPlayers} />
         <div className={style.configContainer}>
           <div className={style.inputs}>
-            <div>
-              <Select
-                name={Config.TYPE}
-                label="Тип игрока"
-                options={mapOptions(PlayerTypesLabels)}
-                onChange={handleSelectChange}
-                errorText={inputErrors[Config.TYPE]}
-                value={selectOptions[Config.TYPE]}
-      
-              />
-            </div>
+            <Select
+              name={Config.TYPE}
+              label="Тип игрока"
+              options={mapOptions(PlayerTypesLabels)}
+              onChange={handleSelectChange}
+              errorText={inputErrors[Config.TYPE]}
+              value={selectOptions[Config.TYPE]}
+            />
+
             <Input
               name={Config.NAME}
               label="Имя игрока"
               onChange={handleInputChange}
               value={config.name}
               errorText={inputErrors[Config.NAME]}
+              errorAbsolutePosition
             />
             <Select
               name={Config.COLOR}
@@ -105,14 +130,13 @@ export const GameSetup = (props: IGameProps) => {
               onChange={handleSelectChange}
               errorText={inputErrors[Config.COLOR]}
               value={selectOptions[Config.COLOR]}
-
             />
           </div>
           <Button
             variation={ButtonVariation.OUTLINED}
             onClick={addPlayer}
             rounded
-            disabled={players.length >= maxPlayers}>
+            disabled={playersNumber >= maxPlayers}>
             Добавить
           </Button>
         </div>

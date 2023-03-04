@@ -1,7 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
+import playersReducer from './players/playersSlice';
 
 //здесь будут редьюсеры нашего приложения
 const appReducer = {
+  players: playersReducer
 };
 
 export const store = configureStore({
