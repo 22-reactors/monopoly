@@ -8,17 +8,22 @@ export const gameLoader = unAuthorizedRedirect
 
 export const Game = () => {
   const canvasEl = useRef<HTMLCanvasElement>(null);
-
   useEffect(() => { initCanvas() }, []);
+  // Насколько я понял тут можно сделать через useState
+  // initCanvas() возращает экземпляр класса GameEngine,
+  // который можно перезагрузить по кнопке
+  // но я не понял как это написать по "нормальному"
+  // HELP!
+  let gameEngine: GameEngine | null  = null;
 
   async function initCanvas() {
     if (canvasEl.current) {
-      await GameEngine.init(canvasEl.current);
+      gameEngine = await GameEngine.init(canvasEl.current);
     }
   }
 
-  const reloadPage = () => {
-    window.location.reload();
+  async function reloadGame() {
+      await gameEngine?.board?.reload();
   }
 
   return (
@@ -26,7 +31,7 @@ export const Game = () => {
       <Button
         className={style.reloadPageBtnClass}
         variation={ButtonVariation.PRIMARY}
-        onClick={reloadPage}>
+        onClick={reloadGame}>
         Начать сначало
       </Button>
       <canvas

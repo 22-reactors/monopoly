@@ -1,6 +1,6 @@
-import { MonopolyConfig } from '../../config/monopolyConfig';
 import { CanvasElement } from '../canvas/canvasElement';
 import { IUserConfig } from '../chip/chips';
+import { getUserConfigStore } from '../store/monopolyStore';
 
 type IFillText = {
   ctx: CanvasRenderingContext2D;
@@ -32,14 +32,9 @@ export class WinnerInfo extends CanvasElement {
   }
 
   private getWinner() {
-    const winner: IUserConfig = MonopolyConfig.userConfig.reduce(
-      (res, user) => {
-        if (!res || user.score > res.score) {
-          return user;
-        }
-        return res;
-      }
-    );
+    const winner: IUserConfig = getUserConfigStore().reduce((res, user) => {
+      return !res || user.score > res.score ? user : res;
+    });
     return winner;
   }
 }

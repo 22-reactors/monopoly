@@ -1,6 +1,8 @@
 import { Cards } from '../card/cards';
 import { MainCard } from '../card/cards/commonCard/mainCard';
 import { TCard } from '../card/cardType';
+import { getCardsStore } from '../store/monopolyStore';
+import { ICardMainSetting } from '../types/card';
 
 interface IGameLoop {
   render: () => void;
@@ -45,13 +47,21 @@ export class GameLoop {
   }
 
   private getUnpurchasedCards(): TCard[] {
-    return Cards.getInstance()
-      .cards.filter(card => card instanceof MainCard)
-      .filter(card => !(card as MainCard).buyingBackgroundColor);
+    return Cards.getInstance().cards.filter(
+      card => card instanceof MainCard && this.isCardNotBuy(card.cardIndex)
+    );
   }
 
   private endAnimateAndGame(animate: number): void {
     cancelAnimationFrame(animate);
     this.endGame();
+  }
+
+  //Такой же метод есть в GameEngine, но он статический
+  //Решил задублировать т.к. допущено много ошибок 
+  //при изначальном проектировании классов
+  //из-за отстутствия опыта и малых сроков (торопился)
+  private isCardNotBuy(cardIndex: number): boolean {
+    return !(getCardsStore()[cardIndex] as ICardMainSetting).buyingBackgroundColor;
   }
 }
