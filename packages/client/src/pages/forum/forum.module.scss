@@ -12,10 +12,8 @@
 }
 
 .forum {
-  //display: flex;
   padding-right: 20px;
   position: absolute;
-  //justify-content: space-between;
   margin-inline: auto;
   max-width: 1110px;
   height: 278px;
@@ -30,18 +28,11 @@
     }
   }
   &__body {
-  //row-gap: 28px;
-  //border-spacing: 28px;
-  //margin: auto;
   max-width: 1110px;
   width: 100%;
   table-layout: fixed;
-  //margin-top: 27px;
   border-spacing: 0;
-  //padding: 40px;
   align-content: stretch;
-  //display: flex;
-  //flex-grow: 1;
   }
 
   &__title {

@@ -3,7 +3,6 @@
 import { type FC } from 'react';
 import { Link } from 'react-router-dom';
 import style from '../forum.module.scss';
-//import { Paths } from '../src/pages/forum/constans';
 import { type ForumSectionListProps } from './typings';
 import { Paginator } from '../../../components/paginator/paginator';
 export enum Paths {

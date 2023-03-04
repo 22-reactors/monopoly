@@ -14,14 +14,11 @@ export const Forum: FC<ForumProps> = () => {
   const pageTitle = 'Форум';
   return (
     <>
-     
       <section className={style.forum__wrapper}>
         <h1 className={style.forum__title} >
           {pageTitle}
         </h1>
         <ForumSectionList sectionList={sectionList} />
-        
-
       </section>
       
     </>
