@@ -1,19 +1,31 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IUser } from "../../utils/interfaces";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { IUserData } from '../../api/auth/interfaces';
+import AuthController from '../../controllers/auth';
 
-const initialState: IUser | null = null;
+export const getUser = createAsyncThunk('user/getUser', async () => {
+  const user = await AuthController.getUser();
+  return user;
+});
+
+interface IUserState {
+  user: IUserData | null;
+  loading: boolean;
+}
+
+const initialState: IUserState = { user: null, loading: false };
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
-  reducers: {
-    setUser(state, action) {
+  reducers: {},
+  extraReducers: builder => {
+    builder.addCase(getUser.fulfilled, (state, action) => {
       const user = action.payload;
-
-    }
-  }
-})
-
-/* export const {} */
+      if (user) {
+        state.user = { ...user };
+      }
+    });
+  },
+});
 
 export default userSlice.reducer;
