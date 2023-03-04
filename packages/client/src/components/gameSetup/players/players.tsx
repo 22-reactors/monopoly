@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../../reduxstore/hooks';
+import { playersSelector } from '../../../reduxstore/players/players.selector';
 import { links } from '../../../utils/const';
 import { Button, ButtonVariation } from '../../button/button';
-import { IConfig } from '../gameSetup';
 import style from './players.module.scss';
 
 interface IChipProps {
@@ -11,17 +12,17 @@ interface IChipProps {
 }
 
 interface IPlayersProps {
-  players: IConfig[];
   maxPlayers: number;
 }
 
 export const Players = (props: IPlayersProps) => {
-  const { players, maxPlayers } = props;
+  const { maxPlayers } = props;
+  const players = useAppSelector(playersSelector);
 
   const defaultPlayers: React.ReactNode[] = [];
   for (let i = players.length; i < maxPlayers; i++) {
     defaultPlayers.push(
-      <div className={classNames(style.chip, style.defaultChip)}>
+      <div className={classNames(style.chip, style.defaultChip)} key={i}>
         <span>?</span>
       </div>
     );

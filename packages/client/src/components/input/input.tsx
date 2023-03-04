@@ -17,7 +17,7 @@ export interface IInputProps extends IValidationInputProps {
 }
 
 export function Input(props: IInputProps) {
-  const { type, value, label, onChange, showPassword, onBlur, errorText, name, className, isDarkTheme } =
+  const { type, value, label, onChange, showPassword, onBlur, errorText, name, className, isDarkTheme, errorAbsolutePosition } =
     props;
 
   const [labelFocus, setLabelFocus] = useState(!!value);
@@ -66,7 +66,7 @@ export function Input(props: IInputProps) {
         className={classNames(style.label, labelFocus && style.labelFocus)}>
         {label}
       </label>
-      {errorText && <div className={style.error}>{errorText}</div>}
+      {errorText && <div className={classNames(style.error, errorAbsolutePosition && style.error_absolute)}>{errorText}</div>}
       {showPassword && (
         <EyeIcon className={style.eyeIcon} onClick={onClickEyeShow} />
       )}

@@ -32,4 +32,4 @@ export const ErrorText = {
   [Config.NAME]: 'Имя не указано',
   [Config.TYPE]: 'Тип не указан',
   [Config.COLOR]: 'Цвет не указан',
-};
+} as const;

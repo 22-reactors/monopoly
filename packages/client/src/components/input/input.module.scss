@@ -58,6 +58,12 @@ $animation-time: 0.25s;
   color: $text-error;
   font-size: 12px;
   text-align: left;
+
+  &_absolute {
+    position: absolute;
+    left: 0;
+    top: 100%;
+  }
 }
 
 .eyeIcon {
