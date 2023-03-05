@@ -1,6 +1,5 @@
 import classNames from 'classnames';
-import { Link, useRouteLoaderData } from 'react-router-dom';
-import { IUserData } from '../../api/auth/interfaces';
+import { Link } from 'react-router-dom';
 import {
   Button,
   ButtonSizes,
