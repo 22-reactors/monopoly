@@ -3,9 +3,13 @@ import { IUserData } from '../../api/auth/interfaces';
 import AuthController from '../../controllers/auth';
 
 export const getUser = createAsyncThunk('user/getUser', async () => {
-  const user = await AuthController.getUser();
-  return user;
+  return await AuthController.getUser();
 });
+
+export const logout = createAsyncThunk("user/logout", async () => {
+  await AuthController.logout();
+  return await AuthController.getUser();
+})
 
 interface IUserState {
   user: IUserData | null;
@@ -23,8 +27,15 @@ const userSlice = createSlice({
       const user = action.payload;
       if (user) {
         state.user = { ...user };
+        state.loading = false;
       }
     });
+    builder.addCase(getUser.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(logout.fulfilled, (state, action) => {
+      state.loading = true;
+    })
   },
 });
 
