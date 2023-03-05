@@ -1,14 +1,20 @@
 //Создание новой темы на форуме
 
-import { type FC } from 'react';
+import { useState, type FC } from 'react';
 import style from '../forum.module.scss';
 import { type ForumSectionProps } from '../ForumSection/typings';
 import { Button, ButtonVariation, ButtonSizes } from '../../../components/button/button';
 import { Link } from 'react-router-dom';
 import { links } from '../../../utils/const';
+import Textarea from '../../../components/textarea/textarea';
+
 
 export const CreateTopic: FC<ForumSectionProps> = () => {
   const pageTitle = 'Форум. Создание новой темы в Разделе 1';
+
+  const [topic, setTopic] = useState ('');
+  const [message, setMessage] = useState ('');
+
   return (
     <>
         <section className={style.pageContainer}>
@@ -19,24 +25,20 @@ export const CreateTopic: FC<ForumSectionProps> = () => {
 
          <div className={style.newmessage}>
         <form >
-            <textarea 
-              name="message"
-              id="message"
-              className={style.newmessage__text}
-              rows={2}
-              placeholder="Название темы"
-
+            <Textarea
+            value={topic}
+            onChange={e => setTopic(e.target.value)}
+            label='Введите название темы'
             />
         </form>  
         </div> 
         <div className={style.newmessage}>
         <form >
-            <textarea 
-              name="message"
-              id="message"
-              className={style.newmessage__text}
-              rows={4}
-              placeholder="Сообщение"
+        <Textarea
+            value={message}
+            onChange={e => setMessage(e.target.value)}
+            label='Введите сообщение'
+            solo
             />
         </form>  
         </div> 

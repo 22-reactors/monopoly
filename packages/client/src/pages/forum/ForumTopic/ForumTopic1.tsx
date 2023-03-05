@@ -2,16 +2,17 @@
 
 import style from '../forum.module.scss';
 
-import { type FC } from 'react';
+import { useState, type FC } from 'react';
 import { Button, ButtonSizes, ButtonVariation } from '../../../components/button/button';
 import { type ForumTopicProps } from './typings';
 import { ThemeMessage } from '../../../components/themeMessage/themeMessage';
 import { ThemeMessageProps } from '../../../mocs/ForumProps';
 import { Paginator } from '../../../components/paginator/paginator';
+import Textarea from '../../../components/textarea/textarea';
 
 export const ForumTopic1: FC<ForumTopicProps> = () => {
   const  topicId  = '1';
-  
+  const [message, setMessage] = useState ('');
   return (
     <>
       <section className={style.pageContainer}>
@@ -23,12 +24,11 @@ export const ForumTopic1: FC<ForumTopicProps> = () => {
         </div>
         <div className={style.newmessage}>
         <form >
-            <textarea 
-              name="message"
-              id="message"
-              className={style.newmessage__text}
-              rows={4}
-              placeholder="Введите"
+        <Textarea
+            value={message}
+            onChange={e => setMessage(e.target.value)}
+            label='Введите сообщение'
+            solo
             />
         </form>
             <div>
@@ -40,13 +40,6 @@ export const ForumTopic1: FC<ForumTopicProps> = () => {
               </Button>
             </div>
             </div>
-          {/* Это реализация варианта с составными айди
-            <div className={style.forum__body}>
-            {topicList.map(row => (
-              <ForumMessage key={row.id} message={row} />
-            ))}
-          </div> */}
-                  
               <ThemeMessage {...ThemeMessageProps} /> 
               <ThemeMessage {...ThemeMessageProps} />
 
