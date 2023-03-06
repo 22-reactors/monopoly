@@ -53,7 +53,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     clearError: (state, action: PayloadAction<string | undefined>) => {
-      state.error = action.payload;;
+      state.error = action.payload;
     },
   },
   extraReducers: builder => {
