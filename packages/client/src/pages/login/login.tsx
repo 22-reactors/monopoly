@@ -1,14 +1,19 @@
 import style from './login.module.scss';
 import { authorizedRedirect, getInputData } from '../../utils/helpers';
 import { ILoginData } from '../../api/auth/interfaces';
-import AuthController from '../../controllers/auth';
 import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
 import { IValue } from '../../utils/interfaces';
 import { Input, IInputProps } from '../../components/input/input';
 import { AuthForm, IAuthFormProps } from '../../components/authForm/authForm';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import classNames from 'classnames';
+import { useAppDispatch, useAppSelector } from '../../reduxstore/hooks';
+import { clearError, login } from '../../reduxstore/user/userSlice';
+import {
+  userErrorSelector,
+  userSelector,
+} from '../../reduxstore/user/user.selector';
 
 export const loginLoader = authorizedRedirect;
 
@@ -24,7 +29,15 @@ export interface ILoginForm {
 export const Login = (props: ILoginProps) => {
   const { inputsProps, isDarkTheme } = props;
   const navigate = useNavigate();
-  const [error, setError] = useState<string | undefined>(undefined);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(userSelector);
+  const error = useAppSelector(userErrorSelector);
+
+  useEffect(() => {
+    if (user) {
+      navigate(links.game.path);
+    }
+  }, [user]);
 
   const inputItems = inputsProps.map((inputProp, i) => {
     return <Input key={i} {...inputProp} />;
@@ -32,19 +45,11 @@ export const Login = (props: ILoginProps) => {
 
   const formAction = async (event: React.FormEvent<HTMLFormElement>) => {
     const data = getInputData<ILoginForm, ILoginData>(event);
-    const response = await AuthController.login(data);
-
-    if (response) {
-      if (response === 'OK') {
-        navigate(links.game.path);
-      } else {
-        setError(response.reason);
-      }
-    }
+    dispatch(login(data));
   };
 
   const formFocus = () => {
-    setError(undefined);
+    dispatch(clearError(undefined));
   };
 
   return (
