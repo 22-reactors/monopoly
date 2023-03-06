@@ -53,14 +53,12 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     clearError: (state, action: PayloadAction<string | undefined>) => {
-      const error = action.payload;
-      state.error = error;
+      state.error = action.payload;;
     },
   },
   extraReducers: builder => {
     builder.addCase(getUser.fulfilled, (state, action) => {
-      const user = action.payload;
-      state.user = user ? { ...user } : null;
+      state.user = action.payload ?? null;
       state.loading = false;
     });
     builder.addCase(getUser.pending, state => {
