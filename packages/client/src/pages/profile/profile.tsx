@@ -1,10 +1,13 @@
 import style from './profile.module.scss';
-import { FieldInfo, Info } from '../../components/info/info'
+import { FieldInfo, Info } from '../../components/info/info';
 import { unAuthorizedRedirect } from '../../utils/helpers';
 import Avatar from '../../components/avatar/avatar';
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import AuthController from '../../controllers/auth';
 import { IUserData } from '../../api/auth/interfaces';
+import { useAppSelector } from '../../reduxstore/hooks';
+import { userSelector } from '../../reduxstore/user/user.selector';
+import { login } from '../../reduxstore/user/userSlice';
 
 const FieldMap: Record<string, FieldInfo> = {
   email: {
@@ -72,13 +75,13 @@ export const profileLoader = unAuthorizedRedirect;
 
 export function ProfilePage(): JSX.Element {
   const defaultUserFields = useMemo(() => Object.values(FieldMap), []);
+  const user = useAppSelector(userSelector);
 
   const [fields, setFields] = useState<FieldInfo[]>(defaultUserFields);
   const [avatar, setAvatar] = useState<string>('');
 
-  const fetchUser = useCallback(async () => {
-    const user = await AuthController.getUser();
-    const userFields = connectorUserFields(user);
+  useEffect(() => {
+    const userFields = user ? connectorUserFields(user) : defaultUserFields;
 
     if (user?.avatar) {
       setAvatar(user.avatar);
@@ -86,24 +89,18 @@ export function ProfilePage(): JSX.Element {
     } else {
       setFields(userFields);
     }
-  }, []);
-
-
-  useEffect( () => {
-    fetchUser().catch(console.error);
-  }, [fetchUser]);
+  }, [user]);
 
   return (
     <main className={style.wrapper}>
       <h2 className={style.title}>Профиль</h2>
       <div className={style.container}>
         <Avatar src={avatar} />
-        <Info fields={fields} />
+        <Info fields={fields} validation />
       </div>
     </main>
   );
 }
-
 
 function connectorUserFields(userInfo?: IUserData): FieldInfo[] {
   if (!userInfo?.login) {
@@ -111,8 +108,8 @@ function connectorUserFields(userInfo?: IUserData): FieldInfo[] {
   }
 
   const filteredFields = Object.entries(userInfo)
-    .map(([key, value]) => ({...FieldMap[key], value}))
-    .filter((field) => FieldMap[field.name])
+    .map(([key, value]) => ({ ...FieldMap[key], value }))
+    .filter(field => FieldMap[field.name]);
 
   return [...filteredFields, ...PASSWORD_FIELDS];
 }

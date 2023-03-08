@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Button, ButtonSizes, ButtonVariation } from '../button/button';
 import UserController from '../../controllers/user';
 import style from './avatar.module.scss';
@@ -46,7 +46,7 @@ function Avatar(props: IAvatar) {
   return (
     <section className={style.container}>
       <div className={style.avatar}>
-        <img src={`${resourceURL}${avatarSrc}`} alt="аватар" />
+        <img src={avatarSrc ? `${resourceURL}${avatarSrc}` : ''} alt="аватар" />
       </div>
       <input
         className={style.avatarInput}
