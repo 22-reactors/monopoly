@@ -5,9 +5,6 @@ import {
   ButtonSizes,
   ButtonVariation,
 } from '../../components/button/button';
-import { GameSetup } from '../gameSetup/gameSetup';
-import { useAppSelector } from '../../reduxstore/hooks';
-import { userSelector } from '../../reduxstore/user/user.selector';
 import { links } from '../../utils/const';
 import style from './home.module.scss';
 
@@ -20,7 +17,6 @@ export interface IHomeProps {
 
 export const Home = (props: IHomeProps) => {
   const { title, description, linkText, isDarkTheme } = props;
-  const user = useAppSelector(userSelector);
 
   return (
     <main className={classNames(style.main, isDarkTheme && style.dark)}>
