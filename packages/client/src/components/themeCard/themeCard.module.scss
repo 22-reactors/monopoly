@@ -3,12 +3,18 @@
 
 .wrapper {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  flex-direction: row;
+  gap: 60px;
   background-color: $outlined-color;
   padding: 20px;
   border-radius: 10px;
-  box-sizing: border-box;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  max-width: 1110px;
+  flex-wrap: wrap;
+  width: 100%;
+
 }
 
 .title {
@@ -50,5 +56,6 @@
 }
 
 .lastMessage {
+  padding-left: 20px;
   color: $text-additional-color;
 }
