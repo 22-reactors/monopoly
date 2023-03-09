@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { Button, ButtonVariation } from '../../components/button/button';
 import { GameEngine } from '../../game-engine/gameEngine';
 import { unAuthorizedRedirect } from '../../utils/helpers'
@@ -9,11 +9,6 @@ export const gameLoader = unAuthorizedRedirect
 export const Game = () => {
   const canvasEl = useRef<HTMLCanvasElement>(null);
   useEffect(() => { initCanvas() }, []);
-  // Насколько я понял тут можно сделать через useState
-  // initCanvas() возращает экземпляр класса GameEngine,
-  // который можно перезагрузить по кнопке
-  // но я не понял как это написать по "нормальному"
-  // HELP!
   let gameEngine: GameEngine | null  = null;
 
   async function initCanvas() {
