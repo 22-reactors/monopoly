@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../reduxstore/hooks';
 import { playersNumberSelector } from '../../reduxstore/players/players.selector';
 import { addPlayerAction } from '../../reduxstore/players/playersSlice';
-import { Button, ButtonVariation } from '../button/button';
-import { Input } from '../input/input';
-import Select, { ISelectChangeData } from '../select/select';
-import { IOption } from '../select/selectOption';
+import { Button, ButtonVariation } from '../../components/button/button';
+import { Input } from '../../components/input/input';
+import Select, { ISelectChangeData } from '../../components/select/select';
+import { IOption } from '../../components/select/selectOption';
 import {
   ColorLabels,
   Config,
@@ -15,6 +15,9 @@ import {
 } from './const';
 import style from './gameSetup.module.scss';
 import { Players } from './players/players';
+import { redirect } from 'react-router-dom';
+import { links } from '../../utils/const';
+import AuthController from '../../controllers/auth';
 
 export interface IConfig {
   [Config.NAME]: string;
@@ -41,6 +44,14 @@ const initialInputErrors: IInputErrors = {
   [Config.NAME]: undefined,
   [Config.TYPE]: undefined,
   [Config.COLOR]: undefined,
+};
+
+export const gameSetupLoader = async () => {
+  const user = await AuthController.getUser();
+  if (!user) {
+    return redirect(links.root.path);
+  }
+  return true;
 };
 
 export const GameSetup = (props: IGameProps) => {
@@ -91,6 +102,8 @@ export const GameSetup = (props: IGameProps) => {
     });
     if (isValid) {
       dispatch(addPlayerAction(config));
+      setSelectOptions({});
+      setConfig(initialConfig);
     }
   };
 
@@ -114,7 +127,6 @@ export const GameSetup = (props: IGameProps) => {
               errorText={inputErrors[Config.TYPE]}
               value={selectOptions[Config.TYPE]}
             />
-
             <Input
               name={Config.NAME}
               label="Имя игрока"

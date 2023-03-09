@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../reduxstore/hooks';
 import { playersSelector } from '../../../reduxstore/players/players.selector';
 import { links } from '../../../utils/const';
-import { Button, ButtonVariation } from '../../button/button';
+import { Button, ButtonVariation } from '../../../components/button/button';
 import style from './players.module.scss';
 
 interface IChipProps {
@@ -29,27 +29,25 @@ export const Players = (props: IPlayersProps) => {
   }
 
   return (
-    <>
-      <div className={style.playersContainer}>
-        <p className={style.info}>{`Максимум ${maxPlayers} игрока`}</p>
-        <div className={style.players}>
-          <div className={style.chips}>
-            {players.map(({ name, color }, index) => (
-              <Chip name={name} color={color} key={index} />
-            ))}
-            {defaultPlayers}
-          </div>
-          <Link to={links.game.path}>
-            <Button
-              className={style.startButton}
-              variation={ButtonVariation.PRIMARY}
-              rounded>
-              Начать игру
-            </Button>
-          </Link>
+    <div className={style.playersContainer}>
+      <p className={style.info}>{`Максимум ${maxPlayers} игрока`}</p>
+      <div className={style.players}>
+        <div className={style.chips}>
+          {players.map(({ name, color }, index) => (
+            <Chip name={name} color={color} key={index} />
+          ))}
+          {defaultPlayers}
         </div>
+        <Link to={links.game.path}>
+          <Button
+            className={style.startButton}
+            variation={ButtonVariation.PRIMARY}
+            rounded>
+            Начать игру
+          </Button>
+        </Link>
       </div>
-    </>
+    </div>
   );
 };
 
