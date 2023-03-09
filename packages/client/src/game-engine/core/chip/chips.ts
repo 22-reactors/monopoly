@@ -3,12 +3,14 @@ import { OrientationEnum } from '../types/card';
 import { Cards } from '../card/cards';
 import { EventBus } from '../event-bus';
 import { Chip } from './chip';
+import { getUserConfigStore } from '../store/monopolyStore';
 
 export interface IUserConfig {
   userName: string;
   chipColor: string;
   userMoney: number;
   score: number;
+  chipPosition: number;
 }
 
 export class Chips {
@@ -18,14 +20,13 @@ export class Chips {
 
   private static instance: Chips;
   private readonly chips: Chip[];
-  private readonly userConfig: IUserConfig[];
 
-  constructor(ctx: CanvasRenderingContext2D, userConfig: IUserConfig[]) {
-    this.userConfig = userConfig;
+  constructor(ctx: CanvasRenderingContext2D) {
     Chips.instance = this;
     this.addEventListener();
-    this.chips = this.userConfig.map(
-      ({ chipColor }) => new Chip({ color: chipColor, ctx })
+    this.chips = getUserConfigStore().map(
+      ({ chipColor }, index) =>
+        new Chip({ color: chipColor, ctx, indexChip: index })
     );
     this.setStartCoordinates();
   }
@@ -35,8 +36,12 @@ export class Chips {
   }
 
   private setStartCoordinates() {
-    this.getCoordinatesForCard(0).forEach(({ chip, coordinates }) => {
-      chip.setSize(coordinates);
+    getUserConfigStore().forEach(userConfig => {
+      this.getCoordinatesForCard(userConfig.chipPosition).forEach(
+        ({ chip, coordinates }) => {
+          chip.setSize(coordinates);
+        }
+      );
     });
   }
 
@@ -49,7 +54,10 @@ export class Chips {
   }
 
   private getChipsOnCard(indexCard: number) {
-    return this.chips.filter(({ position }) => position === indexCard);
+    return this.chips.filter(
+      ({ indexChip }) =>
+        getUserConfigStore()[indexChip].chipPosition === indexCard
+    );
   }
 
   render() {
@@ -110,7 +118,7 @@ export class Chips {
 
   moveChip(indexChip: number, value = 0) {
     const chip = this.getChipByIndex(indexChip);
-    const startCard = chip.position;
+    const startCard = getUserConfigStore()[indexChip].chipPosition;
     const { centerCards, endRound, cardIndex } = Chips.getIntervalCardsCenter(
       startCard,
       value

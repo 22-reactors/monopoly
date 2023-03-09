@@ -1,10 +1,10 @@
 import { EVENTS_NAME } from '../../config/eventsNameConfig';
-import { MonopolyConfig } from '../../config/monopolyConfig';
 import { Cards } from '../card/cards';
 import { Chips } from '../chip/chips';
 import { Dices } from '../dice/dices';
 import { EventBus } from '../event-bus';
 import { PlayersInfo } from '../playerinfo/playerInfo';
+import { reinitMonopolyStore } from '../store/monopolyStore';
 import { WinnerInfo } from '../winnerinfo/winnerinfo';
 import { Canvas } from './canvas';
 import { GameLoop } from './gameLoop';
@@ -17,6 +17,7 @@ export class Board {
   private chips: Chips | undefined;
   private playerInfo: PlayersInfo | undefined;
   private winnerInfo: WinnerInfo | undefined;
+  private board: Board;
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = new Canvas(canvas);
@@ -25,6 +26,7 @@ export class Board {
       update: this.update,
       endGame: this.endGame,
     });
+    this.board = this;
   }
 
   static async init(canvas: HTMLCanvasElement) {
@@ -33,6 +35,14 @@ export class Board {
     board.gameLoop.run();
     board.addEventListeners();
     return board;
+  }
+
+  async reload() {
+    //Вовзращаем конфиг игры в изначальное состояние
+    reinitMonopolyStore();
+    //Перезапускаем игру
+    await this.board.createElements();
+    this.board.gameLoop.run();
   }
 
   private addEventListeners() {
@@ -50,11 +60,8 @@ export class Board {
       ctx: this.canvas.ctx,
       canvasSize: this.canvas.width,
     });
-    this.chips = new Chips(this.canvas.ctx, MonopolyConfig.userConfig);
-    this.playerInfo = new PlayersInfo(
-      this.canvas.ctx,
-      MonopolyConfig.userConfig
-    );
+    this.chips = new Chips(this.canvas.ctx);
+    this.playerInfo = new PlayersInfo(this.canvas.ctx);
     this.winnerInfo = new WinnerInfo(this.canvas.ctx);
   }
 

@@ -1,11 +1,11 @@
-import { MonopolyConfig } from '../../config/monopolyConfig';
-import { ICoordinates } from '../types/card';
+import { ICardMainSetting, ICoordinates } from '../types/card';
 import { CardTypeEmum } from '../types/card';
 import { TAssetCard, TCard, TCardInit } from './cardType';
 import { CornerCard } from './cards/cornerCard';
 import { MainCard } from './cards/commonCard/mainCard';
 import { NoPriceCard } from './cards/noPriceCard';
 import { WithImageCard } from './cards/withImageCard';
+import { getCardsStore } from '../store/monopolyStore';
 
 export class Cards {
   private static instance: Cards;
@@ -38,7 +38,7 @@ export class Cards {
 
   static async initAll(ctx: CanvasRenderingContext2D, canvasSize: number) {
     const cards = await Promise.all(
-      MonopolyConfig.cards.map((cardSetting, index) => {
+      getCardsStore().map((cardSetting, index) => {
         const { type } = cardSetting;
         const fnInit = Cards.initCard[type] as TCardInit;
         const props = { index, ctx, canvasSize, ...cardSetting };
@@ -79,5 +79,9 @@ export class Cards {
         return card;
       }
     }
+  }
+
+  public static isCardNotBuy(cardIndex: number): boolean {
+    return !(getCardsStore()[cardIndex] as ICardMainSetting).buyingBackgroundColor;
   }
 }

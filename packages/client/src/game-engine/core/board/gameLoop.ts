@@ -45,9 +45,9 @@ export class GameLoop {
   }
 
   private getUnpurchasedCards(): TCard[] {
-    return Cards.getInstance()
-      .cards.filter(card => card instanceof MainCard)
-      .filter(card => !(card as MainCard).buyingBackgroundColor);
+    return Cards.getInstance().cards.filter(
+      card => card instanceof MainCard  && Cards.isCardNotBuy(card.cardIndex)
+    );
   }
 
   private endAnimateAndGame(animate: number): void {
