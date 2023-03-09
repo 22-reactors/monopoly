@@ -81,7 +81,7 @@ export class GameEngine {
     cardIndexWithOffset: number,
     indexChip: number
   ) {
-    if (card instanceof MainCard && GameEngine.isCardNotBuy(card.cardIndex)) {
+    if (card instanceof MainCard && Cards.isCardNotBuy(card.cardIndex)) {
       const configCard = MonopolyConfig.cards[
         cardIndexWithOffset
       ] as ICardMainSetting;
@@ -100,9 +100,5 @@ export class GameEngine {
         updateUserConfigStore(userConfigStore);
       }
     }
-  }
-
-  private static isCardNotBuy(cardIndex: number): boolean {
-    return !(getCardsStore()[cardIndex] as ICardMainSetting).buyingBackgroundColor
   }
 }

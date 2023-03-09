@@ -33,7 +33,10 @@ export class WinnerInfo extends CanvasElement {
 
   private getWinner() {
     const winner: IUserConfig = getUserConfigStore().reduce((res, user) => {
-      return !res || user.score > res.score ? user : res;
+      if (!res || user.score > res.score) {
+        return user;
+      }
+      return res;
     });
     return winner;
   }

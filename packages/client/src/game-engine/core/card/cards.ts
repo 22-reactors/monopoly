@@ -1,4 +1,4 @@
-import { ICoordinates } from '../types/card';
+import { ICardMainSetting, ICoordinates } from '../types/card';
 import { CardTypeEmum } from '../types/card';
 import { TAssetCard, TCard, TCardInit } from './cardType';
 import { CornerCard } from './cards/cornerCard';
@@ -79,5 +79,9 @@ export class Cards {
         return card;
       }
     }
+  }
+
+  public static isCardNotBuy(cardIndex: number): boolean {
+    return !(getCardsStore()[cardIndex] as ICardMainSetting).buyingBackgroundColor;
   }
 }
