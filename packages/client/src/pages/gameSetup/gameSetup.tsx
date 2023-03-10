@@ -49,7 +49,7 @@ const initialInputErrors: IInputErrors = {
 export const gameSetupLoader = async () => {
   const user = await AuthController.getUser();
   if (!user) {
-    return redirect(links.root.path);
+    return redirect(links.login.path);
   }
   return true;
 };
@@ -102,7 +102,14 @@ export const GameSetup = (props: IGameProps) => {
     });
     if (isValid) {
       dispatch(addPlayerAction(config));
-      setSelectOptions({});
+      setSelectOptions(prevState =>
+        Object.fromEntries(
+          Object.entries(prevState).map(([key]) => [
+            key,
+            { value: '', label: '' },
+          ])
+        )
+      );
       setConfig(initialConfig);
     }
   };

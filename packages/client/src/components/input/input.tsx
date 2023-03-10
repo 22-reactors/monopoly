@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { ChangeEvent, HTMLProps, useRef, useState } from 'react';
+import { ChangeEvent, HTMLProps, useEffect, useRef, useState } from 'react';
 import EyeIcon from '../../icons/EyeIcon';
 import { IValidationInputProps } from '../../types/validation';
 import style from './input.module.scss';
@@ -17,13 +17,28 @@ export interface IInputProps extends IValidationInputProps {
 }
 
 export function Input(props: IInputProps) {
-  const { type, value, label, onChange, showPassword, onBlur, errorText, name, className, isDarkTheme, errorAbsolutePosition } =
-    props;
+  const {
+    type,
+    value,
+    label,
+    onChange,
+    showPassword,
+    onBlur,
+    errorText,
+    name,
+    className,
+    isDarkTheme,
+    errorAbsolutePosition,
+  } = props;
 
   const [labelFocus, setLabelFocus] = useState(!!value);
   const [showPasswordComputed, setShowPasswordComputed] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setLabelFocus(!!value);
+  }, [value]);
 
   const onInputContainerFocus = () => {
     setLabelFocus(true);
@@ -51,7 +66,11 @@ export function Input(props: IInputProps) {
   return (
     <div
       tabIndex={0}
-      className={classNames(style.container, isValid && style.errorContainer, className)}
+      className={classNames(
+        style.container,
+        isValid && style.errorContainer,
+        className
+      )}
       onFocus={onInputContainerFocus}>
       <input
         ref={inputRef}
@@ -66,7 +85,15 @@ export function Input(props: IInputProps) {
         className={classNames(style.label, labelFocus && style.labelFocus)}>
         {label}
       </label>
-      {errorText && <div className={classNames(style.error, errorAbsolutePosition && style.error_absolute)}>{errorText}</div>}
+      {errorText && (
+        <div
+          className={classNames(
+            style.error,
+            errorAbsolutePosition && style.error_absolute
+          )}>
+          {errorText}
+        </div>
+      )}
       {showPassword && (
         <EyeIcon className={style.eyeIcon} onClick={onClickEyeShow} />
       )}

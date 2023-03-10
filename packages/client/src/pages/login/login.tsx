@@ -35,7 +35,7 @@ export const Login = (props: ILoginProps) => {
 
   useEffect(() => {
     if (user) {
-      navigate(links.game.path);
+      navigate(links.setup.path);
     }
   }, [user]);
 

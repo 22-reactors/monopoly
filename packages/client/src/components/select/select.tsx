@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { memo, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import style from './select.module.scss';
 import SelectOption, { IOption } from './selectOption';
 import { IValidationInputProps } from '../../types/validation';
@@ -34,6 +34,13 @@ function Select(props: Props) {
 
   const selectRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    if (!value?.label) {
+      setSelectedOption(defaultOption);
+      setLabelFocus(false);
+    }
+  }, [value]);
+
   const onSelectContainerFocus = () => {
     setLabelFocus(true);
 
@@ -44,13 +51,16 @@ function Select(props: Props) {
 
   const onSelectContainerBlur = () => {
     setIsOpen(false);
-    if (!value) {
+    if (!value?.label) {
       setLabelFocus(false);
     }
   };
 
   const onSelectContainerClick = () => {
-    setIsOpen(prev => !prev);
+    console.log('onSelectContainerClick');
+    console.log(isOpen);
+
+    setIsOpen(!isOpen);
   };
 
   const onOptionSelectClick = (option: IOption) => {
