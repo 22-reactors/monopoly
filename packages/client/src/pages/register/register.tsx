@@ -39,7 +39,7 @@ export const Register = (props: IRegistrProps) => {
 
   useEffect(() => {
     if (user) {
-      navigate(links.game.path);
+      navigate(links.setup.path);
     }
   }, [user]);
 

@@ -1,0 +1,82 @@
+@import '../../../styles/globals.scss';
+@import '../../../styles/mixin.scss';
+@import '../../../styles/variables.scss';
+
+// Устанавливает цвет для передаваемого свойства property
+@mixin colors($property) {
+  &_red {
+    #{$property}: red;
+  }
+
+  &_green {
+    #{$property}: #33ff00;
+  }
+
+  &_pink {
+    #{$property}:purple;
+  }
+
+  &_grey {
+    #{$property}: $primary;
+  }
+}
+
+.playersContainer {
+  padding: 30px;
+  background-color: white;
+  border-radius: 10px;
+  @include shadowDefault;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.info {
+  @include text-base;
+  color: black;
+  margin-bottom: 40px;
+}
+
+.players {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chips {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chipContainer {
+  padding: 10px;
+  text-align: center;
+}
+
+.chip {
+  border-radius: 100%;
+  width: 93px;
+  height: 93px;
+  @include colors(background-color);
+}
+
+.defaultChip {
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 68px;
+  color: $text-additional;
+  border: 2px dashed $text-additional;
+  margin: 10px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.name {
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+  @include colors(color);
+}
