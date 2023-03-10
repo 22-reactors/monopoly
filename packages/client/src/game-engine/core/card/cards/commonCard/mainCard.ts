@@ -1,4 +1,5 @@
 import { MonopolyConfig } from '../../../../config/monopolyConfig';
+import { getCardsStore } from '../../../store/monopolyStore';
 import { ICardMainSetting } from '../../../types/card';
 import { CardRect, ICardRect } from '../../cardComponent/cardRect';
 import { TemplateText } from '../../cardComponent/templateText';
@@ -16,11 +17,12 @@ export class MainCard extends CardRect {
   private readonly title: TemplateText;
   private readonly price: TemplateText;
   private readonly cardLabel: CardLabel;
-  buyingBackgroundColor?: string;
+  public readonly cardIndex: number;
 
   constructor({ title, color, price, ...props }: TMainCard) {
     super(props);
 
+    this.cardIndex = props.index;
     const { index, canvasSize } = props;
     this.setSizeCard(index, canvasSize);
 
@@ -47,7 +49,10 @@ export class MainCard extends CardRect {
   }
 
   render() {
-    this.fillRect(this.buyingBackgroundColor);
+    this.fillRect(
+      (getCardsStore()[this.cardIndex] as ICardMainSetting)
+        .buyingBackgroundColor
+    );
     this.cardLabel.render();
     this.title.render();
     this.price.render();

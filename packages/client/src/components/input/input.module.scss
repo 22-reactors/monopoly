@@ -60,9 +60,7 @@ $animation-time: 0.25s;
   text-align: left;
 
   &_absolute {
-    position: absolute;
-    left: 0;
-    top: 100%;
+    @include absolute(100%, null, null, 0);
   }
 }
 

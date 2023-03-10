@@ -26,6 +26,7 @@ interface IMonopolyConfig {
 const userStartProps = {
   startMoney: 1000,
   startScore: 0,
+  startChipPosition: 0,
 };
 
 export const MonopolyConfig: IMonopolyConfig = {
@@ -249,24 +250,28 @@ export const MonopolyConfig: IMonopolyConfig = {
     {
       userName: 'XXX_Alex_XXX',
       chipColor: 'red',
+      chipPosition: userStartProps.startChipPosition,
       userMoney: userStartProps.startMoney,
       score: userStartProps.startScore,
     },
     {
       userName: 'zxc',
       chipColor: 'green',
+      chipPosition: userStartProps.startChipPosition,
       userMoney: userStartProps.startMoney,
       score: userStartProps.startScore,
     },
     {
       userName: 'Bat9',
       chipColor: 'pink',
+      chipPosition: userStartProps.startChipPosition,
       userMoney: userStartProps.startMoney,
       score: userStartProps.startScore,
     },
     {
       userName: 'Dimasik',
       chipColor: 'gray',
+      chipPosition: userStartProps.startChipPosition,
       userMoney: userStartProps.startMoney,
       score: userStartProps.startScore,
     },

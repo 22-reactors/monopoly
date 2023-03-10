@@ -5,8 +5,6 @@ import {
   ButtonSizes,
   ButtonVariation,
 } from '../../components/button/button';
-import { GameSetup } from '../../components/gameSetup/gameSetup';
-import { useUser } from '../../hooks/useUser';
 import { links } from '../../utils/const';
 import style from './home.module.scss';
 
@@ -19,33 +17,23 @@ export interface IHomeProps {
 
 export const Home = (props: IHomeProps) => {
   const { title, description, linkText, isDarkTheme } = props;
-  const [user] = useUser(null);
 
   return (
     <main className={classNames(style.main, isDarkTheme && style.dark)}>
-      {!user && (
-        <>
-          <div className={style.mainContent}>
-            <h1 className={style.title}>{title}</h1>
-            <p className={style.description}>{description}</p>
-            <Link className={style.link} to={links.game.path}>
-              <Button
-                className={style.button}
-                variation={ButtonVariation.PRIMARY}
-                size={ButtonSizes.LARGE}
-                rounded>
-                {linkText}
-              </Button>
-            </Link>
-          </div>
-          <img
-            className={style.cardsImage}
-            src="cards.svg"
-            alt="monopoly cards"
-          />
-        </>
-      )}
-      {user && <GameSetup maxPlayers={4}/>}
+      <div className={style.mainContent}>
+        <h1 className={style.title}>{title}</h1>
+        <p className={style.description}>{description}</p>
+        <Link className={style.link} to={links.setup.path}>
+          <Button
+            className={style.button}
+            variation={ButtonVariation.PRIMARY}
+            size={ButtonSizes.LARGE}
+            rounded>
+            {linkText}
+          </Button>
+        </Link>
+      </div>
+      <img className={style.cardsImage} src="cards.svg" alt="monopoly cards" />
     </main>
   );
 };

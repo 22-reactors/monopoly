@@ -32,6 +32,7 @@ export interface ICardMainSetting {
   color: ColorMainCardEnum;
   title: string;
   price: number;
+  buyingBackgroundColor?: string;
 }
 
 export interface ICardNoPriceSetting {

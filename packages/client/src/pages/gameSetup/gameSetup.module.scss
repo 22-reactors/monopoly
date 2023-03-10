@@ -1,0 +1,38 @@
+@import '../../styles/globals.scss';
+@import '../../styles/mixin.scss';
+
+.wrapper {
+  width: 100vw;
+}
+
+.container {
+  min-height: 60vh;
+  @include container-width;
+  margin-bottom: 185px;
+}
+
+.title {
+  @include h2;
+  color: $text-base;
+  margin: 27px 0;
+}
+
+.configContainer {
+  width: 100%;
+  margin-top: 37px;
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 10px;
+  @include shadowDefault;
+  box-sizing: border-box;
+}
+
+.inputs {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  margin-right: 40px;
+  min-width: 400px;
+}

@@ -1,10 +1,10 @@
 import { redirect } from 'react-router-dom';
 import { Input } from '../components/input/input';
-import AuthController from '../controllers/auth';
 import { links } from './const';
+import { store } from '../reduxstore/monopolyStore';
 
 export const unAuthorizedRedirect = async () => {
-  const user = await AuthController.getUser();
+  const { user } = store.getState().user;
   if (!user) {
     return redirect(links.login.path);
   }
@@ -12,7 +12,7 @@ export const unAuthorizedRedirect = async () => {
 };
 
 export const authorizedRedirect = async () => {
-  const user = await AuthController.getUser();
+  const { user } = store.getState().user;
   if (user) {
     return redirect(links.game.path);
   }

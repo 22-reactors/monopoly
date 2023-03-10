@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import AuthController from '../../../controllers/auth';
-import { useUser } from '../../../hooks/useUser';
+import { useAppDispatch, useAppSelector } from '../../../reduxstore/hooks';
+import { userSelector } from '../../../reduxstore/user/user.selector';
+import { logoutAction } from '../../../reduxstore/user/userSlice';
 import { links, resourceURL } from '../../../utils/const';
 import { Button, ButtonSizes, ButtonVariation } from '../../button/button';
 import style from './login-buttons.module.scss';
@@ -13,11 +14,11 @@ export interface ILoginButtonsProps {
 
 export const LoginButtons = (props: ILoginButtonsProps) => {
   const { isDarkTheme, logoutText } = props;
-  const [user, setUser] = useUser(null);
+  const user = useAppSelector(userSelector);
+  const dispatch = useAppDispatch();
 
   const logout = () => {
-    AuthController.logout();
-    setUser(null);
+    dispatch(logoutAction());
   };
 
   if (user) {

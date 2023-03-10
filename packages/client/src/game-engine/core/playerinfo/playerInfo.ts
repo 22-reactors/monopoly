@@ -1,18 +1,16 @@
 import { MonopolyConfig } from '../../config/monopolyConfig';
 import { CanvasElement } from '../canvas/canvasElement';
-import { IUserConfig } from '../chip/chips';
+import { getUserConfigStore } from '../store/monopolyStore';
 
 type IFillText = {
   ctx: CanvasRenderingContext2D;
 };
 
 export class PlayersInfo extends CanvasElement {
-  private readonly users: IUserConfig[];
   private readonly font = '100 30px system-ui';
 
-  constructor(ctx: CanvasRenderingContext2D, users: IUserConfig[]) {
+  constructor(ctx: CanvasRenderingContext2D) {
     super({ ctx });
-    this.users = users;
   }
 
   render() {
@@ -24,7 +22,7 @@ export class PlayersInfo extends CanvasElement {
   fillText(props: IFillText) {
     const { ctx } = props;
     ctx.font = this.font;
-    this.users.map((user, i) => {
+    getUserConfigStore().map((user, i) => {
       const y = i === 0 ? 180 : 180 + 35 * i;
 
       ctx.fillStyle = user.chipColor;

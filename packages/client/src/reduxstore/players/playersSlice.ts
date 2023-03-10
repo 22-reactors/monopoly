@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Config } from '../../components/gameSetup/const';
-import { IConfig } from '../../components/gameSetup/gameSetup';
+import { Config } from '../../pages/gameSetup/const';
+import { IConfig } from '../../pages/gameSetup/gameSetup';
 
 const initialState: IConfig[] = [];
 
