@@ -21,7 +21,7 @@ import AuthController from '../../controllers/auth';
 
 export interface IConfig {
   [Config.NAME]: string;
-  [Config.TYPE]: PlayerTypes | '';
+  [Config.TYPE]: string;
   [Config.COLOR]: typeof ColorLabels[keyof typeof ColorLabels] | '';
 }
 
