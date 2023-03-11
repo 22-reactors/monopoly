@@ -2,6 +2,8 @@
 @import '../../styles/globals';
 
 .btn {
+  @include text-base();
+
   cursor: pointer;
   border: 1px solid $primary;
   border-radius: 4px;
