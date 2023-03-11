@@ -3,14 +3,17 @@
 
 .main {
   @include text-base;
-  background: $light-background;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding-top: 262px;
+  padding-bottom: 396px;
+  background-image: url('cards.png');
+  background-position: 100% 0;
+  background-size: 850px 847px;
+  background-repeat: no-repeat;
 }
 
 .mainContent {
-  margin: 20px 0 20px auto;
+  @include container-width;
+
   min-width: 500px;
   max-width: 600px;
 }
@@ -23,15 +26,11 @@
 .description {
   @include h2;
   margin: 0;
+  max-width: 653px;
 }
 
 .button {
-  margin: 90px 0 0 35px;
-}
-
-.cardsImage {
-  max-width: 40vw;
-  align-self: flex-start;
+  margin-top: 78px;
 }
 
 .dark {
