@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { ChangeEvent, useRef, useState } from 'react';
 import { Button, ButtonSizes, ButtonVariation } from '../button/button';
 import UserController from '../../controllers/user';
