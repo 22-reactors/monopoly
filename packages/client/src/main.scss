@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap');
+@import './src/styles/globals.scss';
 
 html,
 body {
@@ -15,11 +16,13 @@ html {
   height: 100vh;
 }
 
-body,
-#root {
-  height: 100%;
-}
-
 body {
   overflow-y: auto;
+}
+
+#root {
+  background-image: $light-background;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
