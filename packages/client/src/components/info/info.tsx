@@ -1,5 +1,5 @@
 import style from './info.module.scss';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { Button, ButtonVariation } from '../button/button';
 import { IValue } from '../../utils/interfaces';
 import UserController from '../../controllers/user';
@@ -8,6 +8,7 @@ import { getInputData } from '../../utils/helpers';
 import { Input } from '../input/input';
 import { useNavigate } from 'react-router-dom';
 import validate, { mapErrorMessage } from '../../service/validate/validate';
+import { InputsState } from '../authForm/authForm'
 
 export type FieldInfo = {
   id: string;
@@ -57,15 +58,45 @@ export function Info(props: IInfo) {
 
   const onSubmitForm = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    let isValid = true;
 
-    const { oldPassword, newPassword, ...userInfo } = getInputData<
-      IProfileForm,
-      IProfileData & IPasswordData
-    >(evt);
+    const inputs = Object.values(evt.target).filter(
+      element => element instanceof HTMLInputElement
+    ) as HTMLInputElement[];
 
-    void (await UserController.changeProfile(userInfo));
-    void (await UserController.changePassword({ oldPassword, newPassword }));
-    void navigate(-1);
+    const newInputsState: InputsState = {};
+
+    inputs.forEach((input) => {
+      const { value, name } = input;
+      let errorText: string | undefined;
+
+      if (props.validation && !validate.isValidField(input)) {
+        errorText = mapErrorMessage[name as keyof typeof mapErrorMessage];
+        isValid = false;
+      }
+
+      if (errorText) {
+        newInputsState[name] = { value };
+        newInputsState[name].errorText = errorText;
+      } else {
+        isValid = true;
+      }
+    });
+
+    if (isValid) {
+      const { oldPassword, newPassword, ...userInfo } = getInputData<
+        IProfileForm,
+        IProfileData & IPasswordData
+      >(evt);
+
+      void (await UserController.changeProfile(userInfo));
+      void (await UserController.changePassword({ oldPassword, newPassword }));
+      void navigate(-1);
+    } else {
+      setFieldInput(prevState => {
+        return { ...prevState, ...newInputsState };
+      });
+    }
   };
 
   return (
