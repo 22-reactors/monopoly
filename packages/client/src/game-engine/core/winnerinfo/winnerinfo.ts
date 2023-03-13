@@ -31,7 +31,7 @@ export class WinnerInfo extends CanvasElement {
     ctx.fillText(userInfoText, 500, 500);
   }
 
-  private getWinner() {
+  public getWinner() {
     const winner: IUserConfig = getUserConfigStore().reduce((res, user) => {
       if (!res || user.score > res.score) {
         return user;

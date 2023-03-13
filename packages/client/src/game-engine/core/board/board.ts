@@ -1,4 +1,5 @@
 import { EVENTS_NAME } from '../../config/eventsNameConfig';
+import { sendWinner } from '../../utils/sendWinner';
 import { Cards } from '../card/cards';
 import { Chips } from '../chip/chips';
 import { Dices } from '../dice/dices';
@@ -32,6 +33,7 @@ export class Board {
   static async init(canvas: HTMLCanvasElement) {
     const board = new Board(canvas);
     await board.createElements();
+    board.resetDoneGame();
     board.gameLoop.run();
     board.addEventListeners();
     return board;
@@ -51,6 +53,14 @@ export class Board {
       mouseout: this.onMouseout,
       click: this.onClick,
     });
+  }
+
+  //Если не ресатать уже законченную игру, то при каждом заходе будут отправлятся данные о том кто победил
+  //таким образом можно бесконечно увеличивать счетик побед простой перезагрузкой
+  private resetDoneGame() {
+    if (Cards.getUnpurchasedCards().length == 0) {
+      reinitMonopolyStore();
+    }
   }
 
   async createElements() {
@@ -102,5 +112,8 @@ export class Board {
 
   endGame = () => {
     this.winnerInfo?.render();
+    if (this.winnerInfo) {
+      sendWinner(this.winnerInfo.getWinner().userName);
+    }
   };
 }
