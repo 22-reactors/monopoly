@@ -1,6 +1,4 @@
 import { Cards } from '../card/cards';
-import { MainCard } from '../card/cards/commonCard/mainCard';
-import { TCard } from '../card/cardType';
 
 interface IGameLoop {
   render: () => void;
@@ -38,16 +36,10 @@ export class GameLoop {
       this.run();
     });
 
-    const unpurchasedCards = this.getUnpurchasedCards();
+    const unpurchasedCards = Cards.getUnpurchasedCards();
     if (unpurchasedCards.length === 0) {
       this.endAnimateAndGame(animateId);
     }
-  }
-
-  private getUnpurchasedCards(): TCard[] {
-    return Cards.getInstance().cards.filter(
-      card => card instanceof MainCard  && Cards.isCardNotBuy(card.cardIndex)
-    );
   }
 
   private endAnimateAndGame(animate: number): void {

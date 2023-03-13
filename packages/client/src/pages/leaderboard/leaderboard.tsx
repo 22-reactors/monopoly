@@ -56,7 +56,7 @@ export function Leaderboard() {
 
 export type LeaderboardResults = {
   name: string;
-  score: string;
+  score: number;
 };
 
 function getUsersResults(results: LeaderboardResults[]) {

@@ -84,4 +84,10 @@ export class Cards {
   public static isCardNotBuy(cardIndex: number): boolean {
     return !(getCardsStore()[cardIndex] as ICardMainSetting).buyingBackgroundColor;
   }
+
+  public static getUnpurchasedCards(): TCard[] {
+    return Cards.getInstance().cards.filter(
+      card => card instanceof MainCard  && Cards.isCardNotBuy(card.cardIndex)
+    );
+  }
 }
