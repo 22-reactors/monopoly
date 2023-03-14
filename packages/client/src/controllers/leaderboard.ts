@@ -26,9 +26,9 @@ class LeaderboardController {
     }
   }
 
-  async getAll() {
+  async getMonopolyResults() {
     try {
-      const response = await this._api.getAll();
+      const response = await this._api.getMonopolyResults();
 
       if (isGetAllGoodResponse(response)) {
         return response[0]?.data.results;

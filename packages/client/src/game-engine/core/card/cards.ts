@@ -6,6 +6,7 @@ import { MainCard } from './cards/commonCard/mainCard';
 import { NoPriceCard } from './cards/noPriceCard';
 import { WithImageCard } from './cards/withImageCard';
 import { getCardsStore } from '../store/monopolyStore';
+import { TCardInitProps } from './cardType';
 
 export class Cards {
   private static instance: Cards;
@@ -41,7 +42,7 @@ export class Cards {
       getCardsStore().map((cardSetting, index) => {
         const { type } = cardSetting;
         const fnInit = Cards.initCard[type] as TCardInit;
-        const props = { index, ctx, canvasSize, ...cardSetting };
+        const props: TCardInitProps = { index, ctx, canvasSize, ...cardSetting };
         return fnInit(props);
       })
     );
@@ -87,7 +88,7 @@ export class Cards {
 
   public static getUnpurchasedCards(): TCard[] {
     return Cards.getInstance().cards.filter(
-      card => card instanceof MainCard  && Cards.isCardNotBuy(card.cardIndex)
+      card => card instanceof MainCard && Cards.isCardNotBuy(card.cardIndex)
     );
   }
 }

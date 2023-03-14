@@ -111,8 +111,8 @@ export class Board {
   };
 
   endGame = () => {
-    this.winnerInfo?.render();
     if (this.winnerInfo) {
+      this.winnerInfo.render();
       sendWinner(this.winnerInfo.getWinner().userName);
     }
   };

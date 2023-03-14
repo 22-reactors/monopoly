@@ -22,7 +22,7 @@ export class LeaderBoardAPI extends RequestTransport {
     }) as Promise<LeaderboardResponse>;
   }
 
-  getAll() {
+  getMonopolyResults() {
     return this.post('/monopoly', {
       data: {
         ratingFieldName: 'leaderboardVersion',
@@ -35,12 +35,13 @@ export class LeaderBoardAPI extends RequestTransport {
   //в REST API данные обновляются только если ratingFieldName имеет значение выше предыдущего
   //т.к. у нас массив юзеров и каждого свой счетик побед, а поле ratingFieldName одно, то
   //было принято решение, что ratingFieldName - сумма очком всех игроков
-  private getVersion = (data: LeaderboardResults[]) => { 
+  private getVersion = (data: LeaderboardResults[]) => {
     //инициализация
     if (data.length === 0) {
       return 0;
     }
-    return data.map(d => d.score).reduce((partialSum, a) => partialSum + a, 0);
+    return data.map(userResult => userResult.score)
+      .reduce((partialSum, acc) => partialSum + acc, 0);
   };
 }
 

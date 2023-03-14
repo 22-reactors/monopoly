@@ -11,7 +11,7 @@ export function Leaderboard() {
   const [results, setResults] = useState<LeaderboardResults[][] | []>([]);
 
   const getResults = useCallback(async () => {
-    const leaderboard: LeaderboardResults[] = await LeaderboardController.getAll() ?? [];
+    const leaderboard: LeaderboardResults[] = await LeaderboardController.getMonopolyResults() ?? [];
     const sortUsersResults = sortResult(leaderboard);
     const usersResults = getSeparateArray<LeaderboardResults>(sortUsersResults, LIMIT_ITEMS_ON_PAGE);
 

@@ -2,7 +2,7 @@ import LeaderboardController from '../../controllers/leaderboard';
 import { LeaderboardResults } from "../../pages/leaderboard/leaderboard";
 
 export const sendWinner = async (userName: string): Promise<void> => {
-    const leaderboard: LeaderboardResults[] = await LeaderboardController.getAll() ?? [];
+    const leaderboard: LeaderboardResults[] = await LeaderboardController.getMonopolyResults() ?? [];
     
     if (leaderboard.length > 0) {
         let userExists = false;
