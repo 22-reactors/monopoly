@@ -10,7 +10,6 @@ import {
   ColorLabels,
   Config,
   ErrorText,
-  PlayerTypes,
   PlayerTypesLabels,
 } from './const';
 import style from './gameSetup.module.scss';
@@ -53,6 +52,11 @@ export const gameSetupLoader = async () => {
   }
   return true;
 };
+
+const mapOptions = (options: Record<string, string>): IOption[] =>
+Object.entries(options).map(([value, label]) => {
+  return { value, label };
+});
 
 export const GameSetup = (props: IGameProps) => {
   const { maxPlayers } = props;
@@ -113,11 +117,6 @@ export const GameSetup = (props: IGameProps) => {
       setConfig(initialConfig);
     }
   };
-
-  const mapOptions = (options: Record<string, string>): IOption[] =>
-    Object.entries(options).map(([value, label]) => {
-      return { value, label };
-    });
 
   return (
     <div className={style.wrapper}>

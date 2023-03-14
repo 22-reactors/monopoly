@@ -57,9 +57,6 @@ function Select(props: Props) {
   };
 
   const onSelectContainerClick = () => {
-    console.log('onSelectContainerClick');
-    console.log(isOpen);
-
     setIsOpen(!isOpen);
   };
 
