@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { ChangeEvent, HTMLProps, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, HTMLProps, useEffect, useRef, useState } from 'react';
 import EyeIcon from '../../icons/EyeIcon';
 import { IValidationInputProps } from '../../types/validation';
 import style from './input.module.scss';

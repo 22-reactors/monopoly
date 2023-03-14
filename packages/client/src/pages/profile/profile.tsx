@@ -2,12 +2,10 @@ import style from './profile.module.scss';
 import { FieldInfo, Info } from '../../components/info/info';
 import { unAuthorizedRedirect } from '../../utils/helpers';
 import Avatar from '../../components/avatar/avatar';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import AuthController from '../../controllers/auth';
+import { useEffect, useState } from 'react';
 import { IUserData } from '../../api/auth/interfaces';
 import { useAppSelector } from '../../reduxstore/hooks';
 import { userSelector } from '../../reduxstore/user/user.selector';
-import { login } from '../../reduxstore/user/userSlice';
 
 const FieldMap: Record<string, FieldInfo> = {
   email: {
@@ -73,8 +71,9 @@ const PASSWORD_FIELDS = [
 
 export const profileLoader = unAuthorizedRedirect;
 
+const defaultUserFields = Object.values(FieldMap);
+
 export function ProfilePage(): JSX.Element {
-  const defaultUserFields = useMemo(() => Object.values(FieldMap), []);
   const user = useAppSelector(userSelector);
 
   const [fields, setFields] = useState<FieldInfo[]>(defaultUserFields);
@@ -85,10 +84,9 @@ export function ProfilePage(): JSX.Element {
 
     if (user?.avatar) {
       setAvatar(user.avatar);
-      setFields(userFields);
-    } else {
-      setFields(userFields);
     }
+
+    setFields(userFields);
   }, [user]);
 
   return (
