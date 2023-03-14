@@ -41,7 +41,7 @@ export class LeaderBoardAPI extends RequestTransport {
       return 0;
     }
     return data.map(userResult => userResult.score)
-      .reduce((partialSum, acc) => partialSum + acc, 0);
+      .reduce((acc, UserScore) => acc + UserScore, 0);
   };
 }
 
