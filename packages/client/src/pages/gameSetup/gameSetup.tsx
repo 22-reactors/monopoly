@@ -96,10 +96,10 @@ export const GameSetup = (props: IGameProps) => {
   };
 
   const addPlayer = () => {
-    let isValid = true;
+    const validator = { isValid: true };
     Object.entries(config).forEach(([key, value]) => {
       if (value === '') {
-        isValid = false;
+        validator.isValid = false;
         setInputErrors(prevState => ({
           ...prevState,
           [key]: ErrorText[key as keyof IConfig],
@@ -107,10 +107,10 @@ export const GameSetup = (props: IGameProps) => {
       }
     });
 
-    isValid = validFieldOnDup(Config.NAME);
-    isValid = validFieldOnDup(Config.COLOR);
+    validFieldOnDup(Config.NAME, validator);
+    validFieldOnDup(Config.COLOR, validator);
 
-    if (isValid) {
+    if (validator.isValid) {
       dispatch(addPlayerAction(config));
       setSelectOptions(prevState =>
         Object.fromEntries(
@@ -124,20 +124,17 @@ export const GameSetup = (props: IGameProps) => {
     }
   };
 
-  const validFieldOnDup = (fieldName: Config.NAME | Config.COLOR): boolean => {
-    let isValid = true;
+  const validFieldOnDup = (fieldName: Config.NAME | Config.COLOR, validator: {isValid: boolean}): void => {
     players.forEach(player => {
       if (player[fieldName] == config[fieldName]) {
         setInputErrors(prevState => ({
           ...prevState,
           [fieldName]: ErrorDupText[fieldName],
         }));
-        isValid = false;
+        validator.isValid = false;
         return;
       }
     });
-
-    return isValid;
   }
 
   return (
