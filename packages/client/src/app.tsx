@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { homeProps } from './mocs/homeProps';
 import LoginProps from './mocs/loginProps';
 import RegistrProps from './mocs/registrProps';
+import { GameSetup, gameSetupLoader } from './pages/gameSetup/gameSetup';
 
 import {
   RootBoundary,
@@ -50,6 +51,11 @@ const router = createBrowserRouter([
       {
         path: links.forum.path,
         element: <Forum />,
+      },
+      {
+        path: links.setup.path,
+        element: <GameSetup maxPlayers={4} />,
+        loader: gameSetupLoader,
       },
     ],
   },
