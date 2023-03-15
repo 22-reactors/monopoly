@@ -1,4 +1,7 @@
+import { IConfig } from '../../pages/gameSetup/gameSetup';
 import { IUserConfig } from '../core/chip/chips';
+import { getCardsStore, initMonopolyStore } from '../core/store/monopolyStore';
+import { ICardMainSetting } from '../core/types/card';
 import {
   TCardSetting,
   CardTypeEmum,
@@ -16,14 +19,13 @@ interface IMonopolyConfig {
   currency: string;
   moneyPerRound: number;
   cards: TCardSetting[];
-  userConfig: IUserConfig[];
 }
 
 /*
  * startMoney - Кол-во денег, с которым старуют игроки
  * startScore - Стартовое кол-во очков у игроков
  */
-const userStartProps = {
+export const userStartProps = {
   startMoney: 1000,
   startScore: 0,
   startChipPosition: 0,
@@ -246,36 +248,6 @@ export const MonopolyConfig: IMonopolyConfig = {
       price: 400,
     },
   ],
-  userConfig: [
-    {
-      userName: 'XXX_Alex_XXX',
-      chipColor: 'red',
-      chipPosition: userStartProps.startChipPosition,
-      userMoney: userStartProps.startMoney,
-      score: userStartProps.startScore,
-    },
-    {
-      userName: 'zxc',
-      chipColor: 'green',
-      chipPosition: userStartProps.startChipPosition,
-      userMoney: userStartProps.startMoney,
-      score: userStartProps.startScore,
-    },
-    {
-      userName: 'Bat9',
-      chipColor: 'pink',
-      chipPosition: userStartProps.startChipPosition,
-      userMoney: userStartProps.startMoney,
-      score: userStartProps.startScore,
-    },
-    {
-      userName: 'Dimasik',
-      chipColor: 'gray',
-      chipPosition: userStartProps.startChipPosition,
-      userMoney: userStartProps.startMoney,
-      score: userStartProps.startScore,
-    },
-  ],
 };
 
 export const ThemeConfig = {
@@ -290,4 +262,28 @@ export const ThemeConfig = {
   baseColor: '#c4eda4',
   strokeColor: '#0d1c00',
   textColor: '#000000',
+};
+
+export const initMonopolyUserConfig = (players: IConfig[]) => {
+  const userConfig: IUserConfig[] = players.map(player => {
+    return {
+      userName: player.name,
+      userType: player.type,
+      chipColor: player.color,
+      userMoney: userStartProps.startMoney,
+      score: userStartProps.startScore,
+      chipPosition: userStartProps.startChipPosition,
+    };
+  });
+  initMonopolyStore(userConfig);
+};
+
+export const isGameExist = (): boolean => {
+  const unpurchasedCards: TCardSetting[] = getCardsStore()
+    .map(card => card as ICardMainSetting)
+    .filter(
+      card => card.type === CardTypeEmum.Main && !card.buyingBackgroundColor
+    );
+
+  return unpurchasedCards.length !== 0;
 };

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../reduxstore/hooks';
-import { playersNumberSelector } from '../../reduxstore/players/players.selector';
+import { playersNumberSelector, playersSelector } from '../../reduxstore/players/players.selector';
 import { addPlayerAction } from '../../reduxstore/players/playersSlice';
 import { Button, ButtonVariation } from '../../components/button/button';
 import { Input } from '../../components/input/input';
@@ -9,6 +9,7 @@ import { IOption } from '../../components/select/selectOption';
 import {
   ColorLabels,
   Config,
+  ErrorDupText,
   ErrorText,
   PlayerTypesLabels,
 } from './const';
@@ -54,9 +55,9 @@ export const gameSetupLoader = async () => {
 };
 
 const mapOptions = (options: Record<string, string>): IOption[] =>
-Object.entries(options).map(([value, label]) => {
-  return { value, label };
-});
+  Object.entries(options).map(([value, label]) => {
+    return { value, label };
+  });
 
 export const GameSetup = (props: IGameProps) => {
   const { maxPlayers } = props;
@@ -68,6 +69,7 @@ export const GameSetup = (props: IGameProps) => {
   );
 
   const playersNumber = useAppSelector(playersNumberSelector);
+  const players: IConfig[] = useAppSelector(playersSelector);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -104,6 +106,10 @@ export const GameSetup = (props: IGameProps) => {
         }));
       }
     });
+
+    isValid = validFieldOnDup(Config.NAME);
+    isValid = validFieldOnDup(Config.COLOR);
+
     if (isValid) {
       dispatch(addPlayerAction(config));
       setSelectOptions(prevState =>
@@ -117,6 +123,22 @@ export const GameSetup = (props: IGameProps) => {
       setConfig(initialConfig);
     }
   };
+
+  const validFieldOnDup = (fieldName: Config.NAME | Config.COLOR): boolean => {
+    let isValid = true;
+    players.forEach(player => {
+      if (player[fieldName] == config[fieldName]) {
+        setInputErrors(prevState => ({
+          ...prevState,
+          [fieldName]: ErrorDupText[fieldName],
+        }));
+        isValid = false;
+        return;
+      }
+    });
+
+    return isValid;
+  }
 
   return (
     <div className={style.wrapper}>

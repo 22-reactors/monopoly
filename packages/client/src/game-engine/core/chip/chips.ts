@@ -11,6 +11,7 @@ export interface IUserConfig {
   userMoney: number;
   score: number;
   chipPosition: number;
+  userType: string;
 }
 
 export class Chips {
