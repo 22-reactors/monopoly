@@ -28,7 +28,7 @@ export interface IAuthFormProps {
   formFocus?: React.FormEventHandler<HTMLFormElement>;
 }
 
-type InputsState = Record<string, { value: string; errorText?: string }>;
+export type InputsState = Record<string, { value: string; errorText?: string }>;
 
 export const AuthForm = (props: PropsWithChildren<IAuthFormProps>) => {
   const {

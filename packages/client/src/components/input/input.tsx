@@ -34,6 +34,10 @@ export function Input(props: IInputProps) {
   const [labelFocus, setLabelFocus] = useState(!!value);
   const [showPasswordComputed, setShowPasswordComputed] = useState(false);
 
+  useEffect(() => {
+    setLabelFocus(!!value);
+  }, [value]);
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
