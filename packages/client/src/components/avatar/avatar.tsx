@@ -9,7 +9,7 @@ interface IAvatar {
 }
 
 function Avatar(props: IAvatar) {
-  const [avatarSrc, setAvatarSrc] = useState(props.src ?? '');
+  const [avatarSrc, setAvatarSrc] = useState('');
 
   useEffect(() => {
     if (props.src) {
