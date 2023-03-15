@@ -3,7 +3,6 @@
 
 .footer {
   @include text-base;
-  width: 100vw;
   box-sizing: border-box;
   background-color: $text-white;
 }

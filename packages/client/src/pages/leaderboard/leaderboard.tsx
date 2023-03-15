@@ -23,7 +23,7 @@ export function Leaderboard() {
   }, [getResults]);
 
   return (
-    <div className={style.wrapper}>
+    <main className={style.wrapper}>
       <h2 className={style.title}>Таблица лидеров</h2>
       <table className={style.board}>
         <thead>
@@ -50,7 +50,7 @@ export function Leaderboard() {
           }
         />
       )}
-    </div>
+    </main>
   );
 }
 

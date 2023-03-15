@@ -23,7 +23,7 @@ export const Home = (props: IHomeProps) => {
       <div className={style.mainContent}>
         <h1 className={style.title}>{title}</h1>
         <p className={style.description}>{description}</p>
-        <Link className={style.link} to={links.game.path}>
+        <Link className={style.link} to={links.setup.path}>
           <Button
             className={style.button}
             variation={ButtonVariation.PRIMARY}

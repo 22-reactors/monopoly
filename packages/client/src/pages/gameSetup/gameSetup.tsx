@@ -119,7 +119,7 @@ export const GameSetup = (props: IGameProps) => {
   };
 
   return (
-    <div className={style.wrapper}>
+    <main>
       <div className={style.container}>
         <h2 className={style.title}>Создание игры</h2>
         <Players maxPlayers={maxPlayers} />
@@ -159,6 +159,6 @@ export const GameSetup = (props: IGameProps) => {
           </Button>
         </div>
       </div>
-    </div>
+    </main>
   );
 };

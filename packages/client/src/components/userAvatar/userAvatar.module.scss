@@ -1,3 +1,4 @@
+@import "./src/styles/mixin";
 @import "./src/styles/globals";
 
 .wrapper {
@@ -14,8 +15,14 @@
 }
 
 .name {
-  font: $text-base;
+  @include text-base;
+
+  text-decoration: none;
   color: $primary;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .isDark {

@@ -1,6 +1,5 @@
 @import '../../../styles/globals.scss';
 @import '../../../styles/mixin.scss';
-@import '../../../styles/variables.scss';
 
 // Устанавливает цвет для передаваемого свойства property
 @mixin colors($property) {
