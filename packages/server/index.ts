@@ -19,7 +19,7 @@ async function startServer() {
   });
 
   const distPath = path.dirname(require.resolve('client/dist/index.html'));
-  const ssrClientPath = require.resolve('client/ssr-dist/client.cjs');
+  const ssrClientPath = require.resolve('client/dist-ssr/client.cjs');
 
   app.use(express.static(distPath));
 
