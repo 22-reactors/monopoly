@@ -22,12 +22,12 @@ import {
 } from './pages/index';
 import { links } from './utils/const';
 
-const router = createBrowserRouter([
+export const routes = [
   {
     path: links.root.path,
     element: <Layout />,
     errorElement: <RootBoundary />,
-    children: [
+    /* children: [
       { index: true, element: <Home {...homeProps} /> },
       {
         path: links.login.path,
@@ -59,12 +59,14 @@ const router = createBrowserRouter([
       },
     ],
   },
-  {
+/*   {
     path: links.game.path,
     element: <Game />,
     loader: gameLoader,
-  },
-]);
+  }, */
+];
+
+const router = createBrowserRouter(routes);
 
 export function App() {
   useEffect(() => {
