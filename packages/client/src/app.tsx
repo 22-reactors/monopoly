@@ -27,7 +27,7 @@ export const routes = [
     path: links.root.path,
     element: <Layout />,
     errorElement: <RootBoundary />,
-    /* children: [
+    children: [
       { index: true, element: <Home {...homeProps} /> },
       {
         path: links.login.path,
@@ -52,18 +52,13 @@ export const routes = [
         path: links.forum.path,
         element: <Forum />,
       },
-      {
-        path: links.setup.path,
-        element: <GameSetup maxPlayers={4} />,
-        loader: gameSetupLoader,
-      },
     ],
   },
-/*   {
+  {
     path: links.game.path,
     element: <Game />,
     loader: gameLoader,
-  }, */
+  },
 ];
 
 const router = createBrowserRouter(routes);
