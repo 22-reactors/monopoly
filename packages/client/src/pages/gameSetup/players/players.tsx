@@ -36,7 +36,7 @@ export const Players = (props: IPlayersProps) => {
     initMonopolyUserConfig(players);
   };
 
-  const playerNotExists = () => {
+  const isPlayerNotExists = () => {
     return players.length === 0;
   }
 
@@ -60,7 +60,7 @@ export const Players = (props: IPlayersProps) => {
               className={style.startButton}
               variation={ButtonVariation.PRIMARY}
               onClick={initGameConfig}
-              disabled={playerNotExists()}
+              disabled={isPlayerNotExists()}
               rounded>
               Начать игру
             </Button>
@@ -78,7 +78,7 @@ export const Players = (props: IPlayersProps) => {
             className={style.startButton}
             variation={ButtonVariation.PRIMARY}
             onClick={resetPlayers}
-            disabled={playerNotExists()}
+            disabled={isPlayerNotExists()}
             rounded>
             Сбросить
           </Button>
