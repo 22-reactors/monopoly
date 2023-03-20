@@ -1,30 +1,14 @@
 import type * as express from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-// import { routes } from './src/app';
-import { links } from './src/utils/const';
 import { createStaticHandler } from '@remix-run/router';
 import {
   createStaticRouter,
   StaticRouterProvider,
 } from 'react-router-dom/server';
-import { Home } from './src/pages/index';
-import { homeProps } from './src/mocs/homeProps';
-import { ProfilePage } from './src/pages/index';
-
-
-/* const Home = () => {
-  return <div>Главная</div>;
-};
-
-const Profile = () => {
-  return <div>Профиль</div>;
-};
- */
-const routes = [
-  { path: links.root.path, element: <Home {...homeProps}/> },
-  { path: links.profile.path, element: <ProfilePage /> },
-];
+import { routes } from './src/routes';
+import { Provider } from 'react-redux';
+import { store } from './src/reduxstore/monopolyStore';
 
 export const render = async (request: express.Request) => {
   const { query, dataRoutes } = createStaticHandler(routes);
@@ -39,11 +23,13 @@ export const render = async (request: express.Request) => {
 
   return renderToString(
     <React.StrictMode>
-      <StaticRouterProvider
-        router={router}
-        context={context}
-        nonce="the-nonce"
-      />
+      <Provider store={store}>
+        <StaticRouterProvider
+          router={router}
+          context={context}
+          nonce="the-nonce"
+        />
+      </Provider>
     </React.StrictMode>
   );
 };

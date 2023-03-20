@@ -22,6 +22,8 @@ async function startServer() {
   const ssrClientPath = require.resolve('client/dist-ssr/client.cjs');
 
   app.use('/assets', express.static(path.resolve(distPath, 'assets')))
+  app.use('/images', express.static(path.resolve(distPath, 'images')))
+
 
   app.use('*', async (req, res, next) => {
     try {
