@@ -1,6 +1,6 @@
-import { ILoginProps } from "../pages/login/login";
-import { InputId } from "../service/validate/validate";
-import { links } from "../utils/const";
+import { ILoginProps } from '../pages/login/login';
+import { InputId } from '../service/validate/validate';
+import { links } from '../utils/const';
 
 const LoginProps: ILoginProps = {
   title: 'Вход',

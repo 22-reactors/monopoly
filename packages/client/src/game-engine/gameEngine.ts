@@ -8,7 +8,13 @@ import { Cards } from './core/card/cards';
 import { MainCard } from './core/card/cards/commonCard/mainCard';
 import { ICardMainSetting } from './core/types/card';
 import { TCard } from './core/card/cardType';
-import { getCardsStore, getUserConfigStore, initMonopolyStore, updateCardsStore, updateUserConfigStore } from './core/store/monopolyStore';
+import {
+  getCardsStore,
+  getUserConfigStore,
+  initMonopolyStore,
+  updateCardsStore,
+  updateUserConfigStore,
+} from './core/store/monopolyStore';
 
 export class GameEngine {
   board: Board | undefined;
@@ -62,9 +68,7 @@ export class GameEngine {
   //Порядок хода определяется массивом в конфиге, первое элемент первым и тд
   private setNextChipIndex() {
     this.chipIndex =
-      this.chipIndex < getUserConfigStore().length - 1
-        ? ++this.chipIndex
-        : 0;
+      this.chipIndex < getUserConfigStore().length - 1 ? ++this.chipIndex : 0;
   }
 
   //В конце раунда (прохода фишкой всей доски) даем доп. деньги
@@ -94,7 +98,8 @@ export class GameEngine {
       if (userMoney > cardPrice) {
         userConfigStore[indexChip].userMoney -= cardPrice;
         userConfigStore[indexChip].score += 1;
-        (cardsStore[card.cardIndex] as ICardMainSetting).buyingBackgroundColor = userConfigStore[indexChip].chipColor;
+        (cardsStore[card.cardIndex] as ICardMainSetting).buyingBackgroundColor =
+          userConfigStore[indexChip].chipColor;
 
         updateCardsStore(cardsStore);
         updateUserConfigStore(userConfigStore);

@@ -11,9 +11,13 @@ export function Leaderboard() {
   const [results, setResults] = useState<LeaderboardResults[][] | []>([]);
 
   const getResults = useCallback(async () => {
-    const leaderboard: LeaderboardResults[] = await LeaderboardController.getMonopolyResults() ?? [];
+    const leaderboard: LeaderboardResults[] =
+      (await LeaderboardController.getMonopolyResults()) ?? [];
     const sortUsersResults = sortResult(leaderboard);
-    const usersResults = getSeparateArray<LeaderboardResults>(sortUsersResults, LIMIT_ITEMS_ON_PAGE);
+    const usersResults = getSeparateArray<LeaderboardResults>(
+      sortUsersResults,
+      LIMIT_ITEMS_ON_PAGE
+    );
 
     setResults(usersResults);
   }, []);
@@ -37,17 +41,16 @@ export function Leaderboard() {
           </tr>
         </thead>
         <tbody>
-        {results.length ? getUsersResults(results[page - 1]) : <></>}
+          {results.length ? getUsersResults(results[page - 1]) : <></>}
         </tbody>
       </table>
       {results.length > 1 && (
         <Paginator
           className={style.paginator}
           pagesCount={results.length}
-          pageHandler={(page) => {
-              setPage(page);
-            }
-          }
+          pageHandler={page => {
+            setPage(page);
+          }}
         />
       )}
     </main>
@@ -62,10 +65,14 @@ export type LeaderboardResults = {
 function getUsersResults(results: LeaderboardResults[]) {
   return (
     <>
-      {results.map(({name, score}, idx) => (
+      {results.map(({ name, score }, idx) => (
         <tr key={idx}>
-          <td className={style.contentCell}><span className={style.text}>{name}</span></td>
-          <td className={style.contentCell}><span className={style.text}>{score}</span></td>
+          <td className={style.contentCell}>
+            <span className={style.text}>{name}</span>
+          </td>
+          <td className={style.contentCell}>
+            <span className={style.text}>{score}</span>
+          </td>
         </tr>
       ))}
     </>

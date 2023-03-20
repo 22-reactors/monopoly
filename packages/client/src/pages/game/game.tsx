@@ -1,18 +1,18 @@
 import { useEffect, useRef } from 'react';
 import { Button, ButtonVariation } from '../../components/button/button';
 import { GameEngine } from '../../game-engine/gameEngine';
-import { unAuthorizedRedirect } from '../../utils/helpers'
-import style from './game.module.scss'
-import { useNavigate } from 'react-router-dom'
-import { links } from '../../utils/const'
+import { unAuthorizedRedirect } from '../../utils/helpers';
+import style from './game.module.scss';
+import { useNavigate } from 'react-router-dom';
+import { links } from '../../utils/const';
 
-export const gameLoader = unAuthorizedRedirect
+export const gameLoader = unAuthorizedRedirect;
 
 export const Game = () => {
   const canvasEl = useRef<HTMLCanvasElement>(null);
   const navigate = useNavigate();
 
-  let gameEngine: GameEngine | null  = null;
+  let gameEngine: GameEngine | null = null;
 
   useEffect(() => {
     window.document.documentElement.requestFullscreen();
@@ -26,7 +26,7 @@ export const Game = () => {
   }
 
   async function reloadGame() {
-      await gameEngine?.board?.reload();
+    await gameEngine?.board?.reload();
   }
 
   return (

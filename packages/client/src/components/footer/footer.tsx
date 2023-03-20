@@ -24,36 +24,36 @@ export const Footer = (props: IFooterProps) => {
 
   return (
     <footer className={classNames(style.footer, isDarkTheme && style.dark)}>
-        <div className={classNames(style.menu, isDarkTheme && style.dark)}>
-          <div className={style.menuContainer}>
-            <h4 className={classNames(style.title, isDarkTheme && style.dark)}>
-              {navTitle}
-            </h4>
-            <nav>
-              <ul className={style.navList}>
-                {navLinks.map(({ path, title }) => {
-                  if (!isLoginLinksAndAuthorized(title, user)) {
-                    return (
-                      <li key={path}>
-                        <Link to={path} className={style.link}>
-                          {title}
-                        </Link>
-                      </li>
-                    );
-                  }
-                })}
-              </ul>
-            </nav>
-          </div>
+      <div className={classNames(style.menu, isDarkTheme && style.dark)}>
+        <div className={style.menuContainer}>
+          <h4 className={classNames(style.title, isDarkTheme && style.dark)}>
+            {navTitle}
+          </h4>
+          <nav>
+            <ul className={style.navList}>
+              {navLinks.map(({ path, title }) => {
+                if (!isLoginLinksAndAuthorized(title, user)) {
+                  return (
+                    <li key={path}>
+                      <Link to={path} className={style.link}>
+                        {title}
+                      </Link>
+                    </li>
+                  );
+                }
+              })}
+            </ul>
+          </nav>
         </div>
-        <div className={style.infoContainer}>
-          <Logo className={style.logo} />
-          {infoText.map((text, index) => (
-            <p key={index} className={style.info}>
-              {text}
-            </p>
-          ))}
-        </div>
+      </div>
+      <div className={style.infoContainer}>
+        <Logo className={style.logo} />
+        {infoText.map((text, index) => (
+          <p key={index} className={style.info}>
+            {text}
+          </p>
+        ))}
+      </div>
     </footer>
   );
 };

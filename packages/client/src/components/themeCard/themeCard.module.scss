@@ -1,5 +1,5 @@
-@import "./src/styles/globals";
-@import "./src/styles/mixin";
+@import './src/styles/globals';
+@import './src/styles/mixin';
 
 .wrapper {
   display: flex;
@@ -20,7 +20,7 @@
 
 .description {
   margin: 0;
-  color: $text-additional
+  color: $text-additional;
 }
 
 .infoBlock {

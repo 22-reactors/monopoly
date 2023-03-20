@@ -1,6 +1,6 @@
 import style from './paginator.module.scss';
 import classNames from 'classnames';
-import { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react';
 
 export interface IPaginator {
   pagesCount: number;
@@ -12,9 +12,13 @@ export interface IPaginator {
 const LIMIT_VISIBLE_PAGES = 3;
 
 export function Paginator(props: IPaginator) {
-  const defaultVisiblePages = useMemo(() =>
-    Array(props.pagesCount).fill(null).map((_, i) => i + 1),
-    [props.pagesCount]);
+  const defaultVisiblePages = useMemo(
+    () =>
+      Array(props.pagesCount)
+        .fill(null)
+        .map((_, i) => i + 1),
+    [props.pagesCount]
+  );
   const visiblePages = defaultVisiblePages.slice(0, LIMIT_VISIBLE_PAGES);
   const firstPage = defaultVisiblePages.at(0);
   const lastPage = defaultVisiblePages.at(-1);
@@ -23,12 +27,14 @@ export function Paginator(props: IPaginator) {
   const [page, setPage] = useState<number>(firstPage ?? 1);
 
   return (
-    <div className={classNames(
-      style.container,
-      props.className,
-      props.isDarkMode && style.isDarkMode)}>
+    <div
+      className={classNames(
+        style.container,
+        props.className,
+        props.isDarkMode && style.isDarkMode
+      )}>
       <a
-        href='#'
+        href="#"
         className={classNames(
           style.arrow,
           style.arrowBack,
@@ -42,7 +48,7 @@ export function Paginator(props: IPaginator) {
           const firstVisiblePage = pages[0];
 
           if (page > firstVisiblePage && page <= pages[pages.length - 1]) {
-            setPage((prevState) => prevState - 1);
+            setPage(prevState => prevState - 1);
             props.pageHandler?.(page - 1);
             return;
           }
@@ -50,23 +56,32 @@ export function Paginator(props: IPaginator) {
           if (firstPage && page > firstPage && page === firstVisiblePage) {
             const newFirstPage = firstVisiblePage - 1;
 
-            setPage((prevState) => prevState - 1);
-            setPages((prevState) => [newFirstPage, ...prevState.slice(0, -1)]);
+            setPage(prevState => prevState - 1);
+            setPages(prevState => [newFirstPage, ...prevState.slice(0, -1)]);
             props.pageHandler?.(page - 1);
           }
-      }}>Переход назад</a>
-
-      {pages.map((pageNumber, idx) =>
-        <a href='#' key={idx} className={classNames(style.pageNumber, pageNumber === page && style.active)} onClick={() => {
-          setPage(pageNumber);
-          props.pageHandler?.(pageNumber);
         }}>
+        Переход назад
+      </a>
+
+      {pages.map((pageNumber, idx) => (
+        <a
+          href="#"
+          key={idx}
+          className={classNames(
+            style.pageNumber,
+            pageNumber === page && style.active
+          )}
+          onClick={() => {
+            setPage(pageNumber);
+            props.pageHandler?.(pageNumber);
+          }}>
           {pageNumber}
         </a>
-      )}
+      ))}
 
       <a
-        href='#'
+        href="#"
         className={classNames(
           style.arrow,
           style.arrowForward,
@@ -80,7 +95,7 @@ export function Paginator(props: IPaginator) {
           const lastVisiblePage = pages.at(-1);
 
           if (page !== lastVisiblePage) {
-            setPage((prevState) => prevState + 1);
+            setPage(prevState => prevState + 1);
             props.pageHandler?.(page + 1);
             return;
           }
@@ -88,11 +103,13 @@ export function Paginator(props: IPaginator) {
           if (lastPage && page < lastPage) {
             const newLastPage = lastVisiblePage + 1;
 
-            setPage((prevState) => prevState + 1);
-            setPages((prevState) => [...prevState.slice(1), newLastPage]);
+            setPage(prevState => prevState + 1);
+            setPages(prevState => [...prevState.slice(1), newLastPage]);
             props.pageHandler?.(page + 1);
           }
-      }}>Переход вперёд</a>
+        }}>
+        Переход вперёд
+      </a>
     </div>
   );
 }

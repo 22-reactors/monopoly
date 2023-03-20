@@ -1,5 +1,5 @@
-@import "./src/styles/globals";
-@import "./src/styles/mixin";
+@import './src/styles/globals';
+@import './src/styles/mixin';
 
 .wrapper {
   @include relative();
@@ -17,7 +17,7 @@
   @include absolute(20px, 20px, null, null);
   @include text-paragraph();
 
-  color: $text-base
+  color: $text-base;
 }
 
 .message {

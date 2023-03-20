@@ -1,5 +1,5 @@
 import style from './info.module.scss';
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { Button, ButtonVariation } from '../button/button';
 import { IValue } from '../../utils/interfaces';
 import UserController from '../../controllers/user';
@@ -8,7 +8,7 @@ import { getInputData } from '../../utils/helpers';
 import { Input } from '../input/input';
 import { useNavigate } from 'react-router-dom';
 import validate, { mapErrorMessage } from '../../service/validate/validate';
-import { InputsState } from '../authForm/authForm'
+import { InputsState } from '../authForm/authForm';
 
 export type FieldInfo = {
   id: string;
@@ -66,7 +66,7 @@ export function Info(props: IInfo) {
 
     const newInputsState: InputsState = {};
 
-    inputs.forEach((input) => {
+    inputs.forEach(input => {
       const { value, name } = input;
       let errorText: string | undefined;
 
@@ -105,7 +105,7 @@ export function Info(props: IInfo) {
         <Input
           key={idx}
           {...field}
-          value={fieldInput[field.id]?.value ?? (field.value ?? '')}
+          value={fieldInput[field.id]?.value ?? field.value ?? ''}
           onChange={onChangeFieldInput}
           errorText={fieldInput[field.id]?.errorText}
         />

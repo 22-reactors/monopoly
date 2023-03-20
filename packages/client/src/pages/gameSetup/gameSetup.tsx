@@ -6,12 +6,7 @@ import { Button, ButtonVariation } from '../../components/button/button';
 import { Input } from '../../components/input/input';
 import Select, { ISelectChangeData } from '../../components/select/select';
 import { IOption } from '../../components/select/selectOption';
-import {
-  ColorLabels,
-  Config,
-  ErrorText,
-  PlayerTypesLabels,
-} from './const';
+import { ColorLabels, Config, ErrorText, PlayerTypesLabels } from './const';
 import style from './gameSetup.module.scss';
 import { Players } from './players/players';
 import { redirect } from 'react-router-dom';
@@ -54,9 +49,9 @@ export const gameSetupLoader = async () => {
 };
 
 const mapOptions = (options: Record<string, string>): IOption[] =>
-Object.entries(options).map(([value, label]) => {
-  return { value, label };
-});
+  Object.entries(options).map(([value, label]) => {
+    return { value, label };
+  });
 
 export const GameSetup = (props: IGameProps) => {
   const { maxPlayers } = props;

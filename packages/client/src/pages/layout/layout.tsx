@@ -5,9 +5,9 @@ import { footerProps } from '../../mocs/footerProps';
 import { headerProps } from '../../mocs/headerProps';
 
 export const Layout = () => (
-    <>
-      <Header {...headerProps} />
-      <Outlet />
-      <Footer {...footerProps} />
-    </>
+  <>
+    <Header {...headerProps} />
+    <Outlet />
+    <Footer {...footerProps} />
+  </>
 );

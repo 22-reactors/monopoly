@@ -40,7 +40,8 @@ export class LeaderBoardAPI extends RequestTransport {
     if (data.length === 0) {
       return 0;
     }
-    return data.map(userResult => userResult.score)
+    return data
+      .map(userResult => userResult.score)
       .reduce((acc, userScore) => acc + userScore, 0);
   };
 }

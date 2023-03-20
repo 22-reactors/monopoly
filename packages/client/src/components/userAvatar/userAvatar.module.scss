@@ -1,5 +1,5 @@
-@import "./src/styles/mixin";
-@import "./src/styles/globals";
+@import './src/styles/mixin';
+@import './src/styles/globals';
 
 .wrapper {
   display: flex;
@@ -27,6 +27,6 @@
 
 .isDark {
   .name {
-    color: $text-white
+    color: $text-white;
   }
 }
