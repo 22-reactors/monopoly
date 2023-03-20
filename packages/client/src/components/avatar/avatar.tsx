@@ -3,6 +3,7 @@ import { Button, ButtonSizes, ButtonVariation } from '../button/button';
 import UserController from '../../controllers/user';
 import style from './avatar.module.scss';
 import { resourceURL } from '../../utils/const';
+import avatarEmpty from '../../assets/avatar-empty.png'
 
 interface IAvatar {
   src?: string;
@@ -46,7 +47,7 @@ function Avatar(props: IAvatar) {
   return (
     <section className={style.container}>
       <div className={style.avatar}>
-        <img src={avatarSrc ? `${resourceURL}${avatarSrc}` : ''} alt="аватар" />
+        <img src={avatarSrc ? `${resourceURL}${avatarSrc}` : avatarEmpty} alt="аватар" />
       </div>
       <input
         className={style.avatarInput}

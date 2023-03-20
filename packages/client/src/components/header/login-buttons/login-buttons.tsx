@@ -26,12 +26,12 @@ export const LoginButtons = (props: ILoginButtonsProps) => {
     dispatch(logoutAction());
   };
 
-  const avatar = user?.avatar ? `${resourceURL}${user.avatar}` : '';
+  const avatar = user?.avatar ? `${resourceURL}${user.avatar}` : undefined;
 
   return user
     ? (
       <div className={style.user}>
-        <UserAvatar name={user.display_name} src={avatar} isDarkTheme={isDarkTheme}/>
+        <UserAvatar name={user.display_name ?? user.first_name} src={avatar} isDarkTheme={isDarkTheme}/>
         <div className={style.divider}></div>
         <span
           className={classNames(

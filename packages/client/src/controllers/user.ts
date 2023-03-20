@@ -33,6 +33,13 @@ class UserController {
   }
 
   async changePassword(data: IPasswordData) {
+    const values = Object.values(data);
+    const isEmptyValue = values.some((value) => value === '');
+
+    if (isEmptyValue) {
+      return;
+    }
+
     try {
       const response = await this._api.changePassword(data);
       if (response !== 'OK') {

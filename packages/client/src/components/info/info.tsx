@@ -47,7 +47,7 @@ export function Info(props: IInfo) {
     const { value, name } = target;
     let errorText: string | undefined;
 
-    if (props.validation && !validate.isValidField(target)) {
+    if (props.validation && !validate.isValidField(target) && value !== '') {
       errorText = mapErrorMessage[name as keyof typeof mapErrorMessage];
     }
 
@@ -70,7 +70,7 @@ export function Info(props: IInfo) {
       const { value, name } = input;
       let errorText: string | undefined;
 
-      if (props.validation && !validate.isValidField(input)) {
+      if (props.validation && !validate.isValidField(input) && value !== '') {
         errorText = mapErrorMessage[name as keyof typeof mapErrorMessage];
         isValid = false;
       }
@@ -105,7 +105,7 @@ export function Info(props: IInfo) {
         <Input
           key={idx}
           {...field}
-          value={fieldInput[field.id]?.value ?? field.value}
+          value={fieldInput[field.id]?.value ?? (field.value ?? '')}
           onChange={onChangeFieldInput}
           errorText={fieldInput[field.id]?.errorText}
         />
