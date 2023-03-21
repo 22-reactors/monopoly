@@ -74,7 +74,7 @@ async function startServer() {
 
       try {
         const appHtml = await render(req);
-        const html = template.replace('<!--app-html-->', appHtml);
+        const html = template.replace('<!--ssr-outlet-->', appHtml);
         res.setHeader('Content-Type', 'text/html');
         res.status(200).end(html);
       } catch (e) {
