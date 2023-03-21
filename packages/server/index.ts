@@ -72,11 +72,17 @@ async function startServer() {
           .render;
       }
 
-      const appHtml = await render(req);
-
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml);
-
-      res.status(200).set({ 'Context-Type': 'text/html' }).end(html);
+      try {
+        const appHtml = await render(req);
+        const html = template.replace('<!--app-html-->', appHtml);
+        res.setHeader('Content-Type', 'text/html');
+        res.status(200).end(html);
+      } catch (e) {
+        if (e instanceof Response && e.status >= 300 && e.status <= 399) {
+          return res.redirect(e.status, e.headers.get('Location') as string);
+        }
+        throw e;
+      }
     } catch (error) {
       if (isDev()) {
         vite.ssrFixStacktrace(error as Error);
