@@ -9,9 +9,10 @@ import { IOption } from '../../components/select/selectOption';
 import {
   ColorLabels,
   Config,
+  ErrorDupText,
   ErrorText,
-  PlayerTypesLabels,
-} from './const';
+  PlayerTypesLabels
+} from './const'
 import style from './gameSetup.module.scss';
 import { Players } from './players/players';
 import { redirect } from 'react-router-dom';

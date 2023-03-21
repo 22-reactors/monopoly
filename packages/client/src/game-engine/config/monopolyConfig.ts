@@ -1,7 +1,6 @@
 import { IConfig } from '../../pages/gameSetup/gameSetup';
 import { IUserConfig } from '../core/chip/chips';
 import { getCardsStore, initMonopolyStore } from '../core/store/monopolyStore';
-import { ICardMainSetting } from '../core/types/card';
 import {
   TCardSetting,
   CardTypeEmum,
