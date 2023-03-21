@@ -16,12 +16,12 @@ export const ForumTopic1: FC<ForumTopicProps> = () => {
   return (
     <>
       <section className={style.pageContainer}>
-        <h1 className={style.forum__title}>Форум {topicId}</h1>
+        <h1 className={style.title}>Форум {topicId}</h1>
        
         <div className={style.topic__container}>
-        <div className={style.topic__name}>
+        <h2 className={style.topic__name}>
         Тема 1
-        </div>
+        </h2>
         <div className={style.newmessage}>
         <form >
         <Textarea

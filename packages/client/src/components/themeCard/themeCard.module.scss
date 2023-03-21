@@ -9,12 +9,13 @@
   padding: 20px;
   border-radius: 10px;
   align-items: center;
-  margin-bottom: 20px;
+  margin-top: 28px;
+  height: 34px;
   justify-content: space-between;
   max-width: 1110px;
-  flex-wrap: wrap;
   width: 100%;
-
+  @include shadowDefault;
+  padding: auto;
 }
 
 .title {

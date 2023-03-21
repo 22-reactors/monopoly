@@ -3,9 +3,7 @@
 import { type FC } from 'react';
 import { Link } from 'react-router-dom';
 import style from '../../forum.module.scss';
-//import { Paths } from '../constants';
 import { type ForumTopicListProps } from './typings';
-//import { Paginator } from '../../../../components/paginator/paginator';
 export enum Paths {
   Forum = '/forum',
   Section = '/forum/section',

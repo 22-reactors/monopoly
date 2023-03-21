@@ -1,1 +1,0 @@
-export { ForumMessage } from './ForumMessage';

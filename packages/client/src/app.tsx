@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { homeProps } from './mocs/homeProps';
-import { ThemeCard } from './components/themeCard/themeCard';
 import LoginProps from './mocs/loginProps';
 import RegistrProps from './mocs/registrProps'; 
-
 
 import {
   RootBoundary,
@@ -72,8 +70,7 @@ const router = createBrowserRouter([
         path: links.game.path,
         element: <Game />,
         loader: gameLoader,
-      },
-      
+      },  
     ],
   },
   {

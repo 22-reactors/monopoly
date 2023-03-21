@@ -5,20 +5,24 @@ import style from './forum.module.scss';
 import { type FC } from 'react';
 
 import { ExampleForum as sectionList } from './ExampleData';
-import { ForumSectionList } from './ForumSectionList';
+import { ForumSectionList } from './ForumSectionList/ForumSectionList';
 import { type ForumProps } from './typing';
-
 
 
 export const Forum: FC<ForumProps> = () => {
   const pageTitle = 'Форум';
   return (
     <>
-      <section className={style.forum__wrapper}>
-        <h1 className={style.forum__title} >
+      <section className={style.wrapper}>
+        <div>
+        <h1 className={style.title} >
           {pageTitle}
         </h1>
         <ForumSectionList sectionList={sectionList} />
+        </div>
+        
+
+        
       </section>
       
     </>

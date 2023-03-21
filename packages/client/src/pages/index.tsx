@@ -10,6 +10,9 @@ import { ProfilePage, profileLoader } from './profile/profile';
 import { Register } from './register/register';
 import { registerLoader } from './register/register';
 import { Layout } from './layout/layout';
+import { ForumSection1 } from './forum/ForumSection/ForumSection1';
+import { ForumTopic1 } from './forum/ForumTopic/ForumTopic1';
+import { CreateTopic } from './forum/ForumTopic/CreateTopic';
 
 const RootBoundary = () => {
   const error = useRouteError();
@@ -20,9 +23,7 @@ const RootBoundary = () => {
 
   return <ErrorPage />;
 };
-import { ForumSection1 } from './forum/ForumSection/ForumSection1';
-import { ForumTopic1 } from './forum/ForumTopic/ForumTopic1';
-import { CreateTopic } from './forum/ForumTopic/CreateTopic';
+
 
 export {
   RootBoundary,

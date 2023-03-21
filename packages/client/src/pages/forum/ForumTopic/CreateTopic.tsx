@@ -18,7 +18,7 @@ export const CreateTopic: FC<ForumSectionProps> = () => {
   return (
     <>
         <section className={style.pageContainer}>
-        <h1 className={style.forum__title}  >
+        <h1 className={style.title}  >
         {pageTitle}
         </h1>
          <div className={style.topic__container}>
@@ -29,6 +29,7 @@ export const CreateTopic: FC<ForumSectionProps> = () => {
             value={topic}
             onChange={e => setTopic(e.target.value)}
             label='Введите название темы'
+            
             />
         </form>  
         </div> 
@@ -42,7 +43,6 @@ export const CreateTopic: FC<ForumSectionProps> = () => {
             />
         </form>  
         </div> 
-         <div >
             <Link to={links.CreateTopic.path}>
               <Button
               variation={ButtonVariation.PRIMARY}
@@ -52,7 +52,7 @@ export const CreateTopic: FC<ForumSectionProps> = () => {
               </Button>
             </Link>
         </div>
-         </div>
+        
       </section>
     </>
   );

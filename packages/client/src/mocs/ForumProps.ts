@@ -17,14 +17,9 @@ export const ThemeCardProps : IThemeCard = {
     lastMessage: '09.02.2023 15:23' ,
   }
 
- // export default ThemeCardProps;
-
 export const ThemeMessageProps : IThemeMessage = {
     avatar: IUserAvatarProps,
     status: "1 час",
     message: "Привет, мир!",
     countLikes: 10,
   }
-
-
- // export default ThemeCardProps;

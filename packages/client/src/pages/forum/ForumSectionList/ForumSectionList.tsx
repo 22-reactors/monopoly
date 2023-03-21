@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import style from '../forum.module.scss';
 import { type ForumSectionListProps } from './typings';
 import { Paginator } from '../../../components/paginator/paginator';
+
 export enum Paths {
   Forum = '/forum',
   Section = '/forum/section',
@@ -19,17 +20,15 @@ export const ForumSectionList: FC<ForumSectionListProps> = ({ sectionList }) => 
         {sectionList.map(item => (
           <tr key={item.id} className={style.forum__item}>
             <td className={style.forum__name}>
-              <Link to={`${Paths.Section}/${item.id}`}>{item.name}</Link>
+              <Link className={style.link} to={`${Paths.Section}/${item.id}`}>{item.name}</Link>
             </td>
             <td className={style.forum__cell}>{item.topicCount} <text className={style.forum__cell__1}>темы</text></td>
             <td className={style.forum__cell}>{item.messages} <text className={style.forum__cell__1}>Сообщения</text></td>
           </tr>
         ))}
-      
+
       </table>
-            <div className={style.paginator}> 
-            <Paginator pagesCount={4} />
-            </div>
+      <Paginator className={style.paginator} pagesCount={4} />
     </div>
             </>
   );

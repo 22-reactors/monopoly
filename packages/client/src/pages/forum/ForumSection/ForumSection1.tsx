@@ -1,9 +1,7 @@
-//Компонент карточка темы форума
+//Раздел форума. включает список тем и кол-во сообщений
 
 import { type FC } from 'react';
 import style from '../forum.module.scss';
-//import { ExampleSection as topicList } from '../ExampleData';
-//import { ForumTopicList } from './ForumTopicList';
 import { type ForumSectionProps } from './typings';
 import { Button, ButtonVariation, ButtonSizes } from '../../../components/button/button';
 import { Link } from 'react-router-dom';
@@ -16,10 +14,9 @@ export const ForumSection1: FC<ForumSectionProps> = () => {
   const pageTitle = 'Форум 1';
   return (
     <>
-        <section className={style.forum__wrapper}>
-        <h1 className={style.forum__title}  >
+        <section className={style.wrapper}>
+        <h1 className={style.title}  >
         {pageTitle}
-        </h1>
         <div className={style.forum__button}>
             <Link to={links.CreateTopic.path}>
               <Button
@@ -30,19 +27,19 @@ export const ForumSection1: FC<ForumSectionProps> = () => {
               </Button>
             </Link>
         </div>
-         {/* <ForumTopicList topicList={topicList} sectionId= '1' /> */}
-         <div className={style.forum}>
-         <div className={style.forum__body}>
-         <Link to={links.forumtopic1.path} >
-         <ThemeCard {...ThemeCardProps}/>
+        </h1>
+
+      
+        
+         <Link  className={style.link} to={links.forumtopic1.path} >
+         <ThemeCard  {...ThemeCardProps}/>
          </Link>
          <ThemeCard {...ThemeCardProps}/>
          <ThemeCard {...ThemeCardProps}/>
-         </div>
-         <div className={style.paginator}> 
-         <Paginator pagesCount={4} />
-         </div>
-         </div>
+         
+     
+         < Paginator className={style.paginator} pagesCount={4} />
+
       </section>
     </>
   );
