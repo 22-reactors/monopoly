@@ -6,7 +6,7 @@ import { store } from '../reduxstore/monopolyStore';
 export const unAuthorizedRedirect = async () => {
   const { user } = store.getState().user;
   if (!user) {
-    return redirect(links.login.path);
+    redirect(links.login.path);
   }
   return true;
 };
@@ -14,7 +14,7 @@ export const unAuthorizedRedirect = async () => {
 export const authorizedRedirect = async () => {
   const { user } = store.getState().user;
   if (user) {
-    return redirect(links.game.path);
+    redirect(links.game.path);
   }
   return true;
 };
