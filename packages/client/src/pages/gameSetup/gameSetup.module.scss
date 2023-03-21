@@ -1,10 +1,6 @@
 @import '../../styles/globals.scss';
 @import '../../styles/mixin.scss';
 
-.wrapper {
-  width: 100vw;
-}
-
 .container {
   min-height: 60vh;
   @include container-width;

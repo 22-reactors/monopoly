@@ -1,12 +1,14 @@
 @import '../../styles/mixin';
-@import '../../styles/variables';
+@import '../../styles/globals';
 
 .btn {
+  @include text-base();
+
   cursor: pointer;
-  border: 1px solid $primary-color;
+  border: 1px solid $primary;
   border-radius: 4px;
   padding: 12px 18px;
-  font: $text-base-font;
+  font: $text-base;
   white-space: nowrap;
 
   @media (prefers-reduced-motion: no-preference) {
@@ -14,20 +16,20 @@
   }
 
   &_primary {
-    background-color: $primary-color;
-    color: $outlined-color;
+    background-color: $primary;
+    color: $text-white;
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
-        background-color: $primary-hover-color;
-        border-color: $primary-hover-color;
+        background-color: $primary-hover;
+        border-color: $primary-hover;
       }
     }
   }
 
   &_outlined {
-    background-color: $outlined-color;
-    color: $primary-color;
+    background-color: $text-white;
+    color: $primary;
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {

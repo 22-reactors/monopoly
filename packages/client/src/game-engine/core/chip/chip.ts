@@ -2,7 +2,10 @@ import { EVENTS_NAME } from '../../config/eventsNameConfig';
 import { ICoordinates } from '../types/card';
 import { CanvasElement } from '../canvas/canvasElement';
 import { EventBus } from '../event-bus';
-import { getUserConfigStore, updateUserConfigStore } from '../store/monopolyStore';
+import {
+  getUserConfigStore,
+  updateUserConfigStore,
+} from '../store/monopolyStore';
 
 interface IArc {
   ctx: CanvasRenderingContext2D;

@@ -7,5 +7,5 @@ export const userSelector = createSelector([selectUser], state => state.user);
 
 export const userErrorSelector = createSelector(
   [selectUser],
-  state => state.error 
+  state => state.error
 );

@@ -5,7 +5,7 @@ import playersReducer from './players/playersSlice';
 //здесь будут редьюсеры нашего приложения
 const appReducer = {
   user: userReducer,
-  players: playersReducer
+  players: playersReducer,
 };
 
 export const store = configureStore({

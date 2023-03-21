@@ -42,7 +42,12 @@ export class Cards {
       getCardsStore().map((cardSetting, index) => {
         const { type } = cardSetting;
         const fnInit = Cards.initCard[type] as TCardInit;
-        const props: TCardInitProps = { index, ctx, canvasSize, ...cardSetting };
+        const props: TCardInitProps = {
+          index,
+          ctx,
+          canvasSize,
+          ...cardSetting,
+        };
         return fnInit(props);
       })
     );
@@ -83,7 +88,8 @@ export class Cards {
   }
 
   public static isCardNotBuy(cardIndex: number): boolean {
-    return !(getCardsStore()[cardIndex] as ICardMainSetting).buyingBackgroundColor;
+    return !(getCardsStore()[cardIndex] as ICardMainSetting)
+      .buyingBackgroundColor;
   }
 
   public static getUnpurchasedCards(): TCard[] {

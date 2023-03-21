@@ -1,4 +1,5 @@
-@import "./src/styles/variables";
+@import './src/styles/mixin';
+@import './src/styles/globals';
 
 .wrapper {
   display: flex;
@@ -14,12 +15,18 @@
 }
 
 .name {
-  font: $text-base-font;
-  color: $primary-color;
+  @include text-base;
+
+  text-decoration: none;
+  color: $primary;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .isDark {
   .name {
-    color: $outlined-color
+    color: $text-white;
   }
 }

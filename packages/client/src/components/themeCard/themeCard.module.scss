@@ -1,11 +1,11 @@
-@import "./src/styles/variables";
-@import "./src/styles/mixin";
+@import './src/styles/globals';
+@import './src/styles/mixin';
 
 .wrapper {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background-color: $outlined-color;
+  background-color: $text-white;
   padding: 20px;
   border-radius: 10px;
   box-sizing: border-box;
@@ -13,14 +13,14 @@
 
 .title {
   margin: 0;
-  color: $text-base-color;
+  color: $text-base;
   font-size: 24px;
   line-height: 34px;
 }
 
 .description {
   margin: 0;
-  color: $text-additional-color
+  color: $text-additional;
 }
 
 .infoBlock {
@@ -34,7 +34,7 @@
   @include relative();
 
   padding-left: 48px;
-  color: $primary-color;
+  color: $primary;
 
   &::before {
     content: '';
@@ -50,5 +50,5 @@
 }
 
 .lastMessage {
-  color: $text-additional-color;
+  color: $text-additional;
 }

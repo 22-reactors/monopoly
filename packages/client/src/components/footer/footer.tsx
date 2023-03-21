@@ -24,8 +24,8 @@ export const Footer = (props: IFooterProps) => {
 
   return (
     <footer className={classNames(style.footer, isDarkTheme && style.dark)}>
-      <div className={style.container}>
-        <div className={classNames(style.menu, isDarkTheme && style.dark)}>
+      <div className={classNames(style.menu, isDarkTheme && style.dark)}>
+        <div className={style.menuContainer}>
           <h4 className={classNames(style.title, isDarkTheme && style.dark)}>
             {navTitle}
           </h4>
@@ -45,14 +45,14 @@ export const Footer = (props: IFooterProps) => {
             </ul>
           </nav>
         </div>
-        <div className={style.infoContainer}>
-          <Logo className={style.logo} />
-          {infoText.map((text, index) => (
-            <p key={index} className={style.info}>
-              {text}
-            </p>
-          ))}
-        </div>
+      </div>
+      <div className={style.infoContainer}>
+        <Logo className={style.logo} />
+        {infoText.map((text, index) => (
+          <p key={index} className={style.info}>
+            {text}
+          </p>
+        ))}
       </div>
     </footer>
   );

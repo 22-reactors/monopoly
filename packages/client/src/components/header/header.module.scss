@@ -1,14 +1,13 @@
 @import '../../styles/mixin';
 @import '../../styles/globals';
-@import '../../styles/variables';
 
 .header {
-  width: 100vw;
+  background-color: $text-white;
 }
 
 .container {
   box-sizing: border-box;
-  padding: 10px 0;
+  padding: 11px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,5 +54,5 @@
 }
 
 .lightText {
-  color: $primary-color;
+  color: $primary;
 }

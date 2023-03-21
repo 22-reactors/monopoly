@@ -33,7 +33,6 @@ export const Home = (props: IHomeProps) => {
           </Button>
         </Link>
       </div>
-      <img className={style.cardsImage} src="cards.svg" alt="monopoly cards" />
     </main>
   );
 };

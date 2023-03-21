@@ -1,5 +1,11 @@
 import RequestTransport from '../../service/request/request';
-import { IBadResponse, ILoginData, ISignUpData, SignUpResponse, UserResponse } from './interfaces';
+import {
+  IBadResponse,
+  ILoginData,
+  ISignUpData,
+  SignUpResponse,
+  UserResponse,
+} from './interfaces';
 
 export class AuthAPI extends RequestTransport {
   constructor() {
@@ -23,7 +29,7 @@ export class AuthAPI extends RequestTransport {
   }
 
   logout() {
-    return this.post('/logout') as Promise<"OK" | IBadResponse>;
+    return this.post('/logout') as Promise<'OK' | IBadResponse>;
   }
 }
 

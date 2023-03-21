@@ -1,3 +1,3 @@
 export const Forum = () => {
-  return <div>Форум</div>
-}
+  return <div>Форум</div>;
+};

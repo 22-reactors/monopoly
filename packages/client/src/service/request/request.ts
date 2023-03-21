@@ -93,7 +93,7 @@ export default class RequestTransport {
     if (!(data instanceof FormData)) {
       headers['content-type'] = 'application/json';
     }
-    
+
     const response = await fetch(url, {
       method,
       headers,

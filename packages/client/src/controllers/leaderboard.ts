@@ -1,5 +1,8 @@
 import API, { LeaderBoardAPI } from '../api/leaderboard/leaderboard';
-import { Leaderboard, LeaderboardGetAllResponse } from '../api/leaderboard/interfaces';
+import {
+  Leaderboard,
+  LeaderboardGetAllResponse,
+} from '../api/leaderboard/interfaces';
 import { LeaderboardResults } from '../pages/leaderboard/leaderboard';
 
 const isGetAllGoodResponse = (

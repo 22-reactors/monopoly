@@ -11,8 +11,8 @@ import {
   Config,
   ErrorDupText,
   ErrorText,
-  PlayerTypesLabels,
-} from './const';
+  PlayerTypesLabels
+} from './const'
 import style from './gameSetup.module.scss';
 import { Players } from './players/players';
 import { redirect } from 'react-router-dom';
@@ -138,7 +138,7 @@ export const GameSetup = (props: IGameProps) => {
   }
 
   return (
-    <div className={style.wrapper}>
+    <main>
       <div className={style.container}>
         <h2 className={style.title}>Создание игры</h2>
         <Players maxPlayers={maxPlayers} />
@@ -178,6 +178,6 @@ export const GameSetup = (props: IGameProps) => {
           </Button>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
