@@ -1,5 +1,5 @@
-@import './src/styles/globals';
-@import './src/styles/mixin';
+@import "../../styles/variables";
+@import "../../styles/mixin";
 
 .wrapper {
   @include relative();
