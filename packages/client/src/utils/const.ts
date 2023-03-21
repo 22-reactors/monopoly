@@ -25,11 +25,11 @@ export const links = {
   },
   game: {
     path: '/game',
-    title: 'Играть',
+    title: 'Игра',
   },
   setup: {
     path: '/setup',
-    title: 'Создание игры',
+    title: 'Играть',
   },
 };
 

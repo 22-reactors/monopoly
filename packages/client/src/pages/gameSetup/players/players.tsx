@@ -1,10 +1,13 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../../reduxstore/hooks';
+import { useAppDispatch, useAppSelector } from '../../../reduxstore/hooks';
 import { playersSelector } from '../../../reduxstore/players/players.selector';
 import { links } from '../../../utils/const';
 import { Button, ButtonVariation } from '../../../components/button/button';
 import style from './players.module.scss';
+import { initMonopolyUserConfig, isGameExist } from '../../../game-engine/config/monopolyConfig';
+import { resetPlayersAction } from '../../../reduxstore/players/playersSlice';
+
 
 interface IChipProps {
   name: string;
@@ -18,6 +21,7 @@ interface IPlayersProps {
 export const Players = (props: IPlayersProps) => {
   const { maxPlayers } = props;
   const players = useAppSelector(playersSelector);
+  const dispatch = useAppDispatch();
 
   const defaultPlayers: React.ReactNode[] = [];
   for (let i = players.length; i < maxPlayers; i++) {
@@ -26,6 +30,18 @@ export const Players = (props: IPlayersProps) => {
         <span>?</span>
       </div>
     );
+  }
+
+  const initGameConfig = () => {
+    initMonopolyUserConfig(players);
+  };
+
+  const isPlayerNotExists = () => {
+    return players.length === 0;
+  }
+
+  const resetPlayers = () => {
+    dispatch(resetPlayersAction())
   }
 
   return (
@@ -38,14 +54,35 @@ export const Players = (props: IPlayersProps) => {
           ))}
           {defaultPlayers}
         </div>
-        <Link to={links.game.path}>
+        <div className={style.startGameBtns}>
+          <Link to={links.game.path}>
+            <Button
+              className={style.startButton}
+              variation={ButtonVariation.PRIMARY}
+              onClick={initGameConfig}
+              disabled={isPlayerNotExists()}
+              rounded>
+              Начать игру
+            </Button>
+          </Link>
+          <Link to={links.game.path}>
+            <Button
+              className={style.startButton}
+              variation={ButtonVariation.PRIMARY}
+              rounded
+              disabled={!isGameExist()}>
+              Продолжить
+            </Button>
+          </Link>
           <Button
             className={style.startButton}
             variation={ButtonVariation.PRIMARY}
+            onClick={resetPlayers}
+            disabled={isPlayerNotExists()}
             rounded>
-            Начать игру
+            Сбросить
           </Button>
-        </Link>
+        </div>
       </div>
     </div>
   );

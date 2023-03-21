@@ -19,9 +19,11 @@ const playersSlice = createSlice({
         color,
       });
     },
+    resetPlayersAction: () => initialState
   },
 });
 
 export const { addPlayerAction } = playersSlice.actions;
+export const { resetPlayersAction } = playersSlice.actions;
 
 export default playersSlice.reducer;

@@ -11,7 +11,6 @@ import { TCard } from './core/card/cardType';
 import {
   getCardsStore,
   getUserConfigStore,
-  initMonopolyStore,
   updateCardsStore,
   updateUserConfigStore,
 } from './core/store/monopolyStore';
@@ -26,7 +25,6 @@ export class GameEngine {
   }
 
   static async init(canvas: HTMLCanvasElement) {
-    initMonopolyStore();
     const gameEngine = new GameEngine();
     await gameEngine.addBoard(canvas);
     return gameEngine;

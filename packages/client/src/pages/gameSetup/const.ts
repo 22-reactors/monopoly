@@ -24,7 +24,7 @@ export const enum Colors {
 export const ColorLabels = {
   [Colors.RED]: 'Красный',
   [Colors.GREEN]: 'Зеленый',
-  [Colors.PINK]: 'Фиолетовый',
+  [Colors.PINK]: 'Розовый',
   [Colors.GREY]: 'Серый',
 };
 
@@ -32,4 +32,9 @@ export const ErrorText = {
   [Config.NAME]: 'Имя не указано',
   [Config.TYPE]: 'Тип не указан',
   [Config.COLOR]: 'Цвет не указан',
+} as const;
+
+export const ErrorDupText = {
+  [Config.NAME]: 'Имя уже занято',
+  [Config.COLOR]: 'Цвет уже занят',
 } as const;

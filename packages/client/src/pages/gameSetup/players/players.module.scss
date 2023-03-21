@@ -12,7 +12,7 @@
   }
 
   &_pink {
-    #{$property}: purple;
+    #{$property}: pink;
   }
 
   &_grey {
@@ -39,6 +39,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.startGameBtns {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px
 }
 
 .chips {

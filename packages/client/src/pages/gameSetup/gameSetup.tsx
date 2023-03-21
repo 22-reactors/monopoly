@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../reduxstore/hooks';
-import { playersNumberSelector } from '../../reduxstore/players/players.selector';
+import { playersNumberSelector, playersSelector } from '../../reduxstore/players/players.selector';
 import { addPlayerAction } from '../../reduxstore/players/playersSlice';
 import { Button, ButtonVariation } from '../../components/button/button';
 import { Input } from '../../components/input/input';
 import Select, { ISelectChangeData } from '../../components/select/select';
 import { IOption } from '../../components/select/selectOption';
-import { ColorLabels, Config, ErrorText, PlayerTypesLabels } from './const';
+import {
+  ColorLabels,
+  Config,
+  ErrorText,
+  PlayerTypesLabels,
+} from './const';
 import style from './gameSetup.module.scss';
 import { Players } from './players/players';
 import { redirect } from 'react-router-dom';
@@ -63,6 +68,7 @@ export const GameSetup = (props: IGameProps) => {
   );
 
   const playersNumber = useAppSelector(playersNumberSelector);
+  const players: IConfig[] = useAppSelector(playersSelector);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -89,17 +95,21 @@ export const GameSetup = (props: IGameProps) => {
   };
 
   const addPlayer = () => {
-    let isValid = true;
+    const validator = { isValid: true };
     Object.entries(config).forEach(([key, value]) => {
       if (value === '') {
-        isValid = false;
+        validator.isValid = false;
         setInputErrors(prevState => ({
           ...prevState,
           [key]: ErrorText[key as keyof IConfig],
         }));
       }
     });
-    if (isValid) {
+
+    validFieldOnDup(Config.NAME, validator);
+    validFieldOnDup(Config.COLOR, validator);
+
+    if (validator.isValid) {
       dispatch(addPlayerAction(config));
       setSelectOptions(prevState =>
         Object.fromEntries(
@@ -112,6 +122,19 @@ export const GameSetup = (props: IGameProps) => {
       setConfig(initialConfig);
     }
   };
+
+  const validFieldOnDup = (fieldName: Config.NAME | Config.COLOR, validator: {isValid: boolean}): void => {
+    players.forEach(player => {
+      if (player[fieldName] == config[fieldName]) {
+        setInputErrors(prevState => ({
+          ...prevState,
+          [fieldName]: ErrorDupText[fieldName],
+        }));
+        validator.isValid = false;
+        return;
+      }
+    });
+  }
 
   return (
     <main>
