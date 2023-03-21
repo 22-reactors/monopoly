@@ -8,7 +8,7 @@ import { Cards } from './core/card/cards';
 import { MainCard } from './core/card/cards/commonCard/mainCard';
 import { ICardMainSetting } from './core/types/card';
 import { TCard } from './core/card/cardType';
-import { getCardsStore, getUserConfigStore, initMonopolyStore, updateCardsStore, updateUserConfigStore } from './core/store/monopolyStore';
+import { getCardsStore, getUserConfigStore, updateCardsStore, updateUserConfigStore } from './core/store/monopolyStore';
 
 export class GameEngine {
   board: Board | undefined;
@@ -20,7 +20,6 @@ export class GameEngine {
   }
 
   static async init(canvas: HTMLCanvasElement) {
-    initMonopolyStore();
     const gameEngine = new GameEngine();
     await gameEngine.addBoard(canvas);
     return gameEngine;

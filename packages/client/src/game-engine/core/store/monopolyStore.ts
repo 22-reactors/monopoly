@@ -1,5 +1,5 @@
 import { localStorageService } from '../../../service/store/storage';
-import { MonopolyConfig } from '../../config/monopolyConfig';
+import { MonopolyConfig, userStartProps } from '../../config/monopolyConfig';
 import { IUserConfig } from '../chip/chips';
 import { TCardSetting } from '../types/card';
 
@@ -11,18 +11,22 @@ export function getCardsStore(): TCardSetting[] {
   return localStorageService().get('cards');
 }
 
-export function initMonopolyStore(): void {
-  if (localStorageService().get('userConfig') === null) {
-    updateUserConfigStore(MonopolyConfig.userConfig);
-  }
-
-  if (localStorageService().get('cards') === null) {
-    updateCardsStore(MonopolyConfig.cards);
-  }
+export function initMonopolyStore(userConfig: IUserConfig[]): void {
+  updateUserConfigStore(userConfig);
+  updateCardsStore(MonopolyConfig.cards);
 }
 
 export function reinitMonopolyStore(): void {
-  updateUserConfigStore(MonopolyConfig.userConfig);
+  const userConfig: IUserConfig[] = getUserConfigStore();
+
+  //Сбасываем прогрессы игроков до стартовых
+  userConfig.forEach(user => {
+    user.chipPosition = userStartProps.startChipPosition;
+    user.userMoney = userStartProps.startMoney;
+    user.score = userStartProps.startScore;
+  });
+
+  updateUserConfigStore(userConfig);
   updateCardsStore(MonopolyConfig.cards);
 }
 
