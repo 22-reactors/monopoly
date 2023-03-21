@@ -10,6 +10,7 @@ import { ProfilePage, profileLoader } from './profile/profile';
 import { Register } from './register/register';
 import { registerLoader } from './register/register';
 import { Layout } from './layout/layout';
+import { GameSetup, gameSetupLoader } from './gameSetup/gameSetup';
 
 const RootBoundary = () => {
   const error = useRouteError();
@@ -35,4 +36,6 @@ export {
   Register,
   registerLoader,
   Layout,
+  GameSetup,
+  gameSetupLoader,
 };

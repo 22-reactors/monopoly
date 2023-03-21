@@ -49,7 +49,7 @@ const initialInputErrors: IInputErrors = {
 export const gameSetupLoader = async () => {
   const user = await AuthController.getUser();
   if (!user) {
-    return redirect(links.login.path);
+    redirect(links.login.path);
   }
   return true;
 };

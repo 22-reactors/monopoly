@@ -16,6 +16,8 @@ import {
   Register,
   registerLoader,
   Layout,
+  GameSetup,
+  gameSetupLoader,
 } from './pages/index';
 import { links } from './utils/const';
 
@@ -48,6 +50,11 @@ export const routes = [
       {
         path: links.forum.path,
         element: <Forum />,
+      },
+      {
+        path: links.setup.path,
+        element: <GameSetup maxPlayers={4} />,
+        loader: gameSetupLoader,
       },
     ],
   },
