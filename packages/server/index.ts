@@ -10,7 +10,7 @@ dotenv.config();
 import express from 'express';
 // import { createClientAndConnect } from './db';
 
-const isDev = () => process.env.NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === 'development';
 
 async function startServer() {
   const app = express();
@@ -24,7 +24,7 @@ async function startServer() {
   const ssrClientPath = require.resolve('client/dist-ssr/client.cjs');
   const srcPath = path.dirname(require.resolve('client'));
 
-  if (isDev()) {
+  if (isDev) {
     vite = await createViteServer({
       server: { middlewareMode: true },
       root: srcPath,
@@ -38,7 +38,7 @@ async function startServer() {
     res.json('👋 Howdy from the server :)');
   });
 
-  if (!isDev()) {
+  if (!isDev) {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')));
     app.use('/images', express.static(path.resolve(distPath, 'images')));
   }
@@ -49,7 +49,7 @@ async function startServer() {
     try {
       let template: string;
 
-      if (!isDev()) {
+      if (!isDev) {
         template = fs.readFileSync(
           path.resolve(distPath, 'index.html'),
           'utf-8'
@@ -65,7 +65,7 @@ async function startServer() {
 
       let render: (...args: any) => Promise<string>;
 
-      if (!isDev()) {
+      if (!isDev) {
         render = (await import(ssrClientPath)).render;
       } else {
         render = (await vite.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx')))
@@ -84,7 +84,7 @@ async function startServer() {
         throw e;
       }
     } catch (error) {
-      if (isDev()) {
+      if (isDev) {
         vite.ssrFixStacktrace(error as Error);
       }
       next(error);
