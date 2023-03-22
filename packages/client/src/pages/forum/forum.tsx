@@ -20,11 +20,7 @@ export const Forum: FC<ForumProps> = () => {
         </h1>
         <ForumSectionList sectionList={sectionList} />
         </div>
-        
-
-        
       </section>
-      
     </>
   );
 };

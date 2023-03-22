@@ -1,21 +1,20 @@
 @import '../../styles/mixin';
-@import '../../styles/variables';
 @import '../../styles/globals';
 
 .footer {
   @include text-base;
-  width: 100vw;
   box-sizing: border-box;
-}
-
-.container {
-  @include container-width;
+  background-color: $text-white;
 }
 
 .menu {
   padding: 26px 0;
   border-top: 1px solid rgba(149, 149, 149, 0.2);
   border-bottom: 1px solid rgba(149, 149, 149, 0.2);
+}
+
+.menuContainer {
+  @include container-width;
 }
 
 .title {
@@ -26,6 +25,7 @@
 }
 
 .navList {
+  @include container-width;
   @include clear-list;
   display: inline-grid;
   grid-template-rows: repeat(4, 1fr);
@@ -41,6 +41,8 @@
 }
 
 .infoContainer {
+  @include container-width;
+
   text-align: center;
   padding: 60px 0;
 }

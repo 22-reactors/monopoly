@@ -4,12 +4,10 @@ import { Header } from '../../components/header/header';
 import { footerProps } from '../../mocs/footerProps';
 import { headerProps } from '../../mocs/headerProps';
 
-export const Layout = () => {
-  return (
-    <>
-      <Header {...headerProps} />
-      <Outlet />
-      <Footer {...footerProps} />
-    </>
-  );
-};
+export const Layout = () => (
+  <>
+    <Header {...headerProps} />
+    <Outlet />
+    <Footer {...footerProps} />
+  </>
+);

@@ -1,13 +1,13 @@
 .gamePageWrapClass {
-  display: table-caption;
+  height: 100%;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
 }
 
-.reloadPageBtnClass {
-  margin-left: 50px;
-  margin-top: 50px;
-}
-
-.canvasClass {
-  margin-left: 50px;
-  margin-top: 15px;
+.btnWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }

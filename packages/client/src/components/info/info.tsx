@@ -1,18 +1,21 @@
 import style from './info.module.scss';
-import classNames from 'classnames';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Button, ButtonVariation } from '../button/button';
-import { IUser, IValue } from '../../utils/interfaces';
+import { IValue } from '../../utils/interfaces';
 import UserController from '../../controllers/user';
-import { IProfileData } from '../../api/user/interfaces';
+import { IPasswordData, IProfileData } from '../../api/user/interfaces';
 import { getInputData } from '../../utils/helpers';
+import { Input } from '../input/input';
+import { useNavigate } from 'react-router-dom';
+import validate, { mapErrorMessage } from '../../service/validate/validate';
+import { InputsState } from '../authForm/authForm';
 
 export type FieldInfo = {
   id: string;
   type: string;
   name: string;
   label: string;
-  value?: string;
+  value: string;
   disabled?: boolean;
   onChange?(evt: ChangeEvent): void;
 };
@@ -20,6 +23,7 @@ export type FieldInfo = {
 interface IInfo {
   className?: string;
   fields: FieldInfo[];
+  validation: boolean;
   onSubmit?(): void;
 }
 
@@ -33,79 +37,86 @@ interface IProfileForm {
 }
 
 export function Info(props: IInfo) {
-  const [isEdit, setIsEdit] = useState(false);
-  const [fieldInput, setFieldInput] = useState<Record<string, string>>({});
-  const [profile, setProfile] = useState<IUser | null>(null);
+  const navigate = useNavigate();
+  const [fieldInput, setFieldInput] = useState<
+    Record<string, { value: string; errorText?: string }>
+  >({});
 
   const onChangeFieldInput = (evt: ChangeEvent) => {
     const target = evt.target as HTMLInputElement;
-    setFieldInput({
-      ...fieldInput,
-      [target.name]: target.value,
+    const { value, name } = target;
+    let errorText: string | undefined;
+
+    if (props.validation && !validate.isValidField(target) && value !== '') {
+      errorText = mapErrorMessage[name as keyof typeof mapErrorMessage];
+    }
+
+    setFieldInput(prevState => {
+      return { ...prevState, [name]: { value, errorText } };
     });
   };
 
   const onSubmitForm = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    const data = getInputData<IProfileForm, IProfileData>(evt);
-    const response = await UserController.changeProfile(data);
-    if (response) {
-      setProfile(response);
-    }
-    setIsEdit(false);
-    console.log('Save info');
-  };
+    let isValid = true;
 
-  const getFieldValue = (fieldId: string) => {
-    if (fieldId in fieldInput) {
-      return fieldInput[fieldId];
+    const inputs = Object.values(evt.target).filter(
+      element => element instanceof HTMLInputElement
+    ) as HTMLInputElement[];
+
+    const newInputsState: InputsState = {};
+
+    inputs.forEach(input => {
+      const { value, name } = input;
+      let errorText: string | undefined;
+
+      if (props.validation && !validate.isValidField(input) && value !== '') {
+        errorText = mapErrorMessage[name as keyof typeof mapErrorMessage];
+        isValid = false;
+      }
+
+      if (errorText) {
+        newInputsState[name] = { value };
+        newInputsState[name].errorText = errorText;
+      } else {
+        isValid = true;
+      }
+    });
+
+    if (isValid) {
+      const { oldPassword, newPassword, ...userInfo } = getInputData<
+        IProfileForm,
+        IProfileData & IPasswordData
+      >(evt);
+
+      void (await UserController.changeProfile(userInfo));
+      void (await UserController.changePassword({ oldPassword, newPassword }));
+      void navigate(-1);
+    } else {
+      setFieldInput(prevState => {
+        return { ...prevState, ...newInputsState };
+      });
     }
-    if (profile !== null && fieldId) {
-      return profile[fieldId as keyof IProfileForm];
-    }
-    return '';
   };
 
   return (
-    <section className={classNames(props.className, style.wrapper)}>
-      <form action="#" className={style.form} onSubmit={onSubmitForm}>
-        {props.fields.map((field, idx) => (
-          <Field
-            key={idx}
-            {...field}
-            disabled={!isEdit}
-            value={getFieldValue(field.id)}
-            onChange={onChangeFieldInput}
-          />
-        ))}
-        <div className={style.btnWrapper}>
-          <Button
-            className={classNames(style.btnEdit, isEdit && style.btnEditActive)}
-            variation={ButtonVariation.PRIMARY}
-            onClick={() => setIsEdit(prevState => !prevState)}>
-            Изменить
-          </Button>
-          <Button
-            type={'submit'}
-            variation={ButtonVariation.PRIMARY}
-            isHide={!isEdit}>
-            Сохранить
-          </Button>
-        </div>
-      </form>
-    </section>
-  );
-}
-
-function Field(props: FieldInfo) {
-  const { label, id, ...otherProps } = props;
-
-  return (
-    <fieldset className={style.field}>
-      <label htmlFor={id} className={style.label}>
-        {label}
-      </label>
-      <input className={style.input} {...otherProps} />
-    </fieldset>
+    <form action="#" className={style.form} onSubmit={onSubmitForm}>
+      {props.fields.map((field, idx) => (
+        <Input
+          key={idx}
+          {...field}
+          value={fieldInput[field.id]?.value ?? field.value ?? ''}
+          onChange={onChangeFieldInput}
+          errorText={fieldInput[field.id]?.errorText}
+        />
+      ))}
+      <Button
+        className={style.button}
+        type={'submit'}
+        variation={ButtonVariation.PRIMARY}
+        rounded>
+        Сохранить
+      </Button>
+    </form>
   );
 }

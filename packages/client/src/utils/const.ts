@@ -41,8 +41,12 @@ export const links = {
   },
   game: {
     path: '/game',
+    title: 'Игра',
+  },
+  setup: {
+    path: '/setup',
     title: 'Играть',
   },
 };
 
-export const resourceURL = 'https://ya-praktikum.tech/api/v2/resources/';
+export const resourceURL = 'https://ya-praktikum.tech/api/v2/resources';

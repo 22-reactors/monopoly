@@ -2,13 +2,18 @@ import { AuthForm, IAuthFormProps } from '../../components/authForm/authForm';
 import style from '../login/login.module.scss';
 import { authorizedRedirect, getInputData } from '../../utils/helpers';
 import { ISignUpData } from '../../api/auth/interfaces';
-import AuthController, { isSignUpGoodResponse } from '../../controllers/auth';
 import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
 import { IValue } from '../../utils/interfaces';
 import { IInputProps, Input } from '../../components/input/input';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import classNames from 'classnames';
+import { useAppDispatch, useAppSelector } from '../../reduxstore/hooks';
+import {
+  userErrorSelector,
+  userSelector,
+} from '../../reduxstore/user/user.selector';
+import { clearError, signUp } from '../../reduxstore/user/userSlice';
 
 export const registerLoader = authorizedRedirect;
 
@@ -27,28 +32,28 @@ export interface ISignUpForm {
 
 export const Register = (props: IRegistrProps) => {
   const { inputsProps, isDarkTheme } = props;
-  const [error, setError] = useState<string | undefined>();
+  const user = useAppSelector(userSelector);
+  const error = useAppSelector(userErrorSelector);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (user) {
+      navigate(links.setup.path);
+    }
+  }, [user]);
 
   const inputItems = inputsProps.map((inputProp, i) => {
     return <Input key={i} {...inputProp} />;
   });
 
-  const navigate = useNavigate();
-
   const formAction = async (event: React.FormEvent<HTMLFormElement>) => {
     const data = getInputData<ISignUpForm, ISignUpData>(event);
-    const response = await AuthController.signup(data);
-    if (response) {
-      if (isSignUpGoodResponse(response)) {
-        navigate(links.game.path);
-      } else {
-        setError(response.reason);
-      }
-    }
+    dispatch(signUp(data));
   };
 
   const formFocus = () => {
-    setError(undefined);
+    dispatch(clearError());
   };
 
   return (

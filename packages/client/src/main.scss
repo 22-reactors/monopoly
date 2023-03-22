@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap');
+@import './src/styles/globals.scss';
 
 html,
 body {
@@ -11,15 +12,26 @@ body {
   margin: 0;
 }
 
-html {
-  height: 100vh;
-}
-
+html,
 body,
 #root {
-  height: 100%;
+  min-height: 100vh;
 }
 
 body {
   overflow-y: auto;
+}
+
+#root {
+  background-image: $light-background;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  flex-direction: column;
+
+  > *:not(header, footer) {
+    flex-grow: 1;
+  }
 }

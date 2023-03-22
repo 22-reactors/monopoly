@@ -1,12 +1,22 @@
-import classNames from 'classnames';
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Button, ButtonSizes, ButtonVariation } from '../button/button';
 import UserController from '../../controllers/user';
 import style from './avatar.module.scss';
 import { resourceURL } from '../../utils/const';
+import avatarEmpty from '../../assets/avatar-empty.png';
 
-function Avatar() {
+interface IAvatar {
+  src?: string;
+}
+
+function Avatar(props: IAvatar) {
   const [avatarSrc, setAvatarSrc] = useState('');
+
+  useEffect(() => {
+    if (props.src) {
+      setAvatarSrc(props.src);
+    }
+  }, [props.src]);
 
   const onChangeAvatarFileHandler = async (
     event: ChangeEvent<HTMLInputElement>
@@ -21,8 +31,7 @@ function Avatar() {
       formData.append('avatar', avatarFile, avatarFile.name);
       const response = await UserController.changeAvatar(formData);
       if (response) {
-        const url = `${resourceURL}${response.avatar}`;
-        setAvatarSrc(url);
+        setAvatarSrc(response.avatar);
       }
     }
   };
@@ -38,7 +47,10 @@ function Avatar() {
   return (
     <section className={style.container}>
       <div className={style.avatar}>
-        <img src={avatarSrc} alt="аватар" />
+        <img
+          src={avatarSrc ? `${resourceURL}${avatarSrc}` : avatarEmpty}
+          alt="аватар"
+        />
       </div>
       <input
         className={style.avatarInput}

@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { homeProps } from './mocs/homeProps';
 import LoginProps from './mocs/loginProps';
-import RegistrProps from './mocs/registrProps'; 
+import RegistrProps from './mocs/registrProps';
+import { GameSetup, gameSetupLoader } from './pages/gameSetup/gameSetup';
 
 import {
   RootBoundary,
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
         element: <Game />,
         loader: gameLoader,
       },  
+        path: links.setup.path,
+        element: <GameSetup maxPlayers={4} />,
+        loader: gameSetupLoader,
+      },
     ],
   },
   {

@@ -8,6 +8,12 @@ import { Cards } from './core/card/cards';
 import { MainCard } from './core/card/cards/commonCard/mainCard';
 import { ICardMainSetting } from './core/types/card';
 import { TCard } from './core/card/cardType';
+import {
+  getCardsStore,
+  getUserConfigStore,
+  updateCardsStore,
+  updateUserConfigStore,
+} from './core/store/monopolyStore';
 
 export class GameEngine {
   board: Board | undefined;
@@ -19,8 +25,9 @@ export class GameEngine {
   }
 
   static async init(canvas: HTMLCanvasElement) {
-    const game = new GameEngine();
-    await game.addBoard(canvas);
+    const gameEngine = new GameEngine();
+    await gameEngine.addBoard(canvas);
+    return gameEngine;
   }
 
   private async addBoard(canvas: HTMLCanvasElement) {
@@ -59,16 +66,15 @@ export class GameEngine {
   //Порядок хода определяется массивом в конфиге, первое элемент первым и тд
   private setNextChipIndex() {
     this.chipIndex =
-      this.chipIndex < MonopolyConfig.userConfig.length - 1
-        ? ++this.chipIndex
-        : 0;
+      this.chipIndex < getUserConfigStore().length - 1 ? ++this.chipIndex : 0;
   }
 
   //В конце раунда (прохода фишкой всей доски) даем доп. деньги
   private static addEndRoundMoney(endRound: boolean, indexChip: number) {
     if (endRound) {
-      MonopolyConfig.userConfig[indexChip].userMoney +=
-        MonopolyConfig.moneyPerRound;
+      const store = getUserConfigStore();
+      store[indexChip].userMoney += MonopolyConfig.moneyPerRound;
+      updateUserConfigStore(store);
     }
   }
 
@@ -77,20 +83,24 @@ export class GameEngine {
     cardIndexWithOffset: number,
     indexChip: number
   ) {
-    if (card instanceof MainCard && !card.buyingBackgroundColor) {
+    if (card instanceof MainCard && Cards.isCardNotBuy(card.cardIndex)) {
       const configCard = MonopolyConfig.cards[
         cardIndexWithOffset
       ] as ICardMainSetting;
 
       const cardPrice = configCard.price;
-      const userMoney = MonopolyConfig.userConfig[indexChip].userMoney;
+      const userConfigStore = getUserConfigStore();
+      const cardsStore = getCardsStore();
+      const userMoney = userConfigStore[indexChip].userMoney;
 
       if (userMoney > cardPrice) {
-        MonopolyConfig.userConfig[indexChip].userMoney -= cardPrice;
-        MonopolyConfig.userConfig[indexChip].score += 1;
+        userConfigStore[indexChip].userMoney -= cardPrice;
+        userConfigStore[indexChip].score += 1;
+        (cardsStore[card.cardIndex] as ICardMainSetting).buyingBackgroundColor =
+          userConfigStore[indexChip].chipColor;
 
-        card.buyingBackgroundColor =
-          MonopolyConfig.userConfig[indexChip].chipColor;
+        updateCardsStore(cardsStore);
+        updateUserConfigStore(userConfigStore);
       }
     }
   }

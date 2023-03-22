@@ -14,7 +14,7 @@ export const localStorageService = () => {
           ? itemWrap.object
           : JSON.parse(itemWrap.object);
       } else {
-        throw new Error(`Element by key: '${itemName}' not found!`);
+        return null;
       }
     },
 

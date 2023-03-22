@@ -1,34 +1,56 @@
 import { useEffect, useRef } from 'react';
 import { Button, ButtonVariation } from '../../components/button/button';
 import { GameEngine } from '../../game-engine/gameEngine';
-import { unAuthorizedRedirect } from '../../utils/helpers'
-import style from './game.module.scss'
+import { unAuthorizedRedirect } from '../../utils/helpers';
+import style from './game.module.scss';
+import { useNavigate } from 'react-router-dom';
+import { links } from '../../utils/const';
 
-export const gameLoader = unAuthorizedRedirect
+export const gameLoader = unAuthorizedRedirect;
 
 export const Game = () => {
   const canvasEl = useRef<HTMLCanvasElement>(null);
+  const navigate = useNavigate();
 
-  useEffect(() => { initCanvas() }, []);
+  let gameEngine: GameEngine | null = null;
+
+  useEffect(() => {
+    window.document.documentElement.requestFullscreen();
+    initCanvas();
+  }, []);
 
   async function initCanvas() {
     if (canvasEl.current) {
-      await GameEngine.init(canvasEl.current);
+      gameEngine = await GameEngine.init(canvasEl.current);
     }
   }
 
-  const reloadPage = () => {
-    window.location.reload();
+  async function reloadGame() {
+    await gameEngine?.board?.reload();
   }
 
   return (
     <div className={style.gamePageWrapClass}>
-      <Button
-        className={style.reloadPageBtnClass}
-        variation={ButtonVariation.PRIMARY}
-        onClick={reloadPage}>
-        Начать сначало
-      </Button>
+      <div className={style.btnWrapper}>
+        <Button
+          className={style.reloadPageBtnClass}
+          variation={ButtonVariation.PRIMARY}
+          onClick={() => {
+            window.document.exitFullscreen();
+            navigate(links.setup.path);
+          }}>
+          Настройки
+        </Button>
+        <Button
+          className={style.reloadPageBtnClass}
+          variation={ButtonVariation.PRIMARY}
+          onClick={() => {
+            window.document.exitFullscreen();
+            reloadGame();
+          }}>
+          Начать сначала
+        </Button>
+      </div>
       <canvas
         ref={canvasEl}
         width={1000}

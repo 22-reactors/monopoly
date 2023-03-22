@@ -1,10 +1,12 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import AuthController from '../../../controllers/auth';
-import { useUser } from '../../../hooks/useUser';
+import { useAppDispatch, useAppSelector } from '../../../reduxstore/hooks';
+import { userSelector } from '../../../reduxstore/user/user.selector';
+import { getUser, logoutAction } from '../../../reduxstore/user/userSlice';
 import { links, resourceURL } from '../../../utils/const';
 import { Button, ButtonSizes, ButtonVariation } from '../../button/button';
 import style from './login-buttons.module.scss';
+import { UserAvatar } from '../../userAvatar/userAvatar';
 
 export interface ILoginButtonsProps {
   logoutText: string;
@@ -13,35 +15,37 @@ export interface ILoginButtonsProps {
 
 export const LoginButtons = (props: ILoginButtonsProps) => {
   const { isDarkTheme, logoutText } = props;
-  const [user, setUser] = useUser(null);
+  const user = useAppSelector(userSelector);
+  const dispatch = useAppDispatch();
+
+  if (!user) {
+    dispatch(getUser());
+  }
 
   const logout = () => {
-    AuthController.logout();
-    setUser(null);
+    dispatch(logoutAction());
   };
 
-  if (user) {
-    const avatar = `${resourceURL}${user?.avatar}`;
+  const avatar = user?.avatar ? `${resourceURL}${user.avatar}` : undefined;
 
-    return (
-      <div className={style.user}>
-        <img className={style.avatar} src={avatar} alt="avatar" />
-        <h4 className={classNames(style.name, isDarkTheme && style.darkText)}>
-          {user.display_name}
-        </h4>
-        <div className={style.divider}></div>
-        <span
-          className={classNames(
-            style.logoutText,
-            isDarkTheme ? style.darkText : style.lightText
-          )}
-          onClick={logout}>
-          {logoutText}
-        </span>
-      </div>
-    );
-  }
-  return (
+  return user ? (
+    <div className={style.user}>
+      <UserAvatar
+        name={user.display_name ?? user.first_name}
+        src={avatar}
+        isDarkTheme={isDarkTheme}
+      />
+      <div className={style.divider}></div>
+      <span
+        className={classNames(
+          style.logoutText,
+          isDarkTheme ? style.darkText : style.lightText
+        )}
+        onClick={logout}>
+        {logoutText}
+      </span>
+    </div>
+  ) : (
     <div className={style.buttons}>
       <Link to={links.login.path}>
         <Button

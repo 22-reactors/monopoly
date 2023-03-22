@@ -1,20 +1,23 @@
 @import './src/styles/mixin';
+@import './src/styles/globals';
 
 .wrapper {
-  @include absolute(0);
-  background-image: url('profile-bg.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
+  width: 100%;
+  max-width: 1110px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title {
+  @include h2();
+  margin-top: 27px;
+  color: $text-base;
 }
 
 .container {
-  height: 100%;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-bottom: 70px;
-  display: grid;
-  grid-template-columns: 40% 60%;
+  margin-top: 27px;
+  margin-bottom: 40px;
+  padding: 30px;
+  background-color: $text-white;
   box-sizing: border-box;
 }

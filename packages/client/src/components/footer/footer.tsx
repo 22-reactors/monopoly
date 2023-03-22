@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { links } from '../../utils/const';
 import { Logo } from '../../icons/logo';
 import style from './footer.module.scss';
-import { useUser } from '../../hooks/useUser';
 import { IUser } from '../../utils/interfaces';
+import { useAppSelector } from '../../reduxstore/hooks';
+import { userSelector } from '../../reduxstore/user/user.selector';
 
 export interface IFooterProps {
   navTitle: string;
@@ -19,12 +20,12 @@ const isLoginLinksAndAuthorized = (title: string, user: IUser | null) => {
 
 export const Footer = (props: IFooterProps) => {
   const { navLinks, navTitle, infoText, isDarkTheme } = props;
-  const [user] = useUser(null);
+  const user = useAppSelector(userSelector);
 
   return (
     <footer className={classNames(style.footer, isDarkTheme && style.dark)}>
-      <div className={style.container}>
-        <div className={classNames(style.menu, isDarkTheme && style.dark)}>
+      <div className={classNames(style.menu, isDarkTheme && style.dark)}>
+        <div className={style.menuContainer}>
           <h4 className={classNames(style.title, isDarkTheme && style.dark)}>
             {navTitle}
           </h4>
@@ -44,14 +45,14 @@ export const Footer = (props: IFooterProps) => {
             </ul>
           </nav>
         </div>
-        <div className={style.infoContainer}>
-          <Logo className={style.logo} />
-          {infoText.map((text, index) => (
-            <p key={index} className={style.info}>
-              {text}
-            </p>
-          ))}
-        </div>
+      </div>
+      <div className={style.infoContainer}>
+        <Logo className={style.logo} />
+        {infoText.map((text, index) => (
+          <p key={index} className={style.info}>
+            {text}
+          </p>
+        ))}
       </div>
     </footer>
   );

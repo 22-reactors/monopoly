@@ -2,6 +2,10 @@ import { EVENTS_NAME } from '../../config/eventsNameConfig';
 import { ICoordinates } from '../types/card';
 import { CanvasElement } from '../canvas/canvasElement';
 import { EventBus } from '../event-bus';
+import {
+  getUserConfigStore,
+  updateUserConfigStore,
+} from '../store/monopolyStore';
 
 interface IArc {
   ctx: CanvasRenderingContext2D;
@@ -16,6 +20,7 @@ interface IArc {
 interface IChip {
   color: string;
   ctx: CanvasRenderingContext2D;
+  indexChip: number;
 }
 
 export class Chip extends CanvasElement {
@@ -24,11 +29,11 @@ export class Chip extends CanvasElement {
     COUNT_CARD: 40,
     END_ANGLE: 2 * Math.PI,
     DISTANCE_BETWEEN_CHIPS: Math.floor(15 * 0.7),
-    SPEED_MOVE: 300,
+    SPEED_MOVE: 200,
   };
 
   private readonly color: string;
-  position = 0;
+  public readonly indexChip: number;
 
   private startMoveTime = 0;
   private endMoveTime = 0;
@@ -43,9 +48,10 @@ export class Chip extends CanvasElement {
     to: null,
   };
 
-  constructor({ color, ctx }: IChip) {
+  constructor({ color, ctx, indexChip }: IChip) {
     super({ ctx });
     this.color = color;
+    this.indexChip = indexChip;
   }
 
   render() {
@@ -58,10 +64,13 @@ export class Chip extends CanvasElement {
   }
 
   private takeStep(value: number) {
-    this.position += value;
-    if (this.position >= Chip.CONST.COUNT_CARD) {
-      this.position -= Chip.CONST.COUNT_CARD;
+    const store = getUserConfigStore();
+    store[this.indexChip].chipPosition += value;
+    if (store[this.indexChip].chipPosition >= Chip.CONST.COUNT_CARD) {
+      store[this.indexChip].chipPosition -= Chip.CONST.COUNT_CARD;
     }
+
+    updateUserConfigStore(store);
   }
 
   moveBetweenCards(value: number, moveCoordinates: ICoordinates[]) {
@@ -97,7 +106,7 @@ export class Chip extends CanvasElement {
       if (this.moveToNewCard) {
         EventBus.getInstance().emit(
           EVENTS_NAME.CHIP_IN_CENTER_CARD,
-          this.position
+          getUserConfigStore()[this.indexChip].chipPosition
         );
         this.moveToNewCard = false;
       }

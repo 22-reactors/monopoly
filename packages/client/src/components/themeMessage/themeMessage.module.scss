@@ -1,5 +1,5 @@
-@import "./src/styles/variables";
-@import "./src/styles/mixin";
+@import './src/styles/globals';
+@import './src/styles/mixin';
 
 .wrapper {
   @include relative();
@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background-color: $outlined-color;
+  background-color: $text-white;
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -18,16 +18,16 @@
 
 .status {
   @include absolute(20px, 20px, null, null);
+  @include text-paragraph();
 
-  font: $text-base-font;
-  color: $text-base-color
+  color: $text-base;
 }
 
 .message {
+  @include text-paragraph-medium();
+
   margin: 0;
-  font: $text-base-font;
-  font-weight: 500;
-  color: $text-description-color;
+  color: $text-description;
 }
 
 .actionWrapper {
@@ -56,9 +56,10 @@
 }
 
 .text {
+  @include text-paragraph();
+
   margin-left: 8px;
-  font: $text-base-font;
-  color: $text-action-color;
+  color: $text-action;
   opacity: 0;
 
   &Show {

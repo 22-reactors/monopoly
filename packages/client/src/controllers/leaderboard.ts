@@ -1,6 +1,8 @@
 import API, { LeaderBoardAPI } from '../api/leaderboard/leaderboard';
-import { Leaderboard, LeaderboardGetAllResponse } from '../api/leaderboard/interfaces';
-import { results } from '../api/leaderboard/mocs';
+import {
+  Leaderboard,
+  LeaderboardGetAllResponse,
+} from '../api/leaderboard/interfaces';
 import { LeaderboardResults } from '../pages/leaderboard/leaderboard';
 
 const isGetAllGoodResponse = (
@@ -27,14 +29,12 @@ class LeaderboardController {
     }
   }
 
-  async getAll() {
+  async getMonopolyResults() {
     try {
-      // TODO: Временно отправляем моки. В дальнейшем, отправлять результаты из игры
-      void await this.add(results);
-      const response = await this._api.getAll();
+      const response = await this._api.getMonopolyResults();
 
       if (isGetAllGoodResponse(response)) {
-        return response[0].data.results;
+        return response[0]?.data.results;
       } else {
         console.log(response.reason);
       }
