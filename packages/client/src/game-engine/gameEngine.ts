@@ -14,6 +14,12 @@ import {
   updateCardsStore,
   updateUserConfigStore,
 } from './core/store/monopolyStore';
+import { store } from '../reduxstore/monopolyStore';
+import {
+  addBuyingCardInfoAction,
+  IBuyingCardInfo,
+  resetBuyingCardInfoAction,
+} from '../reduxstore/game/buyingCardInfoSlice';
 
 export class GameEngine {
   board: Board | undefined;
@@ -42,21 +48,19 @@ export class GameEngine {
   // из-за strict mode срабатывает 2 раза
   private rollDices = async () => {
     const { value } = await Dices.getInstance().roll();
-    GameEngine.moveChip(this.chipIndex, value);
-    this.setNextChipIndex();
+    this.moveChip(this.chipIndex, value);
   };
 
-  private static moveChip(indexChip: number, dicesValue: number) {
+  private moveChip(indexChip: number, dicesValue: number) {
     const { endRound, cardIndex } = Chips.getInstance().moveChip(
       indexChip,
       dicesValue
     );
 
     this.addEndRoundMoney(endRound, indexChip);
-
     //костыль, нужен что бы купить 39-ую карту
     const cardIndexWithOffset = cardIndex === -1 ? 39 : cardIndex;
-    this.buyCard(
+    this.dispatchCardInfo(
       Cards.getInstance().getCardByIndex(cardIndexWithOffset),
       cardIndexWithOffset,
       indexChip
@@ -70,7 +74,7 @@ export class GameEngine {
   }
 
   //В конце раунда (прохода фишкой всей доски) даем доп. деньги
-  private static addEndRoundMoney(endRound: boolean, indexChip: number) {
+  private addEndRoundMoney(endRound: boolean, indexChip: number) {
     if (endRound) {
       const store = getUserConfigStore();
       store[indexChip].userMoney += MonopolyConfig.moneyPerRound;
@@ -78,7 +82,7 @@ export class GameEngine {
     }
   }
 
-  private static buyCard(
+  private dispatchCardInfo(
     card: TCard,
     cardIndexWithOffset: number,
     indexChip: number
@@ -90,18 +94,40 @@ export class GameEngine {
 
       const cardPrice = configCard.price;
       const userConfigStore = getUserConfigStore();
-      const cardsStore = getCardsStore();
       const userMoney = userConfigStore[indexChip].userMoney;
 
       if (userMoney > cardPrice) {
-        userConfigStore[indexChip].userMoney -= cardPrice;
-        userConfigStore[indexChip].score += 1;
-        (cardsStore[card.cardIndex] as ICardMainSetting).buyingBackgroundColor =
-          userConfigStore[indexChip].chipColor;
-
-        updateCardsStore(cardsStore);
-        updateUserConfigStore(userConfigStore);
+        const buyingInfo: IBuyingCardInfo = {
+          showModal: true,
+          cardName: configCard.title,
+          cardPrice: cardPrice,
+          cardIndex: card.cardIndex,
+          indexChip: indexChip
+        };
+        store.dispatch(addBuyingCardInfoAction(buyingInfo));
+      } else {
+        this.setNextChipIndex();
       }
     }
+  }
+
+  public buyCard(buyCardInfo: IBuyingCardInfo) {
+    const { indexChip, cardIndex, cardPrice } = buyCardInfo;
+    const userConfigStore = getUserConfigStore();
+    const cardsStore = getCardsStore();
+
+    userConfigStore[indexChip].userMoney -= cardPrice;
+    userConfigStore[indexChip].score += 1;
+    (cardsStore[cardIndex] as ICardMainSetting).buyingBackgroundColor =
+      userConfigStore[indexChip].chipColor;
+
+    updateCardsStore(cardsStore);
+    updateUserConfigStore(userConfigStore);
+    this.resetStateAndSetNextPlayer();
+  }
+
+  public resetStateAndSetNextPlayer() {
+    store.dispatch(resetBuyingCardInfoAction());
+    this.setNextChipIndex();
   }
 }
