@@ -13,7 +13,7 @@ import Textarea from '../../../components/textarea/textarea';
 export const ForumTopic1: FC<ForumTopicProps> = () => {
   const  topicId  = '1';
   const [message, setMessage] = useState ('');
-  return (
+    return (
     <>
       <section className={style.pageContainer}>
         <h1 className={style.title}>Форум {topicId}</h1>

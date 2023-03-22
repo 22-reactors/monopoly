@@ -1,6 +1,6 @@
 @import '../../styles/globals.scss';
 @import '../../styles/mixin.scss';
-@import "../../styles/variables";
+
 
 .wrapper {
   @include container-width;
@@ -11,7 +11,7 @@
   @include h2();
   align-items: center;
   margin-top: 27px;
-  color: $text-base-color;
+  color: $text-base;
   display: flex;
   flex-direction: row;
   position: relative;
@@ -44,7 +44,7 @@
       align-items: center;
       max-width: 1110px;
       height: 74px;
-      background: $outlined-color;
+      background: $outlined-hover-color;
       @include shadowDefault;
       border-radius: 10px;
       margin-bottom: 28px;
@@ -63,16 +63,16 @@
     width: 40%;
     font-style: normal;
     @include h2();
-    color: $text-base-color;
+    color: $text-base;
     }
 
     &__cell {
       font-style: normal;
       @include h3();
-      color: $text-base-color;
+      color: $text-base;
     
       &__1 {
-        color:$text-additional-color;
+        color:$text-additional;
       }
     }
 
@@ -130,12 +130,12 @@
     justify-content: space-between;
     flex-wrap: wrap;
     &__text {
-      background-color: $outlined-color;
+      background-color: $outlined-hover-color;
       display: flex;
       width: 100%;
       border: none;
       border-radius: 10px;
-      font: $text-base-font;
+      @include font-family;
       font-weight: 500;
       color: #7a757d;
     }

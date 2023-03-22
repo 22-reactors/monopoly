@@ -29,7 +29,6 @@ export const CreateTopic: FC<ForumSectionProps> = () => {
             value={topic}
             onChange={e => setTopic(e.target.value)}
             label='Введите название темы'
-            
             />
         </form>  
         </div> 
