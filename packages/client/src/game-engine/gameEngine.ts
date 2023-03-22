@@ -108,6 +108,9 @@ export class GameEngine {
       } else {
         this.setNextChipIndex();
       }
+      
+    } else {
+      this.setNextChipIndex();
     }
   }
 
