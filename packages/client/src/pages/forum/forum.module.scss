@@ -26,7 +26,6 @@
   table-layout: fixed;
   border-spacing: 0;
   padding-top: 40px;
-  background-color: $text-white;
   border: none;
   box-sizing: border-box;
 
@@ -44,7 +43,7 @@
       align-items: center;
       max-width: 1110px;
       height: 74px;
-      background: $outlined-hover-color;
+      background: $dark-theme-white;
       @include shadowDefault;
       border-radius: 10px;
       margin-bottom: 28px;
@@ -84,12 +83,14 @@
 
 .paginator {
   margin-top: 43px;
+  margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .link {
   @include clear-link;
+  color: $text-base;
 }
 
 .pageContainer {
