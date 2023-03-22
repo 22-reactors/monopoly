@@ -71,7 +71,8 @@ const router = createBrowserRouter([
         path: links.game.path,
         element: <Game />,
         loader: gameLoader,
-      },  
+      }, 
+      { 
         path: links.setup.path,
         element: <GameSetup maxPlayers={4} />,
         loader: gameSetupLoader,
