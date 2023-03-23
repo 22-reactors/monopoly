@@ -56,12 +56,14 @@ export const Game = () => {
           Начать сначала
         </Button>
       </div>
-      <canvas
-        ref={canvasEl}
-        width={1000}
-        height={1000}
-        className={style.canvasClass}
-      />
+      <div className={style.canvasWrap}>
+        <canvas
+          ref={canvasEl}
+          width={1000}
+          height={1000}
+          className={style.canvasClass}
+        />
+      </div>
       <GameModal
         show={buyingCardInfo.showModal}
         title={`Вы встали на "${buyingCardInfo.cardName}"`}>

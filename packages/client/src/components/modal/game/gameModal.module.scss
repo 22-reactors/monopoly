@@ -1,21 +1,18 @@
 .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  height: 100vh;
+  width: 100vw;
   background: rgba(0, 0, 0, 0.6);
   box-shadow: 0 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .modalMain {
-  position: fixed;
   background: white;
   height: auto;
   border-radius: 4px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   padding: 40px;
   width: 400px;
 }
@@ -32,14 +29,12 @@
 }
 
 .show {
-  display: block;
   visibility: visible;
   transition: opacity 1s;
   opacity: 1;
 }
 
 .hide {
-  display: block;
   visibility: hidden;
   opacity: 0;
 }
