@@ -64,8 +64,7 @@ export const Game = () => {
       />
       <GameModal
         show={buyingCardInfo.showModal}
-        title={`Вы встали на "${buyingCardInfo.cardName}"`}
-        width={400}>
+        title={`Вы встали на "${buyingCardInfo.cardName}"`}>
         <Button
           variation={ButtonVariation.PRIMARY}
           onClick={() => { gameEngine?.buyCard(buyingCardInfo) }}>

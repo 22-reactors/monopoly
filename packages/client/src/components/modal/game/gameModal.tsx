@@ -6,29 +6,21 @@ interface IGameModal {
     show: boolean;
     children: JSX.Element | JSX.Element[];
     childrenClassName?: string;
-    width?: number
 }
 
-export const GameModal = (props: IGameModal) => {
-    const { title, children, show, childrenClassName, width } = props;
+export const GameModal = ({ title, children, show, childrenClassName }: IGameModal) => {
 
-    const widthStyle = {
-        width: width ?? 'auto'
-    };
-
-    const showHideClassName = classNames(style.modal, show ? style.displayBlock : style.displayNone);
+    const showModal = classNames(style.modal, show ? style.show : style.hide);
     const childrenStyle = childrenClassName ?? style.defaultChildrenClassName;
 
     return (
-        <div className={showHideClassName}>
-            <main
-                className={style.modalMain}
-                style={widthStyle}>
+        <dialog className={showModal}>
+            <main className={style.modalMain}>
                 <h1 className={style.title}>{title}</h1>
                 <div className={childrenStyle}>
                     {children}
                 </div>
             </main>
-        </div>
+        </dialog>
     );
 }

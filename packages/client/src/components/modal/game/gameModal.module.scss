@@ -17,6 +17,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 40px;
+  width: 400px;
 }
 
 .defaultChildrenClassName {
@@ -30,10 +31,15 @@
   text-align: center;
 }
 
-.displayBlock {
+.show {
   display: block;
+  visibility: visible;
+  transition: opacity 1s;
+  opacity: 1;
 }
 
-.displayNone {
-  display: none;
+.hide {
+  display: block;
+  visibility: hidden;
+  opacity: 0;
 }
