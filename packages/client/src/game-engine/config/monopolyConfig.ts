@@ -278,7 +278,7 @@ export const initMonopolyUserConfig = (players: IConfig[]) => {
 };
 
 export const isGameExist = (): boolean => {
-  const unpurchasedCards: TCardSetting[] = getCardsStore()
+  const unpurchasedCards: TCardSetting[] = (getCardsStore() ?? [])
     .filter(card => card.type === CardTypeEmum.Main && !card.buyingBackgroundColor);
 
   return unpurchasedCards.length !== 0;
