@@ -24,7 +24,7 @@ export default defineConfig({
         runtimeCaching: [
           {
             urlPattern: 'https://ya-praktikum.tech/api/v2/auth/user',
-            handler: 'CacheFirst',
+            handler: 'NetworkFirst',
           },
         ],
       },
