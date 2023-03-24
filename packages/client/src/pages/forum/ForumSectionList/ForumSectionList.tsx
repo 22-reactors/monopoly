@@ -14,7 +14,6 @@ export enum Paths {
 
 export const ForumSectionList: FC<ForumSectionListProps> = ({ sectionList }) => {
   return (
-    <>
     <div className={style.forum}>
       <table border={0} className={style.forum__body}>
         {sectionList.map(item => (
@@ -30,6 +29,5 @@ export const ForumSectionList: FC<ForumSectionListProps> = ({ sectionList }) => 
       </table>
       <Paginator className={style.paginator} pagesCount={4} />
     </div>
-            </>
   );
 };

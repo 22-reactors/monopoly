@@ -29,15 +29,12 @@ export const ForumSection1: FC<ForumSectionProps> = () => {
         </div>
         </h1>
 
-      
-        
          <Link  className={style.link} to={links.forumtopic1.path} >
          <ThemeCard  {...ThemeCardProps}/>
          </Link>
          <ThemeCard {...ThemeCardProps}/>
          <ThemeCard {...ThemeCardProps}/>
          
-     
          < Paginator className={style.paginator} pagesCount={4} />
 
       </section>

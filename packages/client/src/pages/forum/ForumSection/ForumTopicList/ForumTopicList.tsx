@@ -1,6 +1,6 @@
 //Список топиков в N-м разделе форума.  вариант1 на будущее- с составными путями
 
-import { type FC } from 'react';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import style from '../../forum.module.scss';
 import { type ForumTopicListProps } from './typings';
