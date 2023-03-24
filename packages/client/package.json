@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "link-client": "yarn unlink && yarn link",
-    "build": "yarn link-client && yarn build:ssr && yarn build:vite",
+    "link-client": "yarn link",
+    "build": "yarn build:ssr && yarn build:vite",
     "build:vite": "tsc && vite build --config vite.config.ts",
     "build:ssr": "tsc && vite build --config ssr.config.ts",
     "preview": "vite preview",

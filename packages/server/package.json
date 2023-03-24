@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "link-client": "yarn unlink client && yarn link client",
-    "start": "yarn link-client && yarn build && yarn preview",
+    "link-client": "yarn link client",
+    "start": "yarn build && yarn preview",
     "build": "rimraf dist && tsc --p ./tsconfig.prod.json",
     "preview": "node ./dist/index.js",
-    "dev": "yarn link-client && cross-env NODE_ENV=development nodemon index.ts",
+    "dev": "cross-env NODE_ENV=development nodemon index.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "jest ."
