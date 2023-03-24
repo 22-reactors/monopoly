@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "bootstrap": "yarn && node init.js && lerna clean && yarn && lerna bootstrap && yarn link-client",
-    "link-client": "yarn link-client --scope=client && yarn link-client --scope=server",
+    "link-client": "lerna run link-client --scope=client && lerna run link-client --scope=server",
     "build": "yarn build:client && yarn build:server",
     "build:client": "lerna run build --scope=client",
     "build:server": "lerna run build --scope=server",
@@ -21,7 +21,7 @@
     "packages/*"
   ],
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "devDependencies": {
     "@evilmartians/lefthook": "^1.1.1",
