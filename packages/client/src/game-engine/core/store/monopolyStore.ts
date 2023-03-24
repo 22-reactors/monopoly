@@ -8,7 +8,7 @@ export function getUserConfigStore(): IUserConfig[] {
 }
 
 export function getCardsStore(): TCardSetting[] {
-  return localStorageService().get('cards');
+  return localStorageService().get('cards') ?? [];
 }
 
 export function initMonopolyStore(userConfig: IUserConfig[]): void {

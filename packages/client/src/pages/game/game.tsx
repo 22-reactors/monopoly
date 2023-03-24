@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { Button, ButtonVariation } from '../../components/button/button';
 import { GameEngine } from '../../game-engine/gameEngine';
-import { unAuthorizedRedirect } from '../../utils/helpers';
+import { unAuthorizedOfflineRedirect } from '../../utils/helpers';
 import style from './game.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
 
-export const gameLoader = unAuthorizedRedirect;
+export const gameLoader = unAuthorizedOfflineRedirect;
 
 export const Game = () => {
   const canvasEl = useRef<HTMLCanvasElement>(null);

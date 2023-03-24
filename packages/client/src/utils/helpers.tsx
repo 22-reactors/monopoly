@@ -11,6 +11,17 @@ export const unAuthorizedRedirect = async () => {
   return true;
 };
 
+export const unAuthorizedOfflineRedirect = async () => {
+  if (window?.navigator?.onLine === false) {
+    return true;
+  }
+  const { user } = store.getState().user;
+  if (!user) {
+    return redirect(links.login.path);
+  }
+  return true;
+};
+
 export const authorizedRedirect = async () => {
   const { user } = store.getState().user;
   if (user) {

@@ -21,6 +21,12 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        runtimeCaching: [
+          {
+            urlPattern: 'https://ya-praktikum.tech/api/v2/auth/user',
+            handler: 'CacheFirst',
+          },
+        ],
       },
     }),
     react(),
