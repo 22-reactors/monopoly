@@ -2,8 +2,7 @@
   "name": "monopoly",
   "private": true,
   "scripts": {
-    "bootstrap": "yarn && node init.js && lerna clean && yarn && lerna bootstrap && yarn link-client",
-    "link-client": "lerna run link-client --scope=client && lerna run link-client --scope=server",
+    "bootstrap": "yarn && node init.js && lerna clean && yarn && lerna bootstrap",
     "build": "yarn build:client && yarn build:server",
     "build:client": "lerna run build --scope=client",
     "build:server": "lerna run build --scope=server",
@@ -21,7 +20,7 @@
     "packages/*"
   ],
   "engines": {
-    "node": ">=15"
+    "node": ">=18.15.0"
   },
   "devDependencies": {
     "@evilmartians/lefthook": "^1.1.1",
