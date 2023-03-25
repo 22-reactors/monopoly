@@ -18,10 +18,6 @@ export const LoginButtons = (props: ILoginButtonsProps) => {
   const user = useAppSelector(userSelector);
   const dispatch = useAppDispatch();
 
-  if (!user) {
-    dispatch(getUser());
-  }
-
   const logout = () => {
     dispatch(logoutAction());
   };

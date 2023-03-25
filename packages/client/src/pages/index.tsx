@@ -43,6 +43,7 @@ export {
   Register,
   registerLoader,
   Layout,
+  rootLoader,
   GameSetup,
   gameSetupLoader,
 };

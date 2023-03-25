@@ -19,6 +19,7 @@ import {
   Register,
   registerLoader,
   Layout,
+  rootLoader,
   GameSetup,
   gameSetupLoader,
 } from './pages/index';
@@ -29,6 +30,7 @@ export const routes = [
     path: links.root.path,
     element: <Layout />,
     errorElement: <RootBoundary />,
+    loader: rootLoader,
     children: [
       { index: true, element: <Home {...homeProps} /> },
       {
