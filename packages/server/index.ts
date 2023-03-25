@@ -60,7 +60,7 @@ async function startServer() {
     })
   );
 
-  app.use('/', cookieParser(), async (req, res, next) => {
+  app.use('*', cookieParser(), async (req, res, next) => {
     const url = req.originalUrl;
 
     try {

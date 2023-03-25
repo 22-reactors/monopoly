@@ -20,7 +20,13 @@ export const render = async (request: express.Request) => {
   const store = configureStore({ reducer: appReducer });
 
   if (request.url === links.root.path) {
-    await store.dispatch(getUser({ Cookie: request.headers.cookie ?? '' }));
+    await store.dispatch(
+      getUser({
+        Cookie:
+          'authCookie=62f174773382a33c855e5ed6eccc3687d1b4080c:1679768924; uuid=22890feb-d011-4db4-99e8-a567b94a7517' ??
+          '',
+      })
+    );
   }
 
   const preloadedState = store.getState();

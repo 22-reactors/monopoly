@@ -19,8 +19,10 @@ window.document) {
 
 export const store = configureStore({
   reducer: appReducer,
-  //preloadedState: initialState,
+  preloadedState: initialState,
 });
+
+//export 
 
 export type RootState = ReturnType<typeof appReducer>;
 export type AppDispatch = typeof store.dispatch;
