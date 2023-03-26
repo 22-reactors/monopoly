@@ -5,9 +5,11 @@ import { playersSelector } from '../../../reduxstore/players/players.selector';
 import { links } from '../../../utils/const';
 import { Button, ButtonVariation } from '../../../components/button/button';
 import style from './players.module.scss';
-import { initMonopolyUserConfig, isGameExist } from '../../../game-engine/config/monopolyConfig';
+import {
+  initMonopolyUserConfig,
+  isGameExist,
+} from '../../../game-engine/config/monopolyConfig';
 import { resetPlayersAction } from '../../../reduxstore/players/playersSlice';
-
 
 interface IChipProps {
   name: string;
@@ -38,11 +40,11 @@ export const Players = (props: IPlayersProps) => {
 
   const isPlayerNotExists = () => {
     return players.length === 0;
-  }
+  };
 
   const resetPlayers = () => {
-    dispatch(resetPlayersAction())
-  }
+    dispatch(resetPlayersAction());
+  };
 
   return (
     <div className={style.playersContainer}>

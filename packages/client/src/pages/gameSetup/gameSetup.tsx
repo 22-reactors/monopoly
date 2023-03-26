@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../reduxstore/hooks';
-import { playersNumberSelector, playersSelector } from '../../reduxstore/players/players.selector';
+import {
+  playersNumberSelector,
+  playersSelector,
+} from '../../reduxstore/players/players.selector';
 import { addPlayerAction } from '../../reduxstore/players/playersSlice';
 import { Button, ButtonVariation } from '../../components/button/button';
 import { Input } from '../../components/input/input';
@@ -11,8 +14,8 @@ import {
   Config,
   ErrorDupText,
   ErrorText,
-  PlayerTypesLabels
-} from './const'
+  PlayerTypesLabels,
+} from './const';
 import style from './gameSetup.module.scss';
 import { Players } from './players/players';
 import { redirect } from 'react-router-dom';
@@ -124,7 +127,10 @@ export const GameSetup = (props: IGameProps) => {
     }
   };
 
-  const validFieldOnDup = (fieldName: Config.NAME | Config.COLOR, validator: {isValid: boolean}): void => {
+  const validFieldOnDup = (
+    fieldName: Config.NAME | Config.COLOR,
+    validator: { isValid: boolean }
+  ): void => {
     players.forEach(player => {
       if (player[fieldName] == config[fieldName]) {
         setInputErrors(prevState => ({
@@ -135,7 +141,7 @@ export const GameSetup = (props: IGameProps) => {
         return;
       }
     });
-  }
+  };
 
   return (
     <main>

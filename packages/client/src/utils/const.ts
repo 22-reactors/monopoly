@@ -34,3 +34,9 @@ export const links = {
 };
 
 export const resourceURL = 'https://ya-praktikum.tech/api/v2/resources';
+export const getYanderOAuthURL = (clientId: string) => {
+  const { protocol, port } = window.location;
+  const uri = `${protocol}//localhost:${port}`;
+
+  return `https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}&redirect_uri=${uri}`;
+};

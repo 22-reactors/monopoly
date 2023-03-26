@@ -49,6 +49,11 @@
   @include clear-link;
   @include text-paragraph-medium;
   color: $primary;
+
+  &Yandex {
+    display: block;
+    color: lighten(blue, 30);
+  }
 }
 
 .button {

@@ -51,7 +51,7 @@ export default class RequestTransport {
 
     return await this.request(
       `${this.endpoint}${correctUrl}`,
-      { ...options, method: METHODS.GET },
+      { method: METHODS.GET },
       options?.timeout
     );
   };

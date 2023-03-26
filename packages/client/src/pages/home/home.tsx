@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import {
   Button,
   ButtonSizes,
@@ -7,6 +7,8 @@ import {
 } from '../../components/button/button';
 import { links } from '../../utils/const';
 import style from './home.module.scss';
+import { useCallback, useEffect } from 'react';
+import OAuthController from '../../controllers/oAuth';
 
 export interface IHomeProps {
   title: string;
@@ -15,8 +17,25 @@ export interface IHomeProps {
   isDarkTheme: boolean;
 }
 
-export const Home = (props: IHomeProps) => {
-  const { title, description, linkText, isDarkTheme } = props;
+export const Home = ({
+  title,
+  description,
+  linkText,
+  isDarkTheme,
+}: IHomeProps) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const oAuthYandex = useCallback(async () => {
+    const code = searchParams.get('code') ?? '';
+    await OAuthController.signin(code);
+    setSearchParams('');
+  }, []);
+
+  useEffect(() => {
+    if (searchParams.has('code')) {
+      oAuthYandex().catch(err => console.log(err));
+    }
+  }, [oAuthYandex]);
 
   return (
     <main className={classNames(style.main, isDarkTheme && style.dark)}>
