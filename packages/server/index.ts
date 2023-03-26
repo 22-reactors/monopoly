@@ -5,7 +5,7 @@ import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
 import type { ViteDevServer } from 'vite';
 import cookieParser from 'cookie-parser';
-import { createProxyMiddleware } from 'http-proxy-middleware';
+//import { createProxyMiddleware } from 'http-proxy-middleware';
 import express from 'express';
 import { createClientAndConnect } from './db';
 import { router } from './src/router/forumRouter';
@@ -47,8 +47,6 @@ async function startServer() {
 
   app.use(router);
 
-  app.use(router);
-
   app.use(
     '/api/v2',
     createProxyMiddleware({
@@ -58,9 +56,16 @@ async function startServer() {
       },
       target: 'https://ya-praktikum.tech',
     })
-  );
+  ); */
 
-  app.use('*', cookieParser(), async (req, res, next) => {
+  app.use(cookieParser());
+
+  app.use('/', async (req, _, next) => {
+    console.log(req.cookies);
+    next();
+  });
+
+  app.use('*', async (req, res, next) => {
     const url = req.originalUrl;
 
     try {
@@ -90,8 +95,6 @@ async function startServer() {
       }
 
       try {
-        //throw new Error(JSON.stringify(req.cookies));
-
         const [appHtml, initialState] = await render(req);
 
         const serializedInitialState = `<script>window.initialState = ${JSON.stringify(
@@ -110,6 +113,7 @@ async function startServer() {
         }
         throw e;
       }
+      next();
     } catch (error) {
       if (isDev) {
         vite.ssrFixStacktrace(error as Error);

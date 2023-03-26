@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button, ButtonVariation } from '../../components/button/button';
 import { GameEngine } from '../../game-engine/gameEngine';
-import { unAuthorizedRedirect } from '../../utils/helpers';
 import style from './game.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
@@ -9,14 +8,22 @@ import { useAppSelector } from '../../reduxstore/hooks';
 import { buyingCardInfoSelector } from '../../reduxstore/game/buyingCardInfo.selector';
 import { MonopolyConfig } from '../../game-engine/config/monopolyConfig';
 import { GameModal } from '../../components/modal/game/gameModal';
-
-export const gameLoader = unAuthorizedRedirect;
+import { userSelector } from '../../reduxstore/user/user.selector';
 
 export const Game = () => {
   const buyingCardInfo = useAppSelector(buyingCardInfoSelector);
   const [gameEngine, setGameEngine] = useState<GameEngine | null>(null);
   const canvasEl = useRef<HTMLCanvasElement>(null);
   const navigate = useNavigate();
+  const user = useAppSelector(userSelector);
+
+  let gameEngine: GameEngine | null = null;
+
+  useEffect(() => {
+    if (!user) {
+      navigate(links.login.path);
+    }
+  }, [user]);
 
   useEffect(() => {
     window.document.documentElement.requestFullscreen();

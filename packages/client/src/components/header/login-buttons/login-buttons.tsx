@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../reduxstore/hooks';
 import { userSelector } from '../../../reduxstore/user/user.selector';
-import { getUser, logoutAction } from '../../../reduxstore/user/userSlice';
+import { logoutAction } from '../../../reduxstore/user/userSlice';
 import { links, resourceURL } from '../../../utils/const';
 import { Button, ButtonSizes, ButtonVariation } from '../../button/button';
 import style from './login-buttons.module.scss';

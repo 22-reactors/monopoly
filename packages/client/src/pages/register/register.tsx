@@ -1,12 +1,11 @@
 import { AuthForm, IAuthFormProps } from '../../components/authForm/authForm';
 import style from '../login/login.module.scss';
-import { authorizedRedirect, getInputData } from '../../utils/helpers';
+import { getInputData } from '../../utils/helpers';
 import { ISignUpData } from '../../api/auth/interfaces';
 import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
 import { IValue } from '../../utils/interfaces';
 import { IInputProps, Input } from '../../components/input/input';
-import { useEffect } from 'react';
 import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../reduxstore/hooks';
 import {
@@ -14,8 +13,7 @@ import {
   userSelector,
 } from '../../reduxstore/user/user.selector';
 import { clearError, signUp } from '../../reduxstore/user/userSlice';
-
-export const registerLoader = authorizedRedirect;
+import { useEffect } from 'react';
 
 export interface IRegistrProps extends Omit<IAuthFormProps, 'children'> {
   inputsProps: IInputProps[];

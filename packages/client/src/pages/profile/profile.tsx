@@ -1,11 +1,12 @@
 import style from './profile.module.scss';
 import { FieldInfo, Info } from '../../components/info/info';
-import { unAuthorizedRedirect } from '../../utils/helpers';
 import Avatar from '../../components/avatar/avatar';
 import { useEffect, useState } from 'react';
 import { IUserData } from '../../api/auth/interfaces';
 import { useAppSelector } from '../../reduxstore/hooks';
 import { userSelector } from '../../reduxstore/user/user.selector';
+import { useNavigate } from 'react-router-dom';
+import { links } from '../../utils/const';
 
 const FieldMap: Record<string, FieldInfo> = {
   email: {
@@ -69,15 +70,21 @@ const PASSWORD_FIELDS = [
   },
 ];
 
-export const profileLoader = unAuthorizedRedirect;
-
 const defaultUserFields = Object.values(FieldMap);
 
 export function ProfilePage(): JSX.Element {
+  const navigate = useNavigate();
+
   const user = useAppSelector(userSelector);
 
   const [fields, setFields] = useState<FieldInfo[]>(defaultUserFields);
   const [avatar, setAvatar] = useState<string>('');
+
+  useEffect(() => {
+    if (!user) {
+      navigate(links.login.path);
+    }
+  }, [user]);
 
   useEffect(() => {
     const userFields = user ? connectorUserFields(user) : defaultUserFields;

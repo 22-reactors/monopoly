@@ -1,5 +1,5 @@
 import style from './login.module.scss';
-import { authorizedRedirect, getInputData } from '../../utils/helpers';
+import { getInputData } from '../../utils/helpers';
 import { ILoginData } from '../../api/auth/interfaces';
 import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
@@ -14,8 +14,6 @@ import {
   userErrorSelector,
   userSelector,
 } from '../../reduxstore/user/user.selector';
-
-export const loginLoader = authorizedRedirect;
 
 export interface ILoginProps extends Omit<IAuthFormProps, 'children'> {
   inputsProps: IInputProps[];
