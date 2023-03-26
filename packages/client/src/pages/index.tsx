@@ -37,6 +37,5 @@ export {
   ProfilePage,
   Register,
   Layout,
-  rootLoader,
   GameSetup,
 };

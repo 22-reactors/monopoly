@@ -16,7 +16,6 @@ import {
   Register,
   Layout,
   GameSetup,
-  rootLoader,
 } from './pages/index';
 import { links } from './utils/const';
 
@@ -25,7 +24,6 @@ export const routes = [
     path: links.root.path,
     element: <Layout />,
     errorElement: <RootBoundary />,
-    loader: rootLoader,
     children: [
       { index: true, element: <Home {...homeProps} /> },
       {
