@@ -2,7 +2,7 @@
 
 import '../../styles/globals.scss';
 import style from './forum.module.scss';
-import { type FC } from 'react';
+import { FC } from 'react';
 
 import { ExampleForum as sectionList } from './ExampleData';
 import { ForumSectionList } from './ForumSectionList/ForumSectionList';

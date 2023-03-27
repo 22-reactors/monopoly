@@ -1,6 +1,6 @@
 //Список разделов с кол-вом тем и сообщений в них
 
-import { type FC } from 'react';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import style from '../forum.module.scss';
 import { type ForumSectionListProps } from './typings';

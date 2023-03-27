@@ -1,6 +1,6 @@
 //Создание новой темы на форуме
 
-import { useState, type FC } from 'react';
+import { useState, FC } from 'react';
 import style from '../forum.module.scss';
 import { type ForumSectionProps } from '../ForumSection/typings';
 import { Button, ButtonVariation, ButtonSizes } from '../../../components/button/button';

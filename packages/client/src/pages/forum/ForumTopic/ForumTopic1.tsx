@@ -2,7 +2,7 @@
 
 import style from '../forum.module.scss';
 
-import { useState, type FC } from 'react';
+import { useState, FC } from 'react';
 import { Button, ButtonSizes, ButtonVariation } from '../../../components/button/button';
 import { type ForumTopicProps } from './typings';
 import { ThemeMessage } from '../../../components/themeMessage/themeMessage';

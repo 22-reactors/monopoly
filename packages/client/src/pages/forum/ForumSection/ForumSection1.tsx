@@ -1,6 +1,6 @@
 //Раздел форума. включает список тем и кол-во сообщений
 
-import { type FC } from 'react';
+import { FC } from 'react';
 import style from '../forum.module.scss';
 import { type ForumSectionProps } from './typings';
 import { Button, ButtonVariation, ButtonSizes } from '../../../components/button/button';
