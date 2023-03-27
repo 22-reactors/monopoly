@@ -21,6 +21,13 @@
   },
   "devDependencies": {
     "@evilmartians/lefthook": "^1.1.1",
+    "@types/pg": "^8.6.6",
     "lerna": "^5.4.3"
+  },
+  "dependencies": {
+    "pg": "^8.10.0",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.30.0",
+    "sequelize-typescript": "^2.1.5"
   }
 }
