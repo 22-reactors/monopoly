@@ -8,7 +8,8 @@ import type { ViteDevServer } from 'vite';
 dotenv.config();
 
 import express from 'express';
-// import { createClientAndConnect } from './db';
+import { createClientAndConnect } from './db';
+import { router } from './src/router/forumRouter';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -17,7 +18,7 @@ async function startServer() {
   app.use(cors());
   const port = Number(process.env.SERVER_PORT) || 3001;
 
-  // createClientAndConnect();
+  createClientAndConnect();
 
   let vite: ViteDevServer;
   const distPath = path.dirname(require.resolve('client/dist/index.html'));
@@ -42,6 +43,8 @@ async function startServer() {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')));
     app.use('/images', express.static(path.resolve(distPath, 'images')));
   }
+
+  app.use(router);
 
   app.use('*', async (req, res, next) => {
     const url = req.originalUrl;
