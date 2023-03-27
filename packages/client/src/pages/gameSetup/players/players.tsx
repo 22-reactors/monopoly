@@ -5,9 +5,12 @@ import { playersSelector } from '../../../reduxstore/players/players.selector';
 import { links } from '../../../utils/const';
 import { Button, ButtonVariation } from '../../../components/button/button';
 import style from './players.module.scss';
-import { initMonopolyUserConfig, isGameExist } from '../../../game-engine/config/monopolyConfig';
+import {
+  initMonopolyUserConfig,
+  isGameExist,
+} from '../../../game-engine/config/monopolyConfig';
 import { resetPlayersAction } from '../../../reduxstore/players/playersSlice';
-
+import { useEffect, useState } from 'react';
 
 interface IChipProps {
   name: string;
@@ -22,6 +25,11 @@ export const Players = (props: IPlayersProps) => {
   const { maxPlayers } = props;
   const players = useAppSelector(playersSelector);
   const dispatch = useAppDispatch();
+  const [isAbleToContinue, setIsAbleToContinue] = useState(false);
+
+  useEffect(() => {
+    setIsAbleToContinue(isGameExist());
+  });
 
   const defaultPlayers: React.ReactNode[] = [];
   for (let i = players.length; i < maxPlayers; i++) {
@@ -38,11 +46,11 @@ export const Players = (props: IPlayersProps) => {
 
   const isPlayerNotExists = () => {
     return players.length === 0;
-  }
+  };
 
   const resetPlayers = () => {
-    dispatch(resetPlayersAction())
-  }
+    dispatch(resetPlayersAction());
+  };
 
   return (
     <div className={style.playersContainer}>
@@ -70,7 +78,7 @@ export const Players = (props: IPlayersProps) => {
               className={style.startButton}
               variation={ButtonVariation.PRIMARY}
               rounded
-              disabled={!isGameExist()}>
+              disabled={!isAbleToContinue}>
               Продолжить
             </Button>
           </Link>
