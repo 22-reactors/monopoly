@@ -2,22 +2,26 @@
   "name": "monopoly",
   "private": true,
   "scripts": {
-    "bootstrap": "yarn && node init.js && lerna clean && yarn && lerna bootstrap",
-    "build": "lerna run build",
+    "bootstrap": "yarn && node init.js && lerna clean && yarn && lerna bootstrap && yarn link-client",
+    "link-client": "lerna run link-client --scope=client && lerna run link-client --scope=server",
+    "build": "yarn build:client && yarn build:server",
+    "build:client": "lerna run build --scope=client",
+    "build:server": "lerna run build --scope=server",
     "dev:client": "lerna run dev  --scope=client",
     "dev:server": "lerna run dev --scope=server",
-    "dev": "lerna run dev",
+    "dev": "yarn build:client && yarn dev:server",
     "test": "lerna run test",
     "lint": "lerna run lint",
     "format": "lerna run format",
-    "preview": "lerna run preview"
+    "preview": "lerna run preview",
+    "start": "yarn build && lerna run preview --scope=server"
   },
   "license": "MIT",
   "workspaces": [
     "packages/*"
   ],
   "engines": {
-    "node": ">=15"
+    "node": ">=18"
   },
   "devDependencies": {
     "@evilmartians/lefthook": "^1.1.1",
