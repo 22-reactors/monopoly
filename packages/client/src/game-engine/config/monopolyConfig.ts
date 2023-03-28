@@ -36,7 +36,7 @@ export const MonopolyConfig: IMonopolyConfig = {
   cards: [
     {
       type: CardTypeEmum.Corner,
-      background: 'images/start-card.png',
+      background: '/images/start-card.png',
     },
     {
       title: 'Житная улица',
