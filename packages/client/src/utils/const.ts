@@ -1,3 +1,5 @@
+import { isServer } from "./helpers";
+
 export const links = {
   root: {
     path: '/',
@@ -49,4 +51,8 @@ export const links = {
   },
 };
 
-export const resourceURL = 'https://ya-praktikum.tech/api/v2/resources';
+export const HOST = `http://localhost:${
+  !isServer ? __SERVER_PORT__ : process.env.SERVER_PORT
+}`;
+
+export const resourceURL = `${HOST}/api/v2/resources`;

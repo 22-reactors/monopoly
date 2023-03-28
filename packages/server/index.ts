@@ -4,8 +4,7 @@ import path from 'path';
 import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
 import type { ViteDevServer } from 'vite';
-import cookieParser from 'cookie-parser';
-//import { createProxyMiddleware } from 'http-proxy-middleware';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 import express from 'express';
 import { createClientAndConnect } from './db';
 import { router } from './src/router/forumRouter';
@@ -56,14 +55,7 @@ async function startServer() {
       },
       target: 'https://ya-praktikum.tech',
     })
-  ); */
-
-  app.use(cookieParser());
-
-  app.use('/', async (req, _, next) => {
-    console.log(req.cookies);
-    next();
-  });
+  );
 
   app.use('*', async (req, res, next) => {
     const url = req.originalUrl;

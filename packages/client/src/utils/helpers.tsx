@@ -78,3 +78,5 @@ export const getInputName = (element: JSX.Element) => {
     return element.props.name as string;
   }
 };
+
+export const isServer = !(typeof window !== 'undefined' && window.document);

@@ -17,8 +17,6 @@ export const Game = () => {
   const navigate = useNavigate();
   const user = useAppSelector(userSelector);
 
-  let gameEngine: GameEngine | null = null;
-
   useEffect(() => {
     if (!user) {
       navigate(links.login.path);
