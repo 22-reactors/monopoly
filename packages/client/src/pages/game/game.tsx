@@ -8,20 +8,15 @@ import { useAppSelector } from '../../reduxstore/hooks';
 import { buyingCardInfoSelector } from '../../reduxstore/game/buyingCardInfo.selector';
 import { MonopolyConfig } from '../../game-engine/config/monopolyConfig';
 import { GameModal } from '../../components/modal/game/gameModal';
-import { userSelector } from '../../reduxstore/user/user.selector';
+import { useNav } from '../../hooks/useNav';
 
 export const Game = () => {
   const buyingCardInfo = useAppSelector(buyingCardInfoSelector);
   const [gameEngine, setGameEngine] = useState<GameEngine | null>(null);
   const canvasEl = useRef<HTMLCanvasElement>(null);
   const navigate = useNavigate();
-  const user = useAppSelector(userSelector);
 
-  useEffect(() => {
-    if (!user) {
-      navigate(links.login.path);
-    }
-  }, [user]);
+  useNav(links.login.path, true);
 
   useEffect(() => {
     window.document.documentElement.requestFullscreen();
@@ -74,12 +69,16 @@ export const Game = () => {
         title={`Вы встали на "${buyingCardInfo.cardName}"`}>
         <Button
           variation={ButtonVariation.PRIMARY}
-          onClick={() => { gameEngine?.buyCard(buyingCardInfo) }}>
+          onClick={() => {
+            gameEngine?.buyCard(buyingCardInfo);
+          }}>
           Купить ({buyingCardInfo.cardPrice} {MonopolyConfig.currency})
         </Button>
         <Button
           variation={ButtonVariation.PRIMARY}
-          onClick={() => { gameEngine?.resetStateAndSetNextPlayer() }}>
+          onClick={() => {
+            gameEngine?.resetStateAndSetNextPlayer();
+          }}>
           Отказаться
         </Button>
       </GameModal>

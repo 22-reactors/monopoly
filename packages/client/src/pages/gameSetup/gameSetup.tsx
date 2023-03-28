@@ -19,8 +19,7 @@ import {
 import style from './gameSetup.module.scss';
 import { Players } from './players/players';
 import { links } from '../../utils/const';
-import { userSelector } from '../../reduxstore/user/user.selector';
-import { useNavigate } from 'react-router-dom';
+import { useNav } from '../../hooks/useNav';
 
 export interface IConfig {
   [Config.NAME]: string;
@@ -62,18 +61,13 @@ export const GameSetup = (props: IGameProps) => {
   const [selectOptions, setSelectOptions] = useState<Record<string, IOption>>(
     {}
   );
-  const navigate = useNavigate();
 
   const playersNumber = useAppSelector(playersNumberSelector);
   const players: IConfig[] = useAppSelector(playersSelector);
-  const user = useAppSelector(userSelector);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (!user) {
-      navigate(links.login.path);
-    }
-  }, [user]);
+  useNav(links.login.path, true);
+
 
   useEffect(() => {
     Object.entries(config).forEach(([key, value]) => {

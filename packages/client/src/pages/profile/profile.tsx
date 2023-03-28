@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 import { IUserData } from '../../api/auth/interfaces';
 import { useAppSelector } from '../../reduxstore/hooks';
 import { userSelector } from '../../reduxstore/user/user.selector';
-import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
+import { useNav } from '../../hooks/useNav';
 
 const FieldMap: Record<string, FieldInfo> = {
   email: {
@@ -73,18 +73,12 @@ const PASSWORD_FIELDS = [
 const defaultUserFields = Object.values(FieldMap);
 
 export function ProfilePage(): JSX.Element {
-  const navigate = useNavigate();
-
   const user = useAppSelector(userSelector);
 
   const [fields, setFields] = useState<FieldInfo[]>(defaultUserFields);
   const [avatar, setAvatar] = useState<string>('');
 
-  useEffect(() => {
-    if (!user) {
-      navigate(links.login.path);
-    }
-  }, [user]);
+  useNav(links.login.path, true);
 
   useEffect(() => {
     const userFields = user ? connectorUserFields(user) : defaultUserFields;
