@@ -10,7 +10,7 @@ import { ThemeCard } from '../../../components/themeCard/themeCard';
 import { ThemeCardProps } from '../../../mocs/ForumProps';
 import { Paginator } from '../../../components/paginator/paginator';
 
-export const ForumSection1: FC<ForumSectionProps> = () => {
+export const ForumSection: FC<ForumSectionProps> = () => {
   const pageTitle = 'Форум 1';
   return (
     <>

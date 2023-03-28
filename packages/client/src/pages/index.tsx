@@ -10,8 +10,8 @@ import { ProfilePage, profileLoader } from './profile/profile';
 import { Register } from './register/register';
 import { registerLoader } from './register/register';
 import { Layout } from './layout/layout';
-import { ForumSection1 } from './forum/ForumSection/ForumSection1';
-import { ForumTopic1 } from './forum/ForumTopic/ForumTopic1';
+import { ForumSection } from './forum/ForumSection/ForumSection';
+import { ForumTopic } from './forum/ForumTopic/ForumTopic';
 import { CreateTopic } from './forum/ForumTopic/CreateTopic';
 import { GameSetup, gameSetupLoader } from './gameSetup/gameSetup';
 
@@ -29,8 +29,8 @@ const RootBoundary = () => {
 export {
   RootBoundary,
   Forum,
-  ForumSection1,
-  ForumTopic1,
+  ForumSection,
+  ForumTopic,
   CreateTopic,
   Game,
   gameLoader,

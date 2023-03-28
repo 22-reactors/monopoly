@@ -10,7 +10,7 @@ import { ThemeMessageProps } from '../../../mocs/ForumProps';
 import { Paginator } from '../../../components/paginator/paginator';
 import Textarea from '../../../components/textarea/textarea';
 
-export const ForumTopic1: FC<ForumTopicProps> = () => {
+export const ForumTopic: FC<ForumTopicProps> = () => {
   const  topicId  = '1';
   const [message, setMessage] = useState ('');
     return (
