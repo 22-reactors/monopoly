@@ -13,6 +13,7 @@ import { Layout } from './layout/layout';
 import { ForumSection1 } from './forum/ForumSection/ForumSection1';
 import { ForumTopic1 } from './forum/ForumTopic/ForumTopic1';
 import { CreateTopic } from './forum/ForumTopic/CreateTopic';
+import { GameSetup, gameSetupLoader } from './gameSetup/gameSetup';
 
 const RootBoundary = () => {
   const error = useRouteError();
@@ -42,4 +43,6 @@ export {
   Register,
   registerLoader,
   Layout,
+  GameSetup,
+  gameSetupLoader,
 };

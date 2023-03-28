@@ -1,12 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import userReducer from './user/userSlice';
 import playersReducer from './players/playersSlice';
+import buyingCardInfoReducer from './game/buyingCardInfoSlice';
 
-//здесь будут редьюсеры нашего приложения
-const appReducer = {
+const appReducer = combineReducers({
   user: userReducer,
   players: playersReducer,
-};
+  buyingCardInfo: buyingCardInfoReducer,
+});
 
 export const store = configureStore({
   reducer: appReducer,

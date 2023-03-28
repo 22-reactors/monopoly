@@ -8,7 +8,7 @@ export const unAuthorizedRedirect = async () => {
   if (!user) {
     return redirect(links.login.path);
   }
-  return true;
+  return null;
 };
 
 export const authorizedRedirect = async () => {
@@ -16,7 +16,7 @@ export const authorizedRedirect = async () => {
   if (user) {
     return redirect(links.game.path);
   }
-  return true;
+  return null;
 };
 
 export const enum WordMap {
