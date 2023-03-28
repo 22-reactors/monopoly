@@ -10,6 +10,9 @@ import { ProfilePage, profileLoader } from './profile/profile';
 import { Register } from './register/register';
 import { registerLoader } from './register/register';
 import { Layout } from './layout/layout';
+import { ForumSection } from './forum/ForumSection/ForumSection';
+import { ForumTopic } from './forum/ForumTopic/ForumTopic';
+import { CreateTopic } from './forum/ForumTopic/CreateTopic';
 import { GameSetup, gameSetupLoader } from './gameSetup/gameSetup';
 
 const RootBoundary = () => {
@@ -22,9 +25,13 @@ const RootBoundary = () => {
   return <ErrorPage />;
 };
 
+
 export {
   RootBoundary,
   Forum,
+  ForumSection,
+  ForumTopic,
+  CreateTopic,
   Game,
   gameLoader,
   Home,

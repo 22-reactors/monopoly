@@ -5,6 +5,9 @@ import RegistrProps from './mocs/registrProps';
 import {
   RootBoundary,
   Forum,
+  ForumSection,
+  ForumTopic,
+  CreateTopic,
   Game,
   gameLoader,
   Home,
@@ -50,6 +53,18 @@ export const routes = [
       {
         path: links.forum.path,
         element: <Forum />,
+      },
+      {
+        path: links.forumsection1.path,
+        element: <ForumSection />,
+      },
+      {
+        path: links.forumtopic1.path,
+        element: <ForumTopic />,
+      },
+      {
+        path: links.CreateTopic.path,
+        element: <CreateTopic/>,
       },
       {
         path: links.setup.path,

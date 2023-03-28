@@ -10,7 +10,10 @@
   background-color: $text-white;
   padding: 20px;
   border-radius: 10px;
-  box-sizing: border-box;
+  margin-bottom: 20px;
+  width: 100%;
+  justify-content: space-between;
+  max-width: 1070px;
 }
 
 .status {
