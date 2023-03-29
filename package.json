@@ -11,7 +11,7 @@
     "dev:server": "lerna run dev --scope=server",
     "dev": "yarn build:client && yarn dev:server",
     "test": "lerna run test",
-    "lint": "lerna run lint",
+    "lint": "lerna run lint --scope=client && lerna run lint --scope=server",
     "format": "lerna run format",
     "preview": "lerna run preview",
     "start": "yarn build && lerna run preview --scope=server"
