@@ -1,23 +1,4 @@
-import { redirect } from 'react-router-dom';
 import { Input } from '../components/input/input';
-import { links } from './const';
-import { store } from '../reduxstore/monopolyStore';
-
-export const unAuthorizedRedirect = async () => {
-  const { user } = store.getState().user;
-  if (!user) {
-    return redirect(links.login.path);
-  }
-  return null;
-};
-
-export const authorizedRedirect = async () => {
-  const { user } = store.getState().user;
-  if (user) {
-    return redirect(links.game.path);
-  }
-  return null;
-};
 
 export const enum WordMap {
   SINGLE = 'single',
@@ -97,3 +78,5 @@ export const getInputName = (element: JSX.Element) => {
     return element.props.name as string;
   }
 };
+
+export const isServer = !(typeof window !== 'undefined' && window.document);

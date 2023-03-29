@@ -4,12 +4,12 @@ import path from 'path';
 import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
 import type { ViteDevServer } from 'vite';
-
-dotenv.config();
-
+import { createProxyMiddleware } from 'http-proxy-middleware';
 import express from 'express';
 import { createClientAndConnect } from './db';
 import { router } from './src/router/forumRouter';
+
+dotenv.config();
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -46,6 +46,17 @@ async function startServer() {
 
   app.use(router);
 
+  app.use(
+    '/api/v2',
+    createProxyMiddleware({
+      changeOrigin: true,
+      cookieDomainRewrite: {
+        '*': '',
+      },
+      target: 'https://ya-praktikum.tech',
+    })
+  );
+
   app.use('*', async (req, res, next) => {
     const url = req.originalUrl;
 
@@ -66,7 +77,7 @@ async function startServer() {
         template = await vite.transformIndexHtml(url, template);
       }
 
-      let render: (...args: any) => Promise<string>;
+      let render: (...args: any) => Promise<[string, Record<string, any>]>;
 
       if (!isDev) {
         render = (await import(ssrClientPath)).render;
@@ -76,8 +87,16 @@ async function startServer() {
       }
 
       try {
-        const appHtml = await render(req);
-        const html = template.replace('<!--ssr-outlet-->', appHtml);
+        const [appHtml, initialState] = await render(req);
+
+        const serializedInitialState = `<script>window.initialState = ${JSON.stringify(
+          initialState
+        ).replace(/</g, '\\u003c')}</script>`;
+
+        const html = template
+          .replace('<!--ssr-outlet-->', appHtml)
+          .replace('<!--store-data-->', serializedInitialState);
+
         res.setHeader('Content-Type', 'text/html');
         res.status(200).end(html);
       } catch (e) {
@@ -86,6 +105,7 @@ async function startServer() {
         }
         throw e;
       }
+      next();
     } catch (error) {
       if (isDev) {
         vite.ssrFixStacktrace(error as Error);

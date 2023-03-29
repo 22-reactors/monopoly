@@ -9,18 +9,13 @@ import {
   ForumTopic,
   CreateTopic,
   Game,
-  gameLoader,
   Home,
   Leaderboard,
   Login,
-  loginLoader,
   ProfilePage,
-  profileLoader,
   Register,
-  registerLoader,
   Layout,
   GameSetup,
-  gameSetupLoader,
 } from './pages/index';
 import { links } from './utils/const';
 
@@ -34,17 +29,14 @@ export const routes = [
       {
         path: links.login.path,
         element: <Login {...LoginProps} />,
-        loader: loginLoader,
       },
       {
         path: links.signup.path,
         element: <Register {...RegistrProps} />,
-        loader: registerLoader,
       },
       {
         path: links.profile.path,
         element: <ProfilePage />,
-        loader: profileLoader,
       },
       {
         path: links.leaderboard.path,
@@ -69,13 +61,11 @@ export const routes = [
       {
         path: links.setup.path,
         element: <GameSetup maxPlayers={4} />,
-        loader: gameSetupLoader,
       },
     ],
   },
   {
     path: links.game.path,
     element: <Game />,
-    loader: gameLoader,
   },
 ];
