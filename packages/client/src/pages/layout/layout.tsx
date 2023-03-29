@@ -12,7 +12,7 @@ export const Layout = () => {
 
   useEffect(() => {
     dispatch(getUser());
-  });
+  }, []);
 
   return (
     <>
