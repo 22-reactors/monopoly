@@ -8,7 +8,7 @@ import {
 } from 'sequelize-typescript';
 
 export interface IUser {
-  login: string
+  login: string;
 }
 
 @Table({ tableName: 'users' })

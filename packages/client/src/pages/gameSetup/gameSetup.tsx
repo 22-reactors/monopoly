@@ -68,7 +68,6 @@ export const GameSetup = (props: IGameProps) => {
 
   useNav(links.login.path, true);
 
-
   useEffect(() => {
     Object.entries(config).forEach(([key, value]) => {
       if (value) {

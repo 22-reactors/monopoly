@@ -10,7 +10,6 @@ interface Props extends IValidationInputProps {
   resize?: 'none' | 'both' | 'horizontal' | 'vertical' | 'inherit';
   onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   onBlur?: (event?: ChangeEvent<HTMLTextAreaElement>) => void;
-  
 }
 
 function Textarea(props: Props) {

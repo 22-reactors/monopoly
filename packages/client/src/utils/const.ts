@@ -1,4 +1,4 @@
-import { isServer } from "./helpers";
+import { isServer } from './helpers';
 
 export const links = {
   root: {
@@ -33,11 +33,11 @@ export const links = {
     path: '/forum/section/1/topic/1',
     title: 'Форум/Раздел1/Тема1',
   },
-  CreateTopic:{
+  CreateTopic: {
     path: '/forum/CreateTopic',
     title: 'Создать тему',
   },
-  ThemeMessage:{
+  ThemeMessage: {
     path: '/forum/ThemeMessage',
     title: 'Отправить',
   },

@@ -10,9 +10,9 @@ import { User } from './user';
 import { Comment } from './comment';
 
 export interface IEmoji {
-  userId: number,
-  commentId: number,
-  emojiCode: string
+  userId: number;
+  commentId: number;
+  emojiCode: string;
 }
 
 @Table({ tableName: 'emojis' })

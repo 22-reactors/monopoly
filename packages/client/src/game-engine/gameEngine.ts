@@ -102,13 +102,12 @@ export class GameEngine {
           cardName: configCard.title,
           cardPrice: cardPrice,
           cardIndex: card.cardIndex,
-          indexChip: indexChip
+          indexChip: indexChip,
         };
         store.dispatch(addBuyingCardInfoAction(buyingInfo));
       } else {
         this.setNextChipIndex();
       }
-      
     } else {
       this.setNextChipIndex();
     }

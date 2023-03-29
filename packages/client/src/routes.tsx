@@ -56,7 +56,7 @@ export const routes = [
       },
       {
         path: links.CreateTopic.path,
-        element: <CreateTopic/>,
+        element: <CreateTopic />,
       },
       {
         path: links.setup.path,
