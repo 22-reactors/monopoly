@@ -5,8 +5,7 @@ import { App } from './app';
 import './main.scss';
 import { store } from './reduxstore/monopolyStore';
 
-ReactDOM.hydrateRoot(
-  document.getElementById('root') as HTMLElement,
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
       <App />

@@ -40,9 +40,9 @@ class AuthController {
     }
   }
 
-  async getUser(headers?: Record<string, string>) {
+  async getUser() {
     try {
-      const response = await this._api.getUser(headers);
+      const response = await this._api.getUser();
       if (isUserGoodResponse(response)) {
         return response;
       } else {

@@ -1,5 +1,3 @@
-import { HOST } from '../../utils/const';
-
 enum METHODS {
   GET = 'GET',
   POST = 'POST',
@@ -21,7 +19,7 @@ type HTTPMethod = (
 ) => Promise<unknown>;
 
 const TIMEOUT_DELAY = 5000;
-const API_HOST = `${HOST}/api/v2`;
+const HOST = 'https://ya-praktikum.tech/api/v2';
 
 function queryStringify(data?: Record<string, string>): string {
   if (!data) {
@@ -43,7 +41,7 @@ export default class RequestTransport {
   protected endpoint: string;
 
   constructor(endpoint: string) {
-    this.endpoint = `${API_HOST}${endpoint}`;
+    this.endpoint = `${HOST}${endpoint}`;
   }
 
   protected get: HTTPMethod = async (url, options) => {

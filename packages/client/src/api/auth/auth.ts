@@ -24,8 +24,8 @@ export class AuthAPI extends RequestTransport {
     }) as Promise<SignUpResponse>;
   }
 
-  getUser(headers?: Record<string, string>) {
-    return this.get('/user', { headers }) as Promise<UserResponse>;
+  getUser() {
+    return this.get('/user') as Promise<UserResponse>;
   }
 
   logout() {

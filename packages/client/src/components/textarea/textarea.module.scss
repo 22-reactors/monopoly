@@ -30,7 +30,7 @@ $animation-time: 0.25s;
 .containerSolo {
   @include shadowDefault;
   background: #fff;
-  padding: 5px;
+  padding: 20px;
   border-radius: 10px;
   & .textarea {
     border-color: transparent;

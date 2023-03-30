@@ -9,8 +9,6 @@ import { Input } from '../input/input';
 import { useNavigate } from 'react-router-dom';
 import validate, { mapErrorMessage } from '../../service/validate/validate';
 import { InputsState } from '../authForm/authForm';
-import { store } from '../../reduxstore/monopolyStore';
-import { getUser } from '../../reduxstore/user/userSlice';
 
 export type FieldInfo = {
   id: string;
@@ -93,7 +91,6 @@ export function Info(props: IInfo) {
 
       void (await UserController.changeProfile(userInfo));
       void (await UserController.changePassword({ oldPassword, newPassword }));
-      store.dispatch(getUser());
       void navigate(-1);
     } else {
       setFieldInput(prevState => {

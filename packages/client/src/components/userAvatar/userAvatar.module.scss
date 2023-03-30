@@ -1,5 +1,5 @@
-@import '../../styles/globals.scss';
-@import '../../styles/mixin.scss';
+@import './src/styles/mixin';
+@import './src/styles/globals';
 
 .wrapper {
   display: flex;

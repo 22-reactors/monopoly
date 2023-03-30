@@ -2,36 +2,25 @@
   "name": "monopoly",
   "private": true,
   "scripts": {
-    "bootstrap": "yarn && node init.js && lerna clean && yarn && lerna bootstrap && yarn link-client",
-    "link-client": "lerna run link-client --scope=client && lerna run link-client --scope=server",
-    "build": "yarn build:client && yarn build:server",
-    "build:client": "lerna run build --scope=client",
-    "build:server": "lerna run build --scope=server",
+    "bootstrap": "yarn && node init.js && lerna clean && yarn && lerna bootstrap",
+    "build": "lerna run build",
     "dev:client": "lerna run dev  --scope=client",
     "dev:server": "lerna run dev --scope=server",
-    "dev": "yarn build:client && yarn dev:server",
+    "dev": "lerna run dev",
     "test": "lerna run test",
     "lint": "lerna run lint",
     "format": "lerna run format",
-    "preview": "lerna run preview",
-    "start": "yarn build && lerna run preview --scope=server"
+    "preview": "lerna run preview"
   },
   "license": "MIT",
   "workspaces": [
     "packages/*"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=15"
   },
   "devDependencies": {
     "@evilmartians/lefthook": "^1.1.1",
-    "@types/pg": "^8.6.6",
     "lerna": "^5.4.3"
-  },
-  "dependencies": {
-    "pg": "^8.10.0",
-    "reflect-metadata": "^0.1.13",
-    "sequelize": "^6.30.0",
-    "sequelize-typescript": "^2.1.5"
   }
 }

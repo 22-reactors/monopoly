@@ -2,12 +2,9 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ILoginData, ISignUpData, IUserData } from '../../api/auth/interfaces';
 import AuthController, { isSignUpGoodResponse } from '../../controllers/auth';
 
-export const getUser = createAsyncThunk(
-  'user/getUser',
-  async (headers?: Record<string, string>) => {
-    return await AuthController.getUser(headers);
-  }
-);
+export const getUser = createAsyncThunk('user/getUser', async () => {
+  return await AuthController.getUser();
+});
 
 export const logoutAction = createAsyncThunk(
   'user/logout',

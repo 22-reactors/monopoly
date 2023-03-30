@@ -1,12 +1,11 @@
 import style from './profile.module.scss';
 import { FieldInfo, Info } from '../../components/info/info';
+import { unAuthorizedRedirect } from '../../utils/helpers';
 import Avatar from '../../components/avatar/avatar';
 import { useEffect, useState } from 'react';
 import { IUserData } from '../../api/auth/interfaces';
 import { useAppSelector } from '../../reduxstore/hooks';
 import { userSelector } from '../../reduxstore/user/user.selector';
-import { links } from '../../utils/const';
-import { useNav } from '../../hooks/useNav';
 
 const FieldMap: Record<string, FieldInfo> = {
   email: {
@@ -70,6 +69,8 @@ const PASSWORD_FIELDS = [
   },
 ];
 
+export const profileLoader = unAuthorizedRedirect;
+
 const defaultUserFields = Object.values(FieldMap);
 
 export function ProfilePage(): JSX.Element {
@@ -77,8 +78,6 @@ export function ProfilePage(): JSX.Element {
 
   const [fields, setFields] = useState<FieldInfo[]>(defaultUserFields);
   const [avatar, setAvatar] = useState<string>('');
-
-  useNav(links.login.path, true);
 
   useEffect(() => {
     const userFields = user ? connectorUserFields(user) : defaultUserFields;

@@ -36,7 +36,7 @@ export const MonopolyConfig: IMonopolyConfig = {
   cards: [
     {
       type: CardTypeEmum.Corner,
-      background: '/images/start-card.png',
+      background: 'start-card.png',
     },
     {
       title: 'Житная улица',
@@ -88,7 +88,7 @@ export const MonopolyConfig: IMonopolyConfig = {
     },
     {
       type: CardTypeEmum.Corner,
-      background: '/images/jail-card.png',
+      background: 'jail-card.png',
     },
     {
       title: 'уллица Полянка',
@@ -142,7 +142,7 @@ export const MonopolyConfig: IMonopolyConfig = {
     },
     {
       type: CardTypeEmum.Corner,
-      background: '/images/parking-card.png',
+      background: 'parking-card.png',
     },
     {
       title: 'улица Тверская',
@@ -196,7 +196,7 @@ export const MonopolyConfig: IMonopolyConfig = {
     },
     {
       type: CardTypeEmum.Corner,
-      background: '/images/arrest-card.png',
+      background: 'arrest-card.png',
     },
     {
       title: 'улица Щусева',
@@ -278,7 +278,7 @@ export const initMonopolyUserConfig = (players: IConfig[]) => {
 };
 
 export const isGameExist = (): boolean => {
-  const unpurchasedCards: TCardSetting[] = (getCardsStore() ?? [])
+  const unpurchasedCards: TCardSetting[] = getCardsStore()
     .filter(card => card.type === CardTypeEmum.Main && !card.buyingBackgroundColor);
 
   return unpurchasedCards.length !== 0;

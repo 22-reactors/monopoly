@@ -1,17 +1,21 @@
 import { AuthForm, IAuthFormProps } from '../../components/authForm/authForm';
 import style from '../login/login.module.scss';
-import { getInputData } from '../../utils/helpers';
+import { authorizedRedirect, getInputData } from '../../utils/helpers';
 import { ISignUpData } from '../../api/auth/interfaces';
+import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
 import { IValue } from '../../utils/interfaces';
 import { IInputProps, Input } from '../../components/input/input';
+import { useEffect } from 'react';
 import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../reduxstore/hooks';
 import {
   userErrorSelector,
+  userSelector,
 } from '../../reduxstore/user/user.selector';
 import { clearError, signUp } from '../../reduxstore/user/userSlice';
-import { useNav } from '../../hooks/useNav';
+
+export const registerLoader = authorizedRedirect;
 
 export interface IRegistrProps extends Omit<IAuthFormProps, 'children'> {
   inputsProps: IInputProps[];
@@ -28,11 +32,16 @@ export interface ISignUpForm {
 
 export const Register = (props: IRegistrProps) => {
   const { inputsProps, isDarkTheme } = props;
+  const user = useAppSelector(userSelector);
   const error = useAppSelector(userErrorSelector);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  useNav(links.setup.path, false);
-
+  useEffect(() => {
+    if (user) {
+      navigate(links.setup.path);
+    }
+  }, [user]);
 
   const inputItems = inputsProps.map((inputProp, i) => {
     return <Input key={i} {...inputProp} />;

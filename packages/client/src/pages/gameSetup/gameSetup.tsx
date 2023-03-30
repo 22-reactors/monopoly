@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../reduxstore/hooks';
-import {
-  playersNumberSelector,
-  playersSelector,
-} from '../../reduxstore/players/players.selector';
+import { playersNumberSelector, playersSelector } from '../../reduxstore/players/players.selector';
 import { addPlayerAction } from '../../reduxstore/players/playersSlice';
 import { Button, ButtonVariation } from '../../components/button/button';
 import { Input } from '../../components/input/input';
@@ -14,12 +11,13 @@ import {
   Config,
   ErrorDupText,
   ErrorText,
-  PlayerTypesLabels,
-} from './const';
+  PlayerTypesLabels
+} from './const'
 import style from './gameSetup.module.scss';
 import { Players } from './players/players';
+import { redirect } from 'react-router-dom';
 import { links } from '../../utils/const';
-import { useNav } from '../../hooks/useNav';
+import AuthController from '../../controllers/auth';
 
 export interface IConfig {
   [Config.NAME]: string;
@@ -48,6 +46,14 @@ const initialInputErrors: IInputErrors = {
   [Config.COLOR]: undefined,
 };
 
+export const gameSetupLoader = async () => {
+  const user = await AuthController.getUser();
+  if (!user) {
+    return redirect(links.login.path);
+  }
+  return true;
+};
+
 const mapOptions = (options: Record<string, string>): IOption[] =>
   Object.entries(options).map(([value, label]) => {
     return { value, label };
@@ -65,9 +71,6 @@ export const GameSetup = (props: IGameProps) => {
   const playersNumber = useAppSelector(playersNumberSelector);
   const players: IConfig[] = useAppSelector(playersSelector);
   const dispatch = useAppDispatch();
-
-  useNav(links.login.path, true);
-
 
   useEffect(() => {
     Object.entries(config).forEach(([key, value]) => {
@@ -121,10 +124,7 @@ export const GameSetup = (props: IGameProps) => {
     }
   };
 
-  const validFieldOnDup = (
-    fieldName: Config.NAME | Config.COLOR,
-    validator: { isValid: boolean }
-  ): void => {
+  const validFieldOnDup = (fieldName: Config.NAME | Config.COLOR, validator: {isValid: boolean}): void => {
     players.forEach(player => {
       if (player[fieldName] == config[fieldName]) {
         setInputErrors(prevState => ({
@@ -135,7 +135,7 @@ export const GameSetup = (props: IGameProps) => {
         return;
       }
     });
-  };
+  }
 
   return (
     <main>

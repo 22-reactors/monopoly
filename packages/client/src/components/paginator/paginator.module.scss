@@ -1,5 +1,5 @@
-@import '../../styles/mixin';
-@import '../../styles/globals';
+@import './src/styles/mixin';
+@import './src/styles/globals';
 
 .container {
   display: flex;
@@ -10,7 +10,7 @@
 
   &.isDarkMode {
     .arrowBack {
-      background-image: url('/images/arrow-light-left.svg');
+      background-image: url('arrow-light-left.svg');
     }
 
     .pageNumber {
@@ -42,7 +42,7 @@
 }
 
 .arrowBack {
-  background-image: url('/images/arrow-dark-left.svg');
+  background-image: url('arrow-dark-left.svg');
 }
 
 .arrowForward {
