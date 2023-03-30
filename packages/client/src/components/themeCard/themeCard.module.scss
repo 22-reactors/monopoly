@@ -1,14 +1,21 @@
-@import './src/styles/globals';
-@import './src/styles/mixin';
+@import "../../styles/globals";
+@import "../../styles/mixin";
 
 .wrapper {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  flex-direction: row;
+  gap: 60px;
   background-color: $text-white;
   padding: 20px;
   border-radius: 10px;
-  box-sizing: border-box;
+  align-items: center;
+  margin-top: 28px;
+  height: 34px;
+  justify-content: space-between;
+  max-width: 1110px;
+  width: 100%;
+  @include shadowDefault;
+  padding: auto;
 }
 
 .title {
@@ -42,7 +49,7 @@
     transform: translateY(-50%);
     width: 32px;
     height: 32px;
-    background-image: url('answer-icon.svg');
+    background-image: url('/images/answer-icon.svg');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -51,4 +58,5 @@
 
 .lastMessage {
   color: $text-additional;
+  padding-left: 20px;
 }

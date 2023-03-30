@@ -1,3 +1,5 @@
+//Компонент. карточка темы форума
+
 import style from './themeCard.module.scss';
 import { IUserAvatar, UserAvatar } from '../userAvatar/userAvatar';
 import { getDeclensionWord } from '../../utils/helpers';
