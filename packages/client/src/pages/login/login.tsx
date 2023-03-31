@@ -8,9 +8,7 @@ import { AuthForm, IAuthFormProps } from '../../components/authForm/authForm';
 import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../reduxstore/hooks';
 import { clearError, login } from '../../reduxstore/user/userSlice';
-import {
-  userErrorSelector,
-} from '../../reduxstore/user/user.selector';
+import { userErrorSelector } from '../../reduxstore/user/user.selector';
 import { useNav } from '../../hooks/useNav';
 
 export interface ILoginProps extends Omit<IAuthFormProps, 'children'> {
@@ -28,7 +26,6 @@ export const Login = (props: ILoginProps) => {
   const error = useAppSelector(userErrorSelector);
 
   useNav(links.setup.path, false);
-
 
   const inputItems = inputsProps.map((inputProp, i) => {
     return <Input key={i} {...inputProp} />;

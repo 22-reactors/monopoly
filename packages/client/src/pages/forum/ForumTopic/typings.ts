@@ -1,4 +1,3 @@
 export type ForumTopicProps = {
-    name?: string;
-  };
-  
+  name?: string;
+};

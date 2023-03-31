@@ -10,10 +10,10 @@ import { User } from './user';
 import { Topic } from './topic';
 
 export interface IComment {
-  topicId: number,
-  parentId: number,
-  userId: number,
-  comment: Comment
+  topicId: number;
+  parentId: number;
+  userId: number;
+  comment: Comment;
 }
 
 @Table({ tableName: 'comments' })

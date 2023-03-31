@@ -19,7 +19,7 @@ const playersSlice = createSlice({
         color,
       });
     },
-    resetPlayersAction: () => initialState
+    resetPlayersAction: () => initialState,
   },
 });
 

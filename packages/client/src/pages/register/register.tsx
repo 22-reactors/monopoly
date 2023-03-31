@@ -7,9 +7,7 @@ import { IValue } from '../../utils/interfaces';
 import { IInputProps, Input } from '../../components/input/input';
 import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../reduxstore/hooks';
-import {
-  userErrorSelector,
-} from '../../reduxstore/user/user.selector';
+import { userErrorSelector } from '../../reduxstore/user/user.selector';
 import { clearError, signUp } from '../../reduxstore/user/userSlice';
 import { useNav } from '../../hooks/useNav';
 
@@ -32,7 +30,6 @@ export const Register = (props: IRegistrProps) => {
   const dispatch = useAppDispatch();
 
   useNav(links.setup.path, false);
-
 
   const inputItems = inputsProps.map((inputProp, i) => {
     return <Input key={i} {...inputProp} />;

@@ -10,19 +10,25 @@ export enum Paths {
   Topic = '/topic',
 }
 
-export const ForumTopicList: FC<ForumTopicListProps> = ({ topicList, sectionId }) => {
+export const ForumTopicList: FC<ForumTopicListProps> = ({
+  topicList,
+  sectionId,
+}) => {
   return (
     <div className={style.forum}>
-    <table border={0} className={style.forum__body}>
+      <table border={0} className={style.forum__body}>
         {topicList.map(item => (
-          <tr key={item.id}  className={style.forum__item}>
+          <tr key={item.id} className={style.forum__item}>
             <td className={style.forum__name}>
-              <Link to={`${Paths.Section}/${sectionId}${Paths.Topic}/${item.id}`}>{item.name}</Link>
+              <Link
+                to={`${Paths.Section}/${sectionId}${Paths.Topic}/${item.id}`}>
+                {item.name}
+              </Link>
             </td>
             <td>{item.messages}</td>
           </tr>
         ))}
-    </table>
+      </table>
     </div>
   );
 };
