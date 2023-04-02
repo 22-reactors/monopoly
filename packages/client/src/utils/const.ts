@@ -62,4 +62,8 @@ export const HOST = `http://localhost:${
   !isServer ? __SERVER_PORT__ : process.env.SERVER_PORT
 }`;
 
-export const resourceURL = `${HOST}/api/v2/resources`;
+export const PROXY_API_HOST = `${HOST}/api/v2`;
+
+export const SERVER_API_HOST = `${HOST}/api`;
+
+export const resourceURL = `${PROXY_API_HOST}/resources`;

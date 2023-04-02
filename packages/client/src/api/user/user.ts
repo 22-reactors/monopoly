@@ -1,4 +1,5 @@
 import RequestTransport from '../../service/request/request';
+import { PROXY_API_HOST } from '../../utils/const';
 import {
   IChangePasswordResponse,
   IPasswordData,
@@ -8,7 +9,7 @@ import {
 
 export class UserAPI extends RequestTransport {
   constructor() {
-    super('/user');
+    super(`${PROXY_API_HOST}/user`);
   }
 
   changeProfile(data: IProfileData) {

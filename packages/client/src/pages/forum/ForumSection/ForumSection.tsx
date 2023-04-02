@@ -13,9 +13,24 @@ import { links } from '../../../utils/const';
 import { ThemeCard } from '../../../components/themeCard/themeCard';
 import { ThemeCardProps } from '../../../mocs/ForumProps';
 import { Paginator } from '../../../components/paginator/paginator';
+import ForumController from '../../../controllers/forum';
 
 export const ForumSection: FC<ForumSectionProps> = () => {
   const pageTitle = 'Форум 1';
+
+  const addTopic = () => {
+    ForumController.addTopic({
+      title: 'Как играть?',
+      description: 'Правила игры',
+      userLogin: 'petrovich',
+    });
+  };
+
+  const getTopics = async () => {
+    const response = await ForumController.getTopics();
+    console.log(response);
+  };
+
   return (
     <>
       <section className={style.wrapper}>
@@ -31,6 +46,12 @@ export const ForumSection: FC<ForumSectionProps> = () => {
               </Button>
             </Link>
           </div>
+          <Button variation={ButtonVariation.OUTLINED} onClick={addTopic}>
+            Создать топик
+          </Button>
+          <Button variation={ButtonVariation.OUTLINED} onClick={getTopics}>
+            Получить топики
+          </Button>
         </h1>
 
         <Link className={style.link} to={links.forumtopic1.path}>
