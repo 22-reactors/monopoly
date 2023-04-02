@@ -7,7 +7,6 @@ const LIMIT = 100;
 
 export class LeaderBoardAPI extends RequestTransport {
   constructor() {
-
     super(`${PROXY_API_HOST}/leaderboard`);
   }
 

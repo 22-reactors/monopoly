@@ -1,10 +1,6 @@
 import RequestTransport from '../../service/request/request';
 import { SERVER_API_HOST } from '../../utils/const';
-import {
-  IAddCommentData,
-  IAddEmojiData,
-  IAddTopicData,
-} from './interfaces';
+import { IAddCommentData, IAddEmojiData, IAddTopicData } from './interfaces';
 
 export class ForumAPI extends RequestTransport {
   constructor() {

@@ -1,4 +1,4 @@
-import { IBadResponse } from "../interfaces";
+import { IBadResponse } from '../interfaces';
 
 export interface IUserData {
   id: number;
