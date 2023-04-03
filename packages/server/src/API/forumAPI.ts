@@ -62,7 +62,7 @@ export const getComments = async (req: Request, res: Response) => {
     const { id } = req.body;
 
     const data = await Comment.findAll({
-      where: {topic_id: id },
+      where: { topic_id: id },
     });
     res.send({ comments: data });
   } catch (e) {
@@ -94,7 +94,11 @@ export const addEmoji = async (req: Request, res: Response) => {
     });
 
     const foundItem = await Emoji.findOne({
-      where: { comment_id: comment_id, user_id: user[0].id, emojiCode: emojiCode },
+      where: {
+        comment_id: comment_id,
+        user_id: user[0].id,
+        emojiCode: emojiCode,
+      },
     });
     if (!foundItem) {
       await Emoji.create({
@@ -127,7 +131,7 @@ export const getEmojis = async (req: Request, res: Response) => {
     });
 
     const data = await Emoji.findAll({
-      where: {user_id: user[0].id },
+      where: { user_id: user[0].id },
     });
     res.send({ emojis: data });
   } catch (e) {

@@ -36,7 +36,7 @@ export const ForumSection: FC<ForumSectionProps> = () => {
       topic_id: 1,
       parent_id: 2,
       userLogin: 'petrovich',
-      comment: "Хей Хоу"
+      comment: 'Хей Хоу',
     });
     console.log(response);
   };
