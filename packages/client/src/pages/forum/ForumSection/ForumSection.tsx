@@ -31,6 +31,39 @@ export const ForumSection: FC<ForumSectionProps> = () => {
     console.log(response);
   };
 
+  const addComment = async () => {
+    const response = await ForumController.addComment({
+      topic_id: 1,
+      parent_id: 2,
+      userLogin: 'petrovich',
+      comment: "Хей Хоу"
+    });
+    console.log(response);
+  };
+
+  const getComments = async () => {
+    const response = await ForumController.getComments(1);
+    console.log(response);
+  };
+
+  const deleteComment = async () => {
+    const response = await ForumController.deleteComment(1);
+    console.log(response);
+  };
+
+  const addEmoji = async () => {
+    const response = await ForumController.addEmoji({
+      comment_id: 2,
+      emojiCode: '$#128518;',
+      userLogin: 'petrovich',
+    });
+  };
+
+  const getEmojis = async () => {
+    const response = await ForumController.getEmojis('petrovich');
+    console.log(response);
+  };
+
   return (
     <>
       <section className={style.wrapper}>
@@ -51,6 +84,21 @@ export const ForumSection: FC<ForumSectionProps> = () => {
           </Button>
           <Button variation={ButtonVariation.OUTLINED} onClick={getTopics}>
             Получить топики
+          </Button>
+          <Button variation={ButtonVariation.OUTLINED} onClick={addComment}>
+            Добавить коммент
+          </Button>
+          <Button variation={ButtonVariation.OUTLINED} onClick={getComments}>
+            Получить комменты
+          </Button>
+          <Button variation={ButtonVariation.OUTLINED} onClick={deleteComment}>
+            Удалить коммент
+          </Button>
+          <Button variation={ButtonVariation.OUTLINED} onClick={addEmoji}>
+            Добавить эмодзи
+          </Button>
+          <Button variation={ButtonVariation.OUTLINED} onClick={getEmojis}>
+            Получить эмодзи
           </Button>
         </h1>
 

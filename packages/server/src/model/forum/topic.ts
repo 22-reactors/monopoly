@@ -9,7 +9,7 @@ import {
 import { User } from './user';
 
 interface ITopic {
-  userId: number;
+  user_id: number;
   title: string;
   description?: string;
 }
@@ -20,7 +20,7 @@ export class Topic extends Model<ITopic> {
     foreignKey: 'user_id',
     as: 'user',
   })
-  userId: number;
+  user_id: number;
 
   @AllowNull(false)
   @Column(DataType.STRING)

@@ -15,7 +15,7 @@ export const addTopic = async (req: Request, res: Response) => {
     await Topic.create({
       title: title,
       description: description ?? '',
-      userId: user[0].id,
+      user_id: user[0].id,
     });
 
     res.send('OK');
@@ -37,7 +37,7 @@ export const getTopics = async (_: Request, res: Response) => {
 
 export const addComment = async (req: Request, res: Response) => {
   try {
-    const { comment, topicId, parentId, userLogin } = req.body;
+    const { comment, topic_id, parent_id, userLogin } = req.body;
 
     const user = await User.findOrCreate({
       where: { login: userLogin },
@@ -45,9 +45,9 @@ export const addComment = async (req: Request, res: Response) => {
 
     await Comment.create({
       comment: comment,
-      topicId: topicId,
-      parentId: parentId,
-      userId: user[0].id,
+      topic_id: topic_id,
+      parent_id: parent_id,
+      user_id: user[0].id,
     });
 
     res.send('OK');
@@ -62,7 +62,7 @@ export const getComments = async (req: Request, res: Response) => {
     const { id } = req.body;
 
     const data = await Comment.findAll({
-      where: { topicId: id },
+      where: {topic_id: id },
     });
     res.send({ comments: data });
   } catch (e) {
@@ -87,29 +87,29 @@ export const deleteComment = async (req: Request, res: Response) => {
 
 export const addEmoji = async (req: Request, res: Response) => {
   try {
-    const { commentId, userLogin, emojiCode } = req.body;
+    const { comment_id, userLogin, emojiCode } = req.body;
 
     const user = await User.findOrCreate({
       where: { login: userLogin },
     });
 
     const foundItem = await Emoji.findOne({
-      where: { commentId: commentId, userId: user[0].id, emojiCode: emojiCode },
+      where: { comment_id: comment_id, user_id: user[0].id, emojiCode: emojiCode },
     });
     if (!foundItem) {
       await Emoji.create({
-        commentId: commentId,
-        userId: user[0].id,
+        comment_id: comment_id,
+        user_id: user[0].id,
         emojiCode: emojiCode,
       });
     } else {
       await Emoji.update(
         { emojiCode: emojiCode },
-        { where: { commentId: commentId, userId: user[0].id } }
+        { where: { comment_id: comment_id, user_id: user[0].id } }
       );
     }
     const data = await Emoji.findAll({
-      where: { userId: user[0].id },
+      where: { user_id: user[0].id },
     });
     res.send({ emojis: data });
   } catch (error) {
@@ -127,7 +127,7 @@ export const getEmojis = async (req: Request, res: Response) => {
     });
 
     const data = await Emoji.findAll({
-      where: { userId: user[0].id },
+      where: {user_id: user[0].id },
     });
     res.send({ emojis: data });
   } catch (e) {

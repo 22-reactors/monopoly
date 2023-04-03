@@ -7,31 +7,31 @@ export interface IAddTopicData {
 export interface ITopic {
   title: string;
   description?: string;
-  userId: number;
+  user_id: number;
 }
 
 export interface IAddCommentData {
-  topicId: number;
-  parentId: number;
+  topic_id: number;
+  parent_id: number;
   comment: string;
   userLogin: string;
 }
 
 export interface IComment {
-  topicId: number;
-  parentId: number;
+  topic_id: number;
+  parent_id: number;
   comment: string;
   userId: number;
 }
 
 export interface IAddEmojiData {
-  commentId: number;
+  comment_id: number;
   emojiCode: string;
   userLogin: string;
 }
 
 export interface IEmoji {
-  commentId: number;
+  comment_id: number;
   emojiCode: string;
-  userId: number;
+  user_id: number;
 }

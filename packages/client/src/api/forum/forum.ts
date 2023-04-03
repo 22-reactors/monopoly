@@ -22,7 +22,7 @@ export class ForumAPI extends RequestTransport {
   getComments(id: number) {
     return this.post('/comments', { data: { id } }) as Promise<{
       comments: any;
-    }>;
+    } | ''>;
   }
 
   deleteComment(id: number) {
@@ -34,13 +34,13 @@ export class ForumAPI extends RequestTransport {
   addEmoji(data: IAddEmojiData) {
     return this.post('/add-emogi', { data }) as Promise<{
       emojis: any;
-    }>;
+    } | ''>;
   }
 
   getEmojis(userLogin: string) {
-    return this.post('/comments', { data: { userLogin } }) as Promise<{
+    return this.post('/emogis', { data: { userLogin } }) as Promise<{
       emojis: any;
-    }>;
+    } | ''>;
   }
 }
 

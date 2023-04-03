@@ -1,5 +1,9 @@
 import API, { ForumAPI } from '../api/forum/forum';
-import { IAddTopicData } from '../api/forum/interfaces';
+import {
+  IAddCommentData,
+  IAddEmojiData,
+  IAddTopicData,
+} from '../api/forum/interfaces';
 
 class ForumController {
   private _api: ForumAPI;
@@ -20,6 +24,55 @@ class ForumController {
   async getTopics() {
     try {
       const response = await this._api.getTopics();
+      if (response) {
+        return response;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async addComment(data: IAddCommentData) {
+    try {
+      const response = await this._api.addComment(data);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getComments(topic_id: number) {
+    try {
+      const response = await this._api.getComments(topic_id);
+      if (response) {
+        return response;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async deleteComment(comment_id: number) {
+    try {
+      const response = await this._api.deleteComment(comment_id);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async addEmoji(data: IAddEmojiData) {
+    try {
+      const response = await this._api.addEmoji(data);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getEmojis(userLogin: string) {
+    try {
+      const response = await this._api.getEmojis(userLogin);
       if (response) {
         return response;
       }

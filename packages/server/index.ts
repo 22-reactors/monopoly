@@ -44,6 +44,7 @@ async function startServer() {
     app.use('/images', express.static(path.resolve(distPath, 'images')));
   }
 
+  app.use('/api/forum', express.json());
   app.use(router);
 
   app.use(
