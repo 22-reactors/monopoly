@@ -27,7 +27,7 @@ const sequelize = new Sequelize(sequelizeOptions);
 export const createClientAndConnect = async (): Promise<void> => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ force: false, alter: true });
 
     console.log('Connected to the Postgres database!');
   } catch (e) {
