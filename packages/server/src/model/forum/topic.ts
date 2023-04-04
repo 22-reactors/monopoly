@@ -13,7 +13,7 @@ interface ITopic {
   title: string;
   description?: string;
   userLogin: string;
-  lastMessageTime?: string
+  lastMessageTime?: string;
 }
 
 @Table({ tableName: 'topics' })

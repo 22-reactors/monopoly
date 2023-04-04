@@ -114,14 +114,13 @@ export const ForumSection: FC<ForumSectionProps> = () => {
             Получить эмодзи
           </Button>
         </h1>
-
-{/*         {topics.map(topic => )}
- */}        <Link className={style.link} to={links.forumtopic1.path}>
+        {/*         {topics.map(topic => )}
+         */}{' '}
+        <Link className={style.link} to={links.forumtopic1.path}>
           <ThemeCard {...ThemeCardProps} />
         </Link>
         <ThemeCard {...ThemeCardProps} />
         <ThemeCard {...ThemeCardProps} />
-
         <Paginator className={style.paginator} pagesCount={4} />
       </section>
     </>
