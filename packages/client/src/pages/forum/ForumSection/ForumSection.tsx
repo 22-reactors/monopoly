@@ -1,6 +1,6 @@
 //Раздел форума. включает список тем и кол-во сообщений
 
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import style from '../forum.module.scss';
 import { type ForumSectionProps } from './typings';
 import {
@@ -14,9 +14,22 @@ import { ThemeCard } from '../../../components/themeCard/themeCard';
 import { ThemeCardProps } from '../../../mocs/ForumProps';
 import { Paginator } from '../../../components/paginator/paginator';
 import ForumController from '../../../controllers/forum';
+import { ITopic } from '../../../api/forum/interfaces';
 
 export const ForumSection: FC<ForumSectionProps> = () => {
   const pageTitle = 'Форум 1';
+
+  const [topics, setTopics] = useState<ITopic[]>([]);
+
+  useEffect(() => {
+    const getTopics = async () => {
+      const response = await ForumController.getTopics();
+      if (response) {
+        setTopics(response.topics);
+      }
+    };
+    getTopics();
+  }, []);
 
   const addTopic = () => {
     ForumController.addTopic({
@@ -34,7 +47,7 @@ export const ForumSection: FC<ForumSectionProps> = () => {
   const addComment = async () => {
     const response = await ForumController.addComment({
       topic_id: 1,
-      parent_id: 2,
+      parent_id: null,
       userLogin: 'petrovich',
       comment: 'Хей Хоу',
     });
@@ -47,7 +60,7 @@ export const ForumSection: FC<ForumSectionProps> = () => {
   };
 
   const deleteComment = async () => {
-    const response = await ForumController.deleteComment(1);
+    const response = await ForumController.deleteComment(3);
     console.log(response);
   };
 
@@ -102,7 +115,8 @@ export const ForumSection: FC<ForumSectionProps> = () => {
           </Button>
         </h1>
 
-        <Link className={style.link} to={links.forumtopic1.path}>
+{/*         {topics.map(topic => )}
+ */}        <Link className={style.link} to={links.forumtopic1.path}>
           <ThemeCard {...ThemeCardProps} />
         </Link>
         <ThemeCard {...ThemeCardProps} />

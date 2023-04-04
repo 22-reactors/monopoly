@@ -12,6 +12,8 @@ interface ITopic {
   user_id: number;
   title: string;
   description?: string;
+  userLogin: string;
+  lastMessageTime?: string
 }
 
 @Table({ tableName: 'topics' })
@@ -24,9 +26,17 @@ export class Topic extends Model<ITopic> {
 
   @AllowNull(false)
   @Column(DataType.STRING)
+  public userLogin: string | undefined;
+
+  @AllowNull(false)
+  @Column(DataType.STRING)
   public title: string | undefined;
 
   @AllowNull(true)
   @Column(DataType.STRING)
   public description: string | undefined;
+
+  @AllowNull(true)
+  @Column(DataType.STRING)
+  public lastMessageTime: string | undefined;
 }

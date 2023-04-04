@@ -13,6 +13,7 @@ export const addTopic = async (req: Request, res: Response) => {
     });
 
     await Topic.create({
+      userLogin: userLogin,
       title: title,
       description: description ?? '',
       user_id: user[0].id,
@@ -43,12 +44,15 @@ export const addComment = async (req: Request, res: Response) => {
       where: { login: userLogin },
     });
 
-    await Comment.create({
+    const newComment = await Comment.create({
       comment: comment,
       topic_id: topic_id,
       parent_id: parent_id,
       user_id: user[0].id,
     });
+
+    const topic = await Topic.findByPk(topic_id);
+    topic?.update({ lastMessageTime: newComment.updatedAt.toJSON() });
 
     res.send('OK');
   } catch (e) {
