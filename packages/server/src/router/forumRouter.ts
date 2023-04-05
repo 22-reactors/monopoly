@@ -18,6 +18,7 @@ import {
   ADD_EMOJI,
   FORUM,
 } from './router';
+import { auth } from '../middleware/auth';
 
 export const boardsRouter = (router: Router) => {
   const boardsRouter: Router = Router();
@@ -25,13 +26,13 @@ export const boardsRouter = (router: Router) => {
   router.use(FORUM, boardsRouter);
 
   boardsRouter
-    .post(ADD_TOPIC, addTopic)
-    .get(TOPICS, getTopics)
-    .post(ADD_COMMENT, addComment)
-    .post(COMMETS, getComments)
-    .delete(DELETE_COMMENT, deleteComment)
-    .post(ADD_EMOJI, addEmoji)
-    .post(EMOJIS, getEmojis);
+    .post(ADD_TOPIC, auth, addTopic)
+    .get(TOPICS, auth, getTopics)
+    .post(ADD_COMMENT, auth, addComment)
+    .post(COMMETS, auth, getComments)
+    .delete(DELETE_COMMENT, auth, deleteComment)
+    .post(ADD_EMOJI, auth, addEmoji)
+    .post(EMOJIS, auth, getEmojis);
 };
 
 export const router: Router = Router();
