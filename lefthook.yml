@@ -5,5 +5,5 @@ pre-commit:
       glob: '*.{ts,tsx}'
       run: yarn eslint {staged_files}
     format:
-      glob: '*.{ts,tsx,js,jsx,json,scss}'
+      glob: '*.{scss,json,js,jsx,ts,tsx}'
       run: yarn prettier {staged_files} --write
