@@ -3,29 +3,18 @@ import {
   DataType,
   Model,
   Table,
-  BelongsTo,
   AllowNull,
+  Unique,
 } from 'sequelize-typescript';
-import { User } from './user';
 
 interface ISection {
-  user_id: number;
-  title: string;
-  messagesCount: number;
-  topicsCount: number;
+  sectionId: number;
 }
 
 @Table({ tableName: 'sections' })
 export class Section extends Model<ISection> {
+  @Unique
   @AllowNull(false)
-  @Column(DataType.STRING)
-  public title: string | undefined;
-
-  @AllowNull(true)
   @Column(DataType.INTEGER)
-  public messagesCount: number;
-
-  @AllowNull(true)
-  @Column(DataType.INTEGER)
-  public topicsCount: number;
+  public sectionId: number;
 }

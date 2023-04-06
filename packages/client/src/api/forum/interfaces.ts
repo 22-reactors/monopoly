@@ -4,11 +4,13 @@ export interface IAddTopicData {
   title: string;
   description?: string;
   userLogin: string;
+  sectionId: number;
 }
 
 export interface ITopic extends IThemeCard {
   id: number;
   userLogin: string;
+  section_id: number;
   user_id: number;
 }
 

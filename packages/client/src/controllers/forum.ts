@@ -23,9 +23,9 @@ class ForumController {
     }
   }
 
-  async getTopics() {
+  async getTopics(sectionId: number) {
     try {
-      const response = await this._api.getTopics();
+      const response = await this._api.getTopics(sectionId);
       if (response) {
         const { topics } = response;
         topics.forEach(async topic => {

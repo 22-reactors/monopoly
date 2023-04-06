@@ -3,13 +3,18 @@ import { Topic } from '../model/forum/topic';
 import { Comment } from '../model/forum/comment';
 import { Emoji } from '../model/forum/emoji';
 import { User } from '../model/forum/user';
+import { Section } from '../model/forum/section';
 
 export const addTopic = async (req: Request, res: Response) => {
   try {
-    const { title, description, userLogin } = req.body;
+    const { title, description, userLogin, sectionId } = req.body;
 
     const user = await User.findOrCreate({
       where: { login: userLogin },
+    });
+
+    const section = await Section.findOrCreate({
+      where: { sectionId: sectionId },
     });
 
     await Topic.create({
@@ -17,6 +22,7 @@ export const addTopic = async (req: Request, res: Response) => {
       title,
       description: description ?? '',
       user_id: user[0].id,
+      section_id: section[0].id,
       amountAnswer: 0,
     });
 
@@ -27,9 +33,12 @@ export const addTopic = async (req: Request, res: Response) => {
   }
 };
 
-export const getTopics = async (_: Request, res: Response) => {
+export const getTopics = async (req: Request, res: Response) => {
   try {
-    const data = await Topic.findAll();
+    const { sectionId } = req.body;
+    const section = await Section.findOne({ where: { sectionId: sectionId } });
+
+    const data = await Topic.findAll({ where: { section_id: section?.id } });
     res.send({ topics: data });
   } catch (error) {
     res.status(400).send();
@@ -85,7 +94,7 @@ export const deleteComment = async (req: Request, res: Response) => {
     await comment?.destroy();
 
     const topic = await Topic.findByPk(comment?.topic_id);
-    topic?.update({ amountAnswer: topic.amountAnswer + 1 });
+    topic?.update({ amountAnswer: topic.amountAnswer - 1 });
 
     res.send('OK');
   } catch (e) {

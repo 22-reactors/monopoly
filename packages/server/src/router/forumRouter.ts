@@ -27,7 +27,7 @@ export const boardsRouter = (router: Router) => {
 
   boardsRouter
     .post(ADD_TOPIC, auth, addTopic)
-    .get(TOPICS, auth, getTopics)
+    .post(TOPICS, auth, getTopics)
     .post(ADD_COMMENT, auth, addComment)
     .post(COMMETS, auth, getComments)
     .delete(DELETE_COMMENT, auth, deleteComment)

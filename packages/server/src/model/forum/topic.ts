@@ -6,10 +6,12 @@ import {
   BelongsTo,
   AllowNull,
 } from 'sequelize-typescript';
+import { Section } from './section';
 import { User } from './user';
 
 interface ITopic {
   user_id: number;
+  section_id: number
   title: string;
   description?: string;
   userLogin: string;
@@ -24,6 +26,12 @@ export class Topic extends Model<ITopic> {
     as: 'user',
   })
   user_id: number;
+
+  @BelongsTo(() => Section, {
+    foreignKey: 'section_id',
+    as: 'user',
+  })
+  section_id: number;
 
   @AllowNull(false)
   @Column(DataType.STRING)

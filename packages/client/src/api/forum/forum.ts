@@ -17,8 +17,10 @@ export class ForumAPI extends RequestTransport {
     return this.post('/add-topic', { data }) as Promise<'OK' | ''>;
   }
 
-  getTopics() {
-    return this.get('/topics') as Promise<{ topics: ITopic[] } | ''>;
+  getTopics(sectionId: number) {
+    return this.post('/topics', { data: { sectionId } }) as Promise<
+      { topics: ITopic[] } | ''
+    >;
   }
 
   addComment(data: IAddCommentData) {
@@ -27,10 +29,7 @@ export class ForumAPI extends RequestTransport {
 
   getComments(id: number) {
     return this.post('/comments', { data: { id } }) as Promise<
-      | {
-          comments: IComment[];
-        }
-      | ''
+      { comments: IComment[] } | ''
     >;
   }
 
@@ -41,20 +40,12 @@ export class ForumAPI extends RequestTransport {
   }
 
   addEmoji(data: IAddEmojiData) {
-    return this.post('/add-emogi', { data }) as Promise<
-      | {
-          emojis: any;
-        }
-      | ''
-    >;
+    return this.post('/add-emogi', { data }) as Promise<{ emojis: any } | ''>;
   }
 
   getEmojis(userLogin: string) {
     return this.post('/emogis', { data: { userLogin } }) as Promise<
-      | {
-          emojis: any;
-        }
-      | ''
+      { emojis: any } | ''
     >;
   }
 }
