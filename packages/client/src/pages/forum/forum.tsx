@@ -14,11 +14,10 @@ const sections: { id: number; title: string }[] = [
   { id: 1, title: 'Как играть' },
   { id: 2, title: 'Технические вопросы' },
   { id: 3, title: 'Доска объявлений' },
-  { id: 4, title: 'Флуд', },
+  { id: 4, title: 'Флуд' },
 ];
 
 export const Forum: FC<ForumProps> = () => {
-
   const pageTitle = 'Форум';
   return (
     <>

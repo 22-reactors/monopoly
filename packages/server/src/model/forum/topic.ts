@@ -11,7 +11,7 @@ import { User } from './user';
 
 interface ITopic {
   user_id: number;
-  section_id: number
+  section_id: number;
   title: string;
   description?: string;
   userLogin: string;
