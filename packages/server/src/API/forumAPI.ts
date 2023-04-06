@@ -54,7 +54,7 @@ export const addComment = async (req: Request, res: Response) => {
 
     const topic = await Topic.findByPk(topic_id);
     topic?.update({ lastMessageTime: newComment.updatedAt.toJSON() });
-    topic?.update({ amountAnswer: topic.amountAnswer + 1});
+    topic?.update({ amountAnswer: topic.amountAnswer + 1 });
 
     res.send('OK');
   } catch (e) {
@@ -85,7 +85,7 @@ export const deleteComment = async (req: Request, res: Response) => {
     await comment?.destroy();
 
     const topic = await Topic.findByPk(comment?.topic_id);
-    topic?.update({ amountAnswer: topic.amountAnswer + 1});
+    topic?.update({ amountAnswer: topic.amountAnswer + 1 });
 
     res.send('OK');
   } catch (e) {

@@ -1,4 +1,4 @@
-import { IThemeCard } from "../../components/themeCard/themeCard";
+import { IThemeCard } from '../../components/themeCard/themeCard';
 
 export interface IAddTopicData {
   title: string;
@@ -6,7 +6,7 @@ export interface IAddTopicData {
   userLogin: string;
 }
 
-export interface ITopic extends IThemeCard{
+export interface ITopic extends IThemeCard {
   id: number;
   userLogin: string;
   user_id: number;

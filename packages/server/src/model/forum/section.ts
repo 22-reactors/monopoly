@@ -17,12 +17,6 @@ interface ISection {
 
 @Table({ tableName: 'sections' })
 export class Section extends Model<ISection> {
-  @BelongsTo(() => User, {
-    foreignKey: 'user_id',
-    as: 'user',
-  })
-  user_id: number;
-
   @AllowNull(false)
   @Column(DataType.STRING)
   public title: string | undefined;

@@ -14,7 +14,7 @@ interface ITopic {
   description?: string;
   userLogin: string;
   lastMessageTime?: string;
-  amountAnswer: number
+  amountAnswer: number;
 }
 
 @Table({ tableName: 'topics' })
