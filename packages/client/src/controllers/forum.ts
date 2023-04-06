@@ -1,9 +1,11 @@
 import API, { ForumAPI } from '../api/forum/forum';
+import UserController from '../controllers/user';
 import {
   IAddCommentData,
   IAddEmojiData,
   IAddTopicData,
 } from '../api/forum/interfaces';
+import { resourceURL } from '../utils/const';
 
 class ForumController {
   private _api: ForumAPI;
@@ -25,7 +27,15 @@ class ForumController {
     try {
       const response = await this._api.getTopics();
       if (response) {
-        return response;
+        const { topics } = response;
+        topics.forEach(async topic => {
+          const response = await UserController.searchUser(topic.userLogin);
+          topic.avatar = {
+            src: response && `${resourceURL}/${response?.avatar}`,
+            name: response?.display_name ?? 'Инкогнито',
+          };
+        });
+        return topics;
       }
     } catch (error) {
       console.log(error);

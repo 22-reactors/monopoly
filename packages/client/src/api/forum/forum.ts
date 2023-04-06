@@ -1,6 +1,6 @@
 import RequestTransport from '../../service/request/request';
 import { SERVER_API_HOST } from '../../utils/const';
-import { IAddCommentData, IAddEmojiData, IAddTopicData } from './interfaces';
+import { IAddCommentData, IAddEmojiData, IAddTopicData, IComment, ITopic } from './interfaces';
 
 export class ForumAPI extends RequestTransport {
   constructor() {
@@ -12,7 +12,7 @@ export class ForumAPI extends RequestTransport {
   }
 
   getTopics() {
-    return this.get('/topics') as Promise<{ topics: any } | ''>;
+    return this.get('/topics') as Promise<{ topics: ITopic[] } | ''>;
   }
 
   addComment(data: IAddCommentData) {
@@ -22,7 +22,7 @@ export class ForumAPI extends RequestTransport {
   getComments(id: number) {
     return this.post('/comments', { data: { id } }) as Promise<
       | {
-          comments: any;
+          comments: IComment[];
         }
       | ''
     >;

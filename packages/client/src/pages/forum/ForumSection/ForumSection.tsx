@@ -23,12 +23,13 @@ export const ForumSection: FC<ForumSectionProps> = () => {
 
   useEffect(() => {
     const getTopics = async () => {
-      const response = await ForumController.getTopics();
-      if (response) {
-        setTopics(response.topics);
+      const topics = await ForumController.getTopics();
+      if (topics) {
+        setTopics(topics);
       }
     };
     getTopics();
+    console.log(topics);
   }, []);
 
   const addTopic = () => {
@@ -47,7 +48,7 @@ export const ForumSection: FC<ForumSectionProps> = () => {
   const addComment = async () => {
     const response = await ForumController.addComment({
       topic_id: 1,
-      parent_id: null,
+      parent_id: 1,
       userLogin: 'petrovich',
       comment: 'Хей Хоу',
     });
@@ -114,13 +115,13 @@ export const ForumSection: FC<ForumSectionProps> = () => {
             Получить эмодзи
           </Button>
         </h1>
-        {/*         {topics.map(topic => )}
-         */}{' '}
-        <Link className={style.link} to={links.forumtopic1.path}>
-          <ThemeCard {...ThemeCardProps} />
-        </Link>
-        <ThemeCard {...ThemeCardProps} />
-        <ThemeCard {...ThemeCardProps} />
+        {topics.map(topic => (
+          <Link
+            className={style.link}
+            to={`${links.forumtopic1.path}/${topic.id}`}>
+            <ThemeCard {...topic} />
+          </Link>
+        ))}
         <Paginator className={style.paginator} pagesCount={4} />
       </section>
     </>

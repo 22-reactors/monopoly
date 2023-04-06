@@ -30,8 +30,8 @@ export const links = {
     title: 'Форум/Раздел1',
   },
   forumtopic1: {
-    path: '/forum/section/1/topic/1',
-    title: 'Форум/Раздел1/Тема1',
+    path: '/forum/section/1/topic',
+    title: 'Тема',
   },
   CreateTopic: {
     path: '/forum/CreateTopic',

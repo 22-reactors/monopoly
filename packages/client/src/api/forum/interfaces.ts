@@ -1,12 +1,14 @@
+import { IThemeCard } from "../../components/themeCard/themeCard";
+
 export interface IAddTopicData {
   title: string;
   description?: string;
   userLogin: string;
 }
 
-export interface ITopic {
-  title: string;
-  description?: string;
+export interface ITopic extends IThemeCard{
+  id: number;
+  userLogin: string;
   user_id: number;
 }
 
@@ -18,10 +20,11 @@ export interface IAddCommentData {
 }
 
 export interface IComment {
+  id: number;
   topic_id: number;
   parent_id: number;
   comment: string;
-  userId: number;
+  user_id: number;
 }
 
 export interface IAddEmojiData {

@@ -14,7 +14,7 @@ export const ThemeCardProps: IThemeCard = {
   avatar: IUserAvatarProps,
   description: 'Описание темы',
   amountAnswer: 5,
-  lastMessage: '09.02.2023 15:23',
+  lastMessageTime: '09.02.2023 15:23',
 };
 
 export const ThemeMessageProps: IThemeMessage = {

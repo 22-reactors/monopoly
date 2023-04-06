@@ -51,7 +51,7 @@ export const routes = [
         element: <ForumSection />,
       },
       {
-        path: links.forumtopic1.path,
+        path: `${links.forumtopic1.path}/:topicId`,
         element: <ForumTopic />,
       },
       {

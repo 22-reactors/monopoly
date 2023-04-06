@@ -9,7 +9,7 @@ export interface IThemeCard {
   avatar: IUserAvatar;
   description: string;
   amountAnswer: number;
-  lastMessage?: string;
+  lastMessageTime?: string;
 }
 
 const WORD_MAP = { single: 'ответ', some: 'ответа', more: 'ответов' };
@@ -27,9 +27,9 @@ export function ThemeCard(props: IThemeCard) {
       <p className={style.description}>{props.description}</p>
       <div className={style.infoBlock}>
         <span className={style.answer}>{amountAnswer}</span>
-        {props.lastMessage && (
+        {props.lastMessageTime && (
           <span className={style.lastMessage}>
-            Последнее сообщение: {props.lastMessage}
+            Последнее сообщение: {props.lastMessageTime}
           </span>
         )}
       </div>

@@ -13,10 +13,11 @@ export const addTopic = async (req: Request, res: Response) => {
     });
 
     await Topic.create({
-      userLogin: userLogin,
-      title: title,
+      userLogin,
+      title,
       description: description ?? '',
       user_id: user[0].id,
+      amountAnswer: 0,
     });
 
     res.send('OK');
@@ -53,6 +54,7 @@ export const addComment = async (req: Request, res: Response) => {
 
     const topic = await Topic.findByPk(topic_id);
     topic?.update({ lastMessageTime: newComment.updatedAt.toJSON() });
+    topic?.update({ amountAnswer: topic.amountAnswer + 1});
 
     res.send('OK');
   } catch (e) {
@@ -81,6 +83,9 @@ export const deleteComment = async (req: Request, res: Response) => {
 
     const comment = await Comment.findByPk(id);
     await comment?.destroy();
+
+    const topic = await Topic.findByPk(comment?.topic_id);
+    topic?.update({ amountAnswer: topic.amountAnswer + 1});
 
     res.send('OK');
   } catch (e) {

@@ -27,11 +27,11 @@ export const ForumSectionList: FC<ForumSectionListProps> = ({
             </td>
             <td className={style.forum__cell}>
               {item.topicCount}
-              <text className={style.forum__cell__1}>темы</text>
+              <span className={style.forum__cell__1}> темы</span>
             </td>
             <td className={style.forum__cell}>
               {item.messages}
-              <text className={style.forum__cell__1}>Сообщения</text>
+              <span className={style.forum__cell__1}> Сообщения</span>
             </td>
           </tr>
         ))}

@@ -5,6 +5,7 @@ import {
   ProfileResponse,
 } from '../api/user/interfaces';
 import { IUser } from '../utils/interfaces';
+import { isUserGoodResponse } from './auth';
 
 const isChangeProfileGoodResponse = (
   object: ProfileResponse
@@ -57,6 +58,21 @@ class UserController {
       const response = await this._api.changeAvatar(data);
       if (isChangeProfileGoodResponse(response)) {
         return response;
+      } else {
+        console.log(response.reason);
+      }
+    } catch (error: any) {
+      if (error && error.reason) {
+        console.log(error.reason);
+      }
+    }
+  }
+
+  async searchUser(login: string) {
+    try {
+      const response = await this._api.searchUser(login);
+      if (Array.isArray(response)) {
+        return response[0];
       } else {
         console.log(response.reason);
       }
