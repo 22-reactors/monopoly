@@ -1,6 +1,8 @@
+import { Outlet } from 'react-router-dom';
 import { homeProps } from './mocs/homeProps';
 import LoginProps from './mocs/loginProps';
 import RegistrProps from './mocs/registrProps';
+import { ForumSectionList } from './pages/forum/ForumSectionList/ForumSectionList';
 
 import {
   RootBoundary,
@@ -45,18 +47,24 @@ export const routes = [
       {
         path: links.forum.path,
         element: <Forum />,
-      },
-      {
-        path: links.forumsection1.path,
-        element: <ForumSection />,
-      },
-      {
-        path: `${links.forumtopic1.path}/:topicId`,
-        element: <ForumTopic />,
-      },
-      {
-        path: links.CreateTopic.path,
-        element: <CreateTopic />,
+        children: [
+          { index: true, element: <ForumSectionList /> },
+          {
+            path: `${links.forumSection.path}/:sectionId`,
+            element: <Outlet />,
+            children: [
+              { index: true, element: <ForumSection /> },
+              {
+                path: `${links.forumTopic.path}/:topicId`,
+                element: <ForumTopic />,
+              },
+              {
+                path: links.createTopic.path,
+                element: <CreateTopic />,
+              },
+            ],
+          },
+        ],
       },
       {
         path: links.setup.path,

@@ -29,7 +29,7 @@ export class Topic extends Model<ITopic> {
 
   @BelongsTo(() => Section, {
     foreignKey: 'section_id',
-    as: 'user',
+    as: 'section',
   })
   section_id: number;
 

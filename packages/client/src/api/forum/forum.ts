@@ -5,7 +5,8 @@ import {
   IAddEmojiData,
   IAddTopicData,
   IComment,
-  ITopic,
+  ISection,
+  ITopicsList,
 } from './interfaces';
 
 export class ForumAPI extends RequestTransport {
@@ -13,14 +14,20 @@ export class ForumAPI extends RequestTransport {
     super(`${SERVER_API_HOST}/forum`);
   }
 
+  createSections(titles: string[]) {
+    return this.post('/sections', { data: { titles } }) as Promise<
+      { sections: ISection[] } | ''
+    >;
+  }
+
   addTopic(data: IAddTopicData) {
     return this.post('/add-topic', { data }) as Promise<'OK' | ''>;
   }
 
   getTopics(sectionId: number) {
-    return this.post('/topics', { data: { sectionId } }) as Promise<
-      { topics: ITopic[] } | ''
-    >;
+    return this.post('/topics', {
+      data: { sectionId: sectionId },
+    }) as Promise<ITopicsList | ''>;
   }
 
   addComment(data: IAddCommentData) {

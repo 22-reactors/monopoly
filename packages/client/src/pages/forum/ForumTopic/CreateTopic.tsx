@@ -42,12 +42,12 @@ export const CreateTopic: FC<ForumSectionProps> = () => {
               />
             </form>
           </div>
-          <Link to={links.CreateTopic.path}>
+          <Link to={links.createTopic.path}>
             <Button
               variation={ButtonVariation.PRIMARY}
               size={ButtonSizes.MEDIUM}
               rounded>
-              {links.CreateTopic.title}
+              {links.createTopic.title}
             </Button>
           </Link>
         </div>

@@ -25,20 +25,20 @@ export const links = {
     path: '/forum',
     title: 'Форум',
   },
-  forumsection1: {
-    path: '/forum/section/1',
-    title: 'Форум/Раздел1',
+  forumSection: {
+    path: 'section',
+    title: 'Раздел',
   },
-  forumtopic1: {
-    path: '/forum/section/1/topic',
+  forumTopic: {
+    path: 'topic',
     title: 'Тема',
   },
-  CreateTopic: {
-    path: '/forum/CreateTopic',
+  createTopic: {
+    path: 'create-topic',
     title: 'Создать тему',
   },
-  ThemeMessage: {
-    path: '/forum/ThemeMessage',
+  themeMessage: {
+    path: 'theme-message',
     title: 'Отправить',
   },
   game: {

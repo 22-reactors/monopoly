@@ -7,6 +7,7 @@ import {
   getComments,
   addEmoji,
   getEmojis,
+  createSections,
 } from '../API/forumAPI';
 import {
   TOPICS,
@@ -17,6 +18,7 @@ import {
   EMOJIS,
   ADD_EMOJI,
   FORUM,
+  SECTIONS,
 } from './router';
 import { auth } from '../middleware/auth';
 
@@ -26,6 +28,7 @@ export const boardsRouter = (router: Router) => {
   router.use(FORUM, boardsRouter);
 
   boardsRouter
+    .post(SECTIONS, auth, createSections)
     .post(ADD_TOPIC, auth, addTopic)
     .post(TOPICS, auth, getTopics)
     .post(ADD_COMMENT, auth, addComment)

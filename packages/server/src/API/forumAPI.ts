@@ -5,6 +5,20 @@ import { Emoji } from '../model/forum/emoji';
 import { User } from '../model/forum/user';
 import { Section } from '../model/forum/section';
 
+export const createSections = async (req: Request, res: Response) => {
+  try {
+    const titles = req.body.titles as string[];
+    titles.forEach(async title => {
+      await Section.findOrCreate({ where: { title: title } });
+    });
+    const data = await Section.findAll();
+    res.send({ sections: data });
+  } catch (error) {
+    res.status(400).send();
+    console.log(error);
+  }
+};
+
 export const addTopic = async (req: Request, res: Response) => {
   try {
     const { title, description, userLogin, sectionId } = req.body;
@@ -13,18 +27,17 @@ export const addTopic = async (req: Request, res: Response) => {
       where: { login: userLogin },
     });
 
-    const section = await Section.findOrCreate({
-      where: { sectionId: sectionId },
-    });
-
     await Topic.create({
       userLogin,
       title,
       description: description ?? '',
       user_id: user[0].id,
-      section_id: section[0].id,
+      section_id: sectionId,
       amountAnswer: 0,
     });
+
+    const section = await Section.findByPk(sectionId);
+    section?.update({ topicsCount: section.topicsCount + 1 });
 
     res.send('OK');
   } catch (error) {
@@ -36,10 +49,11 @@ export const addTopic = async (req: Request, res: Response) => {
 export const getTopics = async (req: Request, res: Response) => {
   try {
     const { sectionId } = req.body;
-    const section = await Section.findOne({ where: { sectionId: sectionId } });
 
-    const data = await Topic.findAll({ where: { section_id: section?.id } });
-    res.send({ topics: data });
+    const data = await Topic.findAll({ where: { section_id: sectionId } });
+    const section = await Section.findByPk(sectionId);
+
+    res.send({ topics: data, sectionTitle: section?.title });
   } catch (error) {
     res.status(400).send();
     console.log(error);
@@ -62,8 +76,13 @@ export const addComment = async (req: Request, res: Response) => {
     });
 
     const topic = await Topic.findByPk(topic_id);
-    topic?.update({ lastMessageTime: newComment.updatedAt.toJSON() });
-    topic?.update({ amountAnswer: topic.amountAnswer + 1 });
+    topic?.update({
+      lastMessageTime: newComment.updatedAt.toJSON(),
+      amountAnswer: topic.amountAnswer + 1,
+    });
+
+    const section = await Section.findByPk(topic?.section_id);
+    section?.update({ messagesCount: section.messagesCount + 1 });
 
     res.send('OK');
   } catch (e) {
@@ -95,6 +114,9 @@ export const deleteComment = async (req: Request, res: Response) => {
 
     const topic = await Topic.findByPk(comment?.topic_id);
     topic?.update({ amountAnswer: topic.amountAnswer - 1 });
+
+    const section = await Section.findByPk(topic?.section_id);
+    section?.update({ messagesCount: section.messagesCount + 1 });
 
     res.send('OK');
   } catch (e) {

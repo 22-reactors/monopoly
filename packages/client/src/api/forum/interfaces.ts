@@ -1,5 +1,12 @@
 import { IThemeCard } from '../../components/themeCard/themeCard';
 
+export interface ISection {
+  id: number;
+  title: string;
+  topicsCount: number;
+  messagesCount: number;
+}
+
 export interface IAddTopicData {
   title: string;
   description?: string;
@@ -12,6 +19,11 @@ export interface ITopic extends IThemeCard {
   userLogin: string;
   section_id: number;
   user_id: number;
+}
+
+export interface ITopicsList {
+  topics: ITopic[];
+  sectionTitle?: string;
 }
 
 export interface IAddCommentData {

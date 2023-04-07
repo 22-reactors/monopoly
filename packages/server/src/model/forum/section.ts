@@ -8,13 +8,23 @@ import {
 } from 'sequelize-typescript';
 
 interface ISection {
-  sectionId: number;
+  title: string;
+  topicsCount: number;
+  messagesCount: number;
 }
 
 @Table({ tableName: 'sections' })
 export class Section extends Model<ISection> {
   @Unique
   @AllowNull(false)
+  @Column(DataType.STRING)
+  public title: string;
+
+  @AllowNull(true)
   @Column(DataType.INTEGER)
-  public sectionId: number;
+  public topicsCount: number;
+
+  @AllowNull(true)
+  @Column(DataType.INTEGER)
+  public messagesCount: number;
 }

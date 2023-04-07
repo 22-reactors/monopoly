@@ -1,42 +1,62 @@
 //Список разделов с кол-вом тем и сообщений в них
 
-import { FC } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import style from '../forum.module.scss';
-import { type ForumSectionListProps } from './typings';
 import { Paginator } from '../../../components/paginator/paginator';
+import { ISection } from '../../../api/forum/interfaces';
+import ForumController from '../../../controllers/forum';
+import { links } from '../../../utils/const';
 
-export enum Paths {
-  Forum = '/forum',
-  Section = '/forum/section',
-  Topic = '/topic',
-}
+const sectionTitles: string[] = [
+  'Как играть',
+  'Технические вопросы',
+  'Доска объявлений',
+  'Флуд',
+];
 
-export const ForumSectionList: FC<ForumSectionListProps> = ({
-  sectionList,
-}) => {
+export const ForumSectionList = () => {
+  const [sections, setSections] = useState<ISection[]>([]);
+
+  useEffect(() => {
+    const createSections = async () => {
+      const sections = await ForumController.createSections(sectionTitles);
+      if (sections) {
+        setSections(sections);
+      }
+    };
+    createSections();
+  }, []);
+
   return (
-    <div className={style.forum}>
-      <table border={0} className={style.forum__body}>
-        {sectionList.map(item => (
-          <tr key={item.id} className={style.forum__item}>
-            <td className={style.forum__name}>
-              <Link className={style.link} to={`${Paths.Section}/${item.id}`}>
-                {item.name}
-              </Link>
-            </td>
-            <td className={style.forum__cell}>
-              {item.topicCount}
-              <span className={style.forum__cell__1}> темы</span>
-            </td>
-            <td className={style.forum__cell}>
-              {item.messages}
-              <span className={style.forum__cell__1}> Сообщения</span>
-            </td>
-          </tr>
-        ))}
-      </table>
-      <Paginator className={style.paginator} pagesCount={4} />
-    </div>
+    <>
+      <h1 className={style.title}>Форум</h1>
+      <div className={style.forum}>
+        <table border={0} className={style.forum__body}>
+          {sections.map(item => {
+            return (
+              <tr key={item.id} className={style.forum__item}>
+                <td className={style.forum__name}>
+                  <Link
+                    className={style.link}
+                    to={`${links.forumSection.path}/${item.id}`}>
+                    {item.title}
+                  </Link>
+                </td>
+                <td className={style.forum__cell}>
+                  {item.topicsCount}
+                  <span className={style.forum__cell__1}> темы</span>
+                </td>
+                <td className={style.forum__cell}>
+                  {item.messagesCount}
+                  <span className={style.forum__cell__1}> Сообщения</span>
+                </td>
+              </tr>
+            );
+          })}
+        </table>
+        <Paginator className={style.paginator} pagesCount={4} />
+      </div>
+    </>
   );
 };

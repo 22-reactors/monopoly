@@ -1,5 +1,7 @@
 export const FORUM = `/api/forum`;
 
+export const SECTIONS = `/sections`;
+
 export const TOPICS = `/topics`;
 export const ADD_TOPIC = `/add-topic`;
 

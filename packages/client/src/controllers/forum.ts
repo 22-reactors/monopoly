@@ -14,6 +14,17 @@ class ForumController {
     this._api = API;
   }
 
+  async createSections(titles: string[]) {
+    try {
+      const response = await this._api.createSections(titles);
+      if (response) {
+        return response.sections;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async addTopic(data: IAddTopicData) {
     try {
       const response = await this._api.addTopic(data);
@@ -35,7 +46,7 @@ class ForumController {
             name: response?.display_name ?? 'Инкогнито',
           };
         });
-        return topics;
+        return response;
       }
     } catch (error) {
       console.log(error);
