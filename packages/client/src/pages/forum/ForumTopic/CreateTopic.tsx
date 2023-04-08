@@ -1,6 +1,6 @@
 //Создание новой темы на форуме
 
-import { useState, FC } from 'react';
+import { useState, FC, ChangeEvent, useEffect } from 'react';
 import style from '../forum.module.scss';
 import { type ForumSectionProps } from '../ForumSection/typings';
 import {
@@ -8,48 +8,90 @@ import {
   ButtonVariation,
   ButtonSizes,
 } from '../../../components/button/button';
-import { Link } from 'react-router-dom';
 import { links } from '../../../utils/const';
 import Textarea from '../../../components/textarea/textarea';
+import { useNavigate, useParams } from 'react-router-dom';
+import ForumController from '../../../controllers/forum';
+import { useAppSelector } from '../../../reduxstore/hooks';
+import { userSelector } from '../../../reduxstore/user/user.selector';
+
+interface IInputProps {
+  value: string;
+  errorText?: string;
+}
+
+const defaultInputProps = {
+  value: '',
+  errorText: '',
+};
 
 export const CreateTopic: FC<ForumSectionProps> = () => {
-  const pageTitle = 'Форум. Создание новой темы в Разделе 1';
+  const [topic, setTopic] = useState<IInputProps>(defaultInputProps);
+  const [message, setMessage] = useState<IInputProps>(defaultInputProps);
+  const user = useAppSelector(userSelector);
+  const { sectionId } = useParams();
+  const navigate = useNavigate();
 
-  const [topic, setTopic] = useState('');
-  const [message, setMessage] = useState('');
+  const changeTopicName = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setTopic({ value: event.target.value });
+  };
+
+  const changeTopicMessage = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage({ value: event.target.value });
+  };
+
+  const createTopic = () => {
+    if (!topic.value) {
+      setTopic(prevState => ({
+        ...prevState,
+        errorText: 'Название темы не должно быть пустым',
+      }));
+    } else {
+      ForumController.addTopic({
+        userLogin: user?.login ?? 'unknown',
+        title: topic.value,
+        description: message.value,
+        sectionId: Number(sectionId),
+      });
+      navigate(-1);
+    }
+  };
 
   return (
     <>
       <section className={style.pageContainer}>
-        <h1 className={style.title}>{pageTitle}</h1>
+        {/* <h1 className={style.title}>Форум</h1> */}
         <div className={style.topic__container}>
           <div className={style.newmessage}>
             <form>
               <Textarea
-                value={topic}
-                onChange={e => setTopic(e.target.value)}
+                value={topic?.value ?? ''}
+                onChange={changeTopicName}
                 label="Введите название темы"
+                errorText={topic.errorText}
               />
             </form>
           </div>
           <div className={style.newmessage}>
             <form>
               <Textarea
-                value={message}
-                onChange={e => setMessage(e.target.value)}
-                label="Введите сообщение"
-                solo
+                value={message?.value ?? ''}
+                onChange={changeTopicMessage}
+                label="Введите описание"
+                errorText={message.errorText}
               />
             </form>
           </div>
-          <Link to={links.createTopic.path}>
+          <div>
             <Button
               variation={ButtonVariation.PRIMARY}
               size={ButtonSizes.MEDIUM}
+              type="submit"
+              onClick={createTopic}
               rounded>
               {links.createTopic.title}
             </Button>
-          </Link>
+          </div>
         </div>
       </section>
     </>

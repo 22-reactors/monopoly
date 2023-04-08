@@ -6,7 +6,7 @@ import {
   IAddTopicData,
   IComment,
   ISection,
-  ITopicsList,
+  ITopics,
 } from './interfaces';
 
 export class ForumAPI extends RequestTransport {
@@ -27,7 +27,7 @@ export class ForumAPI extends RequestTransport {
   getTopics(sectionId: number) {
     return this.post('/topics', {
       data: { sectionId: sectionId },
-    }) as Promise<ITopicsList | ''>;
+    }) as Promise<ITopics | ''>;
   }
 
   addComment(data: IAddCommentData) {

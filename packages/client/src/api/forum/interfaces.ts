@@ -21,7 +21,7 @@ export interface ITopic extends IThemeCard {
   user_id: number;
 }
 
-export interface ITopicsList {
+export interface ITopics {
   topics: ITopic[];
   sectionTitle?: string;
 }

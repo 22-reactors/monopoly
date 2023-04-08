@@ -8,10 +8,15 @@ import { Section } from '../model/forum/section';
 export const createSections = async (req: Request, res: Response) => {
   try {
     const titles = req.body.titles as string[];
-    titles.forEach(async title => {
-      await Section.findOrCreate({ where: { title: title } });
-    });
+    for (const title of titles) {
+      await Section.findOrCreate({
+        where: { title: title },
+        defaults: { title: title, topicsCount: 0, messagesCount: 0 },
+      });
+    }
     const data = await Section.findAll();
+    data.sort((a, b) => a.id - b.id);
+
     res.send({ sections: data });
   } catch (error) {
     res.status(400).send();

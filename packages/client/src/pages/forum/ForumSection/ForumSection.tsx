@@ -13,13 +13,15 @@ import { links } from '../../../utils/const';
 import { ThemeCard } from '../../../components/themeCard/themeCard';
 import { Paginator } from '../../../components/paginator/paginator';
 import ForumController from '../../../controllers/forum';
-import { ITopicsList } from '../../../api/forum/interfaces';
+import { ITopics } from '../../../api/forum/interfaces';
 
-const defaultTopicsList: ITopicsList = { topics: [], sectionTitle: 'Раздел' };
+const defaultTopicsList: ITopics = { topics: [], sectionTitle: 'Раздел' };
+
+const ITEMS_PER_PAGE = 3;
 
 export const ForumSection: FC<ForumSectionProps> = () => {
   const [{ topics, sectionTitle }, setTopicsList] =
-    useState<ITopicsList>(defaultTopicsList);
+    useState<ITopics>(defaultTopicsList);
   const { sectionId } = useParams();
 
   useEffect(() => {
@@ -31,6 +33,9 @@ export const ForumSection: FC<ForumSectionProps> = () => {
     };
     getTopicsList();
   }, []);
+
+  const pagesCount = Math.ceil(topics.length / ITEMS_PER_PAGE);
+  console.log(pagesCount);
 
   return (
     <>
@@ -48,14 +53,18 @@ export const ForumSection: FC<ForumSectionProps> = () => {
             </Link>
           </div>
         </h1>
-        {topics.map(topic => (
-          <Link
-            className={style.link}
-            to={`${links.forumTopic.path}/${topic.id}`}>
-            <ThemeCard {...topic} />
-          </Link>
-        ))}
-        <Paginator className={style.paginator} pagesCount={4} />
+        <div className={style.topics}>
+          {topics.map(topic => (
+            <Link
+              className={style.link}
+              to={`${links.forumTopic.path}/${topic.id}`}>
+              <ThemeCard {...topic} />
+            </Link>
+          ))}
+          {pagesCount > 1 && (
+            <Paginator className={style.paginator} pagesCount={pagesCount} />
+          )}
+        </div>
       </section>
     </>
   );
