@@ -66,13 +66,13 @@ export const ForumSectionList = () => {
               </tr>
             ))}
         </table>
-        { pagesCount > 1 &&
+        {pagesCount > 1 && (
           <Paginator
             className={style.paginator}
             pagesCount={pagesCount}
             pageHandler={showPage}
           />
-        }
+        )}
       </div>
     </>
   );
