@@ -15,7 +15,7 @@ export interface IAddTopicData {
   sectionId: number;
 }
 
-export interface ITopic  {
+export interface ITopic {
   id: number;
   user_id: number;
   section_id: number;
