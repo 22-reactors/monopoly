@@ -67,3 +67,12 @@ export const PROXY_API_HOST = `${HOST}/api/v2`;
 export const SERVER_API_HOST = `${HOST}/api`;
 
 export const resourceURL = `${PROXY_API_HOST}/resources`;
+
+export const TIME_WORDS_MAP = {
+  sec: { single: 'секунда', some: 'секунды', more: 'секунд' },
+  minute: { single: 'минута', some: 'минуты', more: 'минут' },
+  hour: { single: 'час', some: 'часа', more: 'часов' },
+  day: { single: 'день', some: 'дня', more: 'дней' },
+  month: { single: 'месяц', some: 'месяца', more: 'месяцев' },
+  year: { single: 'год', some: 'года', more: 'лет' },
+};

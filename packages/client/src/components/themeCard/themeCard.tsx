@@ -7,7 +7,7 @@ import { getDeclensionWord } from '../../utils/helpers';
 export interface IThemeCard {
   title: string;
   avatar: IUserAvatar;
-  description: string;
+  description?: string;
   amountAnswer: number;
   lastMessageTime?: string;
 }

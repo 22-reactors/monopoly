@@ -6,6 +6,7 @@ import {
   BelongsTo,
   AllowNull,
 } from 'sequelize-typescript';
+import type { IUserData } from '../../interfaces';
 import { Section } from './section';
 import { User } from './user';
 
@@ -14,7 +15,7 @@ interface ITopic {
   section_id: number;
   title: string;
   description?: string;
-  userLogin: string;
+  userData: IUserData;
   lastMessageTime?: string;
   amountAnswer: number;
 }
@@ -34,8 +35,8 @@ export class Topic extends Model<ITopic> {
   section_id: number;
 
   @AllowNull(false)
-  @Column(DataType.STRING)
-  public userLogin: string | undefined;
+  @Column(DataType.JSON)
+  public userData: IUserData | undefined;
 
   @AllowNull(false)
   @Column(DataType.STRING)

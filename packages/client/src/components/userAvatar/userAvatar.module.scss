@@ -19,7 +19,9 @@
 
   text-decoration: none;
   color: $primary;
+}
 
+.isLink {
   &:hover {
     text-decoration: underline;
   }

@@ -7,6 +7,7 @@ import { Paginator } from '../../../components/paginator/paginator';
 import { ISection } from '../../../api/forum/interfaces';
 import ForumController from '../../../controllers/forum';
 import { links } from '../../../utils/const';
+import { usePaginator } from '../../../hooks/usePaginator';
 
 const sectionTitles: string[] = [
   'Как играть',
@@ -18,12 +19,12 @@ const sectionTitles: string[] = [
   'Флуд',
 ];
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 3;
 const pagesCount = Math.ceil(sectionTitles.length / ITEMS_PER_PAGE);
 
 export const ForumSectionList = () => {
   const [sections, setSections] = useState<ISection[]>([]);
-  const [page, setPage] = useState<number>(1);
+  const [page, showPage] = usePaginator(1);
 
   useEffect(() => {
     const createSections = async () => {
@@ -34,11 +35,6 @@ export const ForumSectionList = () => {
     };
     createSections();
   }, []);
-
-  const showPage = (pageNumber: number) => {
-    setPage(pageNumber);
-    console.log(pageNumber);
-  };
 
   return (
     <>

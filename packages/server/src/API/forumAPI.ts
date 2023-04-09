@@ -26,14 +26,14 @@ export const createSections = async (req: Request, res: Response) => {
 
 export const addTopic = async (req: Request, res: Response) => {
   try {
-    const { title, description, userLogin, sectionId } = req.body;
+    const { title, description, userData, sectionId } = req.body;
 
     const user = await User.findOrCreate({
-      where: { login: userLogin },
+      where: { login: userData.login },
     });
 
     await Topic.create({
-      userLogin,
+      userData,
       title,
       description: description ?? '',
       user_id: user[0].id,
@@ -58,6 +58,12 @@ export const getTopics = async (req: Request, res: Response) => {
     const data = await Topic.findAll({ where: { section_id: sectionId } });
     const section = await Section.findByPk(sectionId);
 
+    data.sort((a, b) => {
+      const timeA = new Date(a.updatedAt);
+      const timeB = new Date(b.updatedAt);
+      return timeB.getTime() - timeA.getTime();
+    });
+
     res.send({ topics: data, sectionTitle: section?.title });
   } catch (error) {
     res.status(400).send();
@@ -67,10 +73,10 @@ export const getTopics = async (req: Request, res: Response) => {
 
 export const addComment = async (req: Request, res: Response) => {
   try {
-    const { comment, topic_id, parent_id, userLogin } = req.body;
+    const { comment, topic_id, parent_id, userData } = req.body;
 
     const user = await User.findOrCreate({
-      where: { login: userLogin },
+      where: { login: userData.login },
     });
 
     const newComment = await Comment.create({
@@ -78,6 +84,7 @@ export const addComment = async (req: Request, res: Response) => {
       topic_id: topic_id,
       parent_id: parent_id,
       user_id: user[0].id,
+      userData,
     });
 
     const topic = await Topic.findByPk(topic_id);
@@ -103,6 +110,13 @@ export const getComments = async (req: Request, res: Response) => {
     const data = await Comment.findAll({
       where: { topic_id: id },
     });
+
+    data.sort((a, b) => {
+      const timeA = new Date(a.updatedAt);
+      const timeB = new Date(b.updatedAt);
+      return timeB.getTime() - timeA.getTime();
+    });
+
     res.send({ comments: data });
   } catch (e) {
     res.status(400).send();
@@ -169,14 +183,10 @@ export const addEmoji = async (req: Request, res: Response) => {
 
 export const getEmojis = async (req: Request, res: Response) => {
   try {
-    const { userLogin } = req.body;
-
-    const user = await User.findOrCreate({
-      where: { login: userLogin },
-    });
+    const { comment_id } = req.body;
 
     const data = await Emoji.findAll({
-      where: { user_id: user[0].id },
+      where: { comment_id: comment_id },
     });
     res.send({ emojis: data });
   } catch (e) {

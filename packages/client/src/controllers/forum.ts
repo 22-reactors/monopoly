@@ -6,6 +6,7 @@ import {
   IAddTopicData,
 } from '../api/forum/interfaces';
 import { resourceURL } from '../utils/const';
+import { getDiffTime } from '../utils/helpers';
 
 class ForumController {
   private _api: ForumAPI;
@@ -38,14 +39,6 @@ class ForumController {
     try {
       const response = await this._api.getTopics(sectionId);
       if (response) {
-        const { topics } = response;
-        topics.forEach(async topic => {
-          const response = await UserController.searchUser(topic.userLogin);
-          topic.avatar = {
-            src: response && `${resourceURL}/${response?.avatar}`,
-            name: response?.display_name ?? 'Инкогнито',
-          };
-        });
         return response;
       }
     } catch (error) {
@@ -91,9 +84,9 @@ class ForumController {
     }
   }
 
-  async getEmojis(userLogin: string) {
+  async getEmojis(comment_id: number) {
     try {
-      const response = await this._api.getEmojis(userLogin);
+      const response = await this._api.getEmojis(comment_id);
       if (response) {
         return response;
       }

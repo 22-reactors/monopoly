@@ -6,7 +6,7 @@ import classNames from 'classnames';
 export interface IThemeMessage {
   avatar: IUserAvatar;
   status: string;
-  message: string;
+  comment: string;
   countLikes?: number;
 }
 
@@ -22,7 +22,7 @@ export function ThemeMessage(props: IThemeMessage) {
     <div className={style.wrapper}>
       <UserAvatar {...props.avatar} />
       <span className={style.status}>{props.status} назад</span>
-      <p className={style.message}>{props.message}</p>
+      <p className={style.message}>{props.comment}</p>
       <div className={style.actionWrapper}>
         <span className={style.icon} onClick={iconHandler} role="button">
           Иконка реакции сердца

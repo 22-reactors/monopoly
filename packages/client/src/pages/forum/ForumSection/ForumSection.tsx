@@ -9,19 +9,22 @@ import {
   ButtonSizes,
 } from '../../../components/button/button';
 import { Link, useParams } from 'react-router-dom';
-import { links } from '../../../utils/const';
+import { links, resourceURL } from '../../../utils/const';
 import { ThemeCard } from '../../../components/themeCard/themeCard';
 import { Paginator } from '../../../components/paginator/paginator';
 import ForumController from '../../../controllers/forum';
 import { ITopics } from '../../../api/forum/interfaces';
+import { usePaginator } from '../../../hooks/usePaginator';
+import { IUserAvatar } from '../../../components/userAvatar/userAvatar';
 
 const defaultTopicsList: ITopics = { topics: [], sectionTitle: 'Раздел' };
 
 const ITEMS_PER_PAGE = 3;
 
 export const ForumSection: FC<ForumSectionProps> = () => {
-  const [{ topics, sectionTitle }, setTopicsList] =
-    useState<ITopics>(defaultTopicsList);
+  const [{ topics, sectionTitle }, setTopicsList] = useState(defaultTopicsList);
+  const [page, showPage] = usePaginator(1);
+
   const { sectionId } = useParams();
 
   useEffect(() => {
@@ -35,7 +38,6 @@ export const ForumSection: FC<ForumSectionProps> = () => {
   }, []);
 
   const pagesCount = Math.ceil(topics.length / ITEMS_PER_PAGE);
-  console.log(pagesCount);
 
   return (
     <>
@@ -54,17 +56,29 @@ export const ForumSection: FC<ForumSectionProps> = () => {
           </div>
         </h1>
         <div className={style.topics}>
-          {topics.map(topic => (
-            <Link
-              className={style.link}
-              to={`${links.forumTopic.path}/${topic.id}`}>
-              <ThemeCard {...topic} />
-            </Link>
-          ))}
-          {pagesCount > 1 && (
-            <Paginator className={style.paginator} pagesCount={pagesCount} />
-          )}
+          {topics
+            .slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE)
+            .map(topic => {
+              const avatar: IUserAvatar = {
+                src: `${resourceURL}${topic.userData.avatar}`,
+                name: topic.userData.display_name,
+              };
+              return (
+                <Link
+                  className={style.link}
+                  to={`${links.forumTopic.path}/${topic.id}`}>
+                  <ThemeCard {...topic} avatar={avatar} />
+                </Link>
+              );
+            })}
         </div>
+        {pagesCount > 1 && (
+          <Paginator
+            className={style.paginator}
+            pagesCount={pagesCount}
+            pageHandler={showPage}
+          />
+        )}
       </section>
     </>
   );

@@ -1,4 +1,5 @@
-import { IThemeCard } from '../../components/themeCard/themeCard';
+import { IThemeMessage } from '../../components/themeMessage/themeMessage';
+import { IUser } from '../../utils/interfaces';
 
 export interface ISection {
   id: number;
@@ -10,15 +11,19 @@ export interface ISection {
 export interface IAddTopicData {
   title: string;
   description?: string;
-  userLogin: string;
+  userData: IUser;
   sectionId: number;
 }
 
-export interface ITopic extends IThemeCard {
+export interface ITopic  {
   id: number;
-  userLogin: string;
-  section_id: number;
   user_id: number;
+  section_id: number;
+  title: string;
+  description?: string;
+  userData: IUser;
+  lastMessageTime?: string;
+  amountAnswer: number;
 }
 
 export interface ITopics {
@@ -28,17 +33,20 @@ export interface ITopics {
 
 export interface IAddCommentData {
   topic_id: number;
-  parent_id: number;
+  parent_id?: number;
   comment: string;
-  userLogin: string;
+  userData: IUser;
 }
 
-export interface IComment {
+export interface IComment extends IAddCommentData {
   id: number;
-  topic_id: number;
-  parent_id: number;
-  comment: string;
   user_id: number;
+  updatedAt: string;
+}
+
+export interface IComments {
+  comments: IComment[];
+  topicTitle?: string;
 }
 
 export interface IAddEmojiData {

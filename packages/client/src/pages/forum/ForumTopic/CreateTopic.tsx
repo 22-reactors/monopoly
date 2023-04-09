@@ -1,6 +1,6 @@
 //Создание новой темы на форуме
 
-import { useState, FC, ChangeEvent, useEffect } from 'react';
+import { useState, FC, ChangeEvent } from 'react';
 import style from '../forum.module.scss';
 import { type ForumSectionProps } from '../ForumSection/typings';
 import {
@@ -14,6 +14,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ForumController from '../../../controllers/forum';
 import { useAppSelector } from '../../../reduxstore/hooks';
 import { userSelector } from '../../../reduxstore/user/user.selector';
+import { IUserData } from '../../../api/auth/interfaces';
 
 interface IInputProps {
   value: string;
@@ -48,7 +49,7 @@ export const CreateTopic: FC<ForumSectionProps> = () => {
       }));
     } else {
       ForumController.addTopic({
-        userLogin: user?.login ?? 'unknown',
+        userData: user ?? ({} as IUserData),
         title: topic.value,
         description: message.value,
         sectionId: Number(sectionId),
@@ -79,6 +80,7 @@ export const CreateTopic: FC<ForumSectionProps> = () => {
                 onChange={changeTopicMessage}
                 label="Введите описание"
                 errorText={message.errorText}
+                solo
               />
             </form>
           </div>
