@@ -165,16 +165,39 @@ export const addEmoji = async (req: Request, res: Response) => {
         user_id: user[0].id,
         emojiCode: emojiCode,
       });
-    } else {
-      await Emoji.update(
-        { emojiCode: emojiCode },
-        { where: { comment_id: comment_id, user_id: user[0].id } }
-      );
     }
-    const data = await Emoji.findAll({
-      where: { user_id: user[0].id },
+    const emojis = await Emoji.findAll({
+      where: { comment_id: comment_id },
     });
+    const data: Record<string, number> = {};
+    for (const emoji of emojis) {
+      data[emoji.emojiCode] = await Emoji.count({
+        where: { comment_id: comment_id, emojiCode: emojiCode },
+      });
+    }
+
     res.send({ emojis: data });
+  } catch (error) {
+    res.status(400).send();
+    console.log(error);
+  }
+};
+
+export const deleteEmoji = async (req: Request, res: Response) => {
+  try {
+    const { comment_id, userLogin, emojiCode } = req.body;
+
+    const user = await User.findOrCreate({
+      where: { login: userLogin },
+    });
+
+    const foundItem = await Emoji.findOne({
+      where: {
+        comment_id: comment_id,
+        user_id: user[0].id,
+        emojiCode: emojiCode,
+      },
+    });
   } catch (error) {
     res.status(400).send();
     console.log(error);
@@ -192,5 +215,31 @@ export const getEmojis = async (req: Request, res: Response) => {
   } catch (e) {
     res.status(400).send();
     console.error(e);
+  }
+};
+
+const findEmoji = async (
+  emojiCode: string,
+  comment_id: number,
+  userLogin: string
+) => {
+  try {
+    const user = await User.findOrCreate({
+      where: { login: userLogin },
+    });
+
+    const foundItem = await Emoji.findOne({
+      where: {
+        comment_id: comment_id,
+        user_id: user[0].id,
+        emojiCode: emojiCode,
+      },
+    });
+    if (foundItem) {
+      return foundItem;
+    }
+  } catch (error) {
+    console.log(error);
+    return error;
   }
 };

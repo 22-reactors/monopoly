@@ -8,6 +8,7 @@ import { ISection } from '../../../api/forum/interfaces';
 import ForumController from '../../../controllers/forum';
 import { links } from '../../../utils/const';
 import { usePaginator } from '../../../hooks/usePaginator';
+import { getDeclensionWord } from '../../../utils/helpers';
 
 const sectionTitles: string[] = [
   'Как играть',
@@ -18,6 +19,13 @@ const sectionTitles: string[] = [
   'Предложения',
   'Флуд',
 ];
+
+const TOPIC_WORD_MAP = { single: 'тема', some: 'темы', more: 'тем' };
+const MESSAGE_WORD_MAP = {
+  single: 'сообщение',
+  some: 'сообщения',
+  more: 'сообщений',
+};
 
 const ITEMS_PER_PAGE = 3;
 const pagesCount = Math.ceil(sectionTitles.length / ITEMS_PER_PAGE);
@@ -53,11 +61,16 @@ export const ForumSectionList = () => {
                 </td>
                 <td className={style.forum__cell}>
                   {item.topicsCount}
-                  <span className={style.forum__cell__1}> темы</span>
+                  <span className={style.forum__cell__1}>
+                    {` ${getDeclensionWord(item.topicsCount, TOPIC_WORD_MAP)}`}
+                  </span>
                 </td>
                 <td className={style.forum__cell}>
                   {item.messagesCount}
-                  <span className={style.forum__cell__1}> Сообщения</span>
+                  {` ${getDeclensionWord(
+                    item.messagesCount,
+                    MESSAGE_WORD_MAP
+                  )}`}
                 </td>
               </tr>
             ))}
