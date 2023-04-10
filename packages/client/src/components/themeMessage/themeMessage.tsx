@@ -56,14 +56,13 @@ export function ThemeMessage(props: IThemeMessage) {
           emojiCode: likeCode,
         });
         setEmojis(emojis);
-
       } else {
         const emojis = await ForumController.deleteEmoji({
           comment_id: props.id,
           userLogin: user?.login,
           emojiCode: likeCode,
         });
-        setEmojis(emojis)
+        setEmojis(emojis);
       }
     }
   };
