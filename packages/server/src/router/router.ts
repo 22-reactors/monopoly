@@ -11,3 +11,4 @@ export const DELETE_COMMENT = `/delete-comment`;
 
 export const EMOJIS = `/emogis`;
 export const ADD_EMOJI = `/add-emogi`;
+export const DELETE_EMOJI = '/delete-emogi';

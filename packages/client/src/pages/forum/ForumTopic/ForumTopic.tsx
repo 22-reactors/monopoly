@@ -62,7 +62,6 @@ export const ForumTopic: FC<ForumTopicProps> = () => {
     <>
       <section className={style.pageContainer}>
         <div className={style.topic__container}>
-          <h2 className={style.topic__name}>{topicTitle}</h2>
           <form className={style.newmessage}>
             <Textarea
               value={message}
@@ -80,6 +79,7 @@ export const ForumTopic: FC<ForumTopicProps> = () => {
               </Button>
             </div>
           </form>
+          <h2 className={style.topic__name}>{topicTitle}</h2>
           {comments
             .slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE)
             .map(comment => {
@@ -92,7 +92,12 @@ export const ForumTopic: FC<ForumTopicProps> = () => {
                 new Date(comment.updatedAt)
               );
               return (
-                <ThemeMessage {...comment} avatar={avatar} status={status} />
+                <ThemeMessage
+                  key={comment.id}
+                  {...comment}
+                  avatar={avatar}
+                  status={status}
+                />
               );
             })}
           <div className={style.paginator}>

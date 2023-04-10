@@ -46,34 +46,42 @@ export const ForumSectionList = () => {
 
   return (
     <>
+      <h1 className={style.title}>Форум</h1>
       <div className={style.forum}>
         <table border={0} className={style.forum__body}>
-          {sections
-            .slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE)
-            .map(item => (
-              <tr key={item.id} className={style.forum__item}>
-                <td className={style.forum__name}>
-                  <Link
-                    className={style.link}
-                    to={`${links.forumSection.path}/${item.id}`}>
-                    {item.title}
-                  </Link>
-                </td>
-                <td className={style.forum__cell}>
-                  {item.topicsCount}
-                  <span className={style.forum__cell__1}>
-                    {` ${getDeclensionWord(item.topicsCount, TOPIC_WORD_MAP)}`}
-                  </span>
-                </td>
-                <td className={style.forum__cell}>
-                  {item.messagesCount}
-                  {` ${getDeclensionWord(
-                    item.messagesCount,
-                    MESSAGE_WORD_MAP
-                  )}`}
-                </td>
-              </tr>
-            ))}
+          <tbody>
+            {sections
+              .slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE)
+              .map(item => (
+                <tr key={item.id} className={style.forum__item}>
+                  <td className={style.forum__name}>
+                    <Link
+                      className={style.link}
+                      to={`${links.forumSection.path}/${item.id}`}>
+                      {item.title}
+                    </Link>
+                  </td>
+                  <td className={style.forum__cell}>
+                    {item.topicsCount}
+                    <span className={style.forum__cell__1}>
+                      {` ${getDeclensionWord(
+                        item.topicsCount,
+                        TOPIC_WORD_MAP
+                      )}`}
+                    </span>
+                  </td>
+                  <td className={style.forum__cell}>
+                    {item.messagesCount}
+                    <span className={style.forum__cell__1}>
+                      {` ${getDeclensionWord(
+                        item.messagesCount,
+                        MESSAGE_WORD_MAP
+                      )}`}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
         </table>
         {pagesCount > 1 && (
           <Paginator

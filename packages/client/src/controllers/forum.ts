@@ -78,17 +78,30 @@ class ForumController {
   async addEmoji(data: IAddEmojiData) {
     try {
       const response = await this._api.addEmoji(data);
-      return response;
+      if (response) {
+        return response.emojis;
+      }
     } catch (error) {
       console.log(error);
     }
   }
 
-  async getEmojis(comment_id: number) {
+  async getEmojis(comment_id: number, userLogin: string) {
     try {
-      const response = await this._api.getEmojis(comment_id);
+      const response = await this._api.getEmojis(comment_id, userLogin);
       if (response) {
-        return response;
+        return response.emojis;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async deleteEmoji(data: IAddEmojiData) {
+    try {
+      const response = await this._api.deleteEmoji(data);
+      if (response) {
+        return response.emojis;
       }
     } catch (error) {
       console.log(error);

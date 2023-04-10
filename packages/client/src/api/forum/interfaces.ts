@@ -1,4 +1,3 @@
-import { IThemeMessage } from '../../components/themeMessage/themeMessage';
 import { IUser } from '../../utils/interfaces';
 
 export interface ISection {
@@ -55,8 +54,6 @@ export interface IAddEmojiData {
   userLogin: string;
 }
 
-export interface IEmoji {
-  comment_id: number;
-  emojiCode: string;
-  user_id: number;
+export interface IEmojis {
+  emojis: Record<string, { count: number; isUserReacted: boolean }>;
 }

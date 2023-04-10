@@ -23,14 +23,10 @@ export function Paginator(props: IPaginator) {
   const firstPage = defaultVisiblePages.at(0);
   const lastPage = defaultVisiblePages.at(-1);
 
-  console.log(visiblePages);
-
   const [pages, setPages] = useState<number[]>([]);
   const [page, setPage] = useState<number>(firstPage ?? 1);
 
   useEffect(() => setPages(visiblePages), [props.pagesCount]);
-
-  console.log(pages);
 
   return (
     <div

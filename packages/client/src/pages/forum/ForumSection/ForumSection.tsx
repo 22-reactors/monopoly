@@ -65,6 +65,7 @@ export const ForumSection: FC<ForumSectionProps> = () => {
               };
               return (
                 <Link
+                  key={topic.id}
                   className={style.link}
                   to={`${links.forumTopic.path}/${topic.id}`}>
                   <ThemeCard {...topic} avatar={avatar} />

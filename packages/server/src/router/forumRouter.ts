@@ -8,6 +8,7 @@ import {
   addEmoji,
   getEmojis,
   createSections,
+  deleteEmoji,
 } from '../API/forumAPI';
 import {
   TOPICS,
@@ -19,6 +20,7 @@ import {
   ADD_EMOJI,
   FORUM,
   SECTIONS,
+  DELETE_EMOJI,
 } from './router';
 import { auth } from '../middleware/auth';
 
@@ -35,7 +37,8 @@ export const boardsRouter = (router: Router) => {
     .post(COMMETS, auth, getComments)
     .delete(DELETE_COMMENT, auth, deleteComment)
     .post(ADD_EMOJI, auth, addEmoji)
-    .post(EMOJIS, auth, getEmojis);
+    .post(EMOJIS, auth, getEmojis)
+    .delete(DELETE_EMOJI, auth, deleteEmoji);
 };
 
 export const router: Router = Router();

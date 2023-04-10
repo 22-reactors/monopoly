@@ -6,6 +6,7 @@ import {
   IAddTopicData,
   IComment,
   IComments,
+  IEmojis,
   ISection,
   ITopics,
 } from './interfaces';
@@ -46,12 +47,16 @@ export class ForumAPI extends RequestTransport {
   }
 
   addEmoji(data: IAddEmojiData) {
-    return this.post('/add-emogi', { data }) as Promise<{ emojis: any } | ''>;
+    return this.post('/add-emogi', { data }) as Promise<IEmojis | ''>;
   }
 
-  getEmojis(comment_id: number) {
-    return this.post('/emogis', { data: { comment_id } }) as Promise<
-      { emojis: any } | ''
+  deleteEmoji(data: IAddEmojiData) {
+    return this.delete('/delete-emogi', { data }) as Promise<IEmojis | ''>;
+  }
+
+  getEmojis(comment_id: number, userLogin: string) {
+    return this.post('/emogis', { data: { comment_id, userLogin } }) as Promise<
+      IEmojis | ''
     >;
   }
 }

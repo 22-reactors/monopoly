@@ -14,6 +14,21 @@ export interface IThemeCard {
 
 const WORD_MAP = { single: 'ответ', some: 'ответа', more: 'ответов' };
 
+const formatTime = (time?: string) => {
+  const date = time && new Date(time);
+  if (date) {
+    return new Intl.DateTimeFormat('ru-RU', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    })
+      .format(date)
+      .replace(',', '');
+  }
+};
+
 export function ThemeCard(props: IThemeCard) {
   const amountAnswer = `${props.amountAnswer} ${getDeclensionWord(
     props.amountAnswer,
@@ -29,7 +44,7 @@ export function ThemeCard(props: IThemeCard) {
         <span className={style.answer}>{amountAnswer}</span>
         {props.lastMessageTime && (
           <span className={style.lastMessage}>
-            Последнее сообщение: {props.lastMessageTime}
+            Последнее сообщение: {formatTime(props.lastMessageTime)}
           </span>
         )}
       </div>
