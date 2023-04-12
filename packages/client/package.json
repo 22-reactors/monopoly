@@ -4,9 +4,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "link-client": "yarn link",
+    "build": "yarn build:ssr && yarn build:vite",
+    "build:vite": "tsc && vite build --config vite.config.ts",
+    "build:ssr": "tsc && vite build --config ssr.config.ts",
     "preview": "vite preview",
-    "lint": "eslint .",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write .",
     "test": "jest ./ --passWithNoTests"
   },
@@ -36,9 +39,10 @@
     "jest-environment-jsdom": "^29.0.1",
     "lefthook": "^1.1.1",
     "prettier": "^2.7.1",
+    "rimraf": "4.4.0",
     "sass": "1.58.0",
     "ts-jest": "^28.0.8",
-    "typescript": "^4.8.2",
+    "typescript": "4.8.2",
     "vite": "^3.0.7"
   },
   "license": "MIT"

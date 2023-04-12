@@ -10,6 +10,7 @@ import {
   isGameExist,
 } from '../../../game-engine/config/monopolyConfig';
 import { resetPlayersAction } from '../../../reduxstore/players/playersSlice';
+import { useEffect, useState } from 'react';
 
 interface IChipProps {
   name: string;
@@ -24,6 +25,11 @@ export const Players = (props: IPlayersProps) => {
   const { maxPlayers } = props;
   const players = useAppSelector(playersSelector);
   const dispatch = useAppDispatch();
+  const [isAbleToContinue, setIsAbleToContinue] = useState(false);
+
+  useEffect(() => {
+    setIsAbleToContinue(isGameExist());
+  });
 
   const defaultPlayers: React.ReactNode[] = [];
   for (let i = players.length; i < maxPlayers; i++) {
@@ -72,7 +78,7 @@ export const Players = (props: IPlayersProps) => {
               className={style.startButton}
               variation={ButtonVariation.PRIMARY}
               rounded
-              disabled={!isGameExist()}>
+              disabled={!isAbleToContinue}>
               Продолжить
             </Button>
           </Link>

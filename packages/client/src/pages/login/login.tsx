@@ -1,21 +1,15 @@
 import style from './login.module.scss';
-import { authorizedRedirect, getInputData } from '../../utils/helpers';
+import { getInputData } from '../../utils/helpers';
 import { ILoginData } from '../../api/auth/interfaces';
-import { useNavigate } from 'react-router-dom';
 import { links } from '../../utils/const';
 import { IValue } from '../../utils/interfaces';
 import { Input, IInputProps } from '../../components/input/input';
 import { AuthForm, IAuthFormProps } from '../../components/authForm/authForm';
-import { useEffect } from 'react';
 import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../reduxstore/hooks';
 import { clearError, login } from '../../reduxstore/user/userSlice';
-import {
-  userErrorSelector,
-  userSelector,
-} from '../../reduxstore/user/user.selector';
-
-export const loginLoader = authorizedRedirect;
+import { userErrorSelector } from '../../reduxstore/user/user.selector';
+import { useNav } from '../../hooks/useNav';
 
 export interface ILoginProps extends Omit<IAuthFormProps, 'children'> {
   inputsProps: IInputProps[];
@@ -28,16 +22,10 @@ export interface ILoginForm {
 
 export const Login = (props: ILoginProps) => {
   const { inputsProps, isDarkTheme } = props;
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const user = useAppSelector(userSelector);
   const error = useAppSelector(userErrorSelector);
 
-  useEffect(() => {
-    if (user) {
-      navigate(links.setup.path);
-    }
-  }, [user]);
+  useNav(links.setup.path, false);
 
   const inputItems = inputsProps.map((inputProp, i) => {
     return <Input key={i} {...inputProp} />;

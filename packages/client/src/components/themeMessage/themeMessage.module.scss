@@ -1,5 +1,5 @@
-@import './src/styles/globals';
-@import './src/styles/mixin';
+@import '../../styles/globals';
+@import '../../styles/mixin';
 
 .wrapper {
   @include relative();
@@ -10,7 +10,10 @@
   background-color: $text-white;
   padding: 20px;
   border-radius: 10px;
-  box-sizing: border-box;
+  margin-bottom: 20px;
+  width: 100%;
+  justify-content: space-between;
+  max-width: 1070px;
 }
 
 .status {
@@ -39,7 +42,7 @@
   flex-shrink: 0;
   width: 24px;
   height: 24px;
-  background-image: url('heart-icon.svg');
+  background-image: url('/images/heart-icon.svg');
   cursor: pointer;
   @media (prefers-reduced-motion: no-preference) {
     transition: transform 0.4s linear;

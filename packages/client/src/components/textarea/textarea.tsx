@@ -8,7 +8,7 @@ interface Props extends IValidationInputProps {
   label?: string;
   solo?: boolean;
   resize?: 'none' | 'both' | 'horizontal' | 'vertical' | 'inherit';
-  onChange?: (event?: ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   onBlur?: (event?: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
