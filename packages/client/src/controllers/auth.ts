@@ -53,6 +53,19 @@ class AuthController {
     }
   }
 
+  async getYandexUser() {
+    try {
+      const response = await this._api.getUser();
+      if (isUserGoodResponse(response)) {
+        return { ...response, is_yandex_user: true };
+      } else {
+        console.log(response.reason);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async logout() {
     try {
       const response = await this._api.logout();

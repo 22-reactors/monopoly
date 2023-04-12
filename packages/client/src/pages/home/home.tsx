@@ -8,7 +8,8 @@ import {
 import { links } from '../../utils/const';
 import style from './home.module.scss';
 import { useCallback, useEffect } from 'react';
-import OAuthController from '../../controllers/oAuth';
+import { useAppDispatch } from '../../reduxstore/hooks';
+import { loginYandex } from '../../reduxstore/user/userSlice';
 
 export interface IHomeProps {
   title: string;
@@ -24,10 +25,11 @@ export const Home = ({
   isDarkTheme,
 }: IHomeProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useAppDispatch();
 
   const oAuthYandex = useCallback(async () => {
     const code = searchParams.get('code') ?? '';
-    await OAuthController.signin(code);
+    dispatch(loginYandex(code));
     setSearchParams('');
   }, []);
 

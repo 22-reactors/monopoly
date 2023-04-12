@@ -1,10 +1,18 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ILoginData, ISignUpData, IUserData } from '../../api/auth/interfaces';
 import AuthController, { isSignUpGoodResponse } from '../../controllers/auth';
+import OAuthController from '../../controllers/oAuth';
 
 export const getUser = createAsyncThunk('user/getUser', async () => {
   return await AuthController.getUser();
 });
+
+export const getYandexUser = createAsyncThunk(
+  'user/getYandexUser',
+  async () => {
+    return await AuthController.getYandexUser();
+  }
+);
 
 export const logoutAction = createAsyncThunk(
   'user/logout',
@@ -14,12 +22,26 @@ export const logoutAction = createAsyncThunk(
   }
 );
 
+export const clearUser = createAsyncThunk('user/clear', () => void 0);
+
 export const login = createAsyncThunk(
   'user/login',
   async (data: ILoginData, { dispatch }) => {
     const response = await AuthController.login(data);
     if (response === 'OK') {
       dispatch(getUser());
+    } else {
+      return response?.reason;
+    }
+  }
+);
+
+export const loginYandex = createAsyncThunk(
+  'user/loginYandex',
+  async (code: string, { dispatch }) => {
+    const response = await OAuthController.signin(code);
+    if (response === 'OK') {
+      dispatch(getYandexUser());
     } else {
       return response?.reason;
     }
@@ -64,10 +86,24 @@ const userSlice = createSlice({
     builder.addCase(getUser.pending, state => {
       state.loading = true;
     });
+    builder.addCase(getYandexUser.fulfilled, (state, action) => {
+      state.user = action.payload ?? null;
+      state.loading = false;
+    });
+    builder.addCase(getYandexUser.pending, state => {
+      state.loading = true;
+    });
     builder.addCase(logoutAction.fulfilled, state => {
       state.loading = false;
     });
     builder.addCase(logoutAction.pending, state => {
+      state.loading = true;
+    });
+    builder.addCase(clearUser.fulfilled, state => {
+      state.user = null;
+      state.loading = false;
+    });
+    builder.addCase(clearUser.pending, state => {
       state.loading = true;
     });
     builder.addCase(login.fulfilled, (state, action) => {
