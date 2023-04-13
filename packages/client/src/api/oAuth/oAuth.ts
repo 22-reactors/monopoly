@@ -1,13 +1,16 @@
 import RequestTransport from '../../service/request/request';
 import { IBadResponse, UserResponse } from './interfaces';
+import { isServer } from '../../utils/helpers';
 
 export class OAuthAPI extends RequestTransport {
-  private readonly redirect_uri: string;
+  private readonly redirect_uri: string = '';
   constructor() {
     super('/oauth/yandex');
 
-    const { protocol, port } = window.location;
-    this.redirect_uri = `${protocol}//localhost:${port}`;
+    if (!isServer) {
+      const { protocol, port } = window.location;
+      this.redirect_uri = `${protocol}//localhost:${port}`;
+    }
   }
 
   signin(code: string) {
