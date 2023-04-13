@@ -7,6 +7,7 @@ export interface IUser {
   email: string;
   phone: string;
   avatar: string;
+  is_yandex_user?: boolean;
 }
 
 export interface IValue {

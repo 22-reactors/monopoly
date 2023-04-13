@@ -4,6 +4,7 @@ import { links } from '../utils/const';
 
 const LoginProps: ILoginProps = {
   title: 'Вход',
+  yandexLink: 'Войти через Яндекс',
   linkTitle: 'У вас нет аккаунта?',
   linkName: 'Регистрация',
   linkPath: links.signup.path,

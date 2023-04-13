@@ -51,6 +51,13 @@ export const links = {
   },
 };
 
+export const getYanderOAuthURL = (clientId: string) => {
+  const { protocol, port } = window.location;
+  const uri = `${protocol}//localhost:${port}`;
+
+  return `https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}&redirect_uri=${uri}`;
+};
+
 export const HOST = `http://localhost:${
   !isServer ? __SERVER_PORT__ : process.env.SERVER_PORT
 }`;
