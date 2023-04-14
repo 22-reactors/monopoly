@@ -61,7 +61,7 @@ export const CreateTopic: FC<ForumSectionProps> = () => {
   return (
     <>
       <section className={style.pageContainer}>
-        {/* <h1 className={style.title}>Форум</h1> */}
+        <h1 className={style.title}>Форум</h1>
         <div className={style.topic__container}>
           <div className={style.newmessage}>
             <form>
