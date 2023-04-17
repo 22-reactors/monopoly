@@ -13,7 +13,7 @@ RUN yarn install --frozen-lockfile
 COPY . .
 
 RUN yarn lerna bootstrap
-RUN rm -rf /app/packages/server/dist/ && yarn build --scope=server
+RUN rm -rf /app/packages/server/dist/ && yarn build:server
 
 
 FROM node:$NODE_VERSION-buster-slim as production
