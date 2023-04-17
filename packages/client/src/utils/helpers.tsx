@@ -82,6 +82,7 @@ export const getInputName = (element: JSX.Element) => {
 
 export const isServer = !(typeof window !== 'undefined' && window.document);
 
+// Определяет разницу между двумя датами
 export const getDiffTime = (newDate: Date, oldDate: Date) => {
   const ms = newDate.getTime() - oldDate.getTime();
 
@@ -112,4 +113,21 @@ export const getDiffTime = (newDate: Date, oldDate: Date) => {
 
   const years = Math.round(months / 12);
   return `${years} ${getDeclensionWord(years, TIME_WORDS_MAP.year)}`;
+};
+
+/* Формтирует дату (в виде строки, полученной методом toJSON) 
+в строку вида 'YYYY-MM-DD HOURS:MINUTES' */
+export const formatTime = (time?: string) => {
+  const date = time && new Date(time);
+  if (date) {
+    return new Intl.DateTimeFormat('ru-RU', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    })
+      .format(date)
+      .replace(',', '');
+  }
 };

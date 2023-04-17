@@ -5,7 +5,6 @@ import {
   ProfileResponse,
 } from '../api/user/interfaces';
 import { IUser } from '../utils/interfaces';
-import { isUserGoodResponse } from './auth';
 
 const isChangeProfileGoodResponse = (
   object: ProfileResponse

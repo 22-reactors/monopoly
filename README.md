@@ -2,10 +2,9 @@
 
 1. Убедитесь что у вас установлен `node` и `docker`
 2. Выполните команду `yarn bootstrap` - это обязательный шаг, без него ничего работать не будет :)
-3. Выполните команду `yarn dev`
-3. Выполните команду `yarn dev --scope=client` чтобы запустить только клиент
-4. Выполните команду `yarn dev --scope=server` чтобы запустить только server
-
+3. Запустите базу данных в `docker` командой `docker-compose up postgres`.
+4. Выполните команду `yarn dev:server`. Клиента отдельно запускать не надо.
+5. Откройте приложение в браузере на том порту, который у вас назначен для сервера в `process.env`. 
 
 ### Как добавить зависимости?
 В этом проекте используется `monorepo` на основе [`lerna`](https://github.com/lerna/lerna)
@@ -44,9 +43,7 @@
 
 И чтобы посмотреть что получилось
 
-
-`yarn preview --scope client`
-`yarn preview --scope server`
+`yarn preview:server`
 
 ## Хуки
 В проекте используется [lefthook](https://github.com/evilmartians/lefthook)

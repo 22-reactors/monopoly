@@ -21,8 +21,12 @@ async function startServer() {
   createClientAndConnect();
 
   let vite: ViteDevServer;
-  const distPath = path.dirname(require.resolve('client/dist/index.html'));
-  const ssrClientPath = require.resolve('client/dist-ssr/client.cjs');
+  const distPath = isDev
+    ? path.dirname(require.resolve('client/dist/index.html'))
+    : '';
+  const ssrClientPath = isDev
+    ? require.resolve('client/dist-ssr/client.cjs')
+    : '';
   const srcPath = path.dirname(require.resolve('client'));
 
   if (isDev) {

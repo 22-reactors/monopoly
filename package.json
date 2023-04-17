@@ -7,14 +7,13 @@
     "build": "yarn build:client && yarn build:server",
     "build:client": "lerna run build --scope=client",
     "build:server": "lerna run build --scope=server",
-    "dev:client": "lerna run dev  --scope=client",
     "dev:server": "lerna run dev --scope=server",
-    "dev": "yarn build:client && yarn dev:server",
+    "dev": "lerna run dev",
     "test": "lerna run test",
     "lint": "lerna run lint --scope=client && lerna run lint --scope=server",
     "format": "lerna run format",
     "preview": "lerna run preview",
-    "start": "yarn build && lerna run preview --scope=server"
+    "preview:server": "lerna run preview --scope=server"
   },
   "license": "MIT",
   "workspaces": [

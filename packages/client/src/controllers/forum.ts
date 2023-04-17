@@ -1,12 +1,9 @@
 import API, { ForumAPI } from '../api/forum/forum';
-import UserController from '../controllers/user';
 import {
   IAddCommentData,
   IAddEmojiData,
   IAddTopicData,
 } from '../api/forum/interfaces';
-import { resourceURL } from '../utils/const';
-import { getDiffTime } from '../utils/helpers';
 
 class ForumController {
   private _api: ForumAPI;

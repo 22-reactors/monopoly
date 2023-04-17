@@ -2,7 +2,7 @@
 
 import style from './themeCard.module.scss';
 import { IUserAvatar, UserAvatar } from '../userAvatar/userAvatar';
-import { getDeclensionWord } from '../../utils/helpers';
+import { formatTime, getDeclensionWord } from '../../utils/helpers';
 
 export interface IThemeCard {
   title: string;
@@ -13,21 +13,6 @@ export interface IThemeCard {
 }
 
 const WORD_MAP = { single: 'ответ', some: 'ответа', more: 'ответов' };
-
-const formatTime = (time?: string) => {
-  const date = time && new Date(time);
-  if (date) {
-    return new Intl.DateTimeFormat('ru-RU', {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-    })
-      .format(date)
-      .replace(',', '');
-  }
-};
 
 export function ThemeCard(props: IThemeCard) {
   const amountAnswer = `${props.amountAnswer} ${getDeclensionWord(

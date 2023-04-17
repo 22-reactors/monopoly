@@ -1,11 +1,10 @@
 import style from './themeMessage.module.scss';
 import { IUserAvatar, UserAvatar } from '../userAvatar/userAvatar';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import ForumController from '../../controllers/forum';
 import { useAppSelector } from '../../reduxstore/hooks';
 import { userSelector } from '../../reduxstore/user/user.selector';
-import { IEmojis } from '../../api/forum/interfaces';
 
 export interface IThemeMessage {
   avatar: IUserAvatar;
@@ -48,23 +47,22 @@ export function ThemeMessage(props: IThemeMessage) {
   }, []);
 
   const iconHandler = async () => {
-    if (user) {
-      if (!likes.isUserReacted) {
-        const emojis = await ForumController.addEmoji({
-          comment_id: props.id,
-          userLogin: user?.login,
-          emojiCode: likeCode,
-        });
-        setEmojis(emojis);
-      } else {
-        const emojis = await ForumController.deleteEmoji({
-          comment_id: props.id,
-          userLogin: user?.login,
-          emojiCode: likeCode,
-        });
-        setEmojis(emojis);
-      }
+    if (!user) {
+      return;
     }
+    const emojis = likes.isUserReacted
+      ? await ForumController.deleteEmoji({
+          comment_id: props.id,
+          userLogin: user?.login,
+          emojiCode: likeCode,
+        })
+      : await ForumController.addEmoji({
+          comment_id: props.id,
+          userLogin: user?.login,
+          emojiCode: likeCode,
+        });
+
+    setEmojis(emojis);
   };
 
   return (
