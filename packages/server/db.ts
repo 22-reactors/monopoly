@@ -4,8 +4,13 @@ import { Topic } from './src/model/forum/topic';
 import { Comment } from './src/model/forum/comment';
 import { Emoji } from './src/model/forum/emoji';
 
-const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_HOST } =
-  process.env;
+const {
+  POSTGRES_USER,
+  POSTGRES_PASSWORD,
+  POSTGRES_DB,
+  POSTGRES_PORT,
+  POSTGRES_HOST,
+} = process.env;
 
 const sequelizeOptions: SequelizeOptions = {
   host: POSTGRES_HOST,
