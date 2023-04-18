@@ -8,7 +8,7 @@ export type themePropsType = {
 };
 
 interface IThemeToggler {
-  children: JSX.Element | JSX.Element[];
+  children?: JSX.Element | JSX.Element[];
 }
 
 const ThemeToggler = (props: IThemeToggler) => {
@@ -39,9 +39,10 @@ const ThemeToggler = (props: IThemeToggler) => {
 
   return (
     <>
-      <div className={themeContainerClass}>{childrenWithProps}</div>
+      <div className={themeContainerClass}>{childrenWithProps}
       <div className={style.themeTogglerBtnContainer}>
         <button onClick={toggleTheme} className={toggleBtnClass}></button>
+      </div>
       </div>
     </>
   );

@@ -1,0 +1,29 @@
+@import '../../styles/globals';
+@import '../../styles/mixin';
+
+.themetoggle {
+  --border-radius: 15px;
+  padding: 5px 5px;
+  background-color: var(--theme-toggle-background-color);
+  border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  width: fit-content;
+
+  &__wrapper {
+    display: flex;
+  }
+
+  &__icon {
+    stroke: var(--theme-toggle-icon-color);
+    fill: transparent;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+
+    &_selected {
+      background-color: var(--theme-toggle-selected-icon-color);
+      border-radius: var(--border-radius);
+    }
+  }
+}

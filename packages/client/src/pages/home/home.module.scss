@@ -9,6 +9,7 @@
   background-position: 100% 0;
   background-size: 850px 847px;
   background-repeat: no-repeat;
+  color: var(--text-base);
 }
 
 .mainContent {
@@ -35,6 +36,6 @@
 
 .dark {
   background: none;
-  background-color: $dark-background;
-  color: $dark-theme-white;
+  background-color: var(--background);
+  color: var(--text-base);
 }
