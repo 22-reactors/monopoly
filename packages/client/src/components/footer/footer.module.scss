@@ -4,7 +4,7 @@
 .footer {
   @include text-base;
   box-sizing: border-box;
-  background-color: $text-white;
+  background-color: var(--footer_background);
 }
 
 .menu {

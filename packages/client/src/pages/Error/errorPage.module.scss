@@ -7,16 +7,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background:  var(--background);
 }
 
 .container {
   display: flex;
   flex-direction: row;
-  color: #fff;
+  color: $text-base;
 }
 .code {
   @include h1;
-  color: $primary;
+  color: $text-base;
 }
 
 .divider {
@@ -29,7 +30,7 @@
 
 .message {
   @include h2;
-  color: $primary;
+  color: $text-base;
 }
 
 .discription {
