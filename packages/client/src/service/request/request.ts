@@ -53,7 +53,7 @@ export default class RequestTransport {
 
     return await this.request(
       `${this.endpoint}${correctUrl}`,
-      { method: METHODS.GET },
+      { headers: options?.headers, method: METHODS.GET },
       options?.timeout
     );
   };
