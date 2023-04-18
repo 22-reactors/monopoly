@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { links } from '../../utils/const';
 import { Logo } from '../../icons/logo';
 import style from './header.module.scss';
+
 import {
   ILoginButtonsProps,
   LoginButtons,
 } from './login-buttons/login-buttons';
+import ThemeToggle from '../themetoggle/ThemeToggle';
 
 export interface IHeaderProps extends ILoginButtonsProps {
   navLinks: { path: string; title: string }[];
@@ -16,6 +18,8 @@ export interface IHeaderProps extends ILoginButtonsProps {
 
 export const Header = (props: IHeaderProps) => {
   const { navLinks, isDarkTheme, logoutText } = props;
+
+
 
   return (
     <header
@@ -41,8 +45,10 @@ export const Header = (props: IHeaderProps) => {
             ))}
           </ul>
         </nav>
+        <ThemeToggle />
         <LoginButtons {...{ logoutText, isDarkTheme }} />
       </div>
     </header>
   );
 };
+
