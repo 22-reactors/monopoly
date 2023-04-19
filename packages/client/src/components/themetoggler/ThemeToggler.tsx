@@ -28,18 +28,22 @@ const ThemeToggler = (props: IThemeToggler) => {
     isLightTheme ? style.sunIcon : style.moonIcon
   );
 
-  const childrenWithProps = React.Children.map(props.children, child => {
-    if (React.isValidElement(child)) {
-      return React.cloneElement(child as React.ReactElement<themePropsType>, {
-        isLightTheme: isLightTheme,
-      });
-    }
-    return child;
-  });
+  const childrenWithProps =
+    props.children ??
+    React.Children.map(props.children, child => {
+      if (React.isValidElement(child)) {
+        return React.cloneElement(child as React.ReactElement<themePropsType>, {
+          isLightTheme: isLightTheme,
+        });
+      }
+      return child;
+    });
 
   return (
     <>
-      <div className={themeContainerClass}>{childrenWithProps}</div>
+      <div data-testid="theme-toggler" className={themeContainerClass}>
+        {childrenWithProps}
+      </div>
       <div className={style.themeTogglerBtnContainer}>
         <button onClick={toggleTheme} className={toggleBtnClass}></button>
       </div>

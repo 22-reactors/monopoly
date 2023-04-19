@@ -58,7 +58,7 @@ export const LoginButtons = (props: ILoginButtonsProps) => {
       </span>
     </div>
   ) : (
-    <div className={style.buttons}>
+    <div data-testid="button-wrapper" className={style.buttons}>
       <Link to={links.login.path}>
         <Button
           variation={ButtonVariation.PRIMARY}

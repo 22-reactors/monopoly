@@ -69,6 +69,7 @@ export function Input(props: IInputProps) {
 
   return (
     <div
+      data-testid="input"
       tabIndex={0}
       className={classNames(
         style.container,

@@ -21,7 +21,7 @@ export function ThemeCard(props: IThemeCard) {
   )}`;
 
   return (
-    <div className={style.wrapper}>
+    <div data-testid="theme-card" className={style.wrapper}>
       <h2 className={style.title}>{props.title}</h2>
       <UserAvatar {...props.avatar} />
       <p className={style.description}>{props.description}</p>

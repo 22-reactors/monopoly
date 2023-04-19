@@ -66,7 +66,7 @@ export function ThemeMessage(props: IThemeMessage) {
   };
 
   return (
-    <div className={style.wrapper}>
+    <div data-testid="theme-message" className={style.wrapper}>
       <UserAvatar {...props.avatar} />
       <span className={style.status}>{props.status} назад</span>
       <p className={style.message}>{props.comment}</p>
