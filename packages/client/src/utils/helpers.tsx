@@ -1,4 +1,5 @@
 import { Input } from '../components/input/input';
+import { TIME_WORDS_MAP } from './const';
 
 export const enum WordMap {
   SINGLE = 'single',
@@ -80,3 +81,53 @@ export const getInputName = (element: JSX.Element) => {
 };
 
 export const isServer = !(typeof window !== 'undefined' && window.document);
+
+// Определяет разницу между двумя датами
+export const getDiffTime = (newDate: Date, oldDate: Date) => {
+  const ms = newDate.getTime() - oldDate.getTime();
+
+  const secs = Math.round(ms / 1000);
+  if (secs < 60) {
+    return `${secs} ${getDeclensionWord(secs, TIME_WORDS_MAP.sec)}`;
+  }
+
+  const minutes = Math.round(secs / 60);
+  if (minutes < 60) {
+    return `${minutes} ${getDeclensionWord(minutes, TIME_WORDS_MAP.minute)}`;
+  }
+
+  const hours = Math.round(minutes / 60);
+  if (hours < 24) {
+    return `${hours} ${getDeclensionWord(hours, TIME_WORDS_MAP.hour)}`;
+  }
+
+  const days = Math.round(hours / 24);
+  if (days < 28) {
+    return `${days} ${getDeclensionWord(days, TIME_WORDS_MAP.day)}`;
+  }
+
+  const months = Math.round(days / 28);
+  if (months < 12) {
+    return `${months} ${getDeclensionWord(months, TIME_WORDS_MAP.month)}`;
+  }
+
+  const years = Math.round(months / 12);
+  return `${years} ${getDeclensionWord(years, TIME_WORDS_MAP.year)}`;
+};
+
+/* Формтирует дату (в виде строки, полученной методом toJSON) 
+в строку вида 'YYYY-MM-DD HOURS:MINUTES' */
+export const formatTime = (time?: string) => {
+  const date = time && new Date(time);
+  if (date) {
+    return new Intl.DateTimeFormat('ru-RU', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    })
+      .format(date)
+      .replace(',', '');
+  }
+};

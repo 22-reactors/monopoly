@@ -1,3 +1,5 @@
+import { IBadResponse } from '../interfaces';
+
 export interface IUserData {
   id: number;
   first_name: string;
@@ -22,10 +24,6 @@ export interface ISignUpData {
 export interface ILoginData {
   login: string;
   password: string;
-}
-
-export interface IBadResponse {
-  reason: string;
 }
 
 export interface ISignUpGoodResponse {

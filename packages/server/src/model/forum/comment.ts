@@ -8,11 +8,13 @@ import {
 } from 'sequelize-typescript';
 import { User } from './user';
 import { Topic } from './topic';
+import type { IUserData } from '../../interfaces';
 
 export interface IComment {
-  topicId: number;
-  parentId: number;
-  userId: number;
+  topic_id: number;
+  parent_id: number;
+  user_id: number;
+  userData: IUserData;
   comment: Comment;
 }
 
@@ -22,19 +24,23 @@ export class Comment extends Model<IComment> {
     foreignKey: 'topic_id',
     as: 'topic',
   })
-  public topicId: number;
+  public topic_id: number;
 
   @BelongsTo(() => Comment, {
     foreignKey: 'parent_id',
     as: 'parent',
   })
-  public parentId: number | null;
+  public parent_id: number | null;
 
   @BelongsTo(() => User, {
     foreignKey: 'user_id',
     as: 'user',
   })
-  public userId: number;
+  public user_id: number;
+
+  @AllowNull(false)
+  @Column(DataType.JSON)
+  public userData: IUserData;
 
   @AllowNull(false)
   @Column(DataType.STRING)

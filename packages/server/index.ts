@@ -21,8 +21,12 @@ async function startServer() {
   createClientAndConnect();
 
   let vite: ViteDevServer;
-  const distPath = path.dirname(require.resolve('client/dist/index.html'));
-  const ssrClientPath = require.resolve('client/dist-ssr/client.cjs');
+  const distPath = !isDev
+    ? path.dirname(require.resolve('client/dist/index.html'))
+    : '';
+  const ssrClientPath = !isDev
+    ? require.resolve('client/dist-ssr/client.cjs')
+    : '';
   const srcPath = path.dirname(require.resolve('client'));
 
   if (isDev) {
@@ -44,6 +48,7 @@ async function startServer() {
     app.use('/images', express.static(path.resolve(distPath, 'images')));
   }
 
+  app.use('/api/forum', express.json());
   app.use(router);
 
   app.use(

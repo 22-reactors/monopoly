@@ -45,6 +45,7 @@ export const LoginButtons = (props: ILoginButtonsProps) => {
         name={user.display_name ?? user.first_name}
         src={avatar}
         isDarkTheme={isDarkTheme}
+        isLinkToProfile
       />
       <div className={style.divider}></div>
       <span

@@ -2,14 +2,14 @@
 
 import style from './themeCard.module.scss';
 import { IUserAvatar, UserAvatar } from '../userAvatar/userAvatar';
-import { getDeclensionWord } from '../../utils/helpers';
+import { formatTime, getDeclensionWord } from '../../utils/helpers';
 
 export interface IThemeCard {
   title: string;
   avatar: IUserAvatar;
-  description: string;
+  description?: string;
   amountAnswer: number;
-  lastMessage?: string;
+  lastMessageTime?: string;
 }
 
 const WORD_MAP = { single: 'ответ', some: 'ответа', more: 'ответов' };
@@ -27,9 +27,9 @@ export function ThemeCard(props: IThemeCard) {
       <p className={style.description}>{props.description}</p>
       <div className={style.infoBlock}>
         <span className={style.answer}>{amountAnswer}</span>
-        {props.lastMessage && (
+        {props.lastMessageTime && (
           <span className={style.lastMessage}>
-            Последнее сообщение: {props.lastMessage}
+            Последнее сообщение: {formatTime(props.lastMessageTime)}
           </span>
         )}
       </div>

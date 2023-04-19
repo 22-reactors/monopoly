@@ -12,7 +12,7 @@ export const isSignUpGoodResponse = (
   object: SignUpResponse
 ): object is ISignUpGoodResponse => 'id' in object;
 
-const isUserGoodResponse = (object: UserResponse): object is IUserData =>
+export const isUserGoodResponse = (object: UserResponse): object is IUserData =>
   'avatar' in object;
 
 class AuthController {

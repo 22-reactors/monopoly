@@ -1,4 +1,5 @@
 import { IUser } from '../../utils/interfaces';
+import { IBadResponse } from '../interfaces';
 
 export interface IProfileData {
   first_name: string;
@@ -12,9 +13,6 @@ export interface IProfileData {
 export interface IPasswordData {
   oldPassword: string;
   newPassword: string;
-}
-export interface IBadResponse {
-  reason: string;
 }
 
 export type ProfileResponse = IUser | IBadResponse;

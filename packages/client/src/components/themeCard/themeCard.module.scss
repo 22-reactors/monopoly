@@ -3,19 +3,18 @@
 
 .wrapper {
   display: flex;
-  flex-direction: row;
-  gap: 60px;
+  flex-direction: column;
+  gap: 20px;
   background-color: $text-white;
   padding: 20px;
   border-radius: 10px;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 28px;
-  height: 34px;
   justify-content: space-between;
-  max-width: 1110px;
   width: 100%;
   @include shadowDefault;
   padding: auto;
+  box-sizing: border-box;
 }
 
 .title {
@@ -31,6 +30,7 @@
 }
 
 .infoBlock {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
