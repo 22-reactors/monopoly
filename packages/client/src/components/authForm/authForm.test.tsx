@@ -50,7 +50,7 @@ describe('AuthForm', () => {
       </MemoryRouter>
     );
 
-    const element = screen.getByRole('link');
+    const element = screen.getAllByRole('link')[0];
     expect(element).toHaveAttribute('href', '/');
   });
 
