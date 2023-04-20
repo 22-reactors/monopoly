@@ -3,7 +3,9 @@ import Themetoggler from './index';
 
 describe('ThemeToggler', () => {
   it('рендерится', () => {
-    render(<Themetoggler children={[<div></div>]} />);
+    const Component = () => <div/>;
+
+    render(<Themetoggler children={[<Component key={0}/>]} />);
 
     const component = screen.getByTestId('theme-toggler');
 

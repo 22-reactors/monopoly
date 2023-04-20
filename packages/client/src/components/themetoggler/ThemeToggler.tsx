@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import style from './themeToggler.module.scss';
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 
 export type themePropsType = {
   isLightTheme?: boolean;
 };
 
 interface IThemeToggler {
-  children: JSX.Element | JSX.Element[];
+  children?: JSX.Element | JSX.Element[];
 }
 
 const ThemeToggler = (props: IThemeToggler) => {
@@ -28,9 +28,7 @@ const ThemeToggler = (props: IThemeToggler) => {
     isLightTheme ? style.sunIcon : style.moonIcon
   );
 
-  const childrenWithProps =
-    props.children ??
-    React.Children.map(props.children, child => {
+  const childrenWithProps = React.Children.map(props.children, child => {
       if (React.isValidElement(child)) {
         return React.cloneElement(child as React.ReactElement<themePropsType>, {
           isLightTheme: isLightTheme,
