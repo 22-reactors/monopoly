@@ -2,7 +2,7 @@
   "name": "monopoly",
   "private": true,
   "scripts": {
-    "bootstrap": "yarn && node init.js && lerna clean && yarn && lerna bootstrap && yarn link-client",
+    "bootstrap": "yarn && node init.js && lerna clean && yarn && lerna bootstrap && yarn unlink-client && yarn link-client",
     "link-client": "lerna run link-client --scope=client && lerna run link-client --scope=server",
     "unlink-client": "lerna run unlink-client --scope=client",
     "build": "yarn build:client && yarn build:server",
