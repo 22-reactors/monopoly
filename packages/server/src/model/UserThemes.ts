@@ -18,7 +18,7 @@ import { Themes } from './Themes';
 export class UserThemes extends Model {
   @AllowNull(false)
   @Column(DataType.INTEGER)
-  theme_id!: number;  
+  theme_id!: number;
 
   @AllowNull(false)
   @Unique
