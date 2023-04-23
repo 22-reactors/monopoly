@@ -3,9 +3,9 @@ import { Info } from './info';
 import { FieldMap } from '../../pages/profile/profile';
 import { MemoryRouter } from 'react-router-dom';
 
-describe('Info', () => {
-  const fields = Object.values(FieldMap);
+const fields = Object.values(FieldMap);
 
+describe('Info', () => {
   it('рендерится', () => {
     render(
       <MemoryRouter>
