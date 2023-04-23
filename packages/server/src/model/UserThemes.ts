@@ -13,14 +13,12 @@ import {
 import { Themes } from './Themes';
 
 @Table({
-  timestamps: false,
-  paranoid: true,
   tableName: 'user_themes',
 })
 export class UserThemes extends Model {
-  @AutoIncrement
+  @AllowNull(false)
   @Column(DataType.INTEGER)
-  theme_id!: number;
+  theme_id!: number;  
 
   @AllowNull(false)
   @Unique
