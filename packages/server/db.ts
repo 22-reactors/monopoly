@@ -26,8 +26,6 @@ const sequelizeOptions: SequelizeOptions = {
 
 const sequelize = new Sequelize(sequelizeOptions);
 
-
-
 export const createClientAndConnect = async (): Promise<void> => {
   try {
     await sequelize.authenticate();

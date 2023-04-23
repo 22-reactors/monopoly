@@ -6,23 +6,15 @@ import {
   Model,
   Table,
   Unique,
-  AutoIncrement,
-  PrimaryKey,
   HasMany,
 } from 'sequelize-typescript';
 
 import { UserThemes } from './UserThemes';
 
 @Table({
-  tableName: 'themes'
+  tableName: 'themes',
 })
-
-export class Themes extends Model {
-  @AutoIncrement
-  @PrimaryKey
-  @Column(DataType.INTEGER)
-  id: number;
-
+export class Themes extends Model<Themes> {
   @AllowNull(false)
   @Unique
   @Index
@@ -35,4 +27,4 @@ export class Themes extends Model {
   @AllowNull(false)
   @Column(DataType.STRING)
   description: string;
-} 
+}

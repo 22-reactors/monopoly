@@ -7,7 +7,7 @@ import {
   Unique,
   AutoIncrement,
   Index,
-  BelongsTo
+  BelongsTo,
 } from 'sequelize-typescript';
 
 import { Themes } from './Themes';
@@ -15,9 +15,8 @@ import { Themes } from './Themes';
 @Table({
   timestamps: false,
   paranoid: true,
-  tableName: 'user_themes'
+  tableName: 'user_themes',
 })
-
 export class UserThemes extends Model {
   @AutoIncrement
   @Column(DataType.INTEGER)
@@ -31,4 +30,4 @@ export class UserThemes extends Model {
 
   @BelongsTo(() => Themes, 'theme_id')
   theme!: Themes;
-} 
+}
