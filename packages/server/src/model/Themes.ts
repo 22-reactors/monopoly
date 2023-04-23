@@ -14,7 +14,7 @@ import { UserThemes } from './UserThemes';
 @Table({
   tableName: 'themes',
 })
-export class Themes extends Model<Themes> {
+export class Themes extends Model {
   @AllowNull(false)
   @Unique
   @Index
