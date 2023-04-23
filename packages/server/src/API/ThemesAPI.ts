@@ -28,10 +28,15 @@ export const themizationRoute = Router()
     /** Данные юзера из auth*/
     const userId = res.locals.user.id;
 
-    const theme: Themes | null = await Themes.findOne({ where: { theme_name: themeName } });
+    const theme: Themes | null = await Themes.findOne({
+      where: { theme_name: themeName },
+    });
 
     if (theme) {
-      const userTheme: [UserThemes, null | boolean] = await UserThemes.upsert({ theme_id: theme.id, user_id: userId });
+      const userTheme: [UserThemes, null | boolean] = await UserThemes.upsert({
+        theme_id: theme.id,
+        user_id: userId,
+      });
 
       if (userTheme) {
         return res.status(201).json(userTheme);
