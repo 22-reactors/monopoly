@@ -84,7 +84,9 @@ export const ForumTopic: FC<ForumTopicProps> = () => {
             .slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE)
             .map(comment => {
               const avatar = {
-                src: `${resourceURL}/${comment.userData.avatar}`,
+                src:
+                  comment.userData.avatar &&
+                  `${resourceURL}/${comment.userData.avatar}`,
                 name: comment.userData.display_name ?? 'Инкогнито',
               };
               const status = getDiffTime(
