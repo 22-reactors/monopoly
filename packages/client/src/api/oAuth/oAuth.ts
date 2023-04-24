@@ -1,11 +1,12 @@
 import RequestTransport from '../../service/request/request';
 import { IBadResponse, UserResponse } from './interfaces';
 import { isServer } from '../../utils/helpers';
+import { PROXY_API_HOST } from '../../utils/const';
 
 export class OAuthAPI extends RequestTransport {
   private readonly redirect_uri: string = '';
   constructor() {
-    super('/oauth/yandex');
+    super(`${PROXY_API_HOST}/oauth/yandex`);
 
     if (!isServer) {
       const { protocol, port } = window.location;

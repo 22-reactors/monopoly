@@ -1984,15 +1984,6 @@
     pg-protocol "*"
     pg-types "^2.2.0"
 
-"@types/pg@^8.6.6":
-  version "8.6.6"
-  resolved "https://registry.yarnpkg.com/@types/pg/-/pg-8.6.6.tgz#21cdf873a3e345a6e78f394677e3b3b1b543cb80"
-  integrity sha512-O2xNmXebtwVekJDD+02udOncjVcMZQuTEQEMpKJ0ZRf5E7/9JJX3izhKUcUifBkyKpljyUM6BTgy2trmviKlpw==
-  dependencies:
-    "@types/node" "*"
-    pg-protocol "*"
-    pg-types "^2.2.0"
-
 "@types/prettier@^2.1.5":
   version "2.7.0"
   resolved "https://registry.npmjs.org/@types/prettier/-/prettier-2.7.0.tgz"
@@ -6407,20 +6398,10 @@ pg-pool@^3.5.2:
   resolved "https://registry.npmjs.org/pg-pool/-/pg-pool-3.5.2.tgz"
   integrity sha512-His3Fh17Z4eg7oANLob6ZvH8xIVen3phEZh2QuyrIl4dQSDVEabNducv6ysROKpDNPSD+12tONZVWfSgMvDD9w==
 
-pg-pool@^3.6.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/pg-pool/-/pg-pool-3.6.0.tgz#3190df3e4747a0d23e5e9e8045bcd99bda0a712e"
-  integrity sha512-clFRf2ksqd+F497kWFyM21tMjeikn60oGDmqMT8UBrynEwVEX/5R5xd2sdvdo1cZCFlguORNpVuqxIj+aK4cfQ==
-
 pg-protocol@*, pg-protocol@^1.5.0:
   version "1.5.0"
   resolved "https://registry.npmjs.org/pg-protocol/-/pg-protocol-1.5.0.tgz"
   integrity sha512-muRttij7H8TqRNu/DxrAJQITO4Ac7RmX3Klyr/9mJEOBeIpgnF8f9jAfRz5d3XwQZl5qBjF9gLsUtMPJE0vezQ==
-
-pg-protocol@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/pg-protocol/-/pg-protocol-1.6.0.tgz#4c91613c0315349363af2084608db843502f8833"
-  integrity sha512-M+PDm637OY5WM307051+bsDia5Xej6d9IR4GwJse1qA1DIhiKlksvrneZOYQq42OM+spubpcNYEo2FcKQrDk+Q==
 
 pg-types@^2.1.0, pg-types@^2.2.0:
   version "2.2.0"
@@ -6432,19 +6413,6 @@ pg-types@^2.1.0, pg-types@^2.2.0:
     postgres-bytea "~1.0.0"
     postgres-date "~1.0.4"
     postgres-interval "^1.1.0"
-
-pg@^8.10.0:
-  version "8.10.0"
-  resolved "https://registry.yarnpkg.com/pg/-/pg-8.10.0.tgz#5b8379c9b4a36451d110fc8cd98fc325fe62ad24"
-  integrity sha512-ke7o7qSTMb47iwzOSaZMfeR7xToFdkE71ifIipOAAaLIM0DYzfOAXlgFFmYUIE2BcJtvnVlGCID84ZzCegE8CQ==
-  dependencies:
-    buffer-writer "2.0.0"
-    packet-reader "1.0.0"
-    pg-connection-string "^2.5.0"
-    pg-pool "^3.6.0"
-    pg-protocol "^1.6.0"
-    pg-types "^2.1.0"
-    pgpass "1.x"
 
 pg@^8.8.0:
   version "8.8.0"
@@ -6907,7 +6875,7 @@ redux@^4.2.0:
   dependencies:
     "@babel/runtime" "^7.9.2"
 
-reflect-metadata@^0.1.13:
+reflect-metadata@0.1.13:
   version "0.1.13"
   resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
   integrity sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
@@ -7127,14 +7095,14 @@ sequelize-pool@^7.1.0:
   resolved "https://registry.yarnpkg.com/sequelize-pool/-/sequelize-pool-7.1.0.tgz#210b391af4002762f823188fd6ecfc7413020768"
   integrity sha512-G9c0qlIWQSK29pR/5U2JF5dDQeqqHRragoyahj/Nx4KOOQ3CPPfzxnfqFPCSB7x5UgjOgnZ61nSxz+fjDpRlJg==
 
-sequelize-typescript@^2.1.5:
+sequelize-typescript@2.1.5:
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/sequelize-typescript/-/sequelize-typescript-2.1.5.tgz#f12d14607cc8abfd6172cd99f7d3255ec5c4d78e"
   integrity sha512-x1CNODct8gJyfZPwEZBU5uVGNwgJI2Fda913ZxD5ZtCSRyTDPBTS/0uXciF+MlCpyqjpmoCAPtudQWzw579bzA==
   dependencies:
     glob "7.2.0"
 
-sequelize@^6.30.0:
+sequelize@6.30.0:
   version "6.30.0"
   resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-6.30.0.tgz#e084cbf8d07b1bb6236d931375982e7f43ee44e9"
   integrity sha512-VxQ3gB+isefL8Ic3GDUR6Y8Zwu1ctWNUlffcdSClsLkQ0mwgoLQv3cI3cDwSVn9wZJk0AEwMSm1TYFFRqmcR0A==
@@ -7905,6 +7873,18 @@ vary@^1, vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz"
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
+
+vite@3.0.7:
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-3.0.7.tgz#f1e379857e9c5d652126f8b20d371e1365eb700f"
+  integrity sha512-dILhvKba1mbP1wCezVQx/qhEK7/+jVn9ciadEcyKMMhZpsuAi/eWZfJRMkmYlkSFG7Qq9NvJbgFq4XOBxugJsA==
+  dependencies:
+    esbuild "^0.14.47"
+    postcss "^8.4.16"
+    resolve "^1.22.1"
+    rollup ">=2.75.6 <2.77.0 || ~2.77.0"
+  optionalDependencies:
+    fsevents "~2.3.2"
 
 vite@^3.0.7:
   version "3.0.9"
