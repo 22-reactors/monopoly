@@ -1,6 +1,6 @@
 import style from './paginator.module.scss';
 import classNames from 'classnames';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export interface IPaginator {
   pagesCount: number;
@@ -23,11 +23,14 @@ export function Paginator(props: IPaginator) {
   const firstPage = defaultVisiblePages.at(0);
   const lastPage = defaultVisiblePages.at(-1);
 
-  const [pages, setPages] = useState<number[]>(visiblePages);
+  const [pages, setPages] = useState<number[]>([]);
   const [page, setPage] = useState<number>(firstPage ?? 1);
+
+  useEffect(() => setPages(visiblePages), [props.pagesCount]);
 
   return (
     <div
+      data-testid="paginator"
       className={classNames(
         style.container,
         props.className,

@@ -3,18 +3,24 @@ import { User } from './src/model/forum/user';
 import { Topic } from './src/model/forum/topic';
 import { Comment } from './src/model/forum/comment';
 import { Emoji } from './src/model/forum/emoji';
+import { Section } from './src/model/forum/section';
 
-const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
-  process.env;
+const {
+  POSTGRES_USER,
+  POSTGRES_PASSWORD,
+  POSTGRES_DB,
+  POSTGRES_PORT,
+  POSTGRES_HOST,
+} = process.env;
 
 const sequelizeOptions: SequelizeOptions = {
-  host: 'localhost',
+  host: POSTGRES_HOST,
   port: Number(POSTGRES_PORT),
   username: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
   database: POSTGRES_DB,
   dialect: 'postgres',
-  models: [User, Topic, Comment, Emoji],
+  models: [User, Topic, Comment, Emoji, Section],
 };
 
 const sequelize = new Sequelize(sequelizeOptions);
@@ -22,7 +28,7 @@ const sequelize = new Sequelize(sequelizeOptions);
 export const createClientAndConnect = async (): Promise<void> => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ force: false, alter: true });
 
     console.log('Connected to the Postgres database!');
   } catch (e) {

@@ -13,7 +13,7 @@ interface CodeText {
   discription?: string;
 }
 
-function resolveCodeText(code: Props['code']): CodeText {
+export function resolveCodeText(code: Props['code']): CodeText {
   if (!code) {
     return {
       message: 'Непредвиденная ошибка',
@@ -46,8 +46,8 @@ function ErrorPage(props: Props) {
   }
 
   return (
-    <main className={style.pageContainer}>
-      <div className={style.container}>
+    <main data-testid="error-page" className={style.pageContainer}>
+      <div data-testid="container" className={style.container}>
         <div className={style.code}>{code}</div>
         <div className={style.divider}></div>
         <div>

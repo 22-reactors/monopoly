@@ -66,6 +66,21 @@ class UserController {
       }
     }
   }
+
+  async searchUser(login: string) {
+    try {
+      const response = await this._api.searchUser(login);
+      if (Array.isArray(response)) {
+        return response[0];
+      } else {
+        console.log(response.reason);
+      }
+    } catch (error: any) {
+      if (error && error.reason) {
+        console.log(error.reason);
+      }
+    }
+  }
 }
 
 export default new UserController();

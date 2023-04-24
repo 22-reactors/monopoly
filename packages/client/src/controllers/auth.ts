@@ -12,7 +12,7 @@ export const isSignUpGoodResponse = (
   object: SignUpResponse
 ): object is ISignUpGoodResponse => 'id' in object;
 
-const isUserGoodResponse = (object: UserResponse): object is IUserData =>
+export const isUserGoodResponse = (object: UserResponse): object is IUserData =>
   'avatar' in object;
 
 class AuthController {
@@ -45,6 +45,19 @@ class AuthController {
       const response = await this._api.getUser(headers);
       if (isUserGoodResponse(response)) {
         return response;
+      } else {
+        console.log(response.reason);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getYandexUser() {
+    try {
+      const response = await this._api.getUser();
+      if (isUserGoodResponse(response)) {
+        return { ...response, is_yandex_user: true };
       } else {
         console.log(response.reason);
       }

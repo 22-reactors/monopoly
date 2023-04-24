@@ -13,6 +13,8 @@ import validate, {
   InputId,
   mapErrorMessage,
 } from '../../service/validate/validate';
+import OAuthController from '../../controllers/oAuth';
+import { getYanderOAuthURL } from '../../utils/const';
 
 export interface IAuthFormProps {
   submitBtnName: string;
@@ -21,9 +23,9 @@ export interface IAuthFormProps {
   linkTitle?: string;
   linkName?: string;
   linkPath?: string;
+  yandexLink?: string;
   errorTitle?: string;
   validation?: boolean;
-  linkAction: React.MouseEventHandler<HTMLAnchorElement>;
   formAction: React.FormEventHandler<HTMLFormElement>;
   formFocus?: React.FormEventHandler<HTMLFormElement>;
 }
@@ -40,6 +42,7 @@ export const AuthForm = (props: PropsWithChildren<IAuthFormProps>) => {
     children,
     linkPath,
     linkTitle,
+    yandexLink,
     linkName,
     errorTitle,
     validation,
@@ -98,21 +101,25 @@ export const AuthForm = (props: PropsWithChildren<IAuthFormProps>) => {
     }
   };
 
-  const childrenWithProps = React.Children.map(children, child => {
-    if (React.isValidElement(child)) {
-      const name = getInputName(child);
-      const value = name ? inputValues[name]?.value : '';
-      const errorText = name && inputValues[name]?.errorText;
-      return React.cloneElement(child as React.ReactElement, {
-        className: style.input,
-        isDarkTheme,
-        onChange: inputChangeHandler,
-        value: value ? value : '',
-        errorText,
-      });
-    }
-    return child;
-  });
+  const childrenWithProps = children ? (
+    React?.Children.map(children, child => {
+      if (React.isValidElement(child)) {
+        const name = getInputName(child);
+        const value = name ? inputValues[name]?.value : '';
+        const errorText = name && inputValues[name]?.errorText;
+        return React.cloneElement(child as React.ReactElement, {
+          className: style.input,
+          isDarkTheme,
+          onChange: inputChangeHandler,
+          value: value ? value : '',
+          errorText,
+        });
+      }
+      return child;
+    })
+  ) : (
+    <></>
+  );
 
   const defaultErrorText =
     error && 'Ошибка. Проверьте правильность заполнения полей.';
@@ -123,7 +130,11 @@ export const AuthForm = (props: PropsWithChildren<IAuthFormProps>) => {
       <h2 className={classNames(style.title, isDarkTheme && style.dark)}>
         {title}
       </h2>
-      {errorText && <p className={style.error}>{errorText}</p>}
+      {errorText && (
+        <p data-testid="error-text" className={style.error}>
+          {errorText}
+        </p>
+      )}
       <form className={style.form} onSubmit={submitHandler} onFocus={formFocus}>
         {childrenWithProps}
         <Button
@@ -142,6 +153,24 @@ export const AuthForm = (props: PropsWithChildren<IAuthFormProps>) => {
             className={classNames(style.link, isDarkTheme && style.dark)}>
             {linkName}
           </Link>
+          <a
+            href="#"
+            className={classNames(
+              style.link,
+              style.linkYandex,
+              isDarkTheme && style.dark
+            )}
+            onClick={async () => {
+              const res = await OAuthController.getServiceId();
+              const id = res?.service_id;
+              if (id) {
+                const iframeUrl = getYanderOAuthURL(id);
+
+                window.location.assign(iframeUrl);
+              }
+            }}>
+            {yandexLink}
+          </a>
         </>
       )}
     </div>

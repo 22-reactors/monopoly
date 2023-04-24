@@ -8,7 +8,7 @@ import { userSelector } from '../../reduxstore/user/user.selector';
 import { links } from '../../utils/const';
 import { useNav } from '../../hooks/useNav';
 
-const FieldMap: Record<string, FieldInfo> = {
+export const FieldMap: Record<string, FieldInfo> = {
   email: {
     id: 'email',
     name: 'email',

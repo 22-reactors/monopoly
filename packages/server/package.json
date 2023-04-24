@@ -4,10 +4,9 @@
   "description": "",
   "scripts": {
     "link-client": "yarn link client",
-    "start": "yarn build && yarn preview",
     "build": "rimraf dist && tsc --p ./tsconfig.prod.json",
     "preview": "node ./dist/index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.ts",
+    "dev": "cross-env NODE_ENV=development nodemon index.ts --open",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write .",
     "test": "jest ."
@@ -18,8 +17,14 @@
     "dotenv": "^16.0.2",
     "eslint-config-prettier": "^8.5.0",
     "express": "^4.18.1",
+    "helmet": "^6.1.5",
     "pg": "^8.8.0",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "http-proxy-middleware": "2.0.6",
+    "vite": "3.0.7",
+    "sequelize": "6.30.0",
+    "sequelize-typescript": "2.1.5",
+    "reflect-metadata": "0.1.13"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
@@ -30,7 +35,6 @@
     "@typescript-eslint/parser": "^5.35.1",
     "babel-jest": "^29.0.1",
     "eslint": "^8.23.0",
-    "http-proxy-middleware": "2.0.6",
     "jest": "^28",
     "nodemon": "^2.0.19",
     "prettier": "^2.7.1",

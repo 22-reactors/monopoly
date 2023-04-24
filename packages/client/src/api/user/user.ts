@@ -1,4 +1,7 @@
 import RequestTransport from '../../service/request/request';
+import { PROXY_API_HOST } from '../../utils/const';
+import { IUserData } from '../auth/interfaces';
+import { IBadResponse } from '../interfaces';
 import {
   IChangePasswordResponse,
   IPasswordData,
@@ -8,7 +11,7 @@ import {
 
 export class UserAPI extends RequestTransport {
   constructor() {
-    super('/user');
+    super(`${PROXY_API_HOST}/user`);
   }
 
   changeProfile(data: IProfileData) {
@@ -34,7 +37,7 @@ export class UserAPI extends RequestTransport {
   searchUser(login: string) {
     return this.post('/search', {
       data: { login },
-    });
+    }) as Promise<IUserData[] | IBadResponse>;
   }
 }
 

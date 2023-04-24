@@ -8,6 +8,7 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 import express from 'express';
 import { createClientAndConnect } from './db';
 import { router } from './src/router/forumRouter';
+import helmet from 'helmet';
 
 dotenv.config();
 
@@ -16,13 +17,23 @@ const isDev = process.env.NODE_ENV === 'development';
 async function startServer() {
   const app = express();
   app.use(cors());
-  const port = Number(process.env.SERVER_PORT) || 3001;
+  const port = Number(process.env.SERVER_PORT) || 3000;
+
+  app.use(helmet.xssFilter())
+  app.use(function (_, res, next) {
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+    next();
+  });
 
   createClientAndConnect();
 
   let vite: ViteDevServer;
-  const distPath = path.dirname(require.resolve('client/dist/index.html'));
-  const ssrClientPath = require.resolve('client/dist-ssr/client.cjs');
+  const distPath = !isDev
+    ? path.dirname(require.resolve('client/dist/index.html'))
+    : '';
+  const ssrClientPath = !isDev
+    ? require.resolve('client/dist-ssr/client.cjs')
+    : '';
   const srcPath = path.dirname(require.resolve('client'));
 
   if (isDev) {
@@ -44,6 +55,7 @@ async function startServer() {
     app.use('/images', express.static(path.resolve(distPath, 'images')));
   }
 
+  app.use('/api/forum', express.json());
   app.use(router);
 
   app.use(

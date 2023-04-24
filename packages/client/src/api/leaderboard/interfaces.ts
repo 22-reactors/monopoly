@@ -1,5 +1,5 @@
-import { IBadResponse } from '../auth/interfaces';
 import { LeaderboardResults } from '../../pages/leaderboard/leaderboard';
+import { IBadResponse } from '../interfaces';
 
 export type Leaderboard = [
   {

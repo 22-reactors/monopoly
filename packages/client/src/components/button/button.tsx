@@ -20,7 +20,7 @@ export interface IButton {
   rounded?: boolean;
   isHide?: boolean;
   disabled?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   onClick?(): void;
 }
 

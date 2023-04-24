@@ -1,3 +1,5 @@
+import { IBadResponse } from '../interfaces';
+
 export interface IUserData {
   id: number;
   first_name: string;
@@ -7,6 +9,7 @@ export interface IUserData {
   email: string;
   phone: string;
   avatar: string;
+  is_yandex_user?: boolean;
 }
 
 export interface ISignUpData {
@@ -21,10 +24,6 @@ export interface ISignUpData {
 export interface ILoginData {
   login: string;
   password: string;
-}
-
-export interface IBadResponse {
-  reason: string;
 }
 
 export interface ISignUpGoodResponse {

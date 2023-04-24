@@ -1,12 +1,13 @@
 import RequestTransport from '../../service/request/request';
 import { LeaderboardGetAllResponse, LeaderboardResponse } from './interfaces';
 import { LeaderboardResults } from '../../pages/leaderboard/leaderboard';
+import { PROXY_API_HOST } from '../../utils/const';
 
 const LIMIT = 100;
 
 export class LeaderBoardAPI extends RequestTransport {
   constructor() {
-    super('/leaderboard');
+    super(`${PROXY_API_HOST}/leaderboard`);
   }
 
   add(data: LeaderboardResults[]) {

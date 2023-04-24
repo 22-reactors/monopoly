@@ -1,6 +1,7 @@
 import RequestTransport from '../../service/request/request';
+import { PROXY_API_HOST } from '../../utils/const';
+import { IBadResponse } from '../interfaces';
 import {
-  IBadResponse,
   ILoginData,
   ISignUpData,
   SignUpResponse,
@@ -9,7 +10,7 @@ import {
 
 export class AuthAPI extends RequestTransport {
   constructor() {
-    super('/auth');
+    super(`${PROXY_API_HOST}/auth`);
   }
 
   login(data: ILoginData) {
