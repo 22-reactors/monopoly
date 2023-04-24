@@ -20,7 +20,7 @@ export const GameModal = ({
   if (show) {
     setTimeout(
       () =>
-        playMp3sound('/public/music/notification.mp3', {
+        playMp3sound('/music/notification.mp3', {
           volume: 0.3,
         }),
       1000

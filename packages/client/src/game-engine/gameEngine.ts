@@ -48,7 +48,7 @@ export class GameEngine {
 
   // из-за strict mode срабатывает 2 раза
   private rollDices = async () => {
-    playMp3sound('/public/music/dice.mp3');
+    playMp3sound('/music/dice.mp3');
     const { value } = await Dices.getInstance().roll();
     this.moveChip(this.chipIndex, value);
   };
