@@ -19,7 +19,6 @@ const audioElementMap = new Map<
 >();
 
 function fetchAudio(url: string, cb: (resonse: any) => void) {
-  console.log(url);
   const xhr = new XMLHttpRequest();
   xhr.open('get', url);
   xhr.responseType = 'arraybuffer';
