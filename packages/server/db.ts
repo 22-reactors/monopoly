@@ -5,6 +5,7 @@ import { Comment } from './src/model/forum/comment';
 import { Emoji } from './src/model/forum/emoji';
 import { Section } from './src/model/forum/section';
 import { Themes } from './src/model/Themes';
+import { UserThemes } from './src/model/UserThemes';
 
 const {
   POSTGRES_USER,
@@ -21,7 +22,7 @@ const sequelizeOptions: SequelizeOptions = {
   password: POSTGRES_PASSWORD,
   database: POSTGRES_DB,
   dialect: 'postgres',
-  models: [User, Topic, Comment, Emoji, Section, Themes],
+  models: [User, Topic, Comment, Emoji, Section, Themes, UserThemes],
 };
 
 const sequelize = new Sequelize(sequelizeOptions);

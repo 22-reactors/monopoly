@@ -2,14 +2,14 @@ import {
   AllowNull,
   Column,
   DataType,
-  Index,
   Model,
   Table,
   Unique,
-  HasMany,
+  Index,
 } from 'sequelize-typescript';
 
 import { UserThemes } from './UserThemes';
+
 
 @Table({
   tableName: 'themes',
@@ -19,12 +19,9 @@ export class Themes extends Model {
   @Unique
   @Index
   @Column(DataType.STRING)
-  theme_name!: string;
+  public theme_name!: string;
 
-  @HasMany(() => UserThemes, 'id')
-  user_themes!: UserThemes;
-
-  @AllowNull(false)
+  @AllowNull
   @Column(DataType.STRING)
-  description: string;
+  public user_themes: UserThemes;
 }
