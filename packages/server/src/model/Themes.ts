@@ -10,7 +10,6 @@ import {
 
 import { UserThemes } from './UserThemes';
 
-
 @Table({
   tableName: 'themes',
 })

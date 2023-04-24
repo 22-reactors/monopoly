@@ -11,7 +11,6 @@ import {
 
 import { Themes } from './Themes';
 
-
 @Table({
   tableName: 'user_themes',
 })
