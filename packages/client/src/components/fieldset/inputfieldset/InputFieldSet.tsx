@@ -22,7 +22,7 @@ const InputFieldSet = (props: IInputFieldSet) => {
   );
 
   return (
-    <fieldset className={style.fieldset}>
+    <fieldset data-testid="fieldset" className={style.fieldset}>
       <input
         id={props.fieldId}
         name={props.fieldId}

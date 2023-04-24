@@ -18,7 +18,7 @@ export const GameModal = ({
   const childrenStyle = childrenClassName ?? style.defaultChildrenClassName;
 
   return (
-    <dialog className={showModal}>
+    <dialog data-testid="dialog" className={showModal}>
       <main className={style.modalMain}>
         <h1 className={style.title}>{title}</h1>
         <div className={childrenStyle}>{children}</div>

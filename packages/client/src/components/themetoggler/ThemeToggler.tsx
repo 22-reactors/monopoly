@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import style from './themeToggler.module.scss';
 import classNames from 'classnames';
-import React from 'react';
+import * as React from 'react';
 
 export type themePropsType = {
   isLightTheme?: boolean;
 };
 
 interface IThemeToggler {
-  children: JSX.Element | JSX.Element[];
+  children?: JSX.Element | JSX.Element[];
 }
 
 const ThemeToggler = (props: IThemeToggler) => {
@@ -29,17 +29,19 @@ const ThemeToggler = (props: IThemeToggler) => {
   );
 
   const childrenWithProps = React.Children.map(props.children, child => {
-    if (React.isValidElement(child)) {
-      return React.cloneElement(child as React.ReactElement<themePropsType>, {
-        isLightTheme: isLightTheme,
-      });
-    }
-    return child;
-  });
+      if (React.isValidElement(child)) {
+        return React.cloneElement(child as React.ReactElement<themePropsType>, {
+          isLightTheme: isLightTheme,
+        });
+      }
+      return child;
+    });
 
   return (
     <>
-      <div className={themeContainerClass}>{childrenWithProps}</div>
+      <div data-testid="theme-toggler" className={themeContainerClass}>
+        {childrenWithProps}
+      </div>
       <div className={style.themeTogglerBtnContainer}>
         <button onClick={toggleTheme} className={toggleBtnClass}></button>
       </div>

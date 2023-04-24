@@ -27,6 +27,7 @@ const showUserName = (isLink: boolean, name: string) => {
 export function UserAvatar(props: IUserAvatar) {
   return (
     <div
+      data-testid="user-avatar"
       className={classNames(style.wrapper, props.isDarkTheme && style.isDark)}>
       <img
         className={style.avatar}
