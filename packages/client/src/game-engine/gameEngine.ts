@@ -1,3 +1,4 @@
+import { playMp3sound } from './../service/media/media';
 import { EventBus } from './core/event-bus';
 import { EVENTS_NAME } from './config/eventsNameConfig';
 import { Board } from './core/board/board';
@@ -47,6 +48,7 @@ export class GameEngine {
 
   // из-за strict mode срабатывает 2 раза
   private rollDices = async () => {
+    playMp3sound('/public/music/dice.mp3');
     const { value } = await Dices.getInstance().roll();
     this.moveChip(this.chipIndex, value);
   };

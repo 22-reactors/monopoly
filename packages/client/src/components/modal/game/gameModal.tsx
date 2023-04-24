@@ -1,5 +1,6 @@
 import style from './gameModal.module.scss';
 import classNames from 'classnames';
+import { playMp3sound } from '../../../service/media/media';
 
 interface IGameModal {
   title: string;
@@ -16,7 +17,15 @@ export const GameModal = ({
 }: IGameModal) => {
   const showModal = classNames(style.modal, show ? style.show : style.hide);
   const childrenStyle = childrenClassName ?? style.defaultChildrenClassName;
-
+  if (show) {
+    setTimeout(
+      () =>
+        playMp3sound('/public/music/notification.mp3', {
+          volume: 0.3,
+        }),
+      1000
+    );
+  }
   return (
     <dialog className={showModal}>
       <main className={style.modalMain}>
