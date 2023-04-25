@@ -26,7 +26,6 @@ export interface IAuthFormProps {
   yandexLink?: string;
   errorTitle?: string;
   validation?: boolean;
-  linkAction: React.MouseEventHandler<HTMLAnchorElement>;
   formAction: React.FormEventHandler<HTMLFormElement>;
   formFocus?: React.FormEventHandler<HTMLFormElement>;
 }
@@ -102,21 +101,25 @@ export const AuthForm = (props: PropsWithChildren<IAuthFormProps>) => {
     }
   };
 
-  const childrenWithProps = React.Children.map(children, child => {
-    if (React.isValidElement(child)) {
-      const name = getInputName(child);
-      const value = name ? inputValues[name]?.value : '';
-      const errorText = name && inputValues[name]?.errorText;
-      return React.cloneElement(child as React.ReactElement, {
-        className: style.input,
-        isDarkTheme,
-        onChange: inputChangeHandler,
-        value: value ? value : '',
-        errorText,
-      });
-    }
-    return child;
-  });
+  const childrenWithProps = children ? (
+    React?.Children.map(children, child => {
+      if (React.isValidElement(child)) {
+        const name = getInputName(child);
+        const value = name ? inputValues[name]?.value : '';
+        const errorText = name && inputValues[name]?.errorText;
+        return React.cloneElement(child as React.ReactElement, {
+          className: style.input,
+          isDarkTheme,
+          onChange: inputChangeHandler,
+          value: value ? value : '',
+          errorText,
+        });
+      }
+      return child;
+    })
+  ) : (
+    <></>
+  );
 
   const defaultErrorText =
     error && 'Ошибка. Проверьте правильность заполнения полей.';
@@ -127,7 +130,11 @@ export const AuthForm = (props: PropsWithChildren<IAuthFormProps>) => {
       <h2 className={classNames(style.title, isDarkTheme && style.dark)}>
         {title}
       </h2>
-      {errorText && <p className={style.error}>{errorText}</p>}
+      {errorText && (
+        <p data-testid="error-text" className={style.error}>
+          {errorText}
+        </p>
+      )}
       <form className={style.form} onSubmit={submitHandler} onFocus={formFocus}>
         {childrenWithProps}
         <Button

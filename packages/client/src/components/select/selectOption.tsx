@@ -17,6 +17,7 @@ function SelectOption(props: ISelectOptionProps) {
 
   return (
     <div
+      data-testid="select-option"
       className={classNames(style.option, selected && style.optionSelected)}
       onClick={onClick}>
       {label}

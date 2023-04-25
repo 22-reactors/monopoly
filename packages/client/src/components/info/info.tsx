@@ -103,7 +103,11 @@ export function Info(props: IInfo) {
   };
 
   return (
-    <form action="#" className={style.form} onSubmit={onSubmitForm}>
+    <form
+      data-testid="form"
+      action="#"
+      className={style.form}
+      onSubmit={onSubmitForm}>
       {props.fields.map((field, idx) => (
         <Input
           key={idx}

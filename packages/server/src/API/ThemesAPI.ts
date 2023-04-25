@@ -36,6 +36,7 @@ export const themizationRoute = Router()
       const userTheme: [UserThemes, null | boolean] = await UserThemes.upsert({
         theme_id: theme.id,
         user_id: userId,
+        theme: new Themes(),
       });
 
       if (userTheme) {

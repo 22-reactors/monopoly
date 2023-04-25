@@ -39,6 +39,7 @@ function Textarea(props: Props) {
 
   return (
     <div
+      data-testid="textarea"
       tabIndex={0}
       className={classNames(
         style.container,

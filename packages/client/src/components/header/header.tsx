@@ -22,7 +22,9 @@ export const Header = (props: IHeaderProps) => {
 
 
   return (
-    <header className={classNames(style.header, isDarkTheme && style.dark)}>
+    <header
+      data-testid="header"
+      className={classNames(style.header, isDarkTheme && style.dark)}>
       <div className={style.container}>
         <nav className={style.nav}>
           <Link to={links.root.path} className={style.logoLink}>

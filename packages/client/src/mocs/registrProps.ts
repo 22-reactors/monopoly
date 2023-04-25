@@ -5,9 +5,6 @@ const RegistrProps: IRegistrProps = {
   title: 'Регистрация игрока',
   validation: true,
   isDarkTheme: false,
-  linkAction: () => {
-    console.log('router to login page');
-  },
   submitBtnName: 'Зарегистрироваться',
   formAction: () => {
     console.log('router to submit');

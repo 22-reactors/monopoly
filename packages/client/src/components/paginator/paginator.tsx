@@ -30,6 +30,7 @@ export function Paginator(props: IPaginator) {
 
   return (
     <div
+      data-testid="paginator"
       className={classNames(
         style.container,
         props.className,

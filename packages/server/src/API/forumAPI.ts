@@ -42,7 +42,7 @@ export const addTopic = async (req: Request, res: Response) => {
     });
 
     const section = await Section.findByPk(sectionId);
-    section?.update({ topicsCount: section.topicsCount + 1 });
+    await section?.update({ topicsCount: section.topicsCount + 1 });
 
     res.send('OK');
   } catch (error) {
@@ -88,13 +88,13 @@ export const addComment = async (req: Request, res: Response) => {
     });
 
     const topic = await Topic.findByPk(topic_id);
-    topic?.update({
+    await topic?.update({
       lastMessageTime: newComment.updatedAt.toJSON(),
       amountAnswer: topic.amountAnswer + 1,
     });
 
     const section = await Section.findByPk(topic?.section_id);
-    section?.update({ messagesCount: section.messagesCount + 1 });
+    await section?.update({ messagesCount: section.messagesCount + 1 });
 
     res.send('OK');
   } catch (e) {
@@ -134,10 +134,10 @@ export const deleteComment = async (req: Request, res: Response) => {
     await comment?.destroy();
 
     const topic = await Topic.findByPk(comment?.topic_id);
-    topic?.update({ amountAnswer: topic.amountAnswer - 1 });
+    await topic?.update({ amountAnswer: topic.amountAnswer - 1 });
 
     const section = await Section.findByPk(topic?.section_id);
-    section?.update({ messagesCount: section.messagesCount + 1 });
+    await section?.update({ messagesCount: section.messagesCount - 1 });
 
     res.send('OK');
   } catch (e) {

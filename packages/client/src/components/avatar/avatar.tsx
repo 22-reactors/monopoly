@@ -5,7 +5,7 @@ import style from './avatar.module.scss';
 import { resourceURL } from '../../utils/const';
 import avatarEmpty from '../../assets/avatar-empty.png';
 
-interface IAvatar {
+export interface IAvatar {
   src?: string;
 }
 
@@ -45,7 +45,7 @@ function Avatar(props: IAvatar) {
   };
 
   return (
-    <section className={style.container}>
+    <section data-testid="avatar" className={style.container}>
       <div className={style.avatar}>
         <img
           src={avatarSrc ? `${resourceURL}${avatarSrc}` : avatarEmpty}
