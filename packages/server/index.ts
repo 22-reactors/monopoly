@@ -53,6 +53,7 @@ async function startServer() {
   if (!isDev) {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')));
     app.use('/images', express.static(path.resolve(distPath, 'images')));
+    app.use('/music', express.static(path.resolve(distPath, 'music')));
   }
 
   app.use('/api/forum', express.json());
