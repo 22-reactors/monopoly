@@ -47,7 +47,7 @@ describe('Button', () => {
 
     act(() => {
       fireEvent.click(component);
-    })
+    });
 
     expect(handler).toBeCalled();
     expect(handler).toBeCalledTimes(1);

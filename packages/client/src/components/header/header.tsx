@@ -19,8 +19,6 @@ export interface IHeaderProps extends ILoginButtonsProps {
 export const Header = (props: IHeaderProps) => {
   const { navLinks, isDarkTheme, logoutText } = props;
 
-
-
   return (
     <header
       data-testid="header"
@@ -51,4 +49,3 @@ export const Header = (props: IHeaderProps) => {
     </header>
   );
 };
-
