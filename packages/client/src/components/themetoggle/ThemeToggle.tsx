@@ -8,13 +8,18 @@ export const ThemeToggle: FC = () => {
   const [themeName, setThemeName] = useState<string | null>(null);
 
   const getClassName = (currentThemeName: string): string => {
-    return cn(themeName === currentThemeName ? 'themetoggle__icon_selected' :'themetoggle__icon', 
-  );
+    return cn(
+      themeName === currentThemeName
+        ? 'themetoggle__icon_selected'
+        : 'themetoggle__icon'
+    );
   };
 
   /** Переключатель темы. */
   const toggleTheme = ({ currentThemeName }: toggleThemeArgs) => {
-    const themeNameIsValid = currentThemeName && Object.values(ThemeNames).includes(currentThemeName as ThemeNames);
+    const themeNameIsValid =
+      currentThemeName &&
+      Object.values(ThemeNames).includes(currentThemeName as ThemeNames);
 
     if (!themeNameIsValid) {
       return;
@@ -44,17 +49,19 @@ export const ThemeToggle: FC = () => {
         toggleTheme({ currentThemeName: theme.name });
       }}
       key={theme.name}
-      className={style[getClassName(theme.name)]} 
-      data-testid={theme.name}
+      className={style[getClassName(theme.name)]}
       viewBox={theme.viewBox}
       width="25px">
-      <path d={theme.svgPath} ></path>
+      <path d={theme.svgPath}></path>
     </svg>
   ));
 
   return (
     <div className={style.themetoggle__wrapper}>
-      <div data-testid="themetoggle" className={style.themetoggle} title="Переключатель темы">
+      <div
+        data-testid="themetoggle"
+        className={style.themetoggle}
+        title="Переключатель темы">
         {themeList}
       </div>
     </div>
