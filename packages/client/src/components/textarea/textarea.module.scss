@@ -5,6 +5,7 @@ $animation-time: 0.25s;
 
 .textarea {
   transition: border-color, color $animation-time;
+  background: var(--auth_background);
   color: $text-base;
   @include text-base;
   min-height: 52px;
@@ -18,7 +19,7 @@ $animation-time: 0.25s;
   &:focus {
     outline: none;
     border-color: $primary;
-    color: $primary;
+    color: $text-base;
   }
 }
 
@@ -29,7 +30,7 @@ $animation-time: 0.25s;
 
 .containerSolo {
   @include shadowDefault;
-  background: #fff;
+  background: var(--auth_background);
   padding: 5px;
   border-radius: 10px;
   & .textarea {

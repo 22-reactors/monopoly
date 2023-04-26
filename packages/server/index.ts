@@ -19,7 +19,7 @@ async function startServer() {
   app.use(cors());
   const port = Number(process.env.SERVER_PORT) || 3000;
 
-  app.use(helmet.xssFilter())
+  app.use(helmet.xssFilter());
   app.use(function (_, res, next) {
     res.setHeader('X-XSS-Protection', '1; mode=block');
     next();

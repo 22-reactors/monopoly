@@ -4,6 +4,8 @@ import { Topic } from './src/model/forum/topic';
 import { Comment } from './src/model/forum/comment';
 import { Emoji } from './src/model/forum/emoji';
 import { Section } from './src/model/forum/section';
+import { Themes } from './src/model/Themes';
+import { UserThemes } from './src/model/UserThemes';
 
 const {
   POSTGRES_USER,
@@ -20,7 +22,7 @@ const sequelizeOptions: SequelizeOptions = {
   password: POSTGRES_PASSWORD,
   database: POSTGRES_DB,
   dialect: 'postgres',
-  models: [User, Topic, Comment, Emoji, Section],
+  models: [User, Topic, Comment, Emoji, Section, Themes, UserThemes],
 };
 
 const sequelize = new Sequelize(sequelizeOptions);
@@ -31,6 +33,14 @@ export const createClientAndConnect = async (): Promise<void> => {
     await sequelize.sync({ force: false, alter: true });
 
     console.log('Connected to the Postgres database!');
+
+    const synced = await sequelize.sync({ alter: true });
+    if (synced) {
+      console.log('Synchronized the Postgres database');
+      // Добавляем темы по умолчанию в БД при старте сервера
+      await Themes.upsert({ theme_name: 'DARK' });
+      await Themes.upsert({ theme_name: 'LIGHT' });
+    }
   } catch (e) {
     console.error(e);
   }

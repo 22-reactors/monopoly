@@ -29,13 +29,13 @@ const ThemeToggler = (props: IThemeToggler) => {
   );
 
   const childrenWithProps = React.Children.map(props.children, child => {
-      if (React.isValidElement(child)) {
-        return React.cloneElement(child as React.ReactElement<themePropsType>, {
-          isLightTheme: isLightTheme,
-        });
-      }
-      return child;
-    });
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child as React.ReactElement<themePropsType>, {
+        isLightTheme: isLightTheme,
+      });
+    }
+    return child;
+  });
 
   return (
     <>

@@ -2,7 +2,7 @@
 @import '../../styles/globals';
 
 .header {
-  background-color: $text-white;
+  background-color: var(--header_background);
 }
 
 .container {
@@ -45,14 +45,14 @@
 
 .dark {
   background: none;
-  background-color: $dark-background;
+  background-color: var(--header_background);
   border-bottom: 1px solid rgba(149, 149, 149, 0.2);
 }
 
 .darkText {
-  color: $dark-theme-white;
+  color: var(--text-base);
 }
 
 .lightText {
-  color: $primary;
+  color: var(--text-base);
 }

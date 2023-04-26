@@ -11,7 +11,11 @@ describe('ErrorPage', () => {
     const { message, discription } = resolveCodeText(ERROR_CODE_PAGE);
     const { getByTestId } = render(
       <MemoryRouter>
-        <ErrorPage code={ERROR_CODE_PAGE} message={message} discription={discription} />
+        <ErrorPage
+          code={ERROR_CODE_PAGE}
+          message={message}
+          discription={discription}
+        />
       </MemoryRouter>
     );
 
@@ -29,7 +33,11 @@ describe('ErrorPage', () => {
     const { message, discription } = resolveCodeText(ERROR_CODE_SERVER);
     const { getByTestId } = render(
       <MemoryRouter>
-        <ErrorPage code={ERROR_CODE_SERVER} message={message} discription={discription} />
+        <ErrorPage
+          code={ERROR_CODE_SERVER}
+          message={message}
+          discription={discription}
+        />
       </MemoryRouter>
     );
 

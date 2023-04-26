@@ -11,7 +11,7 @@
   @include h2();
   align-items: center;
   margin-top: 27px;
-  color: $text-base;
+  color: var(--text-base);
   display: flex;
   flex-direction: row;
   position: relative;
@@ -42,7 +42,7 @@
     align-items: center;
     max-width: 1110px;
     height: 74px;
-    background: $dark-theme-white;
+    background: var(--auth_background);
     @include shadowDefault;
     border-radius: 10px;
     margin-bottom: 28px;
@@ -92,6 +92,7 @@
 .link {
   @include clear-link;
   color: $text-base;
+  background: var(--auth_background);
 }
 
 .pageContainer {
@@ -114,8 +115,7 @@
 .topic__name {
   @include h2;
   margin: 30px auto 15px auto;
-
-  color: #2e2e2e;
+  color: var(--text-base);
 }
 
 .newmessage {

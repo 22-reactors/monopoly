@@ -12,12 +12,12 @@ export async function auth(req: Request, res: Response, next: NextFunction) {
 }
 
 const cookieExist = async (cookie: string): Promise<boolean> => {
-    const response: any = await fetch(YANDEX_API_AUTH, {
-      headers: {
-        'Cookie': cookie,
-      }
-    });
-    const jsonData = await response.json();
-    //check exists user by id
-    return jsonData?.id ? true : false;
+  const response: any = await fetch(YANDEX_API_AUTH, {
+    headers: {
+      Cookie: cookie,
+    },
+  });
+  const jsonData = await response.json();
+  //check exists user by id
+  return jsonData?.id ? true : false;
 };

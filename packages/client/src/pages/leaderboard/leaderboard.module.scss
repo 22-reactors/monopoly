@@ -19,7 +19,7 @@
   margin-top: 27px;
   border-spacing: 0;
   padding: 40px;
-  background-color: $text-white;
+  background-color: var(--auth_background);
   border-radius: 10px;
   border: none;
   box-sizing: border-box;
@@ -63,7 +63,7 @@
 
 .caption {
   @include text-paragraph-medium();
-  color: $text-black;
+  color: $text-base;
 }
 
 .contentCell {
@@ -71,6 +71,7 @@
   padding-top: 10px;
   padding-bottom: 9px;
   border-bottom: 1px solid $row-separate;
+  color: $text-base;
 
   &:last-child {
     text-align: right;

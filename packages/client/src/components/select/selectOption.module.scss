@@ -3,7 +3,7 @@
 
 .option {
   color: $text-base;
-  background: #fff;
+  background: var(--auth_background);
   @include text-base;
   padding: 10px;
   @media (prefers-reduced-motion: no-preference) {

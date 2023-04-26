@@ -4,7 +4,7 @@
 .container {
   width: 360px;
   padding: 40px;
-  background-color: white;
+  background-color: var(--auth_background);
   border-radius: 10px;
   @include shadowDefault;
   text-align: center;
@@ -62,6 +62,6 @@
 }
 
 .dark {
-  background-color: $dark-ux-background;
+  background-color: var(--auth_background);
   color: $dark-theme-white;
 }
