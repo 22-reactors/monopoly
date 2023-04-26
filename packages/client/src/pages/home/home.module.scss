@@ -1,0 +1,40 @@
+@import '../../styles/mixin.scss';
+@import '../../styles/globals.scss';
+
+.main {
+  @include text-base;
+  padding-top: 262px;
+  padding-bottom: 396px;
+  background-image: url('/images/cards.png');
+  background-position: 100% 0;
+  background-size: 850px 847px;
+  background-repeat: no-repeat;
+}
+
+.mainContent {
+  @include container-width;
+
+  min-width: 500px;
+  max-width: 600px;
+}
+
+.title {
+  @include text-title;
+  margin: 0 0 6px;
+}
+
+.description {
+  @include h2;
+  margin: 0;
+  max-width: 653px;
+}
+
+.button {
+  margin-top: 78px;
+}
+
+.dark {
+  background: none;
+  background-color: $dark-background;
+  color: $dark-theme-white;
+}

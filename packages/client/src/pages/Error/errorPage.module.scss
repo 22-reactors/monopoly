@@ -1,0 +1,42 @@
+@import '../../styles/globals.scss';
+@import '../../styles/mixin.scss';
+
+.pageContainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  color: #fff;
+}
+.code {
+  @include h1;
+  color: $primary;
+}
+
+.divider {
+  background: $primary;
+  width: 2px;
+  margin: 0 25px;
+  border-radius: 5px;
+  height: 71px;
+}
+
+.message {
+  @include h2;
+  color: $primary;
+}
+
+.discription {
+  color: $text-additional;
+  @include text-paragraph;
+}
+
+.button {
+  margin-top: 40px;
+}

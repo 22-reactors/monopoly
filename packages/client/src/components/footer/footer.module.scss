@@ -1,0 +1,69 @@
+@import '../../styles/mixin';
+@import '../../styles/globals';
+
+.footer {
+  @include text-base;
+  box-sizing: border-box;
+  background-color: $text-white;
+}
+
+.menu {
+  padding: 26px 0;
+  border-top: 1px solid rgba(149, 149, 149, 0.2);
+  border-bottom: 1px solid rgba(149, 149, 149, 0.2);
+}
+
+.menuContainer {
+  @include container-width;
+}
+
+.title {
+  @include text-paragraph;
+  color: $text-base;
+  margin: 0 0 15px;
+  font-weight: 700;
+}
+
+.navList {
+  @include container-width;
+  @include clear-list;
+  display: inline-grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-auto-flow: column;
+  column-gap: 32px;
+  row-gap: 6px;
+}
+
+.link {
+  @include clear-link;
+  @include text-paragraph;
+  color: $text-additional;
+}
+
+.infoContainer {
+  @include container-width;
+
+  text-align: center;
+  padding: 60px 0;
+}
+
+.logo {
+  margin-bottom: 14px;
+  color: $primary;
+}
+
+.info {
+  @include text-small;
+  color: $text-additional;
+  margin: 0;
+}
+
+.info + .info {
+  margin-top: 2px;
+}
+
+.dark {
+  background: none;
+  background-color: $dark-background;
+  color: $text-additional;
+}

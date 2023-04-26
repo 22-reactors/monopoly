@@ -1,0 +1,68 @@
+@import '../../styles/mixin';
+@import '../../styles/globals';
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 210px;
+  height: 44px;
+
+  &.isDarkMode {
+    .arrowBack {
+      background-image: url('/images/arrow-light-left.svg');
+    }
+
+    .pageNumber {
+      color: $text-additional;
+
+      &.active {
+        background-color: $dark-ux-background;
+        border: 1px solid $dark-ux-stroke;
+        color: $text-white;
+      }
+    }
+  }
+}
+
+.arrow {
+  @include clear-font();
+  @include bg-image-styles(8px 14px);
+  @include clear-link();
+
+  flex-shrink: 0;
+  width: 5px;
+  height: 11px;
+  margin: 10px;
+
+  &.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.arrowBack {
+  background-image: url('/images/arrow-dark-left.svg');
+}
+
+.arrowForward {
+  @extend .arrowBack;
+
+  transform: scale(-1, 1);
+}
+
+.pageNumber {
+  @include text-paragraph-medium();
+  @include clear-link();
+
+  margin: 10px 15px;
+  color: $text-base;
+
+  &.active {
+    margin: 0;
+    padding: 10px 15px;
+    background-color: $text-additional;
+    border-radius: 4px;
+    color: $text-white;
+  }
+}

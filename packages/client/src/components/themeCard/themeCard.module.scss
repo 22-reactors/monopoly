@@ -1,0 +1,62 @@
+@import '../../styles/globals';
+@import '../../styles/mixin';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: $text-white;
+  padding: 20px;
+  border-radius: 10px;
+  align-items: flex-start;
+  margin-top: 28px;
+  justify-content: space-between;
+  width: 100%;
+  @include shadowDefault;
+  padding: auto;
+  box-sizing: border-box;
+}
+
+.title {
+  margin: 0;
+  color: $text-base;
+  font-size: 24px;
+  line-height: 34px;
+}
+
+.description {
+  margin: 0;
+  color: $text-additional;
+}
+
+.infoBlock {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 32px;
+}
+
+.answer {
+  @include relative();
+
+  padding-left: 48px;
+  color: $primary;
+
+  &::before {
+    content: '';
+    @include absolute(50%, null, null, 0);
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    background-image: url('/images/answer-icon.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+}
+
+.lastMessage {
+  color: $text-additional;
+  padding-left: 20px;
+}

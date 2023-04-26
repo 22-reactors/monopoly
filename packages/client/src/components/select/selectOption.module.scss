@@ -1,0 +1,20 @@
+@import '../../styles/mixin.scss';
+@import '../../styles/globals.scss';
+
+.option {
+  color: $text-base;
+  background: #fff;
+  @include text-base;
+  padding: 10px;
+  @media (prefers-reduced-motion: no-preference) {
+    transition: all 0.25s;
+  }
+  &:hover {
+    @extend .optionSelected;
+  }
+}
+
+.optionSelected {
+  color: #fff;
+  background: $primary;
+}

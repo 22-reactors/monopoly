@@ -1,0 +1,12 @@
+@import '../../styles/globals.scss';
+
+.wrapper {
+  min-height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dark {
+  background-color: $dark-background;
+}

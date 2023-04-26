@@ -1,0 +1,58 @@
+@import '../../styles/mixin';
+@import '../../styles/globals';
+
+.header {
+  background-color: $text-white;
+}
+
+.container {
+  box-sizing: border-box;
+  padding: 11px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include container-width;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.navList {
+  display: flex;
+  @include clear-list;
+}
+
+.logoLink {
+  margin-right: 120px;
+  line-height: 0;
+}
+
+.logo {
+  color: $primary;
+}
+
+.link {
+  @include text-base;
+  @include clear-link;
+  color: $primary;
+}
+
+.li + .li {
+  margin-left: 30px;
+}
+
+.dark {
+  background: none;
+  background-color: $dark-background;
+  border-bottom: 1px solid rgba(149, 149, 149, 0.2);
+}
+
+.darkText {
+  color: $dark-theme-white;
+}
+
+.lightText {
+  color: $primary;
+}

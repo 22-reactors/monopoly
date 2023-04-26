@@ -1,0 +1,68 @@
+@import '../../styles/globals';
+@import '../../styles/mixin';
+
+.wrapper {
+  @include relative();
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: $text-white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.status {
+  @include absolute(20px, 20px, null, null);
+  @include text-paragraph();
+
+  color: $text-base;
+}
+
+.message {
+  @include text-paragraph-medium();
+
+  margin: 0;
+  color: $text-description;
+}
+
+.actionWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  @include clear-font();
+  @include bg-image-styles(contain);
+
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  background-image: url('/images/heart-icon.svg');
+  cursor: pointer;
+  @media (prefers-reduced-motion: no-preference) {
+    transition: transform 0.4s linear;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.text {
+  @include text-paragraph();
+
+  margin-left: 8px;
+  color: $text-action;
+  opacity: 0;
+
+  &Show {
+    opacity: 1;
+  }
+}

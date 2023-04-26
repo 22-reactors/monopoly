@@ -1,0 +1,23 @@
+.gamePageWrapClass {
+  height: 100%;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.canvasClass {
+  height: 100%;
+  width: 100%;
+}
+
+.canvasWrap {
+  height: 100vh;
+  width: 1000px;
+}

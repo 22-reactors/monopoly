@@ -1,0 +1,23 @@
+@import '../../styles/mixin.scss';
+@import '../../styles/globals.scss';
+
+.wrapper {
+  width: 100%;
+  max-width: 1110px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title {
+  @include h2();
+  margin-top: 27px;
+  color: $text-base;
+}
+
+.container {
+  margin-top: 27px;
+  margin-bottom: 40px;
+  padding: 30px;
+  background-color: $text-white;
+  box-sizing: border-box;
+}
