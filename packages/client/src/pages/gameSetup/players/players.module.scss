@@ -22,7 +22,7 @@
 
 .playersContainer {
   padding: 30px;
-  background-color: #fff;
+  background-color: var(--auth_background);
   border-radius: 10px;
   @include shadowDefault;
   width: 100%;
@@ -31,7 +31,7 @@
 
 .info {
   @include text-base;
-  color: #000;
+  color: $text-base;
   margin-bottom: 40px;
 }
 

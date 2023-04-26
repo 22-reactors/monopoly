@@ -19,7 +19,7 @@
   padding: 40px;
   display: flex;
   justify-content: space-between;
-  background-color: #fff;
+  background-color: var(--auth_background);
   border-radius: 10px;
   @include shadowDefault;
   box-sizing: border-box;

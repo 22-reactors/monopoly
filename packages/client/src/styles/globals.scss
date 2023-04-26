@@ -7,7 +7,7 @@ $text-black: #000000;
 $primary: #474646;
 $primary-hover: #6a6a6a;
 $dark-ux-stroke: #363636;
-$dark-ux-background: var(--background);
+$dark-ux-background: var(--auth_background);
 $dark-white: #fbfbfb;
 $dark-background: var(--background);
 
@@ -29,6 +29,9 @@ $text-action: #34364a;
   --footer_background: #000;
   --text-base: #fff;
   --auth_background: #1a1a1a;
+  --header_background: #111;
+  --active_page: #1a1a1a;
+  --border_color: #363636;
 }
 :root[data-theme='LIGHT'] {
   --background: linear-gradient(112.4deg, #ffeeee 9.84%, #e7dfff 73.46%);
@@ -39,4 +42,6 @@ $text-action: #34364a;
   --footer_background: #fff;
   --text-base: #474646;
   --auth_background: #fff;
+  --header_background: #fff;
+  --active_page: #959595;
 }
